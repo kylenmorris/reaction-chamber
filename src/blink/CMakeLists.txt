@@ -28,25 +28,34 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(blink C CXX ASM)
+project(main C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(blink
-    blink.c
-    )
+add_executable(main
+    main.c
+    controller/button_ctrl.c
+    model/data_structs.c
+)
+
+# Include paths
+target_include_directories(main PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/controller
+    ${CMAKE_CURRENT_LIST_DIR}/include
+    ${CMAKE_CURRENT_LIST_DIR}/model
+)
 
 # pull in common dependencies
-target_link_libraries(blink pico_stdlib)
+target_link_libraries(main pico_stdlib)
 
 if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(blink pico_cyw43_arch_none)
+    target_link_libraries(main pico_cyw43_arch_none)
 endif()
 
 # create map/bin/hex file etc.
-pico_add_extra_outputs(blink)
+pico_add_extra_outputs(main)
 
 # add url via pico_set_program_url

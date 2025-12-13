@@ -37,8 +37,12 @@ pico_sdk_init()
 
 add_executable(main
     main.c
-    controller/button_ctrl.c
     model/data_structs.c
+    controller/button_ctrl.c
+    controller/temp_sens_ctrl.c
+    controller/tube_optical_ctrl.c
+    controller/heater_ctrl.c
+
 )
 
 # Include paths
@@ -61,3 +65,9 @@ pico_enable_stdio_uart(main 0)
 # create map/bin/hex file etc.
 pico_add_extra_outputs(main)
 
+# if(WIN32)
+#     add_custom_command(TARGET main POST_BUILD
+#         COMMAND picotool reboot -f -u 
+#         COMMENT "Rebooting Pico into BOOTSEL mode using picotool"
+#     )
+# endif()

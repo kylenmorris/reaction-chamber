@@ -24,35 +24,50 @@ void button_step(void) {
     for (int i = 0; i < NUM_BUTTONS; i++) {
 
         int reading = gpio_get(BUTTON_PINS[i]);
+        int truePress = debounceButton(i, reading);
 
-        // Check for stable input
-        if (reading == gButtonInput.lastButtonStates[i]) {
-            gButtonInput.debounceCycles[i]++;
-        } 
-        else { 
-            // input is different, reset
-            gButtonInput.debounceCycles[i] = 0;
+        if (truePress) {
+            gButtonInput.lastPressed = i;
+            gButtonInput.wasPressed = true;
         }
-
-        // If stable long enough, update button state
-        if (gButtonInput.debounceCycles[i] > DEBOUNCE_TIME_CYCLES) {
-
-            if (reading != gButtonInput.buttonStates[i]) {
-                gButtonInput.buttonStates[i] = reading;
-
-                // Detect press
-                if (reading == LOW) {
-                    gButtonInput.lastPressed = BUTTON_PINS[i];
-                    gButtonInput.wasPressed  = true;
-                }
-            }
-        }
-
-        gButtonInput.lastButtonStates[i] = reading;
     }
 }
 
-// internal function to initialize pins for button input
+// debounces a button input, returns 1 if a true press detected
+int debounceButton(int i, int reading) {
+    
+    int truePress = 0;
+
+    // Check for stable input
+    if (reading == gButtonInput.lastButtonStates[i]) {
+        gButtonInput.debounceCycles[i]++;
+    } 
+    else { 
+        // input is different, reset
+        gButtonInput.debounceCycles[i] = 0;
+    }
+
+    // If stable long enough, update button state
+    if (gButtonInput.debounceCycles[i] > DEBOUNCE_TIME_CYCLES) {
+
+        // only if state changed is it a press
+        if (reading != gButtonInput.buttonStates[i]) {
+            gButtonInput.buttonStates[i] = reading;
+
+            // press down, not release
+            if (reading == LOW) {
+                truePress = 1;
+            }
+        }
+    }
+
+    // save last reading
+    gButtonInput.lastButtonStates[i] = reading;
+
+    return truePress;
+}
+
+// internal function to init pins
 void init_gpio_button(int gpio_pin) {
     gpio_init(gpio_pin);
     gpio_set_dir(gpio_pin, GPIO_IN);

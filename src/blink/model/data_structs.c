@@ -6,6 +6,6 @@ ButtonInput gButtonInput = {
     .wasPressed = false,
     .buttonStates = { HIGH, HIGH, HIGH, HIGH },
     .lastButtonStates = { HIGH, HIGH, HIGH, HIGH },
-    .debounceCycles = { 0, 0, 0, 0 }
+    .steadyTime = { 0, 0, 0, 0 }
 };
 

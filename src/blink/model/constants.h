@@ -26,7 +26,7 @@
 
 #define NUM_TUBES 10
 
-#define TEMP_HIGH_C 61
+#define TEMP_LOW_C 61
 #define TEMP_HIGH_HIGH_C 64
 #define TEMP_LOW_LOW_C 58
 

@@ -8,7 +8,11 @@
 #include "pico/stdlib.h"
 #include "constants.h"
 
-#include "include/button_ctrl.h"
+#include "button_ctrl.h"
+#include "temp_sens_ctrl.h"
+#include "heater_ctrl.h"
+#include "tube_optical_ctrl.h"
+
 #include <hardware/gpio.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -44,6 +48,42 @@ void pico_set_led(bool led_on) {
 #endif
 }
 
+SystemState update_state(SystemState current_state) {
+    
+    button_step();  
+    temp_sens_step();
+
+    switch (current_state) {
+        case IDLE:
+            // If the button was pressed, go to LED_ON state
+            if (gButtonInput.wasPressed) {
+                char buffer[100];
+                sprintf(buffer, "Button handled on GPIO pin: %d\n", gButtonInput.lastPressed);
+                printf("%s", buffer);
+                gButtonInput.wasPressed = false;  // Reset flag
+
+                return HEATING;
+            }
+            break;
+
+        case HEATING:
+            pico_set_led(true);
+            sleep_ms(500);
+            return REACTING;
+
+        case REACTING:
+            pico_set_led(false);
+            return RESULTS;
+
+        case RESULTS:
+            return IDLE;
+
+        case HISTORY:
+            return IDLE;
+    }
+    return current_state; // No change if no conditions met
+}
+
 int main() {
     int rc = pico_led_init();
     hard_assert(rc == PICO_OK);
@@ -51,25 +91,24 @@ int main() {
 
     printf("Starting up...\n");
     pico_set_led(HIGH);
+
     button_init();
+    temp_sens_init();
+    heater_init();
+    tube_optical_init();
+
+    SystemState current_state = IDLE;
 
     sleep_ms(500);
+    printf("Finished.\n");
     pico_set_led(LOW);
 
-    while (true) {
 
-        button_step();
-        
-        // this would be the state update or something instead
-        if (gButtonInput.wasPressed) {
-            char buffer[100];
-            sprintf(buffer, "Button pressed on GPIO pin: %d\n", gButtonInput.lastPressed);
-            printf("%s", buffer);
-            gButtonInput.wasPressed = false;
-        } 
+    while (true) {      
 
+        current_state = update_state(current_state);
         sleep_ms(SYSTEM_DELAY_MS);
+
     }
 }
-
 

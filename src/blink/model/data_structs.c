@@ -9,3 +9,13 @@ ButtonInput gButtonInput = {
     .steadyTime = { 0, 0, 0, 0 }
 };
 
+TempStatus gTempStatus = {
+    .chamber_temp = 0.0f,
+    .temp_low = false,
+    .temp_extreme = false
+};
+
+OpticalInputs gOpticalInputs = {
+    .intensity = { 0.0f }
+};
+

@@ -4,6 +4,14 @@
 #include <stdbool.h> 
 #include "constants.h"
 
+typedef enum {
+    IDLE,
+    HEATING,
+    REACTING,
+    RESULTS,
+    HISTORY
+} SystemState;
+
 // Button types
 typedef enum {
     UP,

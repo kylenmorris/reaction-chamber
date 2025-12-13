@@ -2,6 +2,7 @@
 #define DATA_STRUCTS_H
 
 #include <stdbool.h> 
+#include "constants.h"
 
 // Button types
 typedef enum {
@@ -13,8 +14,12 @@ typedef enum {
 
 // Input state
 typedef struct {
-    ButtonType lastPressed;
+    // ButtonType lastPressed;
+    int lastPressed;
     bool wasPressed;
+    int buttonStates[NUM_BUTTONS];
+    int lastButtonStates[NUM_BUTTONS];
+    int debounceCycles[NUM_BUTTONS];
 } ButtonInput;
 
 // Declare the global variable (no memory yet)

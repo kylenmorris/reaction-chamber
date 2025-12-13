@@ -12,9 +12,28 @@ typedef enum {
     BACK
 } ButtonType;
 
-// Input state
+
+// Tube states
+typedef enum {
+    UNUSED,
+    RUNNING,
+    COMPLETE,
+    INVALID
+} TubeState;
+
+// Tube results
+// may want to merge with TubeState
+typedef enum {
+    UNKNOWN,
+    POSITIVE,
+    NEGATIVE,
+    INVALID_RESULT 
+} TubeResult;
+
+
+// Button input structure
+// Written only by button_ctrl.c
 typedef struct {
-    // ButtonType lastPressed;
     int lastPressed;
     bool wasPressed;
     int buttonStates[NUM_BUTTONS];
@@ -22,7 +41,26 @@ typedef struct {
     int debounceCycles[NUM_BUTTONS];
 } ButtonInput;
 
-// Declare the global variable (no memory yet)
+
+// Tube optical readings
+// Written only by tube_optical_ctrl.c
+typedef struct {
+    float intensity[NUM_TUBES];
+} OpticalInputs;
+
+
+// Temperature status
+// Written only by temp_sens_ctrl.c
+typedef struct {
+    float chamber_temp; // °C
+    bool temp_low;      // default false
+    bool temp_extreme;  // default false
+} TemperatureStatus;
+
+
+
 extern ButtonInput gButtonInput;
+extern TemperatureStatus gTemperatureStatus;
+extern OpticalInputs gOpticalInputs;
 
 #endif

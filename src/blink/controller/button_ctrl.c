@@ -33,6 +33,13 @@ void button_step(void) {
     }
 }
 
+// internal function to init pins
+void init_gpio_button(int gpio_pin) {
+    gpio_init(gpio_pin);
+    gpio_set_dir(gpio_pin, GPIO_IN);
+    gpio_pull_up(gpio_pin);
+}
+
 // debounces a button input, returns 1 if a true press detected
 int debounceButton(int i, int reading) {
     
@@ -40,15 +47,15 @@ int debounceButton(int i, int reading) {
 
     // Check for stable input
     if (reading == gButtonInput.lastButtonStates[i]) {
-        gButtonInput.debounceCycles[i]++;
+        gButtonInput.steadyTime[i]++;
     } 
     else { 
         // input is different, reset
-        gButtonInput.debounceCycles[i] = 0;
+        gButtonInput.steadyTime[i] = 0;
     }
 
     // If stable long enough, update button state
-    if (gButtonInput.debounceCycles[i] > DEBOUNCE_TIME_CYCLES) {
+    if (gButtonInput.steadyTime[i] > DEBOUNCE_TIME_CYCLES) {
 
         // only if state changed is it a press
         if (reading != gButtonInput.buttonStates[i]) {
@@ -65,11 +72,4 @@ int debounceButton(int i, int reading) {
     gButtonInput.lastButtonStates[i] = reading;
 
     return truePress;
-}
-
-// internal function to init pins
-void init_gpio_button(int gpio_pin) {
-    gpio_init(gpio_pin);
-    gpio_set_dir(gpio_pin, GPIO_IN);
-    gpio_pull_up(gpio_pin);
 }

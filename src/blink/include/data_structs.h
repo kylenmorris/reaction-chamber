@@ -38,7 +38,7 @@ typedef struct {
     bool wasPressed;
     int buttonStates[NUM_BUTTONS];
     int lastButtonStates[NUM_BUTTONS];
-    int debounceCycles[NUM_BUTTONS];
+    int steadyTime[NUM_BUTTONS];
 } ButtonInput;
 
 
@@ -55,12 +55,12 @@ typedef struct {
     float chamber_temp; // °C
     bool temp_low;      // default false
     bool temp_extreme;  // default false
-} TemperatureStatus;
+} TempStatus;
 
 
 
 extern ButtonInput gButtonInput;
-extern TemperatureStatus gTemperatureStatus;
+extern TempStatus gTempStatus;
 extern OpticalInputs gOpticalInputs;
 
 #endif

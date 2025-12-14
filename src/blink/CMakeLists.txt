@@ -39,7 +39,6 @@ add_executable(main
     main.c
     model/data_structs.c
     model/imodel_structs.c
-
     controller/button_ctrl.c
     controller/temp_sens_ctrl.c
     controller/tube_optical_ctrl.c

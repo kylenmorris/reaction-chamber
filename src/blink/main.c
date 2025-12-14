@@ -1,7 +1,9 @@
-#include "pico/stdlib.h"
+
 #include <hardware/gpio.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "pico/stdlib.h" // this IS needed despite clangd saying otherwise
+
 
 #include "imodel_structs.h"
 #include "data_structs.h"
@@ -60,6 +62,8 @@ SystemState update_state(SystemState current_state) {
                 break;
             }
 
+            gIdleMenuIM.needs_redraw = true;
+
             if (gButtonInput.lastPressed == UP) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.selected_index = 0;
@@ -76,7 +80,8 @@ SystemState update_state(SystemState current_state) {
                 if (gIdleMenuIM.selected_index == 0) {
                     heater_ctrl_init();
                     temp_sens_ctrl_init();
-
+                    
+                    gHeatingMenuIM.needs_redraw = true;
                     return HEATING;
                 }
                 else if (gIdleMenuIM.selected_index == 1) {
@@ -92,6 +97,7 @@ SystemState update_state(SystemState current_state) {
 
             if (gButtonInput.wasPressed && gButtonInput.lastPressed == BACK) {
                 gButtonInput.wasPressed = false;  // Reset flag
+                gIdleMenuIM.needs_redraw = true;
                 return IDLE;
             }
 

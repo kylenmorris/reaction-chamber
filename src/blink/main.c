@@ -1,12 +1,11 @@
-/**
- * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
+#include "pico/stdlib.h"
+#include <hardware/gpio.h>
+#include <stdbool.h>
+#include <stdio.h>
 
 #include "imodel_structs.h"
-#include "include/data_structs.h"
-#include "pico/stdlib.h"
+#include "data_structs.h"
+#include "data_structs.h"
 #include "constants.h"
 
 #include "button_ctrl.h"
@@ -14,10 +13,6 @@
 #include "heater_ctrl.h"
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
-
-#include <hardware/gpio.h>
-#include <stdbool.h>
-#include <stdio.h>
 
 // Pico W devices use a GPIO on the WIFI chip for the LED,
 // so when building for Pico W, CYW43_WL_GPIO_LED_PIN will be defined
@@ -50,11 +45,12 @@ void pico_set_led(bool led_on) {
 #endif
 }
 
+// may move this to helper file it's going to get long
 SystemState update_state(SystemState current_state) {
     
-    button_step();  
-    temp_sens_step();
-    draw_display(current_state);
+    button_ctrl_step();  
+    temp_sens_ctrl_step();
+    display_ctrl_draw(current_state);
 
     switch (current_state) {
         case IDLE:
@@ -66,24 +62,24 @@ SystemState update_state(SystemState current_state) {
 
             if (gButtonInput.lastPressed == UP) {
                 gButtonInput.wasPressed = false;  // Reset flag
-                gIdleMenuModel.selected_index = 0;
+                gIdleMenuIM.selected_index = 0;
             }
             
             if (gButtonInput.lastPressed == DOWN) {
                 gButtonInput.wasPressed = false;  // Reset flag
-                gIdleMenuModel.selected_index = 1;
+                gIdleMenuIM.selected_index = 1;
             }
             
             if (gButtonInput.lastPressed == SELECT) {
                 gButtonInput.wasPressed = false;  // Reset flag
 
-                if (gIdleMenuModel.selected_index == 0) {
-                    heater_init();
-                    temp_sens_init();
+                if (gIdleMenuIM.selected_index == 0) {
+                    heater_ctrl_init();
+                    temp_sens_ctrl_init();
 
                     return HEATING;
                 }
-                else if (gIdleMenuModel.selected_index == 1) {
+                else if (gIdleMenuIM.selected_index == 1) {
                     return HISTORY;
                 }
             }
@@ -102,7 +98,7 @@ SystemState update_state(SystemState current_state) {
             if (gTempStatus.chamber_temp >= gTempStatus.target_temp) { // this should probably be a flag in gTempStatus
                 return REACTING;
             }
-            
+
             break;
 
         case REACTING:
@@ -114,27 +110,27 @@ SystemState update_state(SystemState current_state) {
         case HISTORY:
             return IDLE;
     }
-    return current_state; // No change if no conditions met
+
+    return current_state;
 }
 
 int main() {
+
     int rc = pico_led_init();
     hard_assert(rc == PICO_OK);
+    pico_set_led(HIGH); // Startup LED
+
     stdio_init_all();
 
-    printf("Starting up...\n");
-    pico_set_led(HIGH);
-
-    button_init();
-    temp_sens_init();
-    heater_init();
-    tube_optical_init();
+    button_ctrl_init();
+    temp_sens_ctrl_init();
+    heater_ctrl_init();
+    tube_optical_ctrl_init();
 
     SystemState current_state = IDLE;
 
     sleep_ms(500);
-    printf("Finished.\n");
-    pico_set_led(LOW);
+    pico_set_led(LOW); // Finished startup
 
     while (true) {      
 

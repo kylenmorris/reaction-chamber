@@ -18,13 +18,19 @@ static const char *idle_menu_items[] = {
 typedef struct {
     int selected_index;
     bool needs_redraw;
-} menu_model_t;
+} idleMenuIM;
 
-extern menu_model_t gIdleMenuModel;
+extern idleMenuIM gIdleMenuIM;
 
 // ####################################
 // HEATING MENU
 // ####################################
+
+typedef struct {
+    bool needs_redraw;
+} heatingMenuIM;
+
+extern heatingMenuIM gheatingMenuIM;
 
 
 

@@ -3,9 +3,11 @@
 
 idleMenuIM gIdleMenuIM = {
     .selected_index = 0,
-    .needs_redraw = true
+    .needs_redraw = true,
+    .last_redraw = 0
 };
 
-heatingMenuIM gheatingMenuIM = {
-    .needs_redraw = true
+heatingMenuIM gHeatingMenuIM = {
+    .needs_redraw = true,
+    .last_redraw = 0
 };

@@ -3,6 +3,7 @@
 ## Reboot in BOOTSEL 
 
 I haven't found a nice way to link this with the Pi VSCode extension. Run this in powershell to force the pico into bootsel:
+
 `& "C:\your\path\to\.pico-sdk\picotool\2.2.0-a4\picotool\picotool.exe" reboot -f -u`
 
 ## Getting started

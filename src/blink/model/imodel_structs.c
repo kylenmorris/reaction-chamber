@@ -7,3 +7,4 @@ menu_model_t gIdleMenuModel = {
     .selected_index = 0,
     .needs_redraw = true
 };
+

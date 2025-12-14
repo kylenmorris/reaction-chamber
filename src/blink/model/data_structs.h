@@ -4,6 +4,7 @@
 #include <stdbool.h> 
 #include "constants.h"
 
+// System states
 typedef enum {
     IDLE,
     HEATING,
@@ -19,7 +20,6 @@ typedef enum {
     SELECT,
     BACK
 } ButtonType;
-
 
 // Tube states
 typedef enum {

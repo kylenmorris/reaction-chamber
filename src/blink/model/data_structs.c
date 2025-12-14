@@ -1,4 +1,4 @@
-#include "../include/data_structs.h"
+#include "data_structs.h"
 
 ButtonInput gButtonInput = {
     // .lastPressed = ,

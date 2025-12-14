@@ -1,10 +1,9 @@
 #include <stdio.h>
-
+#include "display_ctrl.h"
 #include "data_structs.h"
 #include "imodel_structs.h"
 
-
-void draw_progress_bar(int percent) {
+static void draw_progress_bar(int percent) {
     int filled = (percent * PROGRESS_BAR_WIDTH) / 100;
 
     printf("[");
@@ -19,7 +18,7 @@ void draw_progress_bar(int percent) {
 
 #include <stdio.h>
 
-void terminal_draw_heating_screen() {
+static void terminal_draw_heating_screen() {
     // Clear terminal
     printf("\033[2J");
     printf("\033[H");
@@ -40,9 +39,7 @@ void terminal_draw_heating_screen() {
     printf("========================================\n");
 }
 
-
-
-void terminal_draw_idle_menu() {
+static void terminal_draw_idle_menu() {
     // Clear terminal (works on most terminals)
     printf("\033[2J");    // clear screen
     printf("\033[H");     // move cursor to top-left
@@ -52,7 +49,7 @@ void terminal_draw_idle_menu() {
     printf("================================\n\n");
 
     for (int i = 0; i < IDLE_MENU_ITEM_COUNT; i++) {
-        if (i == gIdleMenuModel.selected_index) {
+        if (i == gIdleMenuIM.selected_index) {
             printf(" > %s\n", idle_menu_items[i]);
         } else {
             printf("   %s\n", idle_menu_items[i]);
@@ -64,19 +61,23 @@ void terminal_draw_idle_menu() {
     printf("================================\n");
 }
 
-void draw_display(SystemState state) {
+// ####################################
+// PUBLIC METHODS
+// ####################################
+
+void display_ctrl_draw(SystemState state) {
     switch (state) {
         case IDLE:
-            if (gIdleMenuModel.needs_redraw) {
+            if (gIdleMenuIM.needs_redraw) {
                 terminal_draw_idle_menu();
-                // gIdleMenuModel.needs_redraw = false;
+                // gIdleMenuIM.needs_redraw = false;
             }
             break;
 
         case HEATING:
-            if (gIdleMenuModel.needs_redraw) {
+            if (gIdleMenuIM.needs_redraw) {
                 terminal_draw_heating_screen();
-                // gIdleMenuModel.needs_redraw = false;
+                // gIdleMenuIM.needs_redraw = false;
             }
             break;
 
@@ -93,26 +94,3 @@ void draw_display(SystemState state) {
             break;
     }
 }
-
-/*
-
-    printf("\n----------------------------------------\n");
-    printf(" Tube | State     | Value\n");
-    printf("----------------------------------------\n");
-
-    for (int i = 0; i < NUM_TUBES; i++) {
-        const tube_model_t *t = &test->tubes[i];
-
-        if (t->valid) {
-            printf("  %2d  | %s | %6.2f\n",
-                   i,
-                   tube_state_str(t->state),
-                   t->value);
-        } else {
-            printf("  %2d  | %s |   ---\n",
-                   i,
-                   tube_state_str(t->state));
-        }
-    }
-
-    */

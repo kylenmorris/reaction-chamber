@@ -3,45 +3,22 @@
 #include "data_structs.h"
 #include <hardware/gpio.h>
 
-const int BUTTON_PINS[] = {
+static const int BUTTON_PINS[] = {
     UP_BUTTON_GPIO_PIN,
     DOWN_BUTTON_GPIO_PIN,
     SELECT_BUTTON_GPIO_PIN,
     BACK_BUTTON_GPIO_PIN
 };
 
-void button_init() {
-    init_gpio_button(UP_BUTTON_GPIO_PIN);
-    init_gpio_button(DOWN_BUTTON_GPIO_PIN);
-    init_gpio_button(SELECT_BUTTON_GPIO_PIN);
-    init_gpio_button(BACK_BUTTON_GPIO_PIN);
-}
-
-
-void button_step(void) {
-    gButtonInput.wasPressed = false;
-
-    for (int i = 0; i < NUM_BUTTONS; i++) {
-
-        int reading = gpio_get(BUTTON_PINS[i]);
-        int truePress = debounceButton(i, reading);
-
-        if (truePress) {
-            gButtonInput.lastPressed = i;
-            gButtonInput.wasPressed = true;
-        }
-    }
-}
-
 // internal function to init pins
-void init_gpio_button(int gpio_pin) {
+static void init_gpio_as_button(int gpio_pin) {
     gpio_init(gpio_pin);
     gpio_set_dir(gpio_pin, GPIO_IN);
     gpio_pull_up(gpio_pin);
 }
 
 // debounces a button input, returns 1 if a true press detected
-int debounceButton(int i, int reading) {
+static int debounceButton(int i, int reading) {
     
     int truePress = 0;
 
@@ -72,4 +49,30 @@ int debounceButton(int i, int reading) {
     gButtonInput.lastButtonStates[i] = reading;
 
     return truePress;
+}
+
+// ####################################
+// PUBLIC METHODS
+// ####################################
+
+void button_ctrl_init() {
+    init_gpio_as_button(UP_BUTTON_GPIO_PIN);
+    init_gpio_as_button(DOWN_BUTTON_GPIO_PIN);
+    init_gpio_as_button(SELECT_BUTTON_GPIO_PIN);
+    init_gpio_as_button(BACK_BUTTON_GPIO_PIN);
+}
+
+void button_ctrl_step(void) {
+    gButtonInput.wasPressed = false;
+
+    for (int i = 0; i < NUM_BUTTONS; i++) {
+
+        int reading = gpio_get(BUTTON_PINS[i]);
+        int truePress = debounceButton(i, reading);
+
+        if (truePress) {
+            gButtonInput.lastPressed = i;
+            gButtonInput.wasPressed = true;
+        }
+    }
 }

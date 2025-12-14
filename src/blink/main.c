@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+#include "imodel_structs.h"
 #include "include/data_structs.h"
 #include "pico/stdlib.h"
 #include "constants.h"
@@ -12,6 +13,7 @@
 #include "temp_sens_ctrl.h"
 #include "heater_ctrl.h"
 #include "tube_optical_ctrl.h"
+#include "display_ctrl.h"
 
 #include <hardware/gpio.h>
 #include <stdbool.h>
@@ -52,27 +54,58 @@ SystemState update_state(SystemState current_state) {
     
     button_step();  
     temp_sens_step();
+    draw_display(current_state);
 
     switch (current_state) {
         case IDLE:
-            // If the button was pressed, go to LED_ON state
-            if (gButtonInput.wasPressed) {
-                char buffer[100];
-                sprintf(buffer, "Button handled on GPIO pin: %d\n", gButtonInput.lastPressed);
-                printf("%s", buffer);
+
+            // no inputs means stay in idle
+            if (!gButtonInput.wasPressed) {
+                break;
+            }
+
+            if (gButtonInput.lastPressed == UP) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                gIdleMenuModel.selected_index = 0;
+            }
+            
+            if (gButtonInput.lastPressed == DOWN) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                gIdleMenuModel.selected_index = 1;
+            }
+            
+            if (gButtonInput.lastPressed == SELECT) {
                 gButtonInput.wasPressed = false;  // Reset flag
 
-                return HEATING;
+                if (gIdleMenuModel.selected_index == 0) {
+                    heater_init();
+                    temp_sens_init();
+
+                    return HEATING;
+                }
+                else if (gIdleMenuModel.selected_index == 1) {
+                    return HISTORY;
+                }
             }
+
+            // back does nothing in idle
+
             break;
 
         case HEATING:
-            pico_set_led(true);
-            sleep_ms(500);
-            return REACTING;
+
+            if (gButtonInput.wasPressed && gButtonInput.lastPressed == BACK) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                return IDLE;
+            }
+
+            if (gTempStatus.chamber_temp >= gTempStatus.target_temp) { // this should probably be a flag in gTempStatus
+                return REACTING;
+            }
+            
+            break;
 
         case REACTING:
-            pico_set_led(false);
             return RESULTS;
 
         case RESULTS:
@@ -102,7 +135,6 @@ int main() {
     sleep_ms(500);
     printf("Finished.\n");
     pico_set_led(LOW);
-
 
     while (true) {      
 

@@ -12,7 +12,8 @@ ButtonInput gButtonInput = {
 TempStatus gTempStatus = {
     .chamber_temp = 0.0f,
     .temp_low = false,
-    .temp_extreme = false
+    .temp_extreme = false,
+    .target_temp = 62.0f
 };
 
 OpticalInputs gOpticalInputs = {

@@ -63,6 +63,7 @@ typedef struct {
     float chamber_temp; // °C
     bool temp_low;      // default false
     bool temp_extreme;  // default false
+    float target_temp;  // °C
 } TempStatus;
 
 

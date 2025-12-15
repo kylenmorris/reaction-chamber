@@ -66,11 +66,11 @@ static void terminal_draw_idle_menu() {
 // PUBLIC METHODS
 // ####################################
 
-void display_ctrl_draw(SystemState state) {
+void display_ctrl_draw() {
     
     uint32_t now_ms = to_ms_since_boot(get_absolute_time());
 
-    switch (state) {
+    switch (gSystemState) {
         case IDLE:
             if (gIdleMenuIM.needs_redraw) {
                 terminal_draw_idle_menu();

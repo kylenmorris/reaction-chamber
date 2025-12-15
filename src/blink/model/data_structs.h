@@ -71,5 +71,6 @@ typedef struct {
 extern ButtonInput gButtonInput;
 extern TempStatus gTempStatus;
 extern OpticalInputs gOpticalInputs;
+extern SystemState gSystemState;
 
 #endif

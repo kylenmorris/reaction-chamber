@@ -3,6 +3,6 @@
 
 #include "data_structs.h"
 
-void display_ctrl_draw(SystemState current_state);
+void display_ctrl_draw();
 
 #endif

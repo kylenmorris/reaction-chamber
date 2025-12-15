@@ -6,6 +6,7 @@
 // ####################################
 
 #define SYSTEM_DELAY_MS 10 // Main loop delay (10 ms = 100 Hz)
+// #define SYSTEM_DELAY_CORE1_M 100
 
 #define LOW 0
 #define HIGH 1

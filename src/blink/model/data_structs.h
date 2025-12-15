@@ -4,14 +4,6 @@
 #include <stdbool.h> 
 #include "constants.h"
 
-// System states
-typedef enum {
-    IDLE,
-    HEATING,
-    REACTING,
-    RESULTS,
-    HISTORY
-} SystemState;
 
 // Button types
 typedef enum {
@@ -21,6 +13,7 @@ typedef enum {
     BACK
 } ButtonType;
 
+
 // Tube states
 typedef enum {
     UNUSED,
@@ -28,6 +21,7 @@ typedef enum {
     COMPLETE,
     INVALID
 } TubeState;
+
 
 // Tube results
 // may want to merge with TubeState
@@ -37,6 +31,19 @@ typedef enum {
     NEGATIVE,
     INVALID_RESULT 
 } TubeResult;
+
+
+// System states for main loop
+// Written only by system_state_loop.c
+typedef enum {
+    IDLE,
+    HEATING,
+    REACTING,
+    RESULTS,
+    HISTORY
+} SystemState;
+
+extern SystemState gSystemState;
 
 
 // Button input structure
@@ -49,12 +56,16 @@ typedef struct {
     int steadyTime[NUM_BUTTONS];
 } ButtonInput;
 
+extern ButtonInput gButtonInput;
+
 
 // Tube optical readings
 // Written only by tube_optical_ctrl.c
 typedef struct {
     float intensity[NUM_TUBES];
 } OpticalInputs;
+
+extern OpticalInputs gOpticalInputs;
 
 
 // Temperature status
@@ -66,11 +77,6 @@ typedef struct {
     float target_temp;  // °C
 } TempStatus;
 
-
-
-extern ButtonInput gButtonInput;
 extern TempStatus gTempStatus;
-extern OpticalInputs gOpticalInputs;
-extern SystemState gSystemState;
 
 #endif

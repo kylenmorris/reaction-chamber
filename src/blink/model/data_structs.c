@@ -1,5 +1,9 @@
 #include "data_structs.h"
 
+// See header for info
+
+SystemState gSystemState = IDLE;
+
 ButtonInput gButtonInput = {
     // .lastPressed = ,
     .lastPressed = -1,
@@ -9,6 +13,10 @@ ButtonInput gButtonInput = {
     .steadyTime = { 0, 0, 0, 0 }
 };
 
+OpticalInputs gOpticalInputs = {
+    .intensity = { 0.0f }
+};
+
 TempStatus gTempStatus = {
     .chamber_temp = 0.0f,
     .temp_low = false,
@@ -16,9 +24,4 @@ TempStatus gTempStatus = {
     .target_temp = 62.0f
 };
 
-OpticalInputs gOpticalInputs = {
-    .intensity = { 0.0f }
-};
-
-SystemState gSystemState = IDLE;
 

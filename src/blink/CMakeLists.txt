@@ -37,6 +37,7 @@ pico_sdk_init()
 
 add_executable(main
     main.c
+    system_state_loop.c
     model/data_structs.c
     model/imodel_structs.c
     controller/button_ctrl.c
@@ -44,6 +45,8 @@ add_executable(main
     controller/tube_optical_ctrl.c
     controller/heater_ctrl.c
     controller/display_ctrl.c
+    helper/pico_led.c
+
 )
 
 # Include paths
@@ -51,6 +54,7 @@ target_include_directories(main PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/controller
     ${CMAKE_CURRENT_LIST_DIR}/include
     ${CMAKE_CURRENT_LIST_DIR}/model
+    ${CMAKE_CURRENT_LIST_DIR}/helper
 )
 
 # pull in common dependencies

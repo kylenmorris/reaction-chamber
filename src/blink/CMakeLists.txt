@@ -57,7 +57,11 @@ target_include_directories(main PRIVATE
 target_link_libraries(main pico_stdlib)
 
 if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(main pico_cyw43_arch_none)
+    target_link_libraries(
+        main 
+        pico_cyw43_arch_none
+        pico_multicore
+        )
 endif()
 
 pico_enable_stdio_usb(main 1)

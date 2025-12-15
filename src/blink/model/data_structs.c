@@ -20,3 +20,5 @@ OpticalInputs gOpticalInputs = {
     .intensity = { 0.0f }
 };
 
+SystemState gSystemState = IDLE;
+

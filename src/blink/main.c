@@ -2,8 +2,9 @@
 #include <hardware/gpio.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "model/data_structs.h"
 #include "pico/stdlib.h" // this IS needed despite clangd saying otherwise
-
+#include "pico/multicore.h"
 
 #include "imodel_structs.h"
 #include "data_structs.h"
@@ -48,13 +49,12 @@ void pico_set_led(bool led_on) {
 }
 
 // may move this to helper file it's going to get long
-SystemState update_state(SystemState current_state) {
+void update_state() {
     
-    button_ctrl_step();  
+ 
     temp_sens_ctrl_step();
-    display_ctrl_draw(current_state);
 
-    switch (current_state) {
+    switch (gSystemState) {
         case IDLE:
 
             // no inputs means stay in idle
@@ -82,10 +82,10 @@ SystemState update_state(SystemState current_state) {
                     temp_sens_ctrl_init();
                     
                     gHeatingMenuIM.needs_redraw = true;
-                    return HEATING;
+                    gSystemState = HEATING;
                 }
                 else if (gIdleMenuIM.selected_index == 1) {
-                    return HISTORY;
+                    gSystemState = HISTORY;
                 }
             }
 
@@ -98,26 +98,33 @@ SystemState update_state(SystemState current_state) {
             if (gButtonInput.wasPressed && gButtonInput.lastPressed == BACK) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.needs_redraw = true;
-                return IDLE;
+                gSystemState = IDLE;
             }
 
             if (gTempStatus.chamber_temp >= gTempStatus.target_temp) { // this should probably be a flag in gTempStatus
-                return REACTING;
+                gSystemState = REACTING;
             }
 
             break;
 
         case REACTING:
-            return RESULTS;
+            gSystemState = RESULTS;
 
         case RESULTS:
-            return IDLE;
+            gSystemState = IDLE;
 
         case HISTORY:
-            return IDLE;
+            gSystemState = IDLE;
     }
 
-    return current_state;
+}
+
+void core1_entry() {
+    while (true) {
+        button_ctrl_step(); 
+        display_ctrl_draw();
+        sleep_ms(SYSTEM_DELAY_MS);
+    }
 }
 
 int main() {
@@ -133,14 +140,16 @@ int main() {
     heater_ctrl_init();
     tube_optical_ctrl_init();
 
-    SystemState current_state = IDLE;
+    multicore_launch_core1(core1_entry);
+
+    // SystemState current_state = IDLE;
 
     sleep_ms(500);
     pico_set_led(LOW); // Finished startup
 
     while (true) {      
 
-        current_state = update_state(current_state);
+        update_state();
         sleep_ms(SYSTEM_DELAY_MS);
 
     }

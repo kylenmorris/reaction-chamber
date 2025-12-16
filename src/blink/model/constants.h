@@ -15,10 +15,10 @@
 // PIN DEFINITIONS
 // ####################################
 
-#define UP_BUTTON_GPIO_PIN 19  
-#define DOWN_BUTTON_GPIO_PIN 18  
-#define SELECT_BUTTON_GPIO_PIN 20  
-#define BACK_BUTTON_GPIO_PIN 16  
+#define UP_BUTTON_GPIO_PIN 18  
+#define DOWN_BUTTON_GPIO_PIN 16  
+#define SELECT_BUTTON_GPIO_PIN 19  
+#define BACK_BUTTON_GPIO_PIN 17 
 
 
 // ####################################

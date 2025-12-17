@@ -1,10 +1,8 @@
 # Pathoscan
 
-## Reboot in BOOTSEL 
+## Reboot in BOOTSEL from VSCode terminal
 
-I haven't found a nice way to link this with the Pi VSCode extension. Run this in powershell to force the pico into bootsel. For some reason my terminal couldn't find picotool so this is hack solution
-
-`& "C:\your\path\to\.pico-sdk\picotool\2.2.0-a4\picotool\picotool.exe" reboot -f -u`
+picotool reboot -f -u
 
 ## Getting started
 

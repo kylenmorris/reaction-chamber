@@ -36,15 +36,22 @@ pico_sdk_init()
 # Add executable. Default name is the project name, version 0.1
 
 add_executable(main
+
     main.c
     system_state_loop.c
+
     model/data_structs.c
     model/imodel_structs.c
+
     controller/button_ctrl.c
     controller/temp_sens_ctrl.c
     controller/tube_optical_ctrl.c
     controller/heater_ctrl.c
-    controller/display_ctrl.c
+    controller/test_manager.c
+
+    display/display_ctrl.c
+    display/screens.c
+
     helper/pico_led.c
 
 )
@@ -55,6 +62,7 @@ target_include_directories(main PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/include
     ${CMAKE_CURRENT_LIST_DIR}/model
     ${CMAKE_CURRENT_LIST_DIR}/helper
+    ${CMAKE_CURRENT_LIST_DIR}/display
 )
 
 # pull in common dependencies

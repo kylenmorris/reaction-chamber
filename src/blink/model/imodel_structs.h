@@ -31,11 +31,32 @@ extern idleMenuIM gIdleMenuIM;
 typedef struct {
     bool needs_redraw;
     uint32_t last_redraw;
+    int spinner_frame;
 } heatingMenuIM;
 
 extern heatingMenuIM gHeatingMenuIM;
 
+// ####################################
+// TEST RUNNING MENU
+// ####################################
 
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+} testRunningIM;
+
+extern testRunningIM gTestRunningIM;
+
+// ####################################
+// RESULTS MENU
+// ####################################
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+} resultsIM;
+
+extern resultsIM gResultsIM;
 
 
 #endif

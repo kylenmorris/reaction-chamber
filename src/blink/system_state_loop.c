@@ -8,6 +8,7 @@
 #include "heater_ctrl.h"
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
+#include "test_manager.h"
 
 
 // Main system state loop and update
@@ -63,16 +64,47 @@ void run_system_state_loop() {
             }
 
             if (gTempStatus.chamber_temp >= gTempStatus.target_temp) { // this should probably be a flag in gTempStatus
+                test_manager_start();
+                gTestRunningIM.needs_redraw = true;
                 gSystemState = REACTING;
             }
 
             break;
 
         case REACTING:
-            gSystemState = RESULTS;
+
+            // Back to idle
+            if (gButtonInput.wasPressed && gButtonInput.lastPressed == BACK) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                // heater_ctrl_shutdown();
+                // temp_sens_ctrl_shutdown();
+                gIdleMenuIM.needs_redraw = true;
+                gSystemState = IDLE;
+            }
+
+            // Reaction complete
+            if (gTestStatus.completed) {
+                // heater_ctrl_shutdown();
+                // temp_sens_ctrl_shutdown();
+                gResultsIM.needs_redraw = true;
+                gSystemState = RESULTS;
+            }
+
+            test_manager_step();
+
+            break;
 
         case RESULTS:
-            gSystemState = IDLE;
+            
+            // Select or Back to go to idle
+            if (gButtonInput.wasPressed &&
+                (gButtonInput.lastPressed == BACK || gButtonInput.lastPressed == SELECT)) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                gIdleMenuIM.needs_redraw = true;
+                gSystemState = IDLE;
+            }
+
+            break;
 
         case HISTORY:
             gSystemState = IDLE;

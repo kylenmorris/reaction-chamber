@@ -1,0 +1,156 @@
+#include "screens.h"
+
+#include "data_structs.h"
+#include "imodel_structs.h"
+#include <stdio.h>
+
+static char* get_result_string(TubeState state) {
+    switch (state) {
+        case IDLE:
+            return "IDLE";
+        case RUNNING:
+            return "RUNNING";
+        case POSITIVE:
+            return "POSITIVE";
+        case NEGATIVE:
+            return "NEGATIVE";
+        case INVALID:
+            return "INVALID";
+        default:
+            return "__ERROR__";
+    }
+}
+
+static void print_spinner(int frame) {
+    const char spinner_chars[] = {'|', '/', '-', '\\'};
+    printf("%c\r", spinner_chars[frame % 4]);
+}
+
+static void draw_progress_bar(int percent) {
+    int filled = (percent * PROGRESS_BAR_WIDTH) / 100;
+
+    printf("[");
+    for (int i = 0; i < PROGRESS_BAR_WIDTH; i++) {
+        if (i < filled)
+            printf("=");
+        else
+            printf(" ");
+    }
+    printf("] %3d%%  ", percent);
+}
+
+// ####################################
+// SCREENS
+// ####################################
+
+void terminal_draw_idle_menu() {
+    // Clear terminal (works on most terminals)
+    printf("\033[2J");    // clear screen
+    printf("\033[H");     // move cursor to top-left
+
+    printf("================================\n");
+    printf("        DEVICE IDLE MENU        \n");
+    printf("================================\n\n");
+
+    for (int i = 0; i < IDLE_MENU_ITEM_COUNT; i++) {
+        if (i == gIdleMenuIM.selected_index) {
+            printf(" > %s\n", idle_menu_items[i]);
+        } else {
+            printf("   %s\n", idle_menu_items[i]);
+        }
+    }
+
+    printf("\n--------------------------------\n");
+    printf("UP/DOWN: Navigate   SEL: Select\n");
+    printf("================================\n");
+}
+
+void terminal_draw_heating_screen() {
+    // Clear terminal
+    printf("\033[2J");
+    printf("\033[H");
+
+    printf("========================================\n");
+    printf("               HEATING MENU             \n");
+    printf("========================================\n\n");
+
+    // Show temperature
+    printf("[%6.2f C / %6.2f C]\n",
+           gTempStatus.chamber_temp, gTempStatus.target_temp);
+
+    // Show progress bar
+    draw_progress_bar(gTempStatus.chamber_temp * 100 / gTempStatus.target_temp);
+    print_spinner(gHeatingMenuIM.spinner_frame);
+    gHeatingMenuIM.spinner_frame = (gHeatingMenuIM.spinner_frame + 1) % 4; // cant just increment or we might have overflow lol
+
+    printf("\n----------------------------------------\n");
+    printf("BACK: Cancel Heating\n");
+    printf("========================================\n");
+}
+
+void terminal_draw_test_running_screen() {
+    // Clear terminal
+    printf("\033[2J");
+    printf("\033[H");
+
+    printf("========================================\n");
+    printf("           TEST RUNNING SCREEN          \n");
+    printf("========================================\n\n");
+
+    // Show test progress
+    printf("Test in progress...\n");
+
+    // Show tube statuses
+    for (int i = 0; i < NUM_TUBES / 2; i++) {
+        printf("%-2d: %-10s | %-2d: %-10s\n",
+               i + 1,
+               get_result_string(gTestStatus.tubes[i].state),
+               i + NUM_TUBES / 2 + 1,
+               get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].state));
+    }
+
+    printf("\n----------------------------------------\n");
+    printf("BACK: Abort Test\n");
+    printf("========================================\n");
+}
+
+void terminal_draw_results_screen() {
+    // Clear terminal
+    printf("\033[2J");
+    printf("\033[H");
+
+    printf("========================================\n");
+    printf("              RESULTS MENU              \n");
+    printf("========================================\n\n");
+
+    // Show test results
+    for (int i = 0; i < NUM_TUBES / 2; i++) {
+        printf("%-2d: %-10s | %-2d: %-10s\n",
+               i + 1,
+               get_result_string(gTestStatus.tubes[i].state),
+               i + NUM_TUBES / 2 + 1,
+               get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].state));
+    }
+
+    printf("\n----------------------------------------\n");
+    printf("SELECT: Return to Idle Menu\n");
+    printf("========================================\n");
+}
+
+void terminal_draw_results_history() {
+    // Clear terminal
+    printf("\033[2J");
+    printf("\033[H");
+
+    printf("========================================\n");
+    printf("           RESULTS HISTORY MENU         \n");
+    printf("========================================\n\n");
+
+    // Placeholder for history display
+    printf("No history available.\n");
+
+    printf("\n----------------------------------------\n");
+    printf("SELECT: Return to Idle Menu\n");
+    printf("========================================\n");
+}
+

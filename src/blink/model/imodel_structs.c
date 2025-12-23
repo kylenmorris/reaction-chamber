@@ -11,3 +11,13 @@ heatingMenuIM gHeatingMenuIM = {
     .needs_redraw = true,
     .last_redraw = 0
 };
+
+testRunningIM gTestRunningIM = {
+    .needs_redraw = true,
+    .last_redraw = 0
+};
+
+resultsIM gResultsIM = {
+    .needs_redraw = true,
+    .last_redraw = 0
+};

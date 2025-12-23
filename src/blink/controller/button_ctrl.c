@@ -60,6 +60,7 @@ void button_ctrl_init() {
     init_gpio_as_button(DOWN_BUTTON_GPIO_PIN);
     init_gpio_as_button(SELECT_BUTTON_GPIO_PIN);
     init_gpio_as_button(BACK_BUTTON_GPIO_PIN);
+    // init_gpio_as_button(DEBUG_BUTTON_GPIO_PIN);
 }
 
 void button_ctrl_step(void) {

@@ -4,17 +4,34 @@
 #include "imodel_structs.h"
 #include <stdio.h>
 
-static char* get_result_string(TubeState state) {
+// ####################################
+// HELPER PRINT FUNCTIONS
+// ####################################
+
+static char* get_tube_state_string(TubeState state) {
     switch (state) {
-        case IDLE:
-            return "IDLE";
+        case EMPTY:
+            return "EMPTY";
         case RUNNING:
             return "RUNNING";
+        case COMPLETED:
+            return "COMPLETED";
+        case ERROR:
+            return "ERROR";
+        default:
+            return "__ERROR__";
+    }
+}
+
+static char* get_result_string(ReactionResult result) {
+    switch (result) {
+        case UNKNOWN:
+            return "UNKNOWN";
         case POSITIVE:
             return "POSITIVE";
         case NEGATIVE:
             return "NEGATIVE";
-        case INVALID:
+        case INVALID_RESULT:
             return "INVALID";
         default:
             return "__ERROR__";
@@ -104,9 +121,9 @@ void terminal_draw_test_running_screen() {
     for (int i = 0; i < NUM_TUBES / 2; i++) {
         printf("%-2d: %-10s | %-2d: %-10s\n",
                i + 1,
-               get_result_string(gTestStatus.tubes[i].state),
+               get_tube_state_string(gTestStatus.tubes[i].state),
                i + NUM_TUBES / 2 + 1,
-               get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].state));
+               get_tube_state_string(gTestStatus.tubes[i + NUM_TUBES / 2].state));
     }
 
     printf("\n----------------------------------------\n");
@@ -127,9 +144,9 @@ void terminal_draw_results_screen() {
     for (int i = 0; i < NUM_TUBES / 2; i++) {
         printf("%-2d: %-10s | %-2d: %-10s\n",
                i + 1,
-               get_result_string(gTestStatus.tubes[i].state),
+               get_result_string(gTestStatus.tubes[i].result),
                i + NUM_TUBES / 2 + 1,
-               get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].state));
+               get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].result));
     }
 
     printf("\n----------------------------------------\n");

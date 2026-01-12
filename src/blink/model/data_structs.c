@@ -5,7 +5,7 @@
 SystemState gSystemState = IDLE;
 
 SystemControl gSysControl = {
-    .start_tube = { false }
+    .tube_present = { false }
 };
 
 TestStatus gTestStatus = {

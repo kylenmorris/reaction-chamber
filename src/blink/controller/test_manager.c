@@ -49,11 +49,11 @@ void test_manager_step(void) {
 
     for (int i = 0; i < NUM_TUBES; i++) {
 
-        // Check for new reactions
-        if (gSysControl.start_tube[i]) {
+        // Check for new tube insertions
+        if (gSysControl.tube_present[i] && gTestStatus.tubes[i].state == EMPTY) {
             gTestStatus.tubes[i].state = RUNNING;
             gTestStatus.tubes[i].start_time = now_ms;
-            gSysControl.start_tube[i] = false; // Reset flag
+            gSysControl.tube_present[i] = false; // Reset flag
         }
 
         

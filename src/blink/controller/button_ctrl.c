@@ -7,7 +7,8 @@ static const int BUTTON_PINS[] = {
     UP_BUTTON_GPIO_PIN,
     DOWN_BUTTON_GPIO_PIN,
     SELECT_BUTTON_GPIO_PIN,
-    BACK_BUTTON_GPIO_PIN
+    BACK_BUTTON_GPIO_PIN,
+    DEBUG_BUTTON_GPIO_PIN
 };
 
 // internal function to init pins
@@ -55,14 +56,16 @@ static int debounceButton(int i, int reading) {
 // PUBLIC METHODS
 // ####################################
 
-void button_ctrl_init() {
+// Initialize required gpio pins as buttons
+void button_ctrl_init(void) {
     init_gpio_as_button(UP_BUTTON_GPIO_PIN);
     init_gpio_as_button(DOWN_BUTTON_GPIO_PIN);
     init_gpio_as_button(SELECT_BUTTON_GPIO_PIN);
     init_gpio_as_button(BACK_BUTTON_GPIO_PIN);
-    // init_gpio_as_button(DEBUG_BUTTON_GPIO_PIN);
+    init_gpio_as_button(DEBUG_BUTTON_GPIO_PIN);
 }
 
+// Checks for button presses and updates gButtonInput if a button was pressed
 void button_ctrl_step(void) {
     gButtonInput.wasPressed = false;
 
@@ -76,4 +79,9 @@ void button_ctrl_step(void) {
             gButtonInput.wasPressed = true;
         }
     }
+}
+
+// Check if a specific button was pressed
+bool button_ctrl_is_pressed(ButtonType button) {
+    return gButtonInput.wasPressed && gButtonInput.lastPressed == button;
 }

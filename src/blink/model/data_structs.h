@@ -5,44 +5,55 @@
 #include "constants.h"
 #include <stdint.h>
 
-typedef struct {
-    bool start_tube[NUM_TUBES];
-} SystemControl;
-
-extern SystemControl gSysControl;
+// ####################################
+// ENUMS
+// ####################################
 
 // Button types
 typedef enum {
     UP,
     DOWN,
     SELECT,
-    BACK
+    BACK,
+    DEBUG
 } ButtonType;
 
-
-// Tube states
+// Physical tube state
 typedef enum {
     EMPTY,
     RUNNING,
-    POSITIVE,
-    NEGATIVE,
-    INVALID
+    COMPLETED,
+    ERROR
 } TubeState;
 
+// Reaction results
+typedef enum {
+    UNKNOWN,
+    POSITIVE,
+    NEGATIVE,
+    INVALID_RESULT 
+} ReactionResult;
 
-// // Tube results
-// // may want to merge with TubeState
-// typedef enum {
-//     UNKNOWN,
-//     POSITIVE,
-//     NEGATIVE,
-//     INVALID_RESULT 
-// } TubeResult;
 
+// ####################################
+// STRUCTS
+// ####################################
+
+// monitors which tubes are inserted
+// Written only by tube_sens_ctrl.c
+typedef struct {
+    bool tube_present[NUM_TUBES];
+} SystemControl;
+
+extern SystemControl gSysControl;
+
+
+// Per tube info
+// Written only by test_manager.c
 typedef struct {
 
     TubeState state;
-    // TubeResult result;
+    ReactionResult result;
     uint32_t start_time;
     uint32_t last_update;
     bool is_positive_control;
@@ -53,6 +64,8 @@ typedef struct {
 } TubeReaction;
 
 
+// Test status
+// Written only by test_manager.c
 typedef struct {
     TubeReaction tubes[NUM_TUBES];
     uint32_t reaction_start_time;
@@ -62,6 +75,7 @@ typedef struct {
 } TestStatus;
 
 extern TestStatus gTestStatus;
+
 
 // System states for main loop
 // Written only by system_state_loop.c

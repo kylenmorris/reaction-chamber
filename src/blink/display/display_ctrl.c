@@ -6,6 +6,18 @@
 #include "constants.h"
 #include "screens.h"
 
+// This might need a rework
+static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw, 
+                            uint32_t* last_redraw, void (*draw_fn)(void)) {
+
+    if ((now_ms - *last_redraw) >= REDRAW_INTERVAL_MS || *needs_redraw) {
+        draw_fn();
+        *last_redraw = now_ms;
+        *needs_redraw = false;
+    }
+    
+}
+
 // ####################################
 // PUBLIC METHODS
 // ####################################
@@ -23,21 +35,13 @@ void display_ctrl_draw() {
             break;
 
         case HEATING:
-            if ((now_ms - gHeatingMenuIM.last_redraw) >= REDRAW_INTERVAL_MS
-                    || gHeatingMenuIM.needs_redraw) {
-                terminal_draw_heating_screen();
-                gHeatingMenuIM.last_redraw = now_ms;
-                gHeatingMenuIM.needs_redraw = false;
-            }
+            redraw_if_needed(now_ms, &gHeatingMenuIM.needs_redraw, 
+                            &gHeatingMenuIM.last_redraw, terminal_draw_heating_screen);
             break;
 
         case REACTING:
-            if ((now_ms - gTestRunningIM.last_redraw) >= REDRAW_INTERVAL_MS
-                    || gTestRunningIM.needs_redraw) {
-                terminal_draw_test_running_screen();
-                gTestRunningIM.last_redraw = now_ms;
-                gTestRunningIM.needs_redraw = false;
-            }
+            redraw_if_needed(now_ms, &gTestRunningIM.needs_redraw, 
+                            &gTestRunningIM.last_redraw, terminal_draw_test_running_screen);
             break;
 
         case RESULTS:

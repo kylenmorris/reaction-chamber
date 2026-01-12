@@ -45,7 +45,7 @@
 // ####################################
 
 #define DEBOUNCE_TIME_CYCLES 5 
-#define NUM_BUTTONS 4
+#define NUM_BUTTONS 5
 #define REDRAW_INTERVAL_MS 500
 
 

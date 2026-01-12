@@ -19,24 +19,24 @@ void run_system_state_loop() {
     switch (gSystemState) {
         case IDLE:
 
-            // no inputs means stay in idle
+            // no inputs means stay in idle, ,keeping this for redraw limiting for now
             if (!gButtonInput.wasPressed) {
                 break;
             }
 
             gIdleMenuIM.needs_redraw = true;
 
-            if (gButtonInput.lastPressed == UP) {
+            if (button_ctrl_is_pressed(UP)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.selected_index = 0;
             }
             
-            if (gButtonInput.lastPressed == DOWN) {
+            if (button_ctrl_is_pressed(DOWN)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.selected_index = 1;
             }
             
-            if (gButtonInput.lastPressed == SELECT) {
+            if (button_ctrl_is_pressed(SELECT)) {
                 gButtonInput.wasPressed = false;  // Reset flag
 
                 if (gIdleMenuIM.selected_index == 0) {
@@ -57,7 +57,7 @@ void run_system_state_loop() {
 
         case HEATING:
 
-            if (gButtonInput.wasPressed && gButtonInput.lastPressed == BACK) {
+            if (button_ctrl_is_pressed(BACK)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;
@@ -74,7 +74,7 @@ void run_system_state_loop() {
         case REACTING:
 
             // Back to idle
-            if (gButtonInput.wasPressed && gButtonInput.lastPressed == BACK) {
+            if (button_ctrl_is_pressed(BACK)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 // heater_ctrl_shutdown();
                 // temp_sens_ctrl_shutdown();
@@ -97,8 +97,7 @@ void run_system_state_loop() {
         case RESULTS:
             
             // Select or Back to go to idle
-            if (gButtonInput.wasPressed &&
-                (gButtonInput.lastPressed == BACK || gButtonInput.lastPressed == SELECT)) {
+            if (button_ctrl_is_pressed(BACK) || button_ctrl_is_pressed(SELECT)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;

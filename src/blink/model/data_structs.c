@@ -11,13 +11,13 @@ SystemControl gSysControl = {
 TestStatus gTestStatus = {
     // .tubes = { {EMPTY, 0, 0, false, false, false, 0} },
     .reaction_start_time = 0,
+    .reaction_total_time = 0,
     .reaction_active = false,
     .test_invalid = false,
     .completed = false
 };
 
 ButtonInput gButtonInput = {
-    // .lastPressed = ,
     .lastPressed = -1,
     .wasPressed = false,
     .buttonStates = { HIGH, HIGH, HIGH, HIGH },

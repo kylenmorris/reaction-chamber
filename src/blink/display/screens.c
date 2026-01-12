@@ -116,6 +116,10 @@ void terminal_draw_test_running_screen() {
 
     // Show test progress
     printf("Test in progress...\n");
+    printf("Elapsed Time: [%dm %ds / %dm]\n", 
+        (gTestStatus.reaction_total_time) / 60000, 
+        (gTestStatus.reaction_total_time % 60000) / 1000,
+        REACTION_DURATION_MS / 60000);
 
     // Show tube statuses
     for (int i = 0; i < NUM_TUBES / 2; i++) {

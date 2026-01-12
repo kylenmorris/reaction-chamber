@@ -69,6 +69,7 @@ typedef struct {
 typedef struct {
     TubeReaction tubes[NUM_TUBES];
     uint32_t reaction_start_time;
+    uint32_t reaction_total_time;
     bool reaction_active;
     bool test_invalid;
     bool completed;

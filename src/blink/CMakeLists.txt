@@ -48,6 +48,7 @@ add_executable(main
     controller/tube_optical_ctrl.c
     controller/heater_ctrl.c
     controller/test_manager.c
+    controller/tube_sens_ctrl.c
 
     display/display_ctrl.c
     display/screens.c

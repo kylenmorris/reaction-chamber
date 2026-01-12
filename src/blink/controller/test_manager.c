@@ -11,13 +11,26 @@ void test_manager_init(void) {
     // Initialize test manager here
 }
 
+void test_manager_stop(void) {
+    gTestStatus.reaction_active = false;
+}
+
 void test_manager_start(void) {
-    // Start a new test here
+    gTestStatus.reaction_active = true;
+    gTestStatus.reaction_start_time = to_ms_since_boot(get_absolute_time());
+    gTestStatus.test_invalid = false;
+    gTestStatus.completed = false;
+
+
+    temp_low_start = 0;
+    temp_extreme_start = 0;
 }
 
 void test_manager_step(void) {
 
     uint32_t now_ms = to_ms_since_boot(get_absolute_time());
+    
+    gTestStatus.reaction_total_time = now_ms - gTestStatus.reaction_start_time;
     
     if (!gTestStatus.reaction_active) {
         return; // No active test
@@ -53,7 +66,7 @@ void test_manager_step(void) {
         if (gSysControl.tube_present[i] && gTestStatus.tubes[i].state == EMPTY) {
             gTestStatus.tubes[i].state = RUNNING;
             gTestStatus.tubes[i].start_time = now_ms;
-            gSysControl.tube_present[i] = false; // Reset flag
+            // gSysControl.tube_present[i] = false; // Reset flag
         }
 
         

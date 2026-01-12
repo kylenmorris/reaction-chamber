@@ -9,6 +9,7 @@
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
 #include "test_manager.h"
+#include "tube_sens_ctrl.h"
 
 
 // Main system state loop and update
@@ -90,6 +91,7 @@ void run_system_state_loop() {
                 gSystemState = RESULTS;
             }
 
+            tube_sens_ctrl_step();
             test_manager_step();
 
             break;

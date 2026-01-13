@@ -3752,7 +3752,7 @@
 		)
 		(uuid "4e5d77db-d1bb-4c4c-ae77-84be87a7d1dc")
 	)
-	(text "XHP-5\n"
+	(text "XHP-6 (+1)\n"
 		(exclude_from_sim no)
 		(at 189.23 55.88 0)
 		(effects
@@ -3912,7 +3912,7 @@
 		)
 		(uuid "8eef6ea6-f5ef-4dce-9e45-d5c44345f2bc")
 	)
-	(text "XHP-5\n"
+	(text "XHP-6 (+1)\n"
 		(exclude_from_sim no)
 		(at 118.11 55.88 0)
 		(effects
@@ -3992,7 +3992,7 @@
 		)
 		(uuid "ab3343df-35e1-4dba-bc4b-ef06d6cbd78d")
 	)
-	(text "XHP-5\n"
+	(text "XHP-6 (+1)\n"
 		(exclude_from_sim no)
 		(at 165.1 55.88 0)
 		(effects
@@ -4032,7 +4032,7 @@
 		)
 		(uuid "b403cfcf-dbdc-44b7-a76d-5098546d7af2")
 	)
-	(text "XHP-5\n"
+	(text "XHP-6 (+1)\n"
 		(exclude_from_sim no)
 		(at 142.24 55.88 0)
 		(effects
@@ -4062,9 +4062,9 @@
 		)
 		(uuid "d2c17693-7128-4228-9213-7252cc92023b")
 	)
-	(text "XHP-8 (1 ext)\n\n"
+	(text "XHP-8 (+1)"
 		(exclude_from_sim no)
-		(at 187.198 93.98 90)
+		(at 186.182 93.98 90)
 		(effects
 			(font
 				(size 1.27 1.27)

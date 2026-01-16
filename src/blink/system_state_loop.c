@@ -94,7 +94,8 @@ void run_system_state_loop() {
 
             tube_sens_ctrl_step();
             test_manager_step();
-
+            tube_optical_ctrl_step();
+            
             break;
 
         case RESULTS:

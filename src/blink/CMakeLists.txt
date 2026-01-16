@@ -55,6 +55,15 @@ add_executable(main
 
     helper/pico_led.c
 
+    lib/glcd-master/glcd.c
+    lib/glcd-master/graphics.c
+    lib/glcd-master/graphs.c
+    lib/glcd-master/text.c
+    lib/glcd-master/text_tiny.c
+    lib/glcd-master/unit_tests.c
+    lib/glcd-master/devices/PICO2W.c
+    lib/glcd-master/controllers/ST7565R.c
+
 )
 
 # Include paths
@@ -64,10 +73,11 @@ target_include_directories(main PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/model
     ${CMAKE_CURRENT_LIST_DIR}/helper
     ${CMAKE_CURRENT_LIST_DIR}/display
+    ${CMAKE_CURRENT_LIST_DIR}/lib/glcd-master
 )
 
 # pull in common dependencies
-target_link_libraries(main pico_stdlib)
+target_link_libraries(main pico_stdlib hardware_spi)
 
 if (PICO_CYW43_SUPPORTED)
     target_link_libraries(

@@ -4,6 +4,8 @@
 #include "imodel_structs.h"
 #include <stdio.h>
 
+#include "glcd.h"
+
 // ####################################
 // HELPER PRINT FUNCTIONS
 // ####################################
@@ -56,8 +58,197 @@ static void draw_progress_bar(int percent) {
     printf("] %3d%%  ", percent);
 }
 
+
 // ####################################
-// SCREENS
+// DISPLAY SCREENS
+// ####################################
+
+void glcd_draw_idle_menu(void) {
+    /* Clear the screen buffer */
+    glcd_clear();
+    
+    /* Draw top border line */
+    glcd_draw_line(0, 8, 128, 8, BLACK);
+    
+    /* Title: "PathoScan" and "IDLE MENU" */
+    glcd_draw_string_xy(15, 0, "PathoScan");
+    glcd_draw_string_xy(8, 10, "IDLE MENU");
+    
+    /* Draw line below title */
+    glcd_draw_line(0, 25, 128, 25, BLACK);
+    
+    /* Draw menu items */
+    const int item_y_start = 30;
+    const int item_spacing = 15;
+    
+    for (int i = 0; i < IDLE_MENU_ITEM_COUNT; i++) {
+        int y = item_y_start + (i * item_spacing);
+        
+        /* Draw selection indicator (arrow) */
+        if (i == gIdleMenuIM.selected_index) {
+            glcd_draw_string_xy(5, y, ">");
+        }
+        
+        /* Draw menu item text */
+        glcd_draw_string_xy(15, y, (char*)idle_menu_items[i]);
+    }
+    
+    /* Draw line above instructions */
+    glcd_draw_line(0, 50, 128, 50, BLACK);
+    
+    /* Draw bottom instruction bar */
+    glcd_draw_string_xy(0, 55, "UP/DOWN: Navigate   SEL: Select");
+    
+    /* Update the display with changes */
+    glcd_write();
+}
+
+void glcd_draw_heating_screen(void) {
+    /* Clear the screen buffer */
+    glcd_clear();
+    
+    /* Draw top border line */
+    glcd_draw_line(0, 8, 128, 8, BLACK);
+    
+    /* Title: "HEATING MENU" */
+    glcd_draw_string_xy(20, 0, "HEATING MENU");
+    
+    /* Draw line below title */
+    glcd_draw_line(0, 25, 128, 25, BLACK);
+    
+    /* Show temperature */
+    char temp_str[32];
+    snprintf(temp_str, sizeof(temp_str), "[%6.2f C / %6.2f C]", 
+             gTempStatus.chamber_temp, gTempStatus.target_temp);
+    glcd_draw_string_xy(15, 30, temp_str);
+    
+    /* Draw progress bar */
+    int percent = (gTempStatus.chamber_temp * 100) / gTempStatus.target_temp;
+    int filled = (percent * PROGRESS_BAR_WIDTH) / 100;
+    
+    glcd_draw_string_xy(15, 45, "[");
+    for (int i = 0; i < PROGRESS_BAR_WIDTH; i++) {
+        if (i < filled)
+            glcd_draw_string_xy(15 + 6 + (i * 6), 45, "=");
+        else
+            glcd_draw_string_xy(15 + 6 + (i * 6), 45, " ");
+    }
+    glcd_draw_string_xy(15 + 6 + (PROGRESS_BAR_WIDTH * 6), 45, "]");
+    
+    /* Draw line above instructions */
+    glcd_draw_line(0, 55, 128, 55, BLACK);
+    
+    /* Draw bottom instruction bar */
+    glcd_draw_string_xy(0, 60, "BACK: Cancel Heating");
+    
+    /* Update the display with changes */
+    glcd_write();
+}
+
+void glcd_draw_test_running_screen(void) {
+    /* Clear the screen buffer */
+    glcd_clear();
+    
+    /* Draw top border line */
+    glcd_draw_line(0, 8, 128, 8, BLACK);
+    
+    /* Title: "TEST RUNNING SCREEN" */
+    glcd_draw_string_xy(10, 0, "TEST RUNNING SCREEN");
+    
+    /* Draw line below title */
+    glcd_draw_line(0, 25, 128, 25, BLACK);
+    
+    /* Show test progress */
+    char progress_str[64];
+    snprintf(progress_str, sizeof(progress_str), 
+             "Elapsed Time: [%dm %ds / %dm]", 
+             (gTestStatus.reaction_total_time) / 60000, 
+             (gTestStatus.reaction_total_time % 60000) / 1000,
+             REACTION_DURATION_MS / 60000);
+    glcd_draw_string_xy(5, 30, "Test in progress...");
+    glcd_draw_string_xy(5, 40, progress_str);
+    
+    /* Draw line above instructions */
+    glcd_draw_line(0, 55, 128, 55, BLACK);
+    
+    /* Draw bottom instruction bar */
+    glcd_draw_string_xy(0, 60, "BACK: Abort Test");
+    
+    /* Update the display with changes */
+    glcd_write();
+}
+
+void glcd_draw_results_screen(void) {
+    /* Clear the screen buffer */
+    glcd_clear();
+    
+    /* Draw top border line */
+    glcd_draw_line(0, 8, 128, 8, BLACK);
+    
+    /* Title: "RESULTS MENU" */
+    glcd_draw_string_xy(20, 0, "RESULTS MENU");
+    
+    /* Draw line below title */
+    glcd_draw_line(0, 25, 128, 25, BLACK);
+    
+    /* Show test results */
+    const int item_y_start = 30;
+    const int item_spacing = 10;
+    
+    for (int i = 0; i < NUM_TUBES / 2; i++) {
+        int y = item_y_start + (i * item_spacing);
+        
+        char result_str[64];
+        snprintf(result_str, sizeof(result_str), 
+                 "%-2d: %-10s | %-2d: %-10s",
+                 i + 1,
+                 get_result_string(gTestStatus.tubes[i].result),
+                 i + NUM_TUBES / 2 + 1,
+                 get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].result));
+        
+        glcd_draw_string_xy(5, y, result_str);
+    }
+    
+    /* Draw line above instructions */
+    glcd_draw_line(0, 55, 128, 55, BLACK);
+    
+    /* Draw bottom instruction bar */
+    glcd_draw_string_xy(0, 60, "SELECT: Return to Idle Menu");
+    
+    /* Update the display with changes */
+    glcd_write();
+}
+
+
+void glcd_draw_results_history(void) {
+    /* Clear the screen buffer */
+    glcd_clear();
+    
+    /* Draw top border line */
+    glcd_draw_line(0, 8, 128, 8, BLACK);
+    
+    /* Title: "RESULTS HISTORY MENU" */
+    glcd_draw_string_xy(10, 0, "RESULTS HISTORY MENU");
+    
+    /* Draw line below title */
+    glcd_draw_line(0, 25, 128, 25, BLACK);
+    
+    /* Placeholder for history display */
+    glcd_draw_string_xy(5, 30, "No history available.");
+    
+    /* Draw line above instructions */
+    glcd_draw_line(0, 55, 128, 55, BLACK);
+    
+    /* Draw bottom instruction bar */
+    glcd_draw_string_xy(0, 60, "SELECT: Return to Idle Menu");
+    
+    /* Update the display with changes */
+    glcd_write();
+}
+
+
+// ####################################
+// TERMINAL SCREENS
 // ####################################
 
 void terminal_draw_idle_menu() {
@@ -175,3 +366,52 @@ void terminal_draw_results_history() {
     printf("========================================\n");
 }
 
+
+// ####################################
+// PUBLIC FUNCTIONS
+// ####################################
+
+void draw_idle_menu(void) {
+    #if defined(DRAW_DISPLAY)
+    glcd_draw_idle_menu();
+    #endif
+    #if defined(DRAW_TERMINAL)
+    terminal_draw_idle_menu();
+    #endif
+}
+
+void draw_heating_screen(void) {
+    #if defined(DRAW_DISPLAY)
+    glcd_draw_heating_screen();
+    #endif
+    #if defined(DRAW_TERMINAL)
+    terminal_draw_heating_screen();
+    #endif
+}
+
+void draw_test_running_screen(void) {
+    #if defined(DRAW_DISPLAY)
+    glcd_draw_test_running_screen();
+    #endif
+    #if defined(DRAW_TERMINAL)
+    terminal_draw_test_running_screen();
+    #endif
+}
+
+void draw_results_screen(void) {
+    #if defined(DRAW_DISPLAY)
+    glcd_draw_results_screen();
+    #endif
+    #if defined(DRAW_TERMINAL)
+    terminal_draw_results_screen();
+    #endif
+}
+
+void draw_results_history(void) {
+    #if defined(DRAW_DISPLAY)
+    glcd_draw_results_history();
+    #endif
+    #if defined(DRAW_TERMINAL)
+    terminal_draw_results_history();
+    #endif
+}

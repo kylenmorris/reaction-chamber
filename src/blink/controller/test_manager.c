@@ -112,13 +112,14 @@ void test_manager_step(void) {
             
             gTestStatus.tubes[i].positive_detected = true;
             gTestStatus.tubes[i].ct_time = tube_reaction_time;
+            gTestStatus.tubes[i].state = COMPLETED;
         }
 
         // Check for tube completions
         if (gTestStatus.tubes[i].state == RUNNING &&
             tube_reaction_time >= REACTION_DURATION_MS) {
 
-                gTestStatus.tubes[i].state = COMPLETED;
+            gTestStatus.tubes[i].state = COMPLETED;
 
         }
 

@@ -29,24 +29,25 @@ void display_ctrl_draw() {
     switch (gSystemState) {
         case IDLE:
             if (gIdleMenuIM.needs_redraw) {
-                terminal_draw_idle_menu();
+                // draw_idle_menu();
+                draw_idle_menu();
                 gIdleMenuIM.needs_redraw = false;
             }
             break;
 
         case HEATING:
             redraw_if_needed(now_ms, &gHeatingMenuIM.needs_redraw, 
-                            &gHeatingMenuIM.last_redraw, terminal_draw_heating_screen);
+                            &gHeatingMenuIM.last_redraw, draw_heating_screen);
             break;
 
         case REACTING:
             redraw_if_needed(now_ms, &gTestRunningIM.needs_redraw, 
-                            &gTestRunningIM.last_redraw, terminal_draw_test_running_screen);
+                            &gTestRunningIM.last_redraw, draw_test_running_screen);
             break;
 
         case RESULTS:
             if (gResultsIM.needs_redraw) {
-                terminal_draw_results_screen();
+                draw_results_screen();
                 gResultsIM.needs_redraw = false;
             }
             break;

@@ -4,6 +4,7 @@
 #include "temp_sens_ctrl.h"
 #include "button_ctrl.h"
 
+// Simulated *** FOR NOW ***
 static float readTemperatureSensor(void) {
     // increase faster if debug is pressed, limiting more to avoid overshoots
     if (gTempStatus.chamber_temp < TEMP_LOW_C + 2.8 
@@ -26,5 +27,5 @@ void temp_sens_ctrl_step(void) {
     gTempStatus.temp_low = (gTempStatus.chamber_temp < TEMP_LOW_LOW_C);
     gTempStatus.temp_extreme = (gTempStatus.chamber_temp < TEMP_LOW_LOW_C || 
                                         gTempStatus.chamber_temp > TEMP_HIGH_HIGH_C);
-    
+    gTempStatus.target_reached = (gTempStatus.chamber_temp >= gTempStatus.target_temp);
 }

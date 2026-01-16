@@ -29,25 +29,26 @@ void run_system_state_loop() {
 
             if (button_ctrl_is_pressed(UP)) {
                 gButtonInput.wasPressed = false;  // Reset flag
-                gIdleMenuIM.selected_index = 0;
+                gIdleMenuIM.selected_index = 0;   // Update selection
             }
             
             if (button_ctrl_is_pressed(DOWN)) {
                 gButtonInput.wasPressed = false;  // Reset flag
-                gIdleMenuIM.selected_index = 1;
+                gIdleMenuIM.selected_index = 1;   // Update selection
             }
             
             if (button_ctrl_is_pressed(SELECT)) {
                 gButtonInput.wasPressed = false;  // Reset flag
 
-                if (gIdleMenuIM.selected_index == 0) {
+                if (gIdleMenuIM.selected_index == 0) { // Go to heating
                     heater_ctrl_init();
                     temp_sens_ctrl_init();
                     
                     gHeatingMenuIM.needs_redraw = true;
                     gSystemState = HEATING;
                 }
-                else if (gIdleMenuIM.selected_index == 1) {
+                else if (gIdleMenuIM.selected_index == 1) { // go to history
+                    gHistoryIM.needs_redraw = true;
                     gSystemState = HISTORY;
                 }
             }
@@ -58,13 +59,13 @@ void run_system_state_loop() {
 
         case HEATING:
 
-            if (button_ctrl_is_pressed(BACK)) {
-                gButtonInput.wasPressed = false;  // Reset flag
+            if (button_ctrl_is_pressed(BACK)) {  // back to idle
+                gButtonInput.wasPressed = false;        // Reset flag
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;
             }
 
-            if (gTempStatus.chamber_temp >= gTempStatus.target_temp) { // this should probably be a flag in gTempStatus
+            if (gTempStatus.target_reached) {           // target temp reached, start test
                 test_manager_start();
                 gTestRunningIM.needs_redraw = true;
                 gSystemState = REACTING;

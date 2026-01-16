@@ -21,3 +21,8 @@ resultsIM gResultsIM = {
     .needs_redraw = true,
     .last_redraw = 0
 };
+
+historyIM gHistoryIM = {
+    .needs_redraw = true,
+    .last_redraw = 0
+};

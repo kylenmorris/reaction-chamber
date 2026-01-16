@@ -63,7 +63,6 @@ typedef struct {
 
 } TubeReaction;
 
-
 // Test status
 // Written only by test_manager.c
 typedef struct {
@@ -120,6 +119,7 @@ typedef struct {
     bool temp_low;      // default false
     bool temp_extreme;  // default false
     float target_temp;  // °C
+    bool target_reached;
 } TempStatus;
 
 extern TempStatus gTempStatus;

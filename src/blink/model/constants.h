@@ -38,7 +38,7 @@
 // OPTICAL CONSTANTS
 // ####################################
 
-#define OPTICAL_REACTION_THRESHOLD 5000
+#define OPTICAL_REACTION_THRESHOLD 5000         // unsure of units
 
 // ####################################
 // DISPLAY AND INPUT CONSTANTS

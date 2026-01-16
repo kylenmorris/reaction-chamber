@@ -58,5 +58,15 @@ typedef struct {
 
 extern resultsIM gResultsIM;
 
+// ####################################
+// HISTORY MENU
+// ####################################
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+} historyIM;
+
+extern historyIM gHistoryIM;
 
 #endif

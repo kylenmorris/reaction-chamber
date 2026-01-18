@@ -2,7 +2,7 @@
 
 // See header for info
 
-SystemState gSystemState = IDLE;
+SystemState gSystemState = BOOT;
 
 SystemControl gSysControl = {
     .tube_present = { false }

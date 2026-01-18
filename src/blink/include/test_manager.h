@@ -7,4 +7,6 @@ void test_manager_start(void);
 
 void test_manager_step(void);
 
+void test_manager_stop(void);
+
 #endif

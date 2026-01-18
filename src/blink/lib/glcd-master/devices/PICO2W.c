@@ -75,6 +75,8 @@ void glcd_init(void)
 	/* Select screen buffer */
 	glcd_select_screen(glcd_buffer, &glcd_bbox);
 	
+	glcd_tiny_set_font(Font5x7,5,7,32,127);
+
 	/* Clear the screen buffer */
 	glcd_clear();
 

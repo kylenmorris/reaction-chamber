@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define PROGRESS_BAR_WIDTH 20
+#define PROGRESS_BAR_WIDTH 16
 #define IDLE_MENU_ITEM_COUNT 2 // might be excessive to define this
 
 // ####################################

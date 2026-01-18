@@ -18,6 +18,11 @@ void run_system_state_loop() {
     temp_sens_ctrl_step();
 
     switch (gSystemState) {
+        case BOOT:
+            gIdleMenuIM.needs_redraw = true;
+            gSystemState = IDLE;
+            break;
+
         case IDLE:
 
             // no inputs means stay in idle, ,keeping this for redraw limiting for now
@@ -88,6 +93,7 @@ void run_system_state_loop() {
             if (gTestStatus.completed) {
                 // heater_ctrl_shutdown();
                 // temp_sens_ctrl_shutdown();
+                test_manager_stop();
                 gResultsIM.needs_redraw = true;
                 gSystemState = RESULTS;
             }

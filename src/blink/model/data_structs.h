@@ -84,7 +84,8 @@ typedef enum {
     HEATING,
     REACTING,
     RESULTS,
-    HISTORY
+    HISTORY,
+    BOOT
 } SystemState;
 
 extern SystemState gSystemState;

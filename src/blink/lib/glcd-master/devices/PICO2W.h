@@ -7,22 +7,23 @@
 #define GLCD_PINOUTS_PICO2W_H_
 
 #include "pico/stdlib.h"
+#include "constants.h"
 
 /**
  * \name SPI Configuration
  * @{
  */
-#define PICO2W_SPI_INSTANCE spi0  /**< SPI instance to use (spi0 or spi1) */
-#define PICO2W_SPI_BAUDRATE 4000000  /**< SPI clock rate in Hz (max 4MHz for LCD) */
+#define PICO2W_SPI_INSTANCE SPI_INSTANCE_DISPLAY  /**< SPI instance to use (spi0 or spi1) */
+#define PICO2W_SPI_BAUDRATE SPI_BAUDRATE_DISPLAY  /**< SPI clock rate in Hz (max 4MHz for LCD) */
 
 /**
  * \name SPI Pin Definitions
  * These pins define the SPI bus connections to the LCD controller
  * @{
  */
-#define PICO2W_MOSI_PIN 3   /**< GPIO pin for SPI MOSI (Master Out Slave In) */
-#define PICO2W_MISO_PIN 4   /**< GPIO pin for SPI MISO (Master In Slave Out) */
-#define PICO2W_SCK_PIN  2   /**< GPIO pin for SPI Clock (SCK) */
+#define PICO2W_MOSI_PIN SPI0_MOSI_PIN   /**< GPIO pin for SPI MOSI (Master Out Slave In) */
+#define PICO2W_MISO_PIN SPI0_MISO_PIN   /**< GPIO pin for SPI MISO (Master In Slave Out) */
+#define PICO2W_SCK_PIN  SPI0_SCK_PIN    /**< GPIO pin for SPI Clock (SCK) */
 /**@}*/
 
 /**
@@ -30,10 +31,10 @@
  * These pins control the LCD controller (data, chip select, reset)
  * @{
  */
-#define PICO2W_DC_PIN   7   /**< Data/Command pin - LOW=command, HIGH=data */
-#define PICO2W_CS_PIN   5   /**< Chip Select pin - LOW=selected, HIGH=deselected */
-#define PICO2W_RST_PIN  6   /**< Reset pin - LOW=reset, HIGH=normal operation */
-#define PICO2W_A0_PIN   7   /**< Address 0 pin (used by some controllers like ST7565R) */
+#define PICO2W_DC_PIN   DISPLAY_DC_A0_PIN   /**< Data/Command pin - LOW=command, HIGH=data */
+#define PICO2W_CS_PIN   SPI0_CS0_PIN   /**< Chip Select pin - LOW=selected, HIGH=deselected */
+#define PICO2W_RST_PIN  DISPLAY_RST_PIN   /**< Reset pin - LOW=reset, HIGH=normal operation */
+#define PICO2W_A0_PIN   DISPLAY_DC_A0_PIN   /**< Address 0 pin (used by some controllers like ST7565R) */
 /**@}*/
 
 /**

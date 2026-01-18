@@ -55,7 +55,6 @@ void test_manager_determine_results(void) {
 }
 
 void test_manager_stop(void) {
-    gTestStatus.reaction_active = false;
     test_manager_determine_results();
 }
 
@@ -124,6 +123,12 @@ void test_manager_step(void) {
         }
 
         
+    }
+
+    // check for test completion
+    if (gTestStatus.reaction_total_time >= REACTION_DURATION_MS) {
+        gTestStatus.reaction_active = false;
+        gTestStatus.completed = true;
     }
 
 }

@@ -15,9 +15,9 @@ static char* get_tube_state_string(TubeState state) {
         case EMPTY:
             return "EMPTY";
         case RUNNING:
-            return "RUNNING";
+            return "RUN";
         case COMPLETED:
-            return "COMPLETED";
+            return "FINISH";
         case ERROR:
             return "ERROR";
         default:
@@ -28,13 +28,13 @@ static char* get_tube_state_string(TubeState state) {
 static char* get_result_string(ReactionResult result) {
     switch (result) {
         case UNKNOWN:
-            return "UNKNOWN";
+            return "UNKN";
         case POSITIVE:
-            return "POSITIVE";
+            return "POS";
         case NEGATIVE:
-            return "NEGATIVE";
+            return "NEG";
         case INVALID_RESULT:
-            return "INVALID";
+            return "ERR";
         default:
             return "__ERROR__";
     }
@@ -64,158 +64,113 @@ static void draw_progress_bar(int percent) {
 // ####################################
 
 void glcd_draw_idle_menu(void) {
-    /* Clear the screen buffer */
+
     glcd_clear();
     
-    /* Draw top border line */
-    glcd_draw_line(0, 8, 128, 8, BLACK);
+    glcd_tiny_draw_string(0, 0, "IDLE MENU");
     
-    /* Title: "PathoScan" and "IDLE MENU" */
-    glcd_draw_string_xy(15, 0, "PathoScan");
-    glcd_draw_string_xy(8, 10, "IDLE MENU");
-    
-    /* Draw line below title */
-    glcd_draw_line(0, 25, 128, 25, BLACK);
-    
-    /* Draw menu items */
-    const int item_y_start = 30;
-    const int item_spacing = 15;
+    const int item_y_start = 1;
+    const int item_spacing = 1;
     
     for (int i = 0; i < IDLE_MENU_ITEM_COUNT; i++) {
-        int y = item_y_start + (i * item_spacing);
+        int y = item_y_start + item_spacing * i;
         
         /* Draw selection indicator (arrow) */
         if (i == gIdleMenuIM.selected_index) {
-            glcd_draw_string_xy(5, y, ">");
+            glcd_tiny_draw_string(5, y, ">");
         }
         
         /* Draw menu item text */
-        glcd_draw_string_xy(15, y, (char*)idle_menu_items[i]);
+        glcd_tiny_draw_string(15, y, idle_menu_items[i]);
     }
-    
-    /* Draw line above instructions */
-    glcd_draw_line(0, 50, 128, 50, BLACK);
-    
+        
     /* Draw bottom instruction bar */
-    glcd_draw_string_xy(0, 55, "UP/DOWN: Navigate   SEL: Select");
+    glcd_tiny_draw_string(0, 7, "UP/DOWN: Nav SEL: Sel");
     
     /* Update the display with changes */
     glcd_write();
 }
 
 void glcd_draw_heating_screen(void) {
-    /* Clear the screen buffer */
     glcd_clear();
     
-    /* Draw top border line */
-    glcd_draw_line(0, 8, 128, 8, BLACK);
-    
-    /* Title: "HEATING MENU" */
-    glcd_draw_string_xy(20, 0, "HEATING MENU");
-    
-    /* Draw line below title */
-    glcd_draw_line(0, 25, 128, 25, BLACK);
+    glcd_tiny_draw_string(0, 0, "HEATING MENU");
     
     /* Show temperature */
     char temp_str[32];
-    snprintf(temp_str, sizeof(temp_str), "[%6.2f C / %6.2f C]", 
+    snprintf(temp_str, sizeof(temp_str), "[%.2f C / %.2f C]", 
              gTempStatus.chamber_temp, gTempStatus.target_temp);
-    glcd_draw_string_xy(15, 30, temp_str);
+    glcd_tiny_draw_string(5, 2, temp_str);
     
     /* Draw progress bar */
     int percent = (gTempStatus.chamber_temp * 100) / gTempStatus.target_temp;
     int filled = (percent * PROGRESS_BAR_WIDTH) / 100;
     
-    glcd_draw_string_xy(15, 45, "[");
+    char bar_str[PROGRESS_BAR_WIDTH + 3];
+    bar_str[0] = '[';
     for (int i = 0; i < PROGRESS_BAR_WIDTH; i++) {
-        if (i < filled)
-            glcd_draw_string_xy(15 + 6 + (i * 6), 45, "=");
-        else
-            glcd_draw_string_xy(15 + 6 + (i * 6), 45, " ");
+        bar_str[i + 1] = (i < filled) ? '=' : ' ';
     }
-    glcd_draw_string_xy(15 + 6 + (PROGRESS_BAR_WIDTH * 6), 45, "]");
+    bar_str[PROGRESS_BAR_WIDTH + 1] = ']';
+    bar_str[PROGRESS_BAR_WIDTH + 2] = '\0';
     
-    /* Draw line above instructions */
-    glcd_draw_line(0, 55, 128, 55, BLACK);
+    glcd_tiny_draw_string(5, 4, bar_str);
     
     /* Draw bottom instruction bar */
-    glcd_draw_string_xy(0, 60, "BACK: Cancel Heating");
+    glcd_tiny_draw_string(0, 7, "BACK: Cancel Heating");
     
-    /* Update the display with changes */
     glcd_write();
 }
 
 void glcd_draw_test_running_screen(void) {
-    /* Clear the screen buffer */
+
     glcd_clear();
-    
-    /* Draw top border line */
-    glcd_draw_line(0, 8, 128, 8, BLACK);
-    
-    /* Title: "TEST RUNNING SCREEN" */
-    glcd_draw_string_xy(10, 0, "TEST RUNNING SCREEN");
-    
-    /* Draw line below title */
-    glcd_draw_line(0, 25, 128, 25, BLACK);
-    
+
+    glcd_draw_string_xy(0, 0, "TEST RUNNING");
+        
     /* Show test progress */
     char progress_str[64];
     snprintf(progress_str, sizeof(progress_str), 
-             "Elapsed Time: [%dm %ds / %dm]", 
+             "[%dm %ds / %dm]", 
              (gTestStatus.reaction_total_time) / 60000, 
              (gTestStatus.reaction_total_time % 60000) / 1000,
              REACTION_DURATION_MS / 60000);
-    glcd_draw_string_xy(5, 30, "Test in progress...");
-    glcd_draw_string_xy(5, 40, progress_str);
+    glcd_tiny_draw_string(5, 1, progress_str);
     
-    /* Draw line above instructions */
-    glcd_draw_line(0, 55, 128, 55, BLACK);
-    
-    /* Draw bottom instruction bar */
-    glcd_draw_string_xy(0, 60, "BACK: Abort Test");
-    
-    /* Update the display with changes */
+    /* Show tube statuses */
+    for (int i = 0; i < NUM_TUBES / 2; i++) {
+        char tube_str[64];
+        snprintf(tube_str, sizeof(tube_str), "%-1d:%-6s | %-2d:%-6s",
+                 i + 1,
+                 get_tube_state_string(gTestStatus.tubes[i].state),
+                 i + NUM_TUBES / 2 + 1,
+                 get_tube_state_string(gTestStatus.tubes[i + NUM_TUBES / 2].state));
+        glcd_tiny_draw_string(0, 2 + i, tube_str);
+    }
+
     glcd_write();
 }
 
 void glcd_draw_results_screen(void) {
-    /* Clear the screen buffer */
+
     glcd_clear();
-    
-    /* Draw top border line */
-    glcd_draw_line(0, 8, 128, 8, BLACK);
-    
-    /* Title: "RESULTS MENU" */
-    glcd_draw_string_xy(20, 0, "RESULTS MENU");
-    
-    /* Draw line below title */
-    glcd_draw_line(0, 25, 128, 25, BLACK);
-    
-    /* Show test results */
-    const int item_y_start = 30;
-    const int item_spacing = 10;
+
+    glcd_tiny_draw_string(0, 0, "RESULTS MENU");
     
     for (int i = 0; i < NUM_TUBES / 2; i++) {
-        int y = item_y_start + (i * item_spacing);
-        
         char result_str[64];
         snprintf(result_str, sizeof(result_str), 
-                 "%-2d: %-10s | %-2d: %-10s",
+                 "%-1d:%-6s | %-2d:%-6s",
                  i + 1,
                  get_result_string(gTestStatus.tubes[i].result),
                  i + NUM_TUBES / 2 + 1,
                  get_result_string(gTestStatus.tubes[i + NUM_TUBES / 2].result));
         
-        glcd_draw_string_xy(5, y, result_str);
+        glcd_tiny_draw_string(0, 1 + i, result_str);
     }
     
-    /* Draw line above instructions */
-    glcd_draw_line(0, 55, 128, 55, BLACK);
+    glcd_tiny_draw_string(0, 7, "SEL: Okay");
     
-    /* Draw bottom instruction bar */
-    glcd_draw_string_xy(0, 60, "SELECT: Return to Idle Menu");
-    
-    /* Update the display with changes */
     glcd_write();
 }
 
@@ -234,15 +189,12 @@ void glcd_draw_results_history(void) {
     glcd_draw_line(0, 25, 128, 25, BLACK);
     
     /* Placeholder for history display */
-    glcd_draw_string_xy(5, 30, "No history available.");
-    
-    /* Draw line above instructions */
-    glcd_draw_line(0, 55, 128, 55, BLACK);
+    glcd_tiny_draw_string(0, 0, "RESULTS HISTORY");
+    glcd_tiny_draw_string(0, 3, "No history available.");
     
     /* Draw bottom instruction bar */
-    glcd_draw_string_xy(0, 60, "SELECT: Return to Idle Menu");
+    glcd_tiny_draw_string(0, 7, "SELECT: Return to Idle");
     
-    /* Update the display with changes */
     glcd_write();
 }
 
@@ -251,6 +203,7 @@ void glcd_draw_results_history(void) {
 // TERMINAL SCREENS
 // ####################################
 
+#include <stdio.h>
 void terminal_draw_idle_menu() {
     // Clear terminal (works on most terminals)
     printf("\033[2J");    // clear screen
@@ -365,6 +318,7 @@ void terminal_draw_results_history() {
     printf("SELECT: Return to Idle Menu\n");
     printf("========================================\n");
 }
+
 
 
 // ####################################

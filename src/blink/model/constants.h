@@ -31,7 +31,7 @@
 #define TEMP_LOW_LOW_C 58
 
 // #define REACTION_DURATION_MS 30 * 60 * 1000     // 30 minutes
-#define REACTION_DURATION_MS 30 * 1000     // 30 seconds
+#define REACTION_DURATION_MS 10 * 1000     // 30 seconds
 #define TEMP_LOW_DURATION_MS 5 * 60 * 1000      // 5 minutes
 #define TEMP_EXTREME_DURATION_MS 10 * 1000      // 10 seconds
 
@@ -51,5 +51,32 @@
 
 #define DRAW_TERMINAL
 #define DRAW_DISPLAY
+
+// ####################################
+// SPI CONSTANTS
+// ####################################
+
+#define SPI0_SCK_PIN 2
+#define SPI0_MISO_PIN 4
+#define SPI0_MOSI_PIN 3
+
+#define SPI0_CS0_PIN 5 // display
+
+#define SPI1_SCK_PIN 14
+#define SPI1_MISO_PIN 12
+#define SPI1_MOSI_PIN 11
+
+#define SPI1_CS0_PIN 13 // SD card reader
+
+// Check glcd/devices/PICO2W.h for usage
+
+#define SPI_INSTANCE_DISPLAY spi0       // spi0 or spi1 - note this doesn't update the SPI pin defines inside PICO2W.h
+#define SPI_BAUDRATE_DISPLAY 4000000    // 4 MHz
+
+#define DISPLAY_DC_A0_PIN   7   // A0 Data/Command pin - LOW=command, HIGH=data
+#define DISPLAY_RST_PIN  6      // Reset pin - LOW=reset, HIGH=normal operation
+
+
+
 
 #endif

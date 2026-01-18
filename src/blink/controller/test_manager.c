@@ -28,16 +28,16 @@ void test_manager_determine_results(void) {
     
     for (int i = 0; i < NUM_TUBES; i++) {
 
-        // positive and negative control checks
-        if (gTestStatus.tubes[i].is_positive_control 
-            && !gTestStatus.tubes[i].positive_detected) {
-            gTestStatus.test_invalid = true;
-        }
+        // // positive and negative control checks
+        // if (gTestStatus.tubes[i].is_positive_control 
+        //     && !gTestStatus.tubes[i].positive_detected) {
+        //     gTestStatus.test_invalid = true;
+        // }
 
-        if (gTestStatus.tubes[i].is_negative_control 
-            && gTestStatus.tubes[i].positive_detected) {
-            gTestStatus.test_invalid = true;
-        }
+        // if (gTestStatus.tubes[i].is_negative_control 
+        //     && gTestStatus.tubes[i].positive_detected) {
+        //     gTestStatus.test_invalid = true;
+        // }
 
     }
 
@@ -118,7 +118,7 @@ void test_manager_step(void) {
         if (gTestStatus.tubes[i].state == RUNNING &&
             tube_reaction_time >= REACTION_DURATION_MS) {
 
-            gTestStatus.tubes[i].state = COMPLETED;
+            // gTestStatus.tubes[i].state = COMPLETED;
 
         }
 

@@ -27,16 +27,16 @@ static char* get_tube_state_string(TubeState state) {
 
 static char* get_result_string(ReactionResult result) {
     switch (result) {
-        case UNKNOWN:
-            return "UNKN";
+        // case UNKNOWN:
+        //     return "UNKN";
         case POSITIVE:
             return "POS";
         case NEGATIVE:
             return "NEG";
         case INVALID_RESULT:
-            return "ERR";
+            return "INVALD";
         default:
-            return "__ERROR__";
+            return "ERR";
     }
 }
 

@@ -31,7 +31,7 @@
 #define TEMP_LOW_LOW_C 58
 
 // #define REACTION_DURATION_MS 30 * 60 * 1000     // 30 minutes
-#define REACTION_DURATION_MS 10 * 1000     // 30 seconds
+#define REACTION_DURATION_MS 10 * 1000          // 10 seconds
 #define TEMP_LOW_DURATION_MS 5 * 60 * 1000      // 5 minutes
 #define TEMP_EXTREME_DURATION_MS 10 * 1000      // 10 seconds
 

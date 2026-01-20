@@ -11,7 +11,7 @@
 // IDLE MENU
 // ####################################
 
-static const char *idle_menu_items[] = {
+static char *idle_menu_items[] = {
     "Start Test",
     "View History"
 };

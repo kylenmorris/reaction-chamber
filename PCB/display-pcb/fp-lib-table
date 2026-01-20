@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "NHD-C12864A1Z-lib")(type "KiCad")(uri "${KIPRJMOD}/NHD-C12864A1Z-lib.pretty")(options "")(descr ""))
+)

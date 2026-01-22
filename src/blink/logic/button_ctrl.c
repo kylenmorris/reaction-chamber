@@ -1,22 +1,10 @@
 #include "button_ctrl.h"
+
+#include "button_interface.h"
+
 #include "constants.h"
 #include "data_structs.h"
 #include <hardware/gpio.h>
-
-static const int BUTTON_PINS[] = {
-    UP_BUTTON_GPIO_PIN,
-    DOWN_BUTTON_GPIO_PIN,
-    SELECT_BUTTON_GPIO_PIN,
-    BACK_BUTTON_GPIO_PIN,
-    DEBUG_BUTTON_GPIO_PIN
-};
-
-// internal function to init pins
-static void init_gpio_as_button(int gpio_pin) {
-    gpio_init(gpio_pin);
-    gpio_set_dir(gpio_pin, GPIO_IN);
-    gpio_pull_up(gpio_pin);
-}
 
 // debounces a button input, returns 1 if a true press detected
 static int debounceButton(int i, int reading) {
@@ -58,11 +46,7 @@ static int debounceButton(int i, int reading) {
 
 // Initialize required gpio pins as buttons
 void button_ctrl_init(void) {
-    init_gpio_as_button(UP_BUTTON_GPIO_PIN);
-    init_gpio_as_button(DOWN_BUTTON_GPIO_PIN);
-    init_gpio_as_button(SELECT_BUTTON_GPIO_PIN);
-    init_gpio_as_button(BACK_BUTTON_GPIO_PIN);
-    init_gpio_as_button(DEBUG_BUTTON_GPIO_PIN);
+
 }
 
 // Checks for button presses and updates gButtonInput if a button was pressed
@@ -71,7 +55,7 @@ void button_ctrl_step(void) {
 
     for (int i = 0; i < NUM_BUTTONS; i++) {
 
-        int reading = gpio_get(BUTTON_PINS[i]);
+        int reading = hw_button_get_raw(BUTTON_PINS[i]);
         int truePress = debounceButton(i, reading);
 
         if (truePress) {
@@ -81,7 +65,3 @@ void button_ctrl_step(void) {
     }
 }
 
-// Check if a specific button was pressed
-bool button_ctrl_is_pressed(ButtonType button) {
-    return gButtonInput.wasPressed && gButtonInput.lastPressed == button;
-}

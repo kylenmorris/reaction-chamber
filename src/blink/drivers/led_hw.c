@@ -1,7 +1,7 @@
 #include <hardware/gpio.h>
 #include <stdbool.h>
 
-#include "pico_led.h"
+#include "led_interface.h"
 
 // Pico W devices use a GPIO on the WIFI chip for the LED,
 // so when building for Pico W, CYW43_WL_GPIO_LED_PIN will be defined

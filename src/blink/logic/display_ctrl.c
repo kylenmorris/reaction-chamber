@@ -1,4 +1,7 @@
 #include <stdio.h>
+
+#include "screens_interface.h"
+
 #include "display_ctrl.h"
 #include "data_structs.h"
 #include "imodel_structs.h"

@@ -1,6 +1,5 @@
 #include <hardware/gpio.h>
 #include "board_setup.h"
-#include "logic/display_ctrl.h"
 // **Note** pico/stdlib.h IS needed despite clangd saying otherwise
 #include "pico/stdlib.h"     
 #include "pico/multicore.h"
@@ -11,11 +10,6 @@
 
 #include "constants.h"
 
-#include "button_ctrl.h"
-#include "display_ctrl.h"
-
-#include "system_state_loop.h"
-
 // Needed in glcd
 void delay_ms(unsigned int ms) {
     sleep_ms(ms);
@@ -25,7 +19,7 @@ void delay_ms(unsigned int ms) {
 void core1_entry() {
     while (true) {      
 
-        run_system_state_loop();
+        run_system_state_loop_core1();
         sleep_ms(SYSTEM_DELAY_MS);
 
     }}
@@ -34,13 +28,11 @@ void core1_entry() {
 // Most logic is in system_state_loop.c
 int main() {
 
+    board_setup();
+
     int rc = pico_led_init();
     hard_assert(rc == PICO_OK);
     pico_set_led(HIGH); // Startup LED
-
-    stdio_init_all();
-
-    board_setup();
 
     multicore_launch_core1(core1_entry);
 
@@ -51,7 +43,7 @@ int main() {
 
     while (true) {      
 
-        run_system_state_loop_cor0();
+        run_system_state_loop_core0();
         sleep_ms(SYSTEM_DELAY_MS);
 
     }

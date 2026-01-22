@@ -6,7 +6,7 @@
 
 #include "glcd.h"
 
-void draw_idle_menu(void) {
+void hw_draw_idle_menu(void) {
 
     glcd_clear();
     
@@ -34,7 +34,7 @@ void draw_idle_menu(void) {
     glcd_write();
 }
 
-void draw_heating_screen(void) {
+void hw_draw_heating_screen(void) {
     glcd_clear();
     
     glcd_tiny_draw_string(0, 0, "HEATING MENU");
@@ -65,7 +65,7 @@ void draw_heating_screen(void) {
     glcd_write();
 }
 
-void draw_test_running_screen(void) {
+void hw_draw_test_running_screen(void) {
 
     glcd_clear();
 
@@ -94,7 +94,7 @@ void draw_test_running_screen(void) {
     glcd_write();
 }
 
-void draw_results_screen(void) {
+void hw_draw_results_screen(void) {
 
     glcd_clear();
 
@@ -118,7 +118,7 @@ void draw_results_screen(void) {
 }
 
 
-void draw_results_history(void) {
+void hw_draw_results_history(void) {
     /* Clear the screen buffer */
     glcd_clear();
     

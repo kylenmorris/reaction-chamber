@@ -9,33 +9,11 @@
 // Track which tubes have been inserted via debug button
 static bool used_tubes[NUM_TUBES] = { false };
 
-void tube_sens_ctrl_init(void) {
-    // Initialize tube sensors here
-    for (int i = 0; i < NUM_TUBES; i++) {
-        used_tubes[i] = false;    
-        gTestStatus.tubes[i].state = EMPTY;
-    }
-
-
-    // Reset tube statuses - potentially
-    // for (int i = 0; i < NUM_TUBES; i++) {
-    //     gTestStatus.tubes[i].state = EMPTY;
-    //     gTestStatus.tubes[i].result = UNKNOWN;
-    //     gTestStatus.tubes[i].start_time = 0;
-    //     gTestStatus.tubes[i].last_update = 0;
-    //     gTestStatus.tubes[i].is_positive_control = false;
-    //     gTestStatus.tubes[i].is_negative_control = false;
-    //     gTestStatus.tubes[i].positive_detected = false;
-    //     gTestStatus.tubes[i].ct_time = 0;
-    // }
-
-}
-
 // Detects the insertion of tubes and might do other stuff later
 void tube_sens_ctrl_step(void) {
 
     // Handle debug button press to insert new random tube
-    if (button_ctrl_is_pressed(DEBUG)) {
+    if (button_is_pressed(DEBUG)) {
 
         // printf("Debug button pressed, inserting tube\n");
         // Find an unused tube

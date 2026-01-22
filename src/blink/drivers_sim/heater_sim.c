@@ -1,9 +1,5 @@
 #include "heater_interface.h"
 
-void heater_init(void) {
-
-}
-
-void heater_toggle(bool enable) {
+void hw_heater_toggle(bool enable) {
 
 }

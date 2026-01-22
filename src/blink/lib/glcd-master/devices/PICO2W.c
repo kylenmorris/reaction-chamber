@@ -29,32 +29,32 @@ void glcd_init(void)
 {
 	/* Initialize GPIO for LCD control pins */
 	gpio_init(PICO2W_DC_PIN);
-	gpio_init(PICO2W_CS_PIN);
 	gpio_init(PICO2W_RST_PIN);
 	gpio_init(PICO2W_A0_PIN);
+	// gpio_init(PICO2W_CS_PIN);
 	
 	/* Set control pins as outputs */
 	gpio_set_dir(PICO2W_DC_PIN, GPIO_OUT);
-	gpio_set_dir(PICO2W_CS_PIN, GPIO_OUT);
 	gpio_set_dir(PICO2W_RST_PIN, GPIO_OUT);
 	gpio_set_dir(PICO2W_A0_PIN, GPIO_OUT);
+	// gpio_set_dir(PICO2W_CS_PIN, GPIO_OUT);
 	
 	/* Initialize control pins to idle states */
-	GLCD_DESELECT();   /* CS high */
+	// GLCD_DESELECT();   /* CS high */
 	GLCD_DC_LOW();     /* Start in command mode */
 	GLCD_RESET_HIGH(); /* Release reset */
 	GLCD_A0_HIGH();    /* A0 high by default */
 	
-	/* Initialize SPI interface */
-	spi_init(PICO2W_SPI_INSTANCE, PICO2W_SPI_BAUDRATE);
+	// /* Initialize SPI interface */
+	// spi_init(PICO2W_SPI_INSTANCE, PICO2W_SPI_BAUDRATE);
 	
-	/* Set up SPI pins */
-	gpio_set_function(PICO2W_MOSI_PIN, GPIO_FUNC_SPI);
-	gpio_set_function(PICO2W_MISO_PIN, GPIO_FUNC_SPI);
-	gpio_set_function(PICO2W_SCK_PIN, GPIO_FUNC_SPI);
+	// /* Set up SPI pins */
+	// gpio_set_function(PICO2W_MOSI_PIN, GPIO_FUNC_SPI);
+	// gpio_set_function(PICO2W_MISO_PIN, GPIO_FUNC_SPI);
+	// gpio_set_function(PICO2W_SCK_PIN, GPIO_FUNC_SPI);
 	
-	/* Small delay to allow SPI to initialize */
-	sleep_ms(1);
+	// /* Small delay to allow SPI to initialize */
+	// sleep_ms(1);
 
 #if defined(GLCD_CONTROLLER_ST7565R)
 	

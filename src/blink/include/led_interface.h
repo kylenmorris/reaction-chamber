@@ -1,10 +1,9 @@
-#ifndef PICO_LED_H
-#define PICO_LED_H
+#ifndef LED_INTERFACE_H
+#define LED_INTERFACE_H
 
 #include <stdbool.h>
 
-int pico_led_init(void);
-
-void pico_set_led(bool led_on);
+// Set the LED state
+void hw_led_set(bool led_on);
 
 #endif

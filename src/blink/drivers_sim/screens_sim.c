@@ -26,7 +26,16 @@ static void draw_progress_bar(int percent) {
 // TERMINAL SCREENS
 // ####################################
 
-#include <stdio.h>
+void draw_boot_menu() {
+    printf("\033[2J");    // clear screen
+    printf("\033[H");     // move cursor to top-left
+    printf("================================\n");
+    printf("        BOOTING DEVICE          \n");
+    printf("================================\n\n");
+    printf("Please wait...\n");
+    printf("================================\n");
+}
+
 void draw_idle_menu() {
     // Clear terminal (works on most terminals)
     printf("\033[2J");    // clear screen

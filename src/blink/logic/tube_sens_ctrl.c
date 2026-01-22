@@ -35,7 +35,7 @@ void tube_sens_ctrl_init(void) {
 void tube_sens_ctrl_step(void) {
 
     // Handle debug button press to insert new random tube
-    if (button_ctrl_is_pressed(DEBUG)) {
+    if (button_is_pressed(DEBUG)) {
 
         // printf("Debug button pressed, inserting tube\n");
         // Find an unused tube

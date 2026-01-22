@@ -20,6 +20,15 @@
 #define BACK_BUTTON_GPIO_PIN 19 
 #define DEBUG_BUTTON_GPIO_PIN 15
 
+static const int BUTTON_PINS[] = {
+    UP_BUTTON_GPIO_PIN,
+    DOWN_BUTTON_GPIO_PIN,
+    SELECT_BUTTON_GPIO_PIN,
+    BACK_BUTTON_GPIO_PIN,
+    DEBUG_BUTTON_GPIO_PIN
+};
+
+
 // ####################################
 // REACTION CONSTANTS
 // ####################################

@@ -1,14 +1,9 @@
+#ifndef BUTTON_INTERFACE_H
+#define BUTTON_INTERFACE_H
 
-#ifndef BUTTON_CTRL_H
-#define BUTTON_CTRL_H
-
-#include "data_structs.h"
 #include <stdbool.h>
 
-//
-void hw_button_init(void);
-
-// 
+// Read raw button state; returns 1 if pressed
 int hw_button_get_raw(int button_index);
 
 #endif

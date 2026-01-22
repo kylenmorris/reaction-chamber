@@ -1,14 +1,12 @@
 #ifndef SCREENS_INTERFACE_H
 #define SCREENS_INTERFACE_H
 
-void draw_idle_menu(void);
-
-void draw_results_screen(void);
-
-void draw_test_running_screen(void);
-
-void draw_heating_screen(void);
-
-void draw_results_history(void);
+// Draw various screens
+void hw_draw_boot_screen(void);
+void hw_draw_idle_menu(void);
+void hw_draw_results_screen(void);
+void hw_draw_test_running_screen(void);
+void hw_draw_heating_screen(void);
+void hw_draw_results_history(void);
 
 #endif

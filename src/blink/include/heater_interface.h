@@ -1,12 +1,9 @@
-#ifndef HEATER_CTRL_H
-#define HEATER_CTRL_H
+#ifndef HEATER_INTERFACE_H
+#define HEATER_INTERFACE_H
 
 #include <stdbool.h>
 
-// Any startup needed... might be empty
-void heater_init(void);
-
-// 
-void heater_toggle(bool enable);
+// Turn the heater on or off
+void hw_heater_toggle(bool enable);
 
 #endif

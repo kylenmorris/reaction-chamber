@@ -7,7 +7,6 @@
 #include "imodel_structs.h"
 #include "pico/time.h"
 #include "constants.h"
-#include "screens.h"
 
 // This might need a rework
 static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw, 
@@ -25,14 +24,17 @@ static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw,
 // PUBLIC METHODS
 // ####################################
 
-void display_ctrl_draw() {
+void display_ctrl_init(void) {
+    
+}
+
+void display_ctrl_step() {
     
     uint32_t now_ms = to_ms_since_boot(get_absolute_time());
 
     switch (gSystemState) {
         case IDLE:
             if (gIdleMenuIM.needs_redraw) {
-                // draw_idle_menu();
                 draw_idle_menu();
                 gIdleMenuIM.needs_redraw = false;
             }
@@ -58,5 +60,10 @@ void display_ctrl_draw() {
         case HISTORY:
 
             break;
-    }
+            
+        case BOOT:
+            draw_boot_screen();
+            gSystemState = IDLE;
+            break;
+        }
 }

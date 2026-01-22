@@ -1,10 +1,10 @@
-#ifndef TEMP_SENS_CTRL_H
-#define TEMP_SENS_CTRL_H
+#ifndef TEMP_SENS_INTERFACE_H
+#define TEMP_SENS_INTERFACE_H
 
-//
+// Initialize I2C for temperature sensors
 void temp_sens_ctrl_init(void);
 
-// 
-void temp_sens_ctrl_step(void);
+// Read data from one sensor
+float hw_read_temperature_sensor(int sensor_id);
 
 #endif

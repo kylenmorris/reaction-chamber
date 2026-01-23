@@ -75,6 +75,9 @@ void glcd_set_font(const char * font_table, uint8_t width, uint8_t height, char 
  *        glcd_tiny_set_font()
  *  \see glcd_tiny_set_font()
  */
+
+#include "glcd.h"
+
 #if defined(GLCD_DEVICE_AVR8)
 void glcd_font(PGM_P font_table, uint8_t width, uint8_t height, char start_char, char end_char, font_table_type_t type);
 #else

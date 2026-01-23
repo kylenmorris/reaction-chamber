@@ -10,15 +10,16 @@
 #define LOW 0
 #define HIGH 1
 
-// ####################################
-// PIN DEFINITIONS
-// ####################################
+// --- HARDWARE TOGGLES ---
+// Uncomment a line to use the REAL hardware for that feature.
+// If commented out, the system will use the SIMULATED version.
 
-#define UP_BUTTON_GPIO_PIN 16  
-#define DOWN_BUTTON_GPIO_PIN 18  
-#define SELECT_BUTTON_GPIO_PIN 17  
-#define BACK_BUTTON_GPIO_PIN 19 
-#define DEBUG_BUTTON_GPIO_PIN 15
+#define USE_HW_PICO
+#define USE_HW_BUTTONS
+//#define USE_HW_HEATER
+//#define USE_HW_TEMP_SENS
+//#define USE_HW_OPTICAL
+//#define USE_HW_TUBE_SENS
 
 // ####################################
 // REACTION CONSTANTS
@@ -36,12 +37,6 @@
 #define TEMP_EXTREME_DURATION_MS 10 * 1000      // 10 seconds
 
 // ####################################
-// OPTICAL CONSTANTS
-// ####################################
-
-#define OPTICAL_REACTION_THRESHOLD 5000         // unsure of units
-
-// ####################################
 // DISPLAY AND INPUT CONSTANTS
 // ####################################
 
@@ -49,12 +44,36 @@
 #define NUM_BUTTONS 5
 #define REDRAW_INTERVAL_MS 500
 
-#define DRAW_TERMINAL
-#define DRAW_DISPLAY
+// ####################################
+// OPTICAL CONSTANTS
+// ####################################
+
+#define OPTICAL_REACTION_THRESHOLD 5000         // unsure of units
 
 // ####################################
-// SPI CONSTANTS
+// PIN DEFINITIONS
 // ####################################
+
+#define UP_BUTTON_GPIO_PIN 16  
+#define DOWN_BUTTON_GPIO_PIN 18  
+#define SELECT_BUTTON_GPIO_PIN 17  
+#define BACK_BUTTON_GPIO_PIN 19 
+#define DEBUG_BUTTON_GPIO_PIN 15
+
+static const int BUTTON_PINS[] = {
+    UP_BUTTON_GPIO_PIN,
+    DOWN_BUTTON_GPIO_PIN,
+    SELECT_BUTTON_GPIO_PIN,
+    BACK_BUTTON_GPIO_PIN,
+    DEBUG_BUTTON_GPIO_PIN
+};
+
+#define HEATER_PIN 20
+
+#define DISPLAY_DC_A0_PIN   7   // A0 Data/Command pin - LOW=command, HIGH=data
+#define DISPLAY_RST_PIN  6      // Reset pin - LOW=reset, HIGH=normal operation
+
+// SPI STUFF
 
 #define SPI0_SCK_PIN 2
 #define SPI0_MISO_PIN 4
@@ -68,13 +87,8 @@
 
 #define SPI1_CS0_PIN 13 // SD card reader
 
-// Check glcd/devices/PICO2W.h for usage
-
-#define SPI_INSTANCE_DISPLAY spi0       // spi0 or spi1 - note this doesn't update the SPI pin defines inside PICO2W.h
+#define SPI_INSTANCE_DISPLAY spi0       // note this doesn't update the SPI pin defines inside PICO2W.h
 #define SPI_BAUDRATE_DISPLAY 4000000    // 4 MHz
-
-#define DISPLAY_DC_A0_PIN   7   // A0 Data/Command pin - LOW=command, HIGH=data
-#define DISPLAY_RST_PIN  6      // Reset pin - LOW=reset, HIGH=normal operation
 
 
 

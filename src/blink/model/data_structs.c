@@ -37,3 +37,37 @@ TempStatus gTempStatus = {
 };
 
 
+char* get_tube_state_string(TubeState state) {
+    switch (state) {
+        case EMPTY:
+            return "EMPTY";
+        case RUNNING:
+            return "RUN";
+        case COMPLETED:
+            return "FINISH";
+        case ERROR:
+            return "ERROR";
+        default:
+            return "__ERROR__";
+    }
+}
+
+char* get_result_string(ReactionResult result) {
+    switch (result) {
+        // case UNKNOWN:
+        //     return "UNKN";
+        case POSITIVE:
+            return "POS";
+        case NEGATIVE:
+            return "NEG";
+        case INVALID_RESULT:
+            return "INVALD";
+        default:
+            return "ERR";
+    }
+}
+
+// Check if a specific button was pressed
+bool button_is_pressed(ButtonType button) {
+    return gButtonInput.wasPressed && gButtonInput.lastPressed == button;
+}

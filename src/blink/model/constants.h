@@ -10,6 +10,17 @@
 #define LOW 0
 #define HIGH 1
 
+// --- HARDWARE TOGGLES ---
+// Uncomment a line to use the REAL hardware for that feature.
+// If commented out, the system will use the SIMULATED version.
+
+#define USE_HW_PICO
+#define USE_HW_BUTTONS
+//#define USE_HW_HEATER
+//#define USE_HW_TEMP_SENS
+//#define USE_HW_OPTICAL
+//#define USE_HW_TUBE_SENS
+
 // ####################################
 // REACTION CONSTANTS
 // ####################################

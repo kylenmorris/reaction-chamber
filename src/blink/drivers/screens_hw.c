@@ -1,3 +1,5 @@
+#include "glcd_controllers.h"
+#include "glcd_text.h"
 #include "screens_interface.h"
 
 #include "data_structs.h"
@@ -141,3 +143,10 @@ void hw_draw_results_history(void) {
     glcd_write();
 }
 
+void hw_draw_boot_screen(void) {
+    glcd_clear();
+
+    glcd_draw_string_xy(0, 0, "PathoScan Booting...");
+
+    glcd_write();
+}

@@ -24,10 +24,6 @@ static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw,
 // PUBLIC METHODS
 // ####################################
 
-void display_ctrl_init(void) {
-    
-}
-
 void display_ctrl_step() {
     
     uint32_t now_ms = to_ms_since_boot(get_absolute_time());
@@ -35,24 +31,24 @@ void display_ctrl_step() {
     switch (gSystemState) {
         case IDLE:
             if (gIdleMenuIM.needs_redraw) {
-                draw_idle_menu();
+                hw_draw_idle_menu();
                 gIdleMenuIM.needs_redraw = false;
             }
             break;
 
         case HEATING:
             redraw_if_needed(now_ms, &gHeatingMenuIM.needs_redraw, 
-                            &gHeatingMenuIM.last_redraw, draw_heating_screen);
+                            &gHeatingMenuIM.last_redraw, hw_draw_heating_screen);
             break;
 
         case REACTING:
             redraw_if_needed(now_ms, &gTestRunningIM.needs_redraw, 
-                            &gTestRunningIM.last_redraw, draw_test_running_screen);
+                            &gTestRunningIM.last_redraw, hw_draw_test_running_screen);
             break;
 
         case RESULTS:
             if (gResultsIM.needs_redraw) {
-                draw_results_screen();
+                hw_draw_results_screen();
                 gResultsIM.needs_redraw = false;
             }
             break;
@@ -62,8 +58,7 @@ void display_ctrl_step() {
             break;
             
         case BOOT:
-            draw_boot_screen();
-            gSystemState = IDLE;
+            hw_draw_boot_screen();
             break;
         }
 }

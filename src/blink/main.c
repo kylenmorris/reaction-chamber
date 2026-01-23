@@ -1,6 +1,7 @@
 #include <hardware/gpio.h>
 #include "board_setup.h"
 // **Note** pico/stdlib.h IS needed despite clangd saying otherwise
+#include "data_structs.h"
 #include "pico/stdlib.h"     
 #include "pico/multicore.h"
 
@@ -10,6 +11,8 @@
 
 #include "constants.h"
 
+#include "system_state_loop.h"
+
 // Needed in glcd
 void delay_ms(unsigned int ms) {
     sleep_ms(ms);
@@ -18,34 +21,32 @@ void delay_ms(unsigned int ms) {
 // Second core will watch for button inputs and update display
 void core1_entry() {
     while (true) {      
-
         run_system_state_loop_core1();
+
         sleep_ms(SYSTEM_DELAY_MS);
+    }
+}
 
-    }}
-
-// Main entry point and loop, though this is really just startup. 
 // Most logic is in system_state_loop.c
 int main() {
 
+    // Set up pins, SPI, I2C, etc
     board_setup();
 
-    int rc = pico_led_init();
-    hard_assert(rc == PICO_OK);
-    pico_set_led(HIGH); // Startup LED
+    // Ensure all protocols had time to start up
+    sleep_ms(SYSTEM_DELAY_MS);
 
+    // Run the display and buttons on core 1
     multicore_launch_core1(core1_entry);
 
-    sleep_ms(250);
-    pico_set_led(LOW); // Finished startup
-
-    delay_ms(1000);
+    // Show the boot screen
+    sleep_ms(1000);
 
     while (true) {      
-
+        // Run everything else on core 0
         run_system_state_loop_core0();
-        sleep_ms(SYSTEM_DELAY_MS);
 
+        sleep_ms(SYSTEM_DELAY_MS);
     }
 }
 

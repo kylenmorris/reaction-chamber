@@ -125,8 +125,8 @@ typedef struct {
 
 extern TempStatus gTempStatus;
 
-static char* get_tube_state_string(TubeState state);
-static char* get_result_string(ReactionResult result);
+char* get_tube_state_string(TubeState state);
+char* get_result_string(ReactionResult result);
 
 bool button_is_pressed(ButtonType button);
 

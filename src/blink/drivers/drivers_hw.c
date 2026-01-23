@@ -24,8 +24,8 @@ void pico_set_led(bool led_on) {
 }
 
 // Checks for button presses and updates gButtonInput if a button was pressed
-int hw_button_get_raw(int button_index) {
-    return gpio_get(BUTTON_PINS[button_index]);
+int hw_button_get_raw(int button_gpio) {
+    return gpio_get(button_gpio);
 }
 
 
@@ -38,21 +38,21 @@ void hw_heater_toggle(bool enable) {
 }
 
 
-float hw_read_temperature_sensor(int sensor_id) {
+// float hw_read_temperature_sensor(int sensor_id) {
 
-}
-
-
-uint16_t hw_adc_read_raw(int adc_index, int channel) {
-
-}
+// }
 
 
-void hw_led_set(bool led_on) {
+// uint16_t hw_adc_read_raw(int adc_index, int channel) {
 
-}
+// }
 
 
-uint16_t hw_tube_sens_read_all(void) {
+// void hw_led_set(bool led_on) {
 
-}
+// }
+
+
+// uint16_t hw_tube_sens_read_all(void) {
+
+// }

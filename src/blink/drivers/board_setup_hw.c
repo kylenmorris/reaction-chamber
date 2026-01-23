@@ -14,21 +14,6 @@
 #include "pico/cyw43_arch.h"
 #endif
 
-static void init_gpio_as_button(int gpio_pin) {
-    gpio_init(gpio_pin);
-    gpio_set_dir(gpio_pin, GPIO_IN);
-    gpio_pull_up(gpio_pin);
-    }
-
-static void init_gpio_as_csn(int gpio_pin) {
-    gpio_init(gpio_pin);
-    gpio_set_dir(gpio_pin, GPIO_OUT);
-    gpio_put(gpio_pin, HIGH); // Deselect
-
-    gpio_set_function(gpio_pin, GPIO_FUNC_SPI);  // init sd card csn
-}
-
-// Perform initialisation
 int init_led(void) {
 #if defined(PICO_DEFAULT_LED_PIN)
     // A device like Pico that uses a GPIO for the LED will define PICO_DEFAULT_LED_PIN
@@ -42,20 +27,10 @@ int init_led(void) {
 #endif
 }
 
-void init_spi1() {
-    spi_init(spi1, SPI_BAUDRATE_DISPLAY);       // keeping 4 MHz for now
-    
-    gpio_set_function(SPI1_SCK_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(SPI1_MISO_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SPI);
-}
-
-void init_spi0() {
-    spi_init(spi0, SPI_BAUDRATE_DISPLAY);       // keeping 4 MHz for now
-    
-    gpio_set_function(SPI0_SCK_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(SPI0_MISO_PIN, GPIO_FUNC_SPI);
-    gpio_set_function(SPI0_MOSI_PIN, GPIO_FUNC_SPI);
+static void init_gpio_as_button(int gpio_pin) {
+    gpio_init(gpio_pin);
+    gpio_set_dir(gpio_pin, GPIO_IN);
+    gpio_pull_up(gpio_pin);
 }
 
 void board_setup(void) {
@@ -63,9 +38,19 @@ void board_setup(void) {
     stdio_init_all();
     init_led();
 
-    // spi0 and spi1
-    init_spi0();
-    init_spi1();
+    // Spi 0
+    spi_init(spi0, SPI_BAUDRATE_DISPLAY);       // keeping 4 MHz for now
+    
+    gpio_set_function(SPI0_SCK_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SPI0_MISO_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SPI0_MOSI_PIN, GPIO_FUNC_SPI);
+
+    // Spi 1
+    spi_init(spi1, SPI_BAUDRATE_DISPLAY);       // keeping 4 MHz for now
+    
+    gpio_set_function(SPI1_SCK_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SPI1_MISO_PIN, GPIO_FUNC_SPI);
+    gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SPI);
 
     // Buttons
     for (int i = 0; i < NUM_BUTTONS; i++) {
@@ -76,7 +61,12 @@ void board_setup(void) {
 
 
     // Display
-    init_gpio_as_csn(SPI0_CS0_PIN);
+    gpio_init(SPI0_CS0_PIN);
+    gpio_set_dir(SPI0_CS0_PIN, GPIO_OUT);
+    gpio_put(SPI0_CS0_PIN, HIGH); // Deselect
+
+    gpio_set_function(SPI0_CS0_PIN, GPIO_FUNC_SPI); 
+
 
     // Photodiodes
 
@@ -88,7 +78,10 @@ void board_setup(void) {
     
 
     // SD card reader
-    init_gpio_as_csn(SPI1_CS0_PIN);
+    gpio_init(SPI1_CS0_PIN);
+    gpio_set_dir(SPI1_CS0_PIN, GPIO_OUT);
+    gpio_put(SPI1_CS0_PIN, HIGH); // Deselect
+    // We don't init the pin as a spi pin so we can easily control multiple spi devices... according to chat
 
     // Libraries
     glcd_init();

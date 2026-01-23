@@ -9,6 +9,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Initialise pico_sdk from installed location
 # (note this can come from environment, CMake cache etc)
 
+# Set controller directory based on option
+if(USE_TEST_CONTROLLERS)
+    set(CONTROLLER_DIR test_controllers)
+else()
+    set(CONTROLLER_DIR ../logic)
+endif()
+
 # == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
 # ====================================================================================
 
@@ -70,26 +77,33 @@ target_link_libraries(glcd PUBLIC
 # ====================================================================================
 
 add_library(project_core STATIC
-    logic/system_state_loop.c
-    logic/test_manager.c
+    system_state_loop.c
+    test_manager.c
+
     model/data_structs.c
     model/imodel_structs.c
-    controller/button_ctrl.c
-    controller/temp_sens_ctrl.c
-    controller/tube_optical_ctrl.c
-    controller/heater_ctrl.c
-    controller/tube_sens_ctrl.c
-    controller/pico_led.c
-    display/display_ctrl.c
-    display/screens.c
+
+    logic/button_ctrl.c
+    logic/temp_sens_ctrl.c
+    logic/tube_optical_ctrl.c
+    logic/heater_ctrl.c
+    logic/tube_sens_ctrl.c
+    logic/display_ctrl.c
+
+    drivers/board_setup_hw.c
+    drivers/drivers_hw.c
+    drivers/screens_hw.c
+
+    drivers_sim/drivers_sim.c
 )
 
 target_include_directories(project_core PUBLIC 
     logic
     model
-    controller
-    display
     include
+    include_ctrl
+    drivers
+    drivers_sim
 )
 
 target_link_libraries(project_core PUBLIC 
@@ -109,10 +123,11 @@ add_executable(main
 
 # Include paths
 target_include_directories(main PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/controller
     ${CMAKE_CURRENT_LIST_DIR}/include
+    ${CMAKE_CURRENT_LIST_DIR}/include_ctrl
     ${CMAKE_CURRENT_LIST_DIR}/model
-    ${CMAKE_CURRENT_LIST_DIR}/helper
+    ${CMAKE_CURRENT_LIST_DIR}/drivers
+    ${CMAKE_CURRENT_LIST_DIR}/drivers_sim
     ${CMAKE_CURRENT_LIST_DIR}/display
     ${CMAKE_CURRENT_LIST_DIR}/lib/glcd-master
 )

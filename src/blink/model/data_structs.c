@@ -37,7 +37,7 @@ TempStatus gTempStatus = {
 };
 
 
-static char* get_tube_state_string(TubeState state) {
+char* get_tube_state_string(TubeState state) {
     switch (state) {
         case EMPTY:
             return "EMPTY";
@@ -52,7 +52,7 @@ static char* get_tube_state_string(TubeState state) {
     }
 }
 
-static char* get_result_string(ReactionResult result) {
+char* get_result_string(ReactionResult result) {
     switch (result) {
         // case UNKNOWN:
         //     return "UNKN";

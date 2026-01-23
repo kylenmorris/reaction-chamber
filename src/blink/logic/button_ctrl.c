@@ -46,8 +46,6 @@ static int debounceButton(int i, int reading) {
 
 void button_ctrl_init(void) {
 
-    hw_button_init();
-
     // initialize button states
     for (int i = 0; i < NUM_BUTTONS; i++) {
         gButtonInput.buttonStates[i] = HIGH;

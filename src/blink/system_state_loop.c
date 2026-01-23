@@ -1,15 +1,16 @@
 #include "constants.h"
-
 #include "data_structs.h"
 #include "imodel_structs.h"
+
+#include "test_manager.h"
 
 #include "button_ctrl.h"
 #include "temp_sens_ctrl.h"
 #include "heater_ctrl.h"
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
-#include "test_manager.h"
 #include "tube_sens_ctrl.h"
+
 #include <pico/time.h>
 
 void run_system_state_loop_core1() {
@@ -51,8 +52,8 @@ void run_system_state_loop_core0() {
                 gButtonInput.wasPressed = false;  // Reset flag
 
                 if (gIdleMenuIM.selected_index == 0) { // Go to heating
-                    heater_ctrl_init();
-                    temp_sens_ctrl_init();
+                    // heater_ctrl_init();
+                    // temp_sens_ctrl_init();
                     
                     gHeatingMenuIM.needs_redraw = true;
                     gSystemState = HEATING;

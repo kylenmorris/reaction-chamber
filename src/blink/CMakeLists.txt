@@ -90,11 +90,10 @@ add_library(project_core STATIC
     logic/tube_sens_ctrl.c
     logic/display_ctrl.c
 
-    drivers/board_setup_hw.c
-    drivers/drivers_hw.c
+    drivers/board_setup.c
+    drivers/drivers.c
     drivers/screens_hw.c
-
-    drivers_sim/drivers_sim.c
+    drivers/screens_sim.c
 )
 
 target_include_directories(project_core PUBLIC 

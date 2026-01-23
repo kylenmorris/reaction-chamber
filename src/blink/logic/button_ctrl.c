@@ -4,7 +4,6 @@
 
 #include "constants.h"
 #include "data_structs.h"
-#include <hardware/gpio.h>
 
 // debounces a button input, returns 1 if a true press detected
 static int debounceButton(int i, int reading) {

@@ -104,6 +104,13 @@ typedef struct {
 extern ButtonInput gButtonInput;
 
 
+typedef struct {
+    bool heaterOn;
+} HeaterState;
+
+extern HeaterState gHeaterState;
+
+
 // Tube optical readings
 // Written only by tube_optical_ctrl.c
 typedef struct {
@@ -124,6 +131,16 @@ typedef struct {
 } TempStatus;
 
 extern TempStatus gTempStatus;
+
+// simulation_engine.h
+typedef struct {
+    float ambient_temp;
+    float heat_rate;      // degC per loop cycle
+    float cool_rate;      // degC per loop cycle
+    bool force_sensor_fault;
+} SimParams;
+
+extern SimParams gSimParams;
 
 char* get_tube_state_string(TubeState state);
 char* get_result_string(ReactionResult result);

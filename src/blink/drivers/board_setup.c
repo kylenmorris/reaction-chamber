@@ -1,13 +1,13 @@
 #include "board_setup.h"
 
 #include "constants.h"
-#include <hardware/gpio.h>
-#include <hardware/gpio.h>
-#include <hardware/spi.h>
+
 #include <stdbool.h>
 
-#include "glcd.h"
 #include <hardware/gpio.h>
+#include <hardware/spi.h>
+#include "glcd.h"
+
 #include <stdbool.h>
 
 #ifdef CYW43_WL_GPIO_LED_PIN

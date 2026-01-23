@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include "compilation_variables.h"
+
 // ####################################
 // SYSTEM DEFINITIONS
 // ####################################
@@ -10,16 +12,23 @@
 #define LOW 0
 #define HIGH 1
 
-// --- HARDWARE TOGGLES ---
-// Uncomment a line to use the REAL hardware for that feature.
-// If commented out, the system will use the SIMULATED version.
+#ifdef PRINT_DEBUG
+    #define DEBUG_LOG(fmt, ...) printf("[DEBUG] " fmt "\n", ##__VA_ARGS__)
+#else
+    #define DEBUG_LOG(fmt, ...) // Becomes nothing on the Pico, saving memory
+#endif
 
-#define USE_HW_PICO
-#define USE_HW_BUTTONS
-//#define USE_HW_HEATER
-//#define USE_HW_TEMP_SENS
-//#define USE_HW_OPTICAL
-//#define USE_HW_TUBE_SENS
+#ifdef MASTER_SIMULATION_MODE
+    #undef USE_HW_PICO
+    #undef USE_HW_BUTTONS
+    #undef USE_HW_HEATER
+    #undef USE_HW_TEMP_SENS
+    #undef USE_HW_OPTICAL
+    #undef USE_HW_TUBE_SENS
+    #define IS_SIMULATING true
+#else
+    #define IS_SIMULATING false
+#endif
 
 // ####################################
 // REACTION CONSTANTS

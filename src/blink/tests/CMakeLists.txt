@@ -1,31 +1,25 @@
 cmake_minimum_required(VERSION 3.13)
 
-# Set controller directory based on option
-if(USE_TEST_CONTROLLERS)
-    set(CONTROLLER_DIR test_controllers)
-else()
-    set(CONTROLLER_DIR ../logic)
-endif()
+project(system_tests C)
 
-add_executable(pathoscan_tests
-    test_main.c
-    ${CONTROLLER_DIR}/system_state_loop.c
-    ${CONTROLLER_DIR}/test_manager.c
-    ../model/data_structs.c
-    ../model/imodel_structs.c
-    ${CONTROLLER_DIR}/button_ctrl.c
-    ${CONTROLLER_DIR}/temp_sens_ctrl.c
-    ${CONTROLLER_DIR}/tube_optical_ctrl.c
-    ${CONTROLLER_DIR}/heater_ctrl.c
-    ${CONTROLLER_DIR}/tube_sens_ctrl.c
-)
+# Add definitions so the code knows it's in sim mode
+add_compile_definitions(MASTER_SIMULATION_MODE)
 
-target_include_directories(pathoscan_tests PRIVATE
-    ..
-    ../logic
+# Include directories (point to your main source folders)
+include_directories(
     ../include
-    ../include_ctrl
     ../model
-    ../drivers
-    ../drivers_sim
+    ../logic
 )
+
+# Create the test executable
+add_executable(run_tests 
+    test_main.c
+    ../logic/system_state_loop.c
+    ../logic/heater_ctrl.c      # Add all your logic files here
+    ../logic/temp_sens_ctrl.c
+    ../drivers/drivers_master.c # This is your unified driver file
+)
+
+# If you use math.h
+target_link_libraries(run_tests m)

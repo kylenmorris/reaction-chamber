@@ -11,8 +11,6 @@
 #include "display_ctrl.h"
 #include "tube_sens_ctrl.h"
 
-#include <pico/time.h>
-
 void run_system_state_loop_core1() {
     button_ctrl_step(); 
     display_ctrl_step();

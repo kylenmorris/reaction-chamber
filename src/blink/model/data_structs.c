@@ -17,6 +17,10 @@ TestStatus gTestStatus = {
     .completed = false
 };
 
+HeaterState gHeaterState = {
+    .heaterOn = false
+};
+
 ButtonInput gButtonInput = {
     .lastPressed = -1,
     .wasPressed = false,
@@ -34,6 +38,13 @@ TempStatus gTempStatus = {
     .temp_low = false,
     .temp_extreme = false,
     .target_temp = 62.0f
+};
+
+SimParams gSimParams = {
+    // .ambient_temp = 0.0f,
+    // .heat_rate = 0.1f,
+    // .cool_rate = 0.1f,
+    // .force_sensor_fault = false
 };
 
 

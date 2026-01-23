@@ -4,11 +4,14 @@
 #include "temp_sens_interface.h"
 #include "tube_optical_interface.h"
 #include "tube_sens_interface.h"
-#include <stdlib.h>
 
 #include "constants.h"
-#include "led_interface.h"
+#include <stdlib.h>
+
+#ifndef MASTER_SIMULATION_MODE
 #include <hardware/gpio.h>
+#include "pico/time.h"
+#endif
 
 #ifdef CYW43_WL_GPIO_LED_PIN
 #include "pico/cyw43_arch.h"
@@ -25,12 +28,22 @@ void pico_set_led(bool led_on) {
 #endif
 }
 
+
+uint32_t hal_get_time_ms(void) {
+    #ifndef MASTER_SIMULATION_MODE
+        return to_ms_since_boot(get_absolute_time());
+    #else
+        return 10;
+    #endif
+}
+
+
 // Checks for button presses and updates gButtonInput if a button was pressed
 int hw_button_get_raw(int button_gpio) {
     #ifdef USE_HW_BUTTONS
         return gpio_get(button_gpio);
     #else
-        return 1;
+        return 1; // no presses
     #endif
 }
 
@@ -52,11 +65,18 @@ float hw_read_temperature_sensor(int sensor_id) {
     #ifdef USE_HW_TEMP_SENS
 
     #else
-        if (gTempStatus.chamber_temp < TEMP_LOW_C + 1.5) {
-            return gTempStatus.chamber_temp + 0.1f;
+        // Dynamic simulation logic
+        if (gSimParams.force_sensor_fault) return -99.0f;
+
+        // Simulate physics: if heater is on, temp goes up
+        if (gHeaterState.heaterOn == true) {
+            gTempStatus.chamber_temp += gSimParams.heat_rate;
         } else {
-            return gTempStatus.chamber_temp;
+            if (gTempStatus.chamber_temp > gSimParams.ambient_temp) {
+                gTempStatus.chamber_temp -= gSimParams.cool_rate;
+            }
         }
+        return gTempStatus.chamber_temp;
     #endif
 }
 
@@ -66,10 +86,10 @@ uint16_t hw_adc_read_raw(int adc_index, int channel) {
 
     #else
         for (int i = 0; i < NUM_TUBES - 6; i++) {                                                                      
-            gOpticalInputs.intensity[i] = (OPTICAL_REACTION_THRESHOLD + 100 - rand() % 100000);
+            gOpticalInputs.intensity[i] = (OPTICAL_REACTION_THRESHOLD + 100);
         }
         for (int i = NUM_TUBES - 6; i < NUM_TUBES; i++) {
-            gOpticalInputs.intensity[i] = rand() % 3000;
+            gOpticalInputs.intensity[i] = 200;
         }
     #endif
 }
@@ -97,7 +117,7 @@ uint16_t hw_tube_sens_read_all(void) {
             
             // If tubes are available, pick a random one
             if (available_count > 0) {
-                int random_idx = rand() % available_count;
+                int random_idx = random() % available_count;
                 int tube_index = available_tubes[random_idx];
 
                 // printf("Inserting tube %d\n", tube_index);

@@ -1,19 +1,25 @@
 #include "constants.h"
-
 #include "data_structs.h"
 #include "imodel_structs.h"
+
+#include "test_manager.h"
 
 #include "button_ctrl.h"
 #include "temp_sens_ctrl.h"
 #include "heater_ctrl.h"
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
-#include "test_manager.h"
 #include "tube_sens_ctrl.h"
 
+#include <pico/time.h>
+
+void run_system_state_loop_core1() {
+    button_ctrl_step(); 
+    display_ctrl_step();
+}
 
 // Main system state loop and update
-void run_system_state_loop() {
+void run_system_state_loop_core0() {
     
     temp_sens_ctrl_step();
 
@@ -32,22 +38,22 @@ void run_system_state_loop() {
 
             gIdleMenuIM.needs_redraw = true;
 
-            if (button_ctrl_is_pressed(UP)) {
+            if (button_is_pressed(UP)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.selected_index = 0;   // Update selection
             }
             
-            if (button_ctrl_is_pressed(DOWN)) {
+            if (button_is_pressed(DOWN)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.selected_index = 1;   // Update selection
             }
             
-            if (button_ctrl_is_pressed(SELECT)) {
+            if (button_is_pressed(SELECT)) {
                 gButtonInput.wasPressed = false;  // Reset flag
 
                 if (gIdleMenuIM.selected_index == 0) { // Go to heating
-                    heater_ctrl_init();
-                    temp_sens_ctrl_init();
+                    // heater_ctrl_init();
+                    // temp_sens_ctrl_init();
                     
                     gHeatingMenuIM.needs_redraw = true;
                     gSystemState = HEATING;
@@ -64,7 +70,7 @@ void run_system_state_loop() {
 
         case HEATING:
 
-            if (button_ctrl_is_pressed(BACK)) {  // back to idle
+            if (button_is_pressed(BACK)) {  // back to idle
                 gButtonInput.wasPressed = false;        // Reset flag
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;
@@ -81,7 +87,7 @@ void run_system_state_loop() {
         case REACTING:
 
             // Back to idle
-            if (button_ctrl_is_pressed(BACK)) {
+            if (button_is_pressed(BACK)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 // heater_ctrl_shutdown();
                 // temp_sens_ctrl_shutdown();
@@ -107,7 +113,7 @@ void run_system_state_loop() {
         case RESULTS:
             
             // Select or Back to go to idle
-            if (button_ctrl_is_pressed(BACK) || button_ctrl_is_pressed(SELECT)) {
+            if (button_is_pressed(BACK) || button_is_pressed(SELECT)) {
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;

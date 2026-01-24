@@ -30,24 +30,24 @@ void display_ctrl_step() {
     switch (gSystemState) {
         case IDLE:
             if (gIdleMenuIM.needs_redraw) {
-                hw_draw_idle_menu();
+                draw_idle_screen();
                 gIdleMenuIM.needs_redraw = false;
             }
             break;
 
         case HEATING:
             redraw_if_needed(now_ms, &gHeatingMenuIM.needs_redraw, 
-                            &gHeatingMenuIM.last_redraw, hw_draw_heating_screen);
+                            &gHeatingMenuIM.last_redraw, draw_heating_screen);
             break;
 
         case REACTING:
             redraw_if_needed(now_ms, &gTestRunningIM.needs_redraw, 
-                            &gTestRunningIM.last_redraw, hw_draw_test_running_screen);
+                            &gTestRunningIM.last_redraw, draw_test_running_screen);
             break;
 
         case RESULTS:
             if (gResultsIM.needs_redraw) {
-                hw_draw_results_screen();
+                draw_results_screen();
                 gResultsIM.needs_redraw = false;
             }
             break;
@@ -57,7 +57,7 @@ void display_ctrl_step() {
             break;
             
         case BOOT:
-            hw_draw_boot_screen();
+            draw_boot_screen();
             break;
         }
 }

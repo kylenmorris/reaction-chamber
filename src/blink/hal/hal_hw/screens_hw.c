@@ -8,7 +8,9 @@
 
 #include "glcd.h"
 
-void hw_draw_idle_menu(void) {
+#ifdef USE_HW_DISPLAY
+
+void draw_idle_screen(void) {
 
     glcd_clear();
     
@@ -36,7 +38,7 @@ void hw_draw_idle_menu(void) {
     glcd_write();
 }
 
-void hw_draw_heating_screen(void) {
+void draw_heating_screen(void) {
     glcd_clear();
     
     glcd_tiny_draw_string(0, 0, "HEATING MENU");
@@ -67,7 +69,7 @@ void hw_draw_heating_screen(void) {
     glcd_write();
 }
 
-void hw_draw_test_running_screen(void) {
+void draw_test_running_screen(void) {
 
     glcd_clear();
 
@@ -96,7 +98,7 @@ void hw_draw_test_running_screen(void) {
     glcd_write();
 }
 
-void hw_draw_results_screen(void) {
+void draw_results_screen(void) {
 
     glcd_clear();
 
@@ -120,7 +122,7 @@ void hw_draw_results_screen(void) {
 }
 
 
-void hw_draw_results_history(void) {
+void draw_results_history(void) {
     /* Clear the screen buffer */
     glcd_clear();
     
@@ -143,10 +145,12 @@ void hw_draw_results_history(void) {
     glcd_write();
 }
 
-void hw_draw_boot_screen(void) {
+void draw_boot_screen(void) {
     glcd_clear();
 
     glcd_draw_string_xy(0, 0, "PathoScan Booting...");
 
     glcd_write();
 }
+
+#endif

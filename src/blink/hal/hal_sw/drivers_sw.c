@@ -1,9 +1,13 @@
 #include "drivers.h"
 #include "data_structs.h"
 #include "constants.h"
+#include <stdio.h>
 #include <stdlib.h>
 
+#define random rand
+
 #ifndef USE_HW_PICO
+
 
 // Turn the led on or off
 void pico_set_led(bool led_on) {
@@ -54,7 +58,7 @@ uint16_t hw_adc_read_raw(int adc_index, int channel) {
     for (int i = NUM_TUBES - 6; i < NUM_TUBES; i++) {
         gOpticalInputs.intensity[i] = 200;
     }
-    
+    return 0;
 }
 
 #endif
@@ -90,6 +94,8 @@ uint16_t hw_tube_sens_read_all(void) {
             used_tubes[tube_index] = true;
         }
     }
+
+    return 0;
     
 }
 #endif

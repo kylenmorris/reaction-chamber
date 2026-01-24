@@ -1,3 +1,4 @@
+#include "screens_interface.h"
 #include "data_structs.h"
 #include "imodel_structs.h"
 #include <stdio.h>
@@ -24,7 +25,7 @@ static void draw_progress_bar(int percent) {
 // TERMINAL SCREENS
 // ####################################
 
-void draw_boot_menu() {
+void draw_boot_screen() {
     printf("\033[2J");    // clear screen
     printf("\033[H");     // move cursor to top-left
     printf("================================\n");
@@ -34,7 +35,7 @@ void draw_boot_menu() {
     printf("================================\n");
 }
 
-void draw_idle_menu() {
+void draw_idle_screen() {
     // Clear terminal (works on most terminals)
     printf("\033[2J");    // clear screen
     printf("\033[H");     // move cursor to top-left

@@ -41,7 +41,7 @@ void heating_test() {
 
         // Check: If temp is > 69, heater MUST be toggled off by heater_ctrl
         if (gTempStatus.chamber_temp > 69.0f) {
-            EXPECT(gHeaterState.heaterOn == true, "Heater should be safety-disabled above 69C");        
+            EXPECT(gHeaterState.heaterOn == false, "Heater should be safety-disabled above 69C");        
         }
     }
 

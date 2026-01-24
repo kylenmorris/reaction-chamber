@@ -150,11 +150,7 @@ target_include_directories(logic_core PUBLIC
 
 if (NOT BUILD_TESTS)
     target_link_libraries(logic_core PUBLIC 
-        glcd
-        pico_stdlib 
-        hardware_spi
-        pico_cyw43_arch_none
-        drivers_hw
+        drivers_hw # must be first to init other relevant libraries
         drivers_sw
         model
     )
@@ -162,6 +158,23 @@ else()
     target_link_libraries(logic_core PUBLIC
         drivers_sw
         model
+    )
+
+endif()
+
+# ====================================================================================
+# Tests library 
+# ====================================================================================
+
+if (BUILD_TESTS)
+    add_library(tests_core 
+        tests/test_files/heater_tests.c
+    )
+    target_include_directories(tests_core PUBLIC
+        tests/include
+    )
+    target_link_libraries(tests_core PUBLIC
+        logic_core
     )
 endif()
 
@@ -190,7 +203,7 @@ else()
     )
 
     target_link_libraries(test_main 
-        logic_core
+        tests_core
     )
 
 endif()

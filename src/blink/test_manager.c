@@ -1,8 +1,8 @@
 #include "test_manager.h"
 
 #include "data_structs.h"
-#include "pico/time.h"
 #include "constants.h"
+#include "drivers.h"
 
 // Timers for temperature violations
 static uint32_t temp_low_start = 0;
@@ -16,7 +16,7 @@ void test_manager_init(void) {
 void test_manager_start(void) {
     gTestStatus.reaction_active = true;
 
-    gTestStatus.reaction_start_time = to_ms_since_boot(get_absolute_time());
+    gTestStatus.reaction_start_time = get_current_time();
     gTestStatus.test_invalid = false;
     gTestStatus.completed = false;
 
@@ -61,7 +61,7 @@ void test_manager_stop(void) {
 
 void test_manager_step(void) {
 
-    uint32_t now_ms = to_ms_since_boot(get_absolute_time());
+    uint32_t now_ms = get_current_time();
     
     gTestStatus.reaction_total_time = now_ms - gTestStatus.reaction_start_time;
     

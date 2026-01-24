@@ -1,6 +1,6 @@
 #include "temp_sens_ctrl.h"
 
-#include "temp_sens_interface.h"
+#include "drivers.h"
 
 #include "constants.h"
 #include "data_structs.h"

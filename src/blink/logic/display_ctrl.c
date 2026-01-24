@@ -1,11 +1,10 @@
-#include <stdio.h>
+#include "display_ctrl.h"
 
 #include "screens_interface.h"
+#include "drivers.h"
 
-#include "display_ctrl.h"
 #include "data_structs.h"
 #include "imodel_structs.h"
-#include "pico/time.h"
 #include "constants.h"
 
 // This might need a rework
@@ -26,7 +25,7 @@ static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw,
 
 void display_ctrl_step() {
     
-    uint32_t now_ms = to_ms_since_boot(get_absolute_time());
+    uint32_t now_ms = get_current_time();
 
     switch (gSystemState) {
         case IDLE:

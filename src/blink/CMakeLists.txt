@@ -84,15 +84,18 @@ target_include_directories(model PUBLIC
 )
 
 # ====================================================================================
+# Hardware drivers
+# ====================================================================================
 
 if (NOT BUILD_TESTS)
-    # Hardware drivers
     add_library(drivers_hw
-        hal/board_setup.c
-        hal/drivers.c
-        hal/screens_hw.c
+        hal/hal_hw/board_setup.c
+        hal/hal_hw/drivers_hw.c
+        hal/hal_hw/screens_hw.c
     )
-    target_include_directories(drivers_hw PUBLIC include_driv)
+    target_include_directories(drivers_hw PUBLIC 
+        hal/include_hal
+    )
     target_link_libraries(drivers_hw PUBLIC 
         glcd
         pico_stdlib 
@@ -103,18 +106,24 @@ if (NOT BUILD_TESTS)
 endif()
 
 # ====================================================================================
-
 # Simulated drivers
-add_library(drivers_sim
-    hal_sim/drivers_sim.c
-    hal_sim/screens_sim.c
-)
-target_include_directories(drivers_sim PUBLIC include_driv)
-target_link_libraries(drivers_sim PUBLIC model)
-
 # ====================================================================================
 
+add_library(drivers_sw
+    hal/hal_sw/drivers_sw.c
+    hal/hal_sw/screens_sw.c
+)
+target_include_directories(drivers_sw PUBLIC 
+    hal/include_hal
+)
+target_link_libraries(drivers_sw PUBLIC 
+    model
+)
+
+# ====================================================================================
 # Logic core of program
+# ====================================================================================
+
 add_library(logic_core
     system_state_loop.c
     test_manager.c
@@ -138,16 +147,18 @@ if (NOT BUILD_TESTS)
         hardware_spi
         pico_cyw43_arch_none
         drivers_hw
-        drivers_sim
+        drivers_sw
         model
     )
 else()
     target_link_libraries(logic_core PUBLIC
-        drivers_sim
+        drivers_sw
         model
     )
 endif()
 
+# ====================================================================================
+# Executable 
 # ====================================================================================
 
 add_executable(main

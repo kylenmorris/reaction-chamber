@@ -1,4 +1,5 @@
 #include "data_structs.h"
+#include <stdint.h>
 
 // See header for info
 
@@ -47,6 +48,7 @@ SimParams gSimParams = {
     // .force_sensor_fault = false
 };
 
+uint16_t gSimTime = 0;
 
 char* get_tube_state_string(TubeState state) {
     switch (state) {

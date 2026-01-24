@@ -141,6 +141,7 @@ typedef struct {
 } SimParams;
 
 extern SimParams gSimParams;
+extern uint16_t gSimTime;
 
 char* get_tube_state_string(TubeState state);
 char* get_result_string(ReactionResult result);

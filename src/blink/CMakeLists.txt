@@ -6,15 +6,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Initialise pico_sdk from installed location
-# (note this can come from environment, CMake cache etc)
-
-# Set controller directory based on option
-if(USE_TEST_CONTROLLERS)
-    set(CONTROLLER_DIR test_controllers)
-else()
-    set(CONTROLLER_DIR ../logic)
-endif()
+set(BUILD_TESTS OFF)
 
 # == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
 # ====================================================================================
@@ -28,8 +20,11 @@ set(sdkVersion 2.2.0)
 set(toolchainVersion 14_2_Rel1)
 set(picotoolVersion 2.2.0-a4)
 set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-if (EXISTS ${picoVscode})
-    include(${picoVscode})
+
+if (NOT BUILD_TESTS)
+    if (EXISTS ${picoVscode})
+        include(${picoVscode})
+    endif()
 endif()
 
 # ====================================================================================
@@ -37,51 +32,92 @@ endif()
 set(PICO_BOARD pico2_w CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
-include(pico_sdk_import.cmake)
+if (NOT BUILD_TESTS)
+    include(pico_sdk_import.cmake)
+endif()
 
 project(main C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
-pico_sdk_init()
+if (NOT BUILD_TESTS)
+    pico_sdk_init()
+endif()
 
 # ====================================================================================
-# --- GLCD Driver Library ---
+
+if (NOT BUILD_TESTS)
+
+    add_library(glcd STATIC
+        lib/glcd-master/glcd.c
+        lib/glcd-master/graphics.c
+        lib/glcd-master/graphs.c
+        lib/glcd-master/text.c
+        lib/glcd-master/text_tiny.c
+        lib/glcd-master/devices/PICO2W.c
+        lib/glcd-master/controllers/ST7565R.c
+    )
+
+    # PUBLIC tells CMake: "If you link to GLCD, you also need these include paths"
+    target_include_directories(glcd PUBLIC 
+        lib/glcd-master
+        lib/glcd-master/devices
+        lib/glcd-master/controllers
+        model/
+    )
+
+    # Link the Pico SDK to the driver
+    target_link_libraries(glcd PUBLIC 
+        pico_stdlib 
+        hardware_spi
+    )
+
+endif()
+
 # ====================================================================================
 
-add_library(glcd STATIC
-    lib/glcd-master/glcd.c
-    lib/glcd-master/graphics.c
-    lib/glcd-master/graphs.c
-    lib/glcd-master/text.c
-    lib/glcd-master/text_tiny.c
-    lib/glcd-master/devices/PICO2W.c
-    lib/glcd-master/controllers/ST7565R.c
-)
-
-# PUBLIC tells CMake: "If you link to GLCD, you also need these include paths"
-target_include_directories(glcd PUBLIC 
-    lib/glcd-master
-    lib/glcd-master/devices
-    lib/glcd-master/controllers
-    model/
-)
-
-# Link the Pico SDK to the driver
-target_link_libraries(glcd PUBLIC 
-    pico_stdlib 
-    hardware_spi
-)
-
-# ====================================================================================
-# --- Application Logic & Controllers ---
-# ====================================================================================
-
-add_library(project_core STATIC
-    system_state_loop.c
-    test_manager.c
-
+add_library(model
     model/data_structs.c
     model/imodel_structs.c
+)
+target_include_directories(model PUBLIC
+    model
+)
+
+# ====================================================================================
+
+if (NOT BUILD_TESTS)
+    # Hardware drivers
+    add_library(drivers_hw
+        hal/board_setup.c
+        hal/drivers.c
+        hal/screens_hw.c
+    )
+    target_include_directories(drivers_hw PUBLIC include_driv)
+    target_link_libraries(drivers_hw PUBLIC 
+        glcd
+        pico_stdlib 
+        hardware_spi
+        pico_cyw43_arch_none
+        model
+    )
+endif()
+
+# ====================================================================================
+
+# Simulated drivers
+add_library(drivers_sim
+    hal_sim/drivers_sim.c
+    hal_sim/screens_sim.c
+)
+target_include_directories(drivers_sim PUBLIC include_driv)
+target_link_libraries(drivers_sim PUBLIC model)
+
+# ====================================================================================
+
+# Logic core of program
+add_library(logic_core
+    system_state_loop.c
+    test_manager.c
 
     logic/button_ctrl.c
     logic/temp_sens_ctrl.c
@@ -89,60 +125,42 @@ add_library(project_core STATIC
     logic/heater_ctrl.c
     logic/tube_sens_ctrl.c
     logic/display_ctrl.c
-
-    drivers/board_setup.c
-    drivers/drivers.c
-    drivers/screens_hw.c
-    drivers/screens_sim.c
 )
-
-target_include_directories(project_core PUBLIC 
-    logic
-    model
+target_include_directories(logic_core PUBLIC
     include
     include_ctrl
-    drivers
-    drivers_sim
 )
 
-target_link_libraries(project_core PUBLIC 
-    glcd
-    pico_stdlib 
-    hardware_spi
-    pico_cyw43_arch_none
-)
+if (NOT BUILD_TESTS)
+    target_link_libraries(logic_core PUBLIC 
+        glcd
+        pico_stdlib 
+        hardware_spi
+        pico_cyw43_arch_none
+        drivers_hw
+        drivers_sim
+        model
+    )
+else()
+    target_link_libraries(logic_core PUBLIC
+        drivers_sim
+        model
+    )
+endif()
 
-# ====================================================================================
-# Add executable
 # ====================================================================================
 
 add_executable(main
     main.c
 )
 
-# Include paths
-target_include_directories(main PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/include
-    ${CMAKE_CURRENT_LIST_DIR}/include_ctrl
-    ${CMAKE_CURRENT_LIST_DIR}/model
-    ${CMAKE_CURRENT_LIST_DIR}/drivers
-    ${CMAKE_CURRENT_LIST_DIR}/drivers_sim
-    ${CMAKE_CURRENT_LIST_DIR}/display
-    ${CMAKE_CURRENT_LIST_DIR}/lib/glcd-master
-)
-
-# pull in common dependencies
 target_link_libraries(main 
-    glcd
-    project_core
-    pico_stdlib 
-    hardware_spi
+    logic_core
 )
 
-if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(
-        main 
-        pico_cyw43_arch_none
+if (NOT BUILD_TESTS)
+    target_link_libraries(main 
+        pico_stdlib
         pico_multicore
         )
 endif()

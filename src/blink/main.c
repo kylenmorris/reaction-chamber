@@ -1,15 +1,15 @@
-#include <hardware/gpio.h>
-#include "board_setup.h"
+#include "drivers.h"
+
 // **Note** pico/stdlib.h IS needed despite clangd saying otherwise
-#include "data_structs.h"
 #include "pico/stdlib.h"     
 #include "pico/multicore.h"
-
+#include <hardware/gpio.h>
 #include <hardware/spi.h>
-#include <stdbool.h>
 #include <sys/_intsup.h>
 
 #include "constants.h"
+#include <stdbool.h>
+#include "data_structs.h"
 
 #include "system_state_loop.h"
 

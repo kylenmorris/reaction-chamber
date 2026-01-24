@@ -1,30 +1,26 @@
-#include "board_setup.h"
+#include "drivers.h"
 
 #include "constants.h"
-
 #include <stdbool.h>
-
 #include <hardware/gpio.h>
 #include <hardware/spi.h>
 #include "glcd.h"
-
-#include <stdbool.h>
 
 #ifdef CYW43_WL_GPIO_LED_PIN
 #include "pico/cyw43_arch.h"
 #endif
 
 int init_led(void) {
-#if defined(PICO_DEFAULT_LED_PIN)
-    // A device like Pico that uses a GPIO for the LED will define PICO_DEFAULT_LED_PIN
-    // so we can use normal GPIO functionality to turn the led on and off
-    gpio_init(PICO_DEFAULT_LED_PIN);
-    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
-    return PICO_OK;
-#elif defined(CYW43_WL_GPIO_LED_PIN)
-    // For Pico W devices we need to initialise the driver etc
-    return cyw43_arch_init();
-#endif
+    #if defined(PICO_DEFAULT_LED_PIN)
+        // A device like Pico that uses a GPIO for the LED will define PICO_DEFAULT_LED_PIN
+        // so we can use normal GPIO functionality to turn the led on and off
+        gpio_init(PICO_DEFAULT_LED_PIN);
+        gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
+        return PICO_OK;
+    #elif defined(CYW43_WL_GPIO_LED_PIN)
+        // For Pico W devices we need to initialise the driver etc
+        return cyw43_arch_init();
+    #endif
 }
 
 static void init_gpio_as_button(int gpio_pin) {

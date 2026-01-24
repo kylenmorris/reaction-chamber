@@ -16,25 +16,24 @@ if(WIN32)
 else()
     set(USERHOME $ENV{HOME})
 endif()
-set(sdkVersion 2.2.0)
-set(toolchainVersion 14_2_Rel1)
-set(picotoolVersion 2.2.0-a4)
-set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
 
 if (NOT BUILD_TESTS)
+    set(sdkVersion 2.2.0)
+    set(toolchainVersion 14_2_Rel1)
+    set(picotoolVersion 2.2.0-a4)
+    set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+
     if (EXISTS ${picoVscode})
         include(${picoVscode})
     endif()
+
+    set(PICO_BOARD pico2_w CACHE STRING "Board type")
+
+    include(pico_sdk_import.cmake)
+
 endif()
 
 # ====================================================================================
-
-set(PICO_BOARD pico2_w CACHE STRING "Board type")
-
-# Pull in Raspberry Pi Pico SDK (must be before project)
-if (NOT BUILD_TESTS)
-    include(pico_sdk_import.cmake)
-endif()
 
 project(main C CXX ASM)
 
@@ -83,6 +82,10 @@ target_include_directories(model PUBLIC
     model
 )
 
+if (BUILD_TESTS)
+    target_compile_definitions(model PUBLIC MASTER_SIMULATION_MODE)
+endif()
+
 # ====================================================================================
 # Hardware drivers
 # ====================================================================================
@@ -120,6 +123,8 @@ target_link_libraries(drivers_sw PUBLIC
     model
 )
 
+
+
 # ====================================================================================
 # Logic core of program
 # ====================================================================================
@@ -136,7 +141,6 @@ add_library(logic_core
     logic/display_ctrl.c
 )
 target_include_directories(logic_core PUBLIC
-    include
     include_ctrl
 )
 
@@ -161,23 +165,28 @@ endif()
 # Executable 
 # ====================================================================================
 
-add_executable(main
-    main.c
-)
-
-target_link_libraries(main 
-    logic_core
-)
-
 if (NOT BUILD_TESTS)
+    add_executable(main
+        main.c
+    )
+
     target_link_libraries(main 
+        logic_core
         pico_stdlib
         pico_multicore
-        )
+    )
+    
+    pico_enable_stdio_usb(main 1)
+    pico_enable_stdio_uart(main 0)
+    pico_add_extra_outputs(main)
+
+else()
+    add_executable(test_main
+        tests/test_main.c
+    )
+
+    target_link_libraries(test_main 
+        logic_core
+    )
+
 endif()
-
-pico_enable_stdio_usb(main 1)
-pico_enable_stdio_uart(main 0)
-
-# create map/bin/hex file etc.
-pico_add_extra_outputs(main)

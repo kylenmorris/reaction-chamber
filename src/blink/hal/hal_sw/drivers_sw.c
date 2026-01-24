@@ -27,16 +27,16 @@ int hw_button_get_raw(int button_gpio) {
 
 #ifndef USE_HW_HEATER
 void hw_heater_toggle(bool enable) {
-
+    gHeaterState.heaterOn = enable;
 }
 #endif
 
 #ifndef USE_HW_TEMP_SENS
 float hw_read_temperature_sensor(int sensor_id) {
 
-    if (gSimParams.force_sensor_fault) return -99.0f;
+    if (gSimParams.force_temp_sensor_fault) return -99.0f;
 
-    // Simulate physics: if heater is on, temp goes up
+    // if heater is on, temp goes up
     if (gHeaterState.heaterOn == true) {
         gTempStatus.chamber_temp += gSimParams.heat_rate;
     } else {
@@ -44,8 +44,8 @@ float hw_read_temperature_sensor(int sensor_id) {
             gTempStatus.chamber_temp -= gSimParams.cool_rate;
         }
     }
+
     return gTempStatus.chamber_temp;
-    
 }
 #endif
 

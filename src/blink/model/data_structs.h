@@ -137,7 +137,7 @@ typedef struct {
     float ambient_temp;
     float heat_rate;      // degC per loop cycle
     float cool_rate;      // degC per loop cycle
-    bool force_sensor_fault;
+    bool force_temp_sensor_fault;
 } SimParams;
 
 extern SimParams gSimParams;

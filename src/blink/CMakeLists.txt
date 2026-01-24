@@ -6,18 +6,29 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(BUILD_TESTS OFF)
+if (NOT DEFINED BUILD_TESTS)
+    set(BUILD_TESTS OFF CACHE BOOL "Build simulation tests")
+endif()
 
 # == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
 # ====================================================================================
 
-if(WIN32)
-    set(USERHOME $ENV{USERPROFILE})
-else()
-    set(USERHOME $ENV{HOME})
-endif()
+if (BUILD_TESTS)
+    # This prevents the Pico VS Code Extension from forcing ARM toolchains
+    set(PICO_SDK_FETCH_FROM_GIT OFF)
+    set(SKIP_PICO_SDK_IMPORT ON) 
+    
+    # Define a standard Windows project immediately
+    project(main C CXX)
 
-if (NOT BUILD_TESTS)
+else()
+
+    if(WIN32)
+        set(USERHOME $ENV{USERPROFILE})
+    else()
+        set(USERHOME $ENV{HOME})
+    endif()
+
     set(sdkVersion 2.2.0)
     set(toolchainVersion 14_2_Rel1)
     set(picotoolVersion 2.2.0-a4)
@@ -31,15 +42,10 @@ if (NOT BUILD_TESTS)
 
     include(pico_sdk_import.cmake)
 
-endif()
+    project(main C CXX ASM)
 
-# ====================================================================================
-
-project(main C CXX ASM)
-
-# Initialise the Raspberry Pi Pico SDK
-if (NOT BUILD_TESTS)
     pico_sdk_init()
+
 endif()
 
 # ====================================================================================
@@ -122,8 +128,6 @@ target_include_directories(drivers_sw PUBLIC
 target_link_libraries(drivers_sw PUBLIC 
     model
 )
-
-
 
 # ====================================================================================
 # Logic core of program

@@ -10,6 +10,7 @@
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
 #include "tube_sens_ctrl.h"
+#include <stdbool.h>
 
 void run_system_state_loop_core1() {
     button_ctrl_step(); 
@@ -20,6 +21,7 @@ void run_system_state_loop_core1() {
 void run_system_state_loop_core0() {
     
     temp_sens_ctrl_step();
+    heater_ctrl_step();
 
     switch (gSystemState) {
         case BOOT:
@@ -68,15 +70,19 @@ void run_system_state_loop_core0() {
 
         case HEATING:
 
+            gTestStatus.heating_active = true;
+
             if (button_is_pressed(BACK)) {  // back to idle
                 gButtonInput.wasPressed = false;        // Reset flag
                 gIdleMenuIM.needs_redraw = true;
+                gTestStatus.heating_active = false;
                 gSystemState = IDLE;
             }
 
             if (gTempStatus.target_reached) {           // target temp reached, start test
                 test_manager_start();
                 gTestRunningIM.needs_redraw = true;
+                gTestStatus.heating_active = false;
                 gSystemState = REACTING;
             }
 

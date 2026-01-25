@@ -14,6 +14,7 @@ TestStatus gTestStatus = {
     .reaction_start_time = 0,
     .reaction_total_time = 0,
     .reaction_active = false,
+    .heating_active = false,
     .test_invalid = false,
     .completed = false
 };
@@ -49,6 +50,18 @@ SimParams gSimParams = {
 };
 
 uint16_t gSimTime = 0;
+
+char* get_system_state_string(SystemState state) {
+    switch (state) {
+        case IDLE:    return "IDLE";
+        case HEATING: return "HEATING";
+        case REACTING: return "REACTING";
+        case RESULTS:  return "RESULTS";
+        case HISTORY:  return "HISTORY";
+        case BOOT:     return "BOOT";
+        default:       return "UNKNOWN_STATE";
+    }
+}
 
 char* get_tube_state_string(TubeState state) {
     switch (state) {

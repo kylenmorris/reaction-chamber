@@ -37,9 +37,11 @@
 
 #define NUM_TUBES 10
 
+#define TEMP_DESIRED_C 62.5
 #define TEMP_LOW_C 61
 #define TEMP_HIGH_HIGH_C 64
 #define TEMP_LOW_LOW_C 58
+#define LOWEST_POSSIBLE_TEMP -40 // for basic error checking on temp sensors
 
 #define TEST_CYCLES 20
 

@@ -3,7 +3,7 @@
 # Stop if any command fails
 $ErrorActionPreference = "Stop"
 
-cd C:\Users\kylen\gth842\capstone\pathoscan\src\blink
+cd C:\Users\kylen\gth842\capstone\pathoscan\code
 
 Write-Host "--- Moving to build_tests dir ---" -ForegroundColor Cyan
 cd .\build_tests

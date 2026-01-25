@@ -63,4 +63,7 @@ fp-info-cache
 # --- Binary and Large Files ---
 *.zip
 *.tar.gz
-src/blink/.cache/
+
+code/.cache/
+code/build
+code/build_tests

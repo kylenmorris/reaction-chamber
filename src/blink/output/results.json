@@ -1,13 +1,78 @@
 {
-	"name":	"Awesome 4K",
-	"resolutions":	[{
-			"width":	1280,
-			"height":	720
+	"test_metadata":	{
+		"total_duration_sec":	0,
+		"test_invalid":	false,
+		"final_gTestStatus":	"INCOMPLETE"
+	},
+	"results":	[{
+			"tube_id":	0,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
 		}, {
-			"width":	1920,
-			"height":	1080
+			"tube_id":	1,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
 		}, {
-			"width":	3840,
-			"height":	2160
+			"tube_id":	2,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	3,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	4,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	5,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	6,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	7,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	8,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
+		}, {
+			"tube_id":	9,
+			"state":	"EMPTY",
+			"result":	"ERR",
+			"is_control":	"NONE",
+			"ct_time_sec":	0,
+			"was_positive_detected":	false
 		}]
 }

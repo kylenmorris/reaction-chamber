@@ -49,17 +49,6 @@ else()
 endif()
 
 # ====================================================================================
-# CJSON 
-# ====================================================================================
-
-add_library(cjson lib/cjson/cjson.c)
-target_include_directories(cjson PUBLIC lib/cjson/)
-
-add_library(sd_card data/json_helper.c)
-target_include_directories(sd_card PUBLIC data/)
-target_link_libraries(sd_card cjson)
-
-# ====================================================================================
 # GLCD 
 # ====================================================================================
 
@@ -109,6 +98,23 @@ if (BUILD_TESTS)
 endif()
 
 # ====================================================================================
+# CJSON 
+# ====================================================================================
+
+add_library(cjson lib/cjson/cjson.c)
+target_include_directories(cjson PUBLIC lib/cjson/)
+
+add_library(data_helper 
+    data/json_helper.c
+    data/sd_drv.c    
+)
+target_include_directories(data_helper PUBLIC data/)
+target_link_libraries(data_helper 
+    cjson
+    model
+)
+
+# ====================================================================================
 # Hardware drivers
 # ====================================================================================
 
@@ -128,7 +134,7 @@ if (NOT BUILD_TESTS)
         pico_cyw43_arch_none
         model
         cjson
-        sd_card
+        data_helper
     )
 endif()
 
@@ -146,7 +152,7 @@ target_include_directories(drivers_sw PUBLIC
 target_link_libraries(drivers_sw PUBLIC 
     model
     cjson
-    sd_card
+    data_helper
 )
 
 # ====================================================================================
@@ -157,12 +163,12 @@ add_library(logic_core
     system_state_loop.c
     test_manager.c
 
-    logic/button_ctrl.c
-    logic/temp_sens_ctrl.c
-    logic/tube_optical_ctrl.c
-    logic/heater_ctrl.c
-    logic/tube_sens_ctrl.c
-    logic/display_ctrl.c
+    ctrl/button_ctrl.c
+    ctrl/temp_sens_ctrl.c
+    ctrl/tube_optical_ctrl.c
+    ctrl/heater_ctrl.c
+    ctrl/tube_sens_ctrl.c
+    ctrl/display_ctrl.c
 )
 target_include_directories(logic_core PUBLIC
     include_ctrl

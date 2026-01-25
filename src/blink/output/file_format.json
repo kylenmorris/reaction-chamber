@@ -1,0 +1,42 @@
+{
+  "test_metadata": {
+    "timestamp_unix": 1706184000,
+    "total_duration_sec": 1200,
+    "final_status": "COMPLETED",
+    "test_invalid": false
+  },
+  "results": [
+    {
+      "tube_id": 0,
+      "state": "COMPLETED",
+      "result": "POSITIVE",
+      "is_control": "POSITIVE_CONTROL",
+      "ct_time_sec": 845,
+      "was_positive_detected": true
+    },
+    {
+      "tube_id": 1,
+      "state": "COMPLETED",
+      "result": "NEGATIVE",
+      "is_control": "NONE",
+      "ct_time_sec": 0,
+      "was_positive_detected": false
+    },
+    {
+      "tube_id": 2,
+      "state": "ERROR",
+      "result": "INVALID_RESULT",
+      "is_control": "NEGATIVE_CONTROL",
+      "ct_time_sec": 0,
+      "was_positive_detected": false
+    },
+    {
+      "tube_id": 3,
+      "state": "EMPTY",
+      "result": "UNKNOWN",
+      "is_control": "NONE",
+      "ct_time_sec": 0,
+      "was_positive_detected": false
+    }
+  ]
+}

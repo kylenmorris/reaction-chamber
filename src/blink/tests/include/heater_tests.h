@@ -5,5 +5,6 @@ void temp_sensor_fail_test(void);
 void heating_test_low(void);
 void heating_test(void);
 
+void json_test(void);
 
 #endif

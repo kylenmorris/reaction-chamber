@@ -3,9 +3,9 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-#include "data_structs.h"
-#include "system_state_loop.h"
-#include "heater_tests.h"
+#include "../model/data_structs.h"
+#include "../include_ctrl/system_state_loop.h"
+#include "include/heater_tests.h"
 
 // #######################################################
 // Heater tests
@@ -17,6 +17,7 @@ int main(void) {
     gSystemState = BOOT;
     run_system_state_loop_core0();
 
+    json_test();
     heating_test();
     heating_test_low();
     temp_sensor_fail_test();

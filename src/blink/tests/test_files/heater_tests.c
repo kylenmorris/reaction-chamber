@@ -5,10 +5,13 @@
 #include <stdlib.h>
 #include "data_structs.h"
 #include "system_state_loop.h"
-#include "sd_ctrl.h"
+#include "json_helper.h"
+#include "sd_drv.h"
 
 void json_test() {
-    char *string = create_json_string();
+    char *string = serialize_test_results();
+    save_to_file(string);
+
     free(string);
 }
 

@@ -76,6 +76,11 @@ typedef struct {
 
 extern TestStatus gTestStatus;
 
+typedef struct {
+    TubeReaction tubes[NUM_TUBES];
+} TestResult;
+
+extern TestResult gTestResult;
 
 // System states for main loop
 // Written only by system_state_loop.c

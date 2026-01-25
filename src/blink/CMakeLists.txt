@@ -49,6 +49,19 @@ else()
 endif()
 
 # ====================================================================================
+# CJSON 
+# ====================================================================================
+
+add_library(cjson lib/cjson/cjson.c)
+target_include_directories(cjson PUBLIC lib/cjson/)
+
+add_library(sd_card data/json_helper.c)
+target_include_directories(sd_card PUBLIC data/)
+target_link_libraries(sd_card cjson)
+
+# ====================================================================================
+# GLCD 
+# ====================================================================================
 
 if (NOT BUILD_TESTS)
 
@@ -79,6 +92,8 @@ if (NOT BUILD_TESTS)
 endif()
 
 # ====================================================================================
+# Model/Data Structs 
+# ====================================================================================
 
 add_library(model
     model/data_structs.c
@@ -88,6 +103,7 @@ target_include_directories(model PUBLIC
     model
 )
 
+# Enables all software driver definitions, disables all hardware definitions. See compilation_variables.h
 if (BUILD_TESTS)
     target_compile_definitions(model PUBLIC MASTER_SIMULATION_MODE)
 endif()
@@ -111,6 +127,8 @@ if (NOT BUILD_TESTS)
         hardware_spi
         pico_cyw43_arch_none
         model
+        cjson
+        sd_card
     )
 endif()
 
@@ -127,6 +145,8 @@ target_include_directories(drivers_sw PUBLIC
 )
 target_link_libraries(drivers_sw PUBLIC 
     model
+    cjson
+    sd_card
 )
 
 # ====================================================================================
@@ -150,14 +170,12 @@ target_include_directories(logic_core PUBLIC
 
 if (NOT BUILD_TESTS)
     target_link_libraries(logic_core PUBLIC 
-        drivers_hw # must be first to init other relevant libraries
+        drivers_hw # must be first 
         drivers_sw
-        model
     )
 else()
     target_link_libraries(logic_core PUBLIC
         drivers_sw
-        model
     )
 
 endif()

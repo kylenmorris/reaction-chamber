@@ -1,9 +1,16 @@
-#include "heater_tests.h"
-#include "definitions.h"
+#include "../include/heater_tests.h"
+#include "../include/definitions.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "data_structs.h"
 #include "system_state_loop.h"
+#include "sd_ctrl.h"
+
+void json_test() {
+    char *string = create_json_string();
+    free(string);
+}
 
 void temp_sensor_fail_test() {
     printf("Running Test: Temperature Sensor Failure...\n");

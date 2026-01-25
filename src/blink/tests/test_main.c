@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-#include "../model/data_structs.h"
-#include "../include_ctrl/system_state_loop.h"
+#include "../include/model/data_structs.h"
+#include "../include/core/system_state_loop.h"
 #include "include/heater_tests.h"
 
 // #######################################################

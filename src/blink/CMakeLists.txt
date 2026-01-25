@@ -69,7 +69,7 @@ if (NOT BUILD_TESTS)
         lib/glcd-master
         lib/glcd-master/devices
         lib/glcd-master/controllers
-        model/
+        include/model/
     )
 
     # Link the Pico SDK to the driver
@@ -85,11 +85,11 @@ endif()
 # ====================================================================================
 
 add_library(model
-    model/data_structs.c
-    model/imodel_structs.c
+    src/model/data_structs.c
+    src/model/imodel_structs.c
 )
 target_include_directories(model PUBLIC
-    model
+    include/model
 )
 
 # Enables all software driver definitions, disables all hardware definitions. See compilation_variables.h
@@ -105,10 +105,12 @@ add_library(cjson lib/cjson/cjson.c)
 target_include_directories(cjson PUBLIC lib/cjson/)
 
 add_library(data_helper 
-    data/json_helper.c
-    data/sd_drv.c    
+    src/storage/json_helper.c
+    src/storage/sd_drv.c    
 )
-target_include_directories(data_helper PUBLIC data/)
+target_include_directories(data_helper PUBLIC 
+    include/storage/
+)
 target_link_libraries(data_helper 
     cjson
     model
@@ -120,12 +122,12 @@ target_link_libraries(data_helper
 
 if (NOT BUILD_TESTS)
     add_library(drivers_hw
-        hal/hal_hw/board_setup.c
-        hal/hal_hw/drivers_hw.c
-        hal/hal_hw/screens_hw.c
+        src/hal/hal_hw/board_setup.c
+        src/hal/hal_hw/drivers_hw.c
+        src/hal/hal_hw/screens_hw.c
     )
     target_include_directories(drivers_hw PUBLIC 
-        hal/include_hal
+        include/interfaces
     )
     target_link_libraries(drivers_hw PUBLIC 
         glcd
@@ -143,11 +145,11 @@ endif()
 # ====================================================================================
 
 add_library(drivers_sw
-    hal/hal_sw/drivers_sw.c
-    hal/hal_sw/screens_sw.c
+    src/hal/hal_sw/drivers_sw.c
+    src/hal/hal_sw/screens_sw.c
 )
 target_include_directories(drivers_sw PUBLIC 
-    hal/include_hal
+    include/interfaces
 )
 target_link_libraries(drivers_sw PUBLIC 
     model
@@ -160,18 +162,20 @@ target_link_libraries(drivers_sw PUBLIC
 # ====================================================================================
 
 add_library(logic_core
-    system_state_loop.c
-    test_manager.c
+    src/core/system_state_loop.c
+    src/core/test_manager.c
 
-    ctrl/button_ctrl.c
-    ctrl/temp_sens_ctrl.c
-    ctrl/tube_optical_ctrl.c
-    ctrl/heater_ctrl.c
-    ctrl/tube_sens_ctrl.c
-    ctrl/display_ctrl.c
+    src/controllers/button_ctrl.c
+    src/controllers/temp_sens_ctrl.c
+    src/controllers/tube_optical_ctrl.c
+    src/controllers/heater_ctrl.c
+    src/controllers/tube_sens_ctrl.c
+    src/controllers/display_ctrl.c
+    src/controllers/sd_ctrl.c
 )
 target_include_directories(logic_core PUBLIC
-    include_ctrl
+    include/controllers
+    include/core
 )
 
 if (NOT BUILD_TESTS)
@@ -208,7 +212,7 @@ endif()
 
 if (NOT BUILD_TESTS)
     add_executable(main
-        main.c
+        src/main.c
     )
 
     target_link_libraries(main 

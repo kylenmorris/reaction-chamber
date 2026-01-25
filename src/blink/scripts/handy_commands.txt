@@ -1,0 +1,2 @@
+.\scripts\run_tests.ps1
+Set-ExecutionPolicy RemoteSigned –Scope Process

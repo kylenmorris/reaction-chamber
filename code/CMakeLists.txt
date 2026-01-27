@@ -197,6 +197,7 @@ endif()
 if (BUILD_TESTS)
     add_library(tests_core 
         tests/test_files/heater_tests.c
+        tests/test_files/state_tests.c
     )
     target_include_directories(tests_core PUBLIC
         tests/include

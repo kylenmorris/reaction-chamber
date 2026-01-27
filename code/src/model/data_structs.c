@@ -14,7 +14,6 @@ TestStatus gTestStatus = {
     .reaction_start_time = 0,
     .reaction_total_time = 0,
     .reaction_active = false,
-    .heating_active = false,
     .test_invalid = false,
     .completed = false
 };
@@ -43,13 +42,17 @@ TempStatus gTempStatus = {
 };
 
 SimParams gSimParams = {
-    // .ambient_temp = 0.0f,
-    // .heat_rate = 0.1f,
-    // .cool_rate = 0.1f,
-    // .force_temp_sensor_fault = false
+
 };
 
-uint16_t gSimTime = 0;
+uint16_t gSimTime = 10;
+
+void reset_sim_params() {
+    gSimParams.ambient_temp = 0.0f;
+    gSimParams.heat_rate = 0.1f;
+    gSimParams.cool_rate = 0.1f;
+    gSimParams.force_temp_sensor_fault = false;
+}
 
 char* get_system_state_string(SystemState state) {
     switch (state) {

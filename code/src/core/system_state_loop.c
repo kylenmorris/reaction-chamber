@@ -31,7 +31,7 @@ void run_system_state_loop_core0() {
 
         case IDLE:
 
-            // no inputs means stay in idle, ,keeping this for redraw limiting for now
+            // no inputs means stay in idle, keeping this for redraw limiting for now
             if (!gButtonInput.wasPressed) {
                 break;
             }
@@ -51,10 +51,7 @@ void run_system_state_loop_core0() {
             if (button_is_pressed(SELECT)) {
                 gButtonInput.wasPressed = false;  // Reset flag
 
-                if (gIdleMenuIM.selected_index == 0) { // Go to heating
-                    // heater_ctrl_init();
-                    // temp_sens_ctrl_init();
-                    
+                if (gIdleMenuIM.selected_index == 0) { // Go to heating                    
                     gHeatingMenuIM.needs_redraw = true;
                     gSystemState = HEATING;
                 }
@@ -70,19 +67,15 @@ void run_system_state_loop_core0() {
 
         case HEATING:
 
-            gTestStatus.heating_active = true;
-
             if (button_is_pressed(BACK)) {  // back to idle
                 gButtonInput.wasPressed = false;        // Reset flag
                 gIdleMenuIM.needs_redraw = true;
-                gTestStatus.heating_active = false;
                 gSystemState = IDLE;
             }
 
             if (gTempStatus.target_reached) {           // target temp reached, start test
                 test_manager_start();
                 gTestRunningIM.needs_redraw = true;
-                gTestStatus.heating_active = false;
                 gSystemState = REACTING;
             }
 
@@ -93,16 +86,12 @@ void run_system_state_loop_core0() {
             // Back to idle
             if (button_is_pressed(BACK)) {
                 gButtonInput.wasPressed = false;  // Reset flag
-                // heater_ctrl_shutdown();
-                // temp_sens_ctrl_shutdown();
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;
             }
 
             // Reaction complete
             if (gTestStatus.completed) {
-                // heater_ctrl_shutdown();
-                // temp_sens_ctrl_shutdown();
                 test_manager_stop();
                 gResultsIM.needs_redraw = true;
                 gSystemState = RESULTS;

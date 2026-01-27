@@ -8,6 +8,8 @@ cd C:\Users\kylen\gth842\capstone\pathoscan\code
 Write-Host "--- Moving to build_tests dir ---" -ForegroundColor Cyan
 cd .\build_tests
 
+rm .\Debug\test_main.exe
+
 Write-Host "--- Configuring CMake ---" -ForegroundColor Cyan
 cmake -DBUILD_TESTS=ON ..
 

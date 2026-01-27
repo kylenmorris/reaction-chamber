@@ -42,6 +42,7 @@
 #define TEMP_HIGH_HIGH_C 64
 #define TEMP_LOW_LOW_C 58
 #define LOWEST_POSSIBLE_TEMP -40 // for basic error checking on temp sensors
+#define HIGHEST_POSSIBLE_TEMP 80
 
 #define TEST_CYCLES 20
 

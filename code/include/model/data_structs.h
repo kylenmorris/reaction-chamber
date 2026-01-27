@@ -70,7 +70,6 @@ typedef struct {
     uint32_t reaction_start_time;
     uint32_t reaction_total_time;
     bool reaction_active;
-    bool heating_active;
     bool test_invalid;
     bool completed;
 } TestStatus;
@@ -148,6 +147,8 @@ typedef struct {
 
 extern SimParams gSimParams;
 extern uint16_t gSimTime;
+
+void reset_sim_params(void);
 
 char* get_system_state_string(SystemState state);
 char* get_tube_state_string(TubeState state);

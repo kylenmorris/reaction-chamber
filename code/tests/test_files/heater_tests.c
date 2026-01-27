@@ -44,8 +44,11 @@ void temp_sensor_failure_test() {
         }
     }
 
+    gSimParams.force_temp_sensor_fault = false;
+
     EXPECT_ONCE(gTempStatus.chamber_temp < 0, "Error: Simulation failed to inject sensor fault");
 
+    reset_sim_params();
     printf("Test Temperature Sensor Failure: FINISHED\n");
 }
 
@@ -71,7 +74,8 @@ void heating_test_low() {
 
     // EXPECT_ONCE(gTempStatus.chamber_temp > TEMP_HIGH_HIGH_C, "Test did not move temp above %dC", TEMP_HIGH_HIGH_C);        
 
-    printf("Test Overheat: FINISHED\n");
+    reset_sim_params();
+    printf("Test Cold: FINISHED\n");
 }
 
 // Check heater turns off when it should
@@ -110,5 +114,6 @@ void heating_test_high() {
 
     EXPECT_ONCE(gTempStatus.chamber_temp > TEMP_HIGH_HIGH_C, "Test did not move temp above %dC", TEMP_HIGH_HIGH_C);        
 
+    reset_sim_params();
     printf("Test Overheat: FINISHED\n");
 }

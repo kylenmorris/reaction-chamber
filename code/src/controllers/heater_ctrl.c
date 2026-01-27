@@ -3,26 +3,32 @@
 #include "constants.h"
 #include "data_structs.h"
 #include "drivers.h"
+#include <stdio.h>
 
 void heater_ctrl_step(void) {
 
-    bool reaction_active = gTestStatus.reaction_active;
-    bool heating_active = gTestStatus.heating_active;
+    // printf(" heater stepped ");
 
-    bool sys_state_valid = gSystemState != (HEATING || REACTING);
-    bool temp_sensors_vald = (gTempStatus.chamber_temp > LOWEST_POSSIBLE_TEMP) 
-                            && (gTempStatus.chamber_temp < TEMP_HIGH_HIGH_C);
+    bool sys_state_invalid = !(gSystemState == HEATING || gSystemState == REACTING);
+    bool temp_sensors_invald = (gTempStatus.chamber_temp < LOWEST_POSSIBLE_TEMP) 
+                                || (gTempStatus.chamber_temp > HIGHEST_POSSIBLE_TEMP);
     
-    if (!(reaction_active || heating_active) || !sys_state_valid || !temp_sensors_vald) {
+    if (sys_state_invalid || temp_sensors_invald) {
         hw_heater_toggle(false);
+        gHeaterState.heaterOn = false;
+        // printf("heater error %d %d", sys_state_invalid, temp_sensors_invald);
         return;        
     }
 
-    if (gTempStatus.chamber_temp < TEMP_DESIRED_C - 0.5) {
-        hw_heater_toggle(true);
-    } 
-    else {
+    // If the heater is on, let it rise to 0.3 above desired. If it's off,
+    // let it fall to 0.3 below. This prevents rapid switching of heater
+    if (gHeaterState.heaterOn && (gTempStatus.chamber_temp > (TEMP_DESIRED_C + 0.3))) {
         hw_heater_toggle(false);
+        gHeaterState.heaterOn = false;
+    }
+    else if (!gHeaterState.heaterOn && (gTempStatus.chamber_temp < (TEMP_DESIRED_C - 0.3))) {
+        hw_heater_toggle(true);
+        gHeaterState.heaterOn = true;
     }
 
 }

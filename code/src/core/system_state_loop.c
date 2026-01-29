@@ -10,7 +10,9 @@
 #include "tube_optical_ctrl.h"
 #include "display_ctrl.h"
 #include "tube_sens_ctrl.h"
+#include "sd_drv.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 void run_system_state_loop_core1() {
     button_ctrl_step(); 
@@ -115,6 +117,7 @@ void run_system_state_loop_core0() {
             break;
 
         case HISTORY:
+            write_to_sd_card();
             gSystemState = IDLE;
     }
 

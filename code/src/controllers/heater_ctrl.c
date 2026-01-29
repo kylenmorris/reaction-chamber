@@ -7,8 +7,6 @@
 
 void heater_ctrl_step(void) {
 
-    // printf(" heater stepped ");
-
     bool sys_state_invalid = !(gSystemState == HEATING || gSystemState == REACTING);
     bool temp_sensors_invald = (gTempStatus.chamber_temp < LOWEST_POSSIBLE_TEMP) 
                                 || (gTempStatus.chamber_temp > HIGHEST_POSSIBLE_TEMP);
@@ -16,7 +14,6 @@ void heater_ctrl_step(void) {
     if (sys_state_invalid || temp_sensors_invald) {
         hw_heater_toggle(false);
         gHeaterState.heaterOn = false;
-        // printf("heater error %d %d", sys_state_invalid, temp_sensors_invald);
         return;        
     }
 

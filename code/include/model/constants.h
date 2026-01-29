@@ -69,10 +69,10 @@
 // PIN DEFINITIONS
 // ####################################
 
-#define UP_BUTTON_GPIO_PIN 16  
-#define DOWN_BUTTON_GPIO_PIN 18  
-#define SELECT_BUTTON_GPIO_PIN 17  
-#define BACK_BUTTON_GPIO_PIN 19 
+#define BACK_BUTTON_GPIO_PIN 28 
+#define DOWN_BUTTON_GPIO_PIN 27  
+#define UP_BUTTON_GPIO_PIN 26 
+#define SELECT_BUTTON_GPIO_PIN 22  
 #define DEBUG_BUTTON_GPIO_PIN 15
 
 static const int BUTTON_PINS[] = {
@@ -83,24 +83,24 @@ static const int BUTTON_PINS[] = {
     DEBUG_BUTTON_GPIO_PIN
 };
 
-#define HEATER_PIN 20
 
-#define DISPLAY_DC_A0_PIN   7   // A0 Data/Command pin - LOW=command, HIGH=data
-#define DISPLAY_RST_PIN  6      // Reset pin - LOW=reset, HIGH=normal operation
+#define DISPLAY_DC_A0_PIN 20   // A0 Data/Command pin - LOW=command, HIGH=data
+#define DISPLAY_RST_PIN  21      // Reset pin - LOW=reset, HIGH=normal operation
 
 // SPI STUFF
 
-#define SPI0_SCK_PIN 2
-#define SPI0_MISO_PIN 4
-#define SPI0_MOSI_PIN 3
+// #define SPI0_MISO_PIN 4
+#define SPI0_SCK_PIN 18
+#define SPI0_MOSI_PIN 19
+#define SPI0_CS0_PIN 17 // display
 
-#define SPI0_CS0_PIN 5 // display
+#define HEATER_PIN 0
 
-#define SPI1_SCK_PIN 14
-#define SPI1_MISO_PIN 12
-#define SPI1_MOSI_PIN 11
+#define SPI1_SCK_PIN 1
+#define SPI1_MISO_PIN 2
+#define SPI1_MOSI_PIN 3
 
-#define SPI1_CS0_PIN 13 // SD card reader
+#define SPI1_CS0_PIN 4
 
 #define SPI_INSTANCE_DISPLAY spi0       // note this doesn't update the SPI pin defines inside PICO2W.h
 #define SPI_BAUDRATE_DISPLAY 4000000    // 4 MHz

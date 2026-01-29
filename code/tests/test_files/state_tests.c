@@ -27,12 +27,7 @@ void state_to_reacting_on_temp(void) {
     gSystemState = HEATING;
 
     for (int i = 0; i < 100; i++) {
-
         run_system_state_loop_core0();
-        // printf("chamber temp %.2f\n", gTempStatus.chamber_temp);
-        // printf("heater %d ", gHeaterState.heaterOn);
-        // printf("state %d", gSystemState);
-
     }
 
     EXPECT_ONCE(gSystemState == REACTING, "System did not move to reacting.");        

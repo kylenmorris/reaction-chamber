@@ -53,7 +53,7 @@ void display_ctrl_step() {
             break;
 
         case HISTORY:
-
+            draw_sd_card_screen();
             break;
             
         case BOOT:

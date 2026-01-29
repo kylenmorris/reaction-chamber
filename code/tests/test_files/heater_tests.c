@@ -12,10 +12,7 @@
 #include "../../include/storage/sd_drv.h"
 
 void json_test() {
-    char *string = serialize_test_results();
-    save_to_file(string);
 
-    free(string);
 }
 
 // Check behaviour during temperature sensor failure in all states

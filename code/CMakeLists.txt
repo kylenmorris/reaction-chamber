@@ -49,6 +49,14 @@ else()
 endif()
 
 # ====================================================================================
+# no-OS-FatFS-SD 
+# ====================================================================================
+
+if (NOT BUILD_TESTS)
+    add_subdirectory(lib/no-OS-FatFs-SD/src)
+endif()
+
+# ====================================================================================
 # GLCD 
 # ====================================================================================
 
@@ -107,11 +115,15 @@ target_include_directories(cjson PUBLIC lib/cjson/)
 add_library(data_helper 
     src/storage/json_helper.c
     src/storage/sd_drv.c    
+    src/storage/hw_config.c
 )
 target_include_directories(data_helper PUBLIC 
     include/storage/
+    lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src
+    lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src/include
 )
 target_link_libraries(data_helper 
+    no-OS-FatFS-SD-SDIO-SPI-RPi-Pico    
     cjson
     model
 )

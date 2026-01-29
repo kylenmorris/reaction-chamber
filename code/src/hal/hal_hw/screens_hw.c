@@ -153,4 +153,14 @@ void draw_boot_screen(void) {
     glcd_write();
 }
 
+
+void draw_sd_card_screen(void) {
+    glcd_clear();
+
+    glcd_draw_string_xy(0, 0, "Writing/Reading to SD Card...");
+
+    glcd_write();
+}
+
+
 #endif

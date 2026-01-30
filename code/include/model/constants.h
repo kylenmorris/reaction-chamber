@@ -87,12 +87,12 @@ static const int BUTTON_PINS[] = {
 #define SPI0_SCK_PIN 18
 #define SPI0_MOSI_PIN 19
 // #define SPI0_MISO_PIN 0
-#define SPI0_BAUDRATE 4 * 1000 * 1000        // 4 MHz
+#define SPI0_BAUDRATE 4 * 1000 * 1000        // 4 MHz which is a limit from glcd
 
 #define SPI1_SCK_PIN 10
 #define SPI1_MOSI_PIN 11
 #define SPI1_MISO_PIN 12
-#define SPI1_BAUDRATE 125 * 1000 * 1000 / 4  // 31.25 MHz
+#define SPI1_BAUDRATE 125 * 1000 * 1000 / 4  // 31.25 MHz, just the default from no-os-fatfs 
 
 #define SPI0_CSn_DISPLAY_PIN 17 // display
 

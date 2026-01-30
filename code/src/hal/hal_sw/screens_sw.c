@@ -8,7 +8,7 @@ static void print_spinner(int frame) {
     printf("%c\r", spinner_chars[frame % 4]);
 }
 
-static void draw_progress_bar(int percent) {
+static void draw_progress_bar(float percent) {
     int filled = (percent * PROGRESS_BAR_WIDTH) / 100;
 
     printf("[");
@@ -18,7 +18,7 @@ static void draw_progress_bar(int percent) {
         else
             printf(" ");
     }
-    printf("] %3d%%  ", percent);
+    printf("] %3f%%  ", percent);
 }
 
 // ####################################

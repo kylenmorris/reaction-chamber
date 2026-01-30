@@ -2,18 +2,11 @@
 #include "../include/definitions.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
 // Clangd can't find these because compiling for windows doesn't result in a 
 // compile_commands.json file. I don't know how to fix that at the moment.
 #include "../../include/model/data_structs.h"
 #include "../../include/core/system_state_loop.h"
-#include "../../include/storage/json_helper.h"
-#include "../../include/storage/sd_drv.h"
-
-void json_test() {
-
-}
 
 // Check behaviour during temperature sensor failure in all states
 

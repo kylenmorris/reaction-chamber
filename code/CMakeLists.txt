@@ -72,7 +72,6 @@ if (NOT BUILD_TESTS)
         lib/glcd-master/controllers/ST7565R.c
     )
 
-    # PUBLIC tells CMake: "If you link to GLCD, you also need these include paths"
     target_include_directories(glcd PUBLIC 
         lib/glcd-master
         lib/glcd-master/devices
@@ -80,7 +79,6 @@ if (NOT BUILD_TESTS)
         include/model/
     )
 
-    # Link the Pico SDK to the driver
     target_link_libraries(glcd PUBLIC 
         pico_stdlib 
         hardware_spi
@@ -114,19 +112,28 @@ target_include_directories(cjson PUBLIC lib/cjson/)
 
 add_library(data_helper 
     src/storage/json_helper.c
-    src/storage/sd_drv.c    
-    src/storage/hw_config.c
 )
 target_include_directories(data_helper PUBLIC 
     include/storage/
-    lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src
-    lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src/include
 )
 target_link_libraries(data_helper 
-    no-OS-FatFS-SD-SDIO-SPI-RPi-Pico    
     cjson
     model
 )
+
+# ====================================================================================
+# SD
+# ====================================================================================
+
+if (NOT BUILD_TESTS)
+
+
+
+else()
+
+
+
+endif()
 
 # ====================================================================================
 # Hardware drivers
@@ -137,12 +144,17 @@ if (NOT BUILD_TESTS)
         src/hal/hal_hw/board_setup.c
         src/hal/hal_hw/drivers_hw.c
         src/hal/hal_hw/screens_hw.c
+        src/storage/sd_drv.c    
+        src/storage/hw_config.c
     )
     target_include_directories(drivers_hw PUBLIC 
         include/interfaces
+        lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src
+        lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src/include
     )
     target_link_libraries(drivers_hw PUBLIC 
         glcd
+        no-OS-FatFS-SD-SDIO-SPI-RPi-Pico    
         pico_stdlib 
         hardware_spi
         pico_cyw43_arch_none

@@ -22,8 +22,6 @@ int main(void) {
     gSystemState = BOOT;
     run_system_state_loop_core0();
 
-    json_test();
-
     heating_test_high();
     heating_test_low();
     temp_sensor_failure_test();

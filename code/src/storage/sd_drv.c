@@ -1,10 +1,8 @@
 #include "sd_drv.h"
 
 #include <stdio.h>
-#include <stdlib.h>
-#include "hw_config.h"
-#include "f_util.h"
-#include "ff.h"
+
+#include "constants.h"
 
 /**
  * @file main.c
@@ -17,27 +15,67 @@
  * - Closing a file and unmounting the SD card
  */
 
-void write_to_sd_card() {
-    // Initialize stdio
-    // stdio_init_all();
+#ifdef USE_HW_SD
+
+#include "hw_config.h"
+#include "f_util.h"
+#include "ff.h"
+
+void save_to_file(char* filename, char* content) {
 
     // See FatFs - Generic FAT Filesystem Module, "Application Interface",
     // http://elm-chan.org/fsw/ff/00index_e.html
+
     FATFS fs;
     FRESULT fr = f_mount(&fs, "", 1);
     if (FR_OK != fr) {
         panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
 
-    // Open a file and write to it
+    // Open a file and write to it 
     FIL fil;
-    const char* const filename = "filename.txt";
     fr = f_open(&fil, filename, FA_OPEN_APPEND | FA_WRITE);
     if (FR_OK != fr && FR_EXIST != fr) {
         panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
     }
-    if (f_printf(&fil, "Hello, world!\n") < 0) {
-        printf("f_printf failed\n");
+    if (f_printf(&fil, content) < 0) {
+        printf("f_printf to file failed!\n");
+    }
+
+    // Close the file
+    fr = f_close(&fil);
+    if (FR_OK != fr) {
+        printf("f_close error: %s (%d)\n", FRESULT_str(fr), fr);
+    }
+
+    printf("Wrote to %s...", filename);
+    
+    // Unmount the SD card
+    f_unmount("");
+}
+
+char *load_file(char *filename) {
+    
+    FATFS fs;
+    FRESULT fr = f_mount(&fs, "", 1);
+    if (FR_OK != fr) {
+        panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+    }
+
+    // Open a file and read from it
+    FIL fil;
+    fr = f_open(&fil, filename, FA_READ);
+    if (FR_OK != fr && FR_EXIST != fr) {
+        panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+    }
+
+    UINT bytes_read;
+    char raw_buffer[512];
+    
+    fr = f_read(&fil, raw_buffer, sizeof(raw_buffer) - 1, &bytes_read);
+    if (fr == FR_OK) {
+        raw_buffer[bytes_read] = '\0'; // Null-terminate for printing
+        printf("Read %u bytes: %s\n", bytes_read, raw_buffer);
     }
 
     // Close the file
@@ -48,66 +86,21 @@ void write_to_sd_card() {
 
     // Unmount the SD card
     f_unmount("");
+
+    // return &raw_buffer;
 }
 
+#endif
+
+
+#ifndef USE_HW_SD
 
 void save_to_file(char* filename, char* content) {
-    FILE *f = fopen(filename, "w");
-    if (f) {
-        fputs(content, f);
-        fclose(f);
-    }
+
 }
 
-char *read_file_into_string(const char *filename) {
-    FILE *file = fopen(filename, "rb");
-    if (file == NULL) {
-        perror("Error opening file");
-        return NULL;
-    }
- 
-    // Get file size
-    if (fseek(file, 0, SEEK_END) != 0) {
-        perror("Error seeking to end of file");
-        fclose(file);
-        return NULL;
-    }
- 
-    long file_size = ftell(file);
-    if (file_size == -1) {
-        perror("Error getting file size");
-        fclose(file);
-        return NULL;
-    }
- 
-    if (fseek(file, 0, SEEK_SET) != 0) {
-        perror("Error seeking to start of file");
-        fclose(file);
-        return NULL;
-    }
- 
-    // Allocate buffer
-    char *buffer = malloc(file_size + 1);
-    if (buffer == NULL) {
-        perror("Error allocating memory");
-        fclose(file);
-        return NULL;
-    }
- 
-    // Read content
-    size_t bytes_read = fread(buffer, 1, file_size, file);
-    if (bytes_read != file_size) {
-        perror("Error reading file");
-        free(buffer);
-        fclose(file);
-        return NULL;
-    }
- 
-    // Null-terminate
-    buffer[file_size] = '\0';
- 
-    // Cleanup and return
-    fclose(file);
-    return buffer;
+char *load_file(char *filename) {
+
 }
- 
+
+#endif

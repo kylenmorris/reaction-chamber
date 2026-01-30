@@ -2,7 +2,6 @@
 #include "../include/definitions.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 
 // Clangd can't find these because compiling for windows doesn't result in a 
 // compile_commands.json file. I don't know how to fix that at the moment.

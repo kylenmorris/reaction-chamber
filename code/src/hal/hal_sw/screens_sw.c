@@ -72,6 +72,7 @@ void draw_heating_screen() {
 
     // Show progress bar
     draw_progress_bar(gTempStatus.chamber_temp * 100 / gTempStatus.target_temp);
+    
     print_spinner(gHeatingMenuIM.spinner_frame);
     gHeatingMenuIM.spinner_frame = (gHeatingMenuIM.spinner_frame + 1) % 4; // cant just increment or we might have overflow lol
 

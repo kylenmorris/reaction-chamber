@@ -84,29 +84,30 @@ static const int BUTTON_PINS[] = {
     DEBUG_BUTTON_GPIO_PIN
 };
 
+#define SPI0_SCK_PIN 18
+#define SPI0_MOSI_PIN 19
+// #define SPI0_MISO_PIN 0
+#define SPI0_BAUDRATE 4 * 1000 * 1000        // 4 MHz
+
+#define SPI1_SCK_PIN 10
+#define SPI1_MOSI_PIN 11
+#define SPI1_MISO_PIN 12
+#define SPI1_BAUDRATE 125 * 1000 * 1000 / 4  // 31.25 MHz
+
+#define SPI0_CSn_DISPLAY_PIN 17 // display
+
+#define SPI1_CSn_SD_CARD_PIN 13
+// #define SPI1_CSn_SWITCHES_SR_PIN 0
+// #define SPI1_CSn_ADC0_PIN 0
+// #define SPI1_CSn_ADC1_PIN 0
 
 #define DISPLAY_DC_A0_PIN 20   // A0 Data/Command pin - LOW=command, HIGH=data
 #define DISPLAY_RST_PIN  21      // Reset pin - LOW=reset, HIGH=normal operation
 
-// SPI STUFF
+// #define HEATER_PIN 0
 
-// #define SPI0_MISO_PIN 4
-#define SPI0_SCK_PIN 18
-#define SPI0_MOSI_PIN 19
-#define SPI0_CS0_PIN 17 // display
-
-#define HEATER_PIN 0
-
-#define SPI1_SCK_PIN 1
-#define SPI1_MISO_PIN 2
-#define SPI1_MOSI_PIN 3
-
-#define SPI1_CS0_PIN 4
-
-#define SPI_INSTANCE_DISPLAY spi0       // note this doesn't update the SPI pin defines inside PICO2W.h
-#define SPI_BAUDRATE_DISPLAY 4000000    // 4 MHz
-
-
+#define SPI_INSTANCE_DISPLAY spi0   // for reference only, see PICO2W.h
+#define SPI_INSTANCE_SD spi1        // for reference only, see hw_config.h
 
 
 #endif

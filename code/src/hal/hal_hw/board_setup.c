@@ -37,14 +37,14 @@ void board_setup(void) {
         init_led();
 
         // Spi 0
-        spi_init(spi0, SPI_BAUDRATE_DISPLAY);       // keeping 4 MHz for now
+        spi_init(spi0, SPI0_BAUDRATE);       // keeping 4 MHz for now
         
         gpio_set_function(SPI0_SCK_PIN, GPIO_FUNC_SPI);
         // gpio_set_function(SPI0_MISO_PIN, GPIO_FUNC_SPI);
         gpio_set_function(SPI0_MOSI_PIN, GPIO_FUNC_SPI);
 
         // Spi 1
-        // spi_init(spi1, SPI_BAUDRATE_DISPLAY);       // keeping 4 MHz for now
+        // spi_init(spi1, SPI0_BAUDRATE);       // keeping 4 MHz for now
         
         // gpio_set_function(SPI1_SCK_PIN, GPIO_FUNC_SPI);
         // gpio_set_function(SPI1_MISO_PIN, GPIO_FUNC_SPI);
@@ -58,11 +58,11 @@ void board_setup(void) {
         // Heater
 
         // Display
-        gpio_init(SPI0_CS0_PIN);
-        gpio_set_dir(SPI0_CS0_PIN, GPIO_OUT);
-        gpio_put(SPI0_CS0_PIN, HIGH); // Deselect
+        gpio_init(SPI0_CSn_DISPLAY_PIN);
+        gpio_set_dir(SPI0_CSn_DISPLAY_PIN, GPIO_OUT);
+        gpio_put(SPI0_CSn_DISPLAY_PIN, HIGH); // Deselect
 
-        gpio_set_function(SPI0_CS0_PIN, GPIO_FUNC_SPI); 
+        gpio_set_function(SPI0_CSn_DISPLAY_PIN, GPIO_FUNC_SPI); 
 
 
         // Photodiodes

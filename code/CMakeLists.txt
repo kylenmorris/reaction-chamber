@@ -49,11 +49,61 @@ else()
 endif()
 
 # ====================================================================================
+# Model/Data Structs 
+# ====================================================================================
+
+add_library(model
+    src/model/data_structs.c
+    src/model/imodel_structs.c
+)
+target_include_directories(model PUBLIC
+    include/model
+)
+
+# Must be before any other compilation of this project
+if (BUILD_TESTS)
+    target_compile_definitions(model PUBLIC MASTER_SIMULATION_MODE)
+endif()
+
+# ====================================================================================
 # no-OS-FatFS-SD 
 # ====================================================================================
 
 if (NOT BUILD_TESTS)
     add_subdirectory(lib/no-OS-FatFs-SD/src)
+endif()
+
+# ====================================================================================
+# SD
+# ====================================================================================
+
+if (NOT BUILD_TESTS)
+    add_library(sd_card
+        src/storage/sd_drv.c    
+        src/storage/hw_config.c
+    )   
+    target_include_directories(sd_card PUBLIC
+        include/storage
+        include/model
+        lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src
+        lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src/include    
+    )   
+    target_link_libraries(sd_card PUBLIC
+        no-OS-FatFS-SD-SDIO-SPI-RPi-Pico
+        model        
+    )
+
+else()
+    add_library(sd_card
+        src/storage/sd_drv.c    
+    )  
+    target_include_directories(sd_card PUBLIC
+        include/storage
+        include/model
+    )   
+    target_link_libraries(sd_card PUBLIC
+        model
+    )
 endif()
 
 # ====================================================================================
@@ -87,28 +137,19 @@ if (NOT BUILD_TESTS)
 endif()
 
 # ====================================================================================
-# Model/Data Structs 
-# ====================================================================================
-
-add_library(model
-    src/model/data_structs.c
-    src/model/imodel_structs.c
-)
-target_include_directories(model PUBLIC
-    include/model
-)
-
-# Enables all software driver definitions, disables all hardware definitions. See compilation_variables.h
-if (BUILD_TESTS)
-    target_compile_definitions(model PUBLIC MASTER_SIMULATION_MODE)
-endif()
-
-# ====================================================================================
 # CJSON 
 # ====================================================================================
 
-add_library(cjson lib/cjson/cjson.c)
-target_include_directories(cjson PUBLIC lib/cjson/)
+add_library(cjson 
+    lib/cjson/cjson.c
+)
+target_include_directories(cjson PUBLIC 
+    lib/cjson/
+)
+
+# ====================================================================================
+# DATA HELPER 
+# ====================================================================================
 
 add_library(data_helper 
     src/storage/json_helper.c
@@ -122,20 +163,6 @@ target_link_libraries(data_helper
 )
 
 # ====================================================================================
-# SD
-# ====================================================================================
-
-if (NOT BUILD_TESTS)
-
-
-
-else()
-
-
-
-endif()
-
-# ====================================================================================
 # Hardware drivers
 # ====================================================================================
 
@@ -144,17 +171,12 @@ if (NOT BUILD_TESTS)
         src/hal/hal_hw/board_setup.c
         src/hal/hal_hw/drivers_hw.c
         src/hal/hal_hw/screens_hw.c
-        src/storage/sd_drv.c    
-        src/storage/hw_config.c
     )
     target_include_directories(drivers_hw PUBLIC 
         include/interfaces
-        lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src
-        lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src/include
     )
     target_link_libraries(drivers_hw PUBLIC 
         glcd
-        no-OS-FatFS-SD-SDIO-SPI-RPi-Pico    
         pico_stdlib 
         hardware_spi
         pico_cyw43_arch_none
@@ -206,10 +228,12 @@ if (NOT BUILD_TESTS)
     target_link_libraries(logic_core PUBLIC 
         drivers_hw # must be first 
         drivers_sw
+        sd_card
     )
 else()
     target_link_libraries(logic_core PUBLIC
         drivers_sw
+        sd_card
     )
 
 endif()

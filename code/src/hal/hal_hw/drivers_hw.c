@@ -1,6 +1,8 @@
 #include "drivers.h"
 #include "data_structs.h"
 #include "constants.h"
+#include <hardware/spi.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include <hardware/gpio.h>
@@ -60,7 +62,34 @@ uint16_t hw_adc_read_raw(int adc_index, int channel) {
 static bool used_tubes[NUM_TUBES] = { false };
 
 #ifdef USE_HW_TUBE_SENS
-uint16_t hw_tube_sens_read_all(void) {
- 
+uint8_t hw_tube_sens_read_all(void) {
+    uint8_t data;
+    
+    // // Latch
+    // gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 0); 
+    // sleep_us(5);
+    // gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 1); // Switch to Shift Mode
+    // sleep_us(5);
+
+    // for (int i = 0; i < 8; i++) {
+    //     // Read the bit currently at QH (Pin 9)
+    //     if (gpio_get(SPI1_MISO_PIN)) {
+    //         data |= (1 << (7 - i));
+    //     }
+        
+    //     // Manual Clock Pulse
+    //     gpio_put(SPI1_SCK_PIN, 1);
+    //     sleep_ms(500);
+    //     gpio_put(SPI1_SCK_PIN, 0);
+    //     sleep_ms(500);
+    // }
+    
+    gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 0);
+    sleep_ms(10); // Could be as short as 100ns but I see no need for that
+    gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 1);
+
+    spi_read_blocking(SPI_INSTANCE_SW, 0x0, &data, 1);
+
+    return data;
 }
 #endif

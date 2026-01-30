@@ -14,7 +14,7 @@
  * @{
  */
 #define PICO2W_SPI_INSTANCE SPI_INSTANCE_DISPLAY  /**< SPI instance to use (spi0 or spi1) */
-#define PICO2W_SPI_BAUDRATE SPI_BAUDRATE_DISPLAY  /**< SPI clock rate in Hz (max 4MHz for LCD) */
+#define PICO2W_SPI_BAUDRATE SPI0_BAUDRATE  /**< SPI clock rate in Hz (max 4MHz for LCD) */
 
 /**
  * \name SPI Pin Definitions
@@ -32,7 +32,7 @@
  * @{
  */
 #define PICO2W_DC_PIN   DISPLAY_DC_A0_PIN   /**< Data/Command pin - LOW=command, HIGH=data */
-#define PICO2W_CS_PIN   SPI0_CS0_PIN   /**< Chip Select pin - LOW=selected, HIGH=deselected */
+#define PICO2W_CS_PIN   SPI0_CSn_DISPLAY_PIN   /**< Chip Select pin - LOW=selected, HIGH=deselected */
 #define PICO2W_RST_PIN  DISPLAY_RST_PIN   /**< Reset pin - LOW=reset, HIGH=normal operation */
 #define PICO2W_A0_PIN   DISPLAY_DC_A0_PIN   /**< Address 0 pin (used by some controllers like ST7565R) */
 /**@}*/

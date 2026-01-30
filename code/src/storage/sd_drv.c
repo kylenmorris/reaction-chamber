@@ -57,7 +57,7 @@ void save_to_file(char* filename, char* content) {
 char *load_file(char *filename) {
     
     FATFS fs;
-    FRESULT fr = f_mount(&fs, "", 1);
+    FRESULT fr = f_mount(&fs, "0:", 1);
     if (FR_OK != fr) {
         panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
     }
@@ -70,7 +70,7 @@ char *load_file(char *filename) {
     }
 
     UINT bytes_read;
-    char raw_buffer[512];
+    char raw_buffer[2048];
     
     fr = f_read(&fil, raw_buffer, sizeof(raw_buffer) - 1, &bytes_read);
     if (fr == FR_OK) {

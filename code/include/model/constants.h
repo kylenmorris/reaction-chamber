@@ -97,7 +97,7 @@ static const int BUTTON_PINS[] = {
 #define SPI0_CSn_DISPLAY_PIN 17 // display
 
 #define SPI1_CSn_SD_CARD_PIN 13
-// #define SPI1_CSn_SWITCHES_SR_PIN 0
+#define SPI1_CS_SHIFT_SWITCHES_SR_PIN 9
 // #define SPI1_CSn_ADC0_PIN 0
 // #define SPI1_CSn_ADC1_PIN 0
 
@@ -108,6 +108,9 @@ static const int BUTTON_PINS[] = {
 
 #define SPI_INSTANCE_DISPLAY spi0   // for reference only, see PICO2W.h
 #define SPI_INSTANCE_SD spi1        // for reference only, see hw_config.h
+#define SPI_INSTANCE_SW spi1        // for reference only
+
+#define PROBE_PIN 1
 
 
 #endif

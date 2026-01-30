@@ -25,11 +25,11 @@ static void draw_progress_bar(int percent) {
 // TERMINAL SCREENS
 // ####################################
 
-void draw_boot_screen() {
+void draw_loading_screen() {
     printf("\033[2J");    // clear screen
     printf("\033[H");     // move cursor to top-left
     printf("================================\n");
-    printf("        BOOTING DEVICE          \n");
+    printf("        DEVICE BUSY          \n");
     printf("================================\n\n");
     printf("Please wait...\n");
     printf("================================\n");

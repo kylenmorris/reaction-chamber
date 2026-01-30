@@ -1,7 +1,7 @@
 #ifndef SD_CTRL_H
 #define SD_CTRL_H
 
-void save_test_results_to_file(void);
+void save_test_results_to_file(char* filename);
 
 void load_all_filenames(void);
 

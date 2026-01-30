@@ -26,6 +26,7 @@
     #undef USE_HW_OPTICAL
     #undef USE_HW_TUBE_SENS
     #undef USE_HW_DISPLAY
+    #undef USE_HW_SD
     #define IS_SIMULATING true
 #else
     #define IS_SIMULATING false

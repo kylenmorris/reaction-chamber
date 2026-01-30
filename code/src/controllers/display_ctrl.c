@@ -53,11 +53,11 @@ void display_ctrl_step() {
             break;
 
         case HISTORY:
-            draw_sd_card_screen();
+            draw_loading_screen();
             break;
             
         case BOOT:
-            draw_boot_screen();
+            draw_loading_screen();
             break;
         }
 }

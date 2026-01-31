@@ -3542,7 +3542,29 @@
 		)
 		(uuid "4b674ac9-56fa-4189-8873-611cb84ca6f2")
 	)
-	(global_label "Vout"
+	(global_label "3V_Line"
+		(shape input)
+		(at 157.48 130.81 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4b996517-0265-43c9-a1c6-b59a0ea1b00c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 167.6014 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "5V_Line"
 		(shape input)
 		(at 30.48 113.03 180)
 		(fields_autoplaced yes)
@@ -3554,7 +3576,7 @@
 		)
 		(uuid "b3b7a7af-6220-4535-88d4-9e040b4f3076")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 23.3825 113.03 0)
+			(at 20.3586 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3586,7 +3608,7 @@
 			)
 		)
 	)
-	(global_label "Vout"
+	(global_label "5V_Line"
 		(shape input)
 		(at 167.64 81.28 0)
 		(fields_autoplaced yes)
@@ -3598,7 +3620,7 @@
 		)
 		(uuid "cfed7bbb-5356-416d-8e10-b07fac57c640")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 174.7375 81.28 0)
+			(at 177.7614 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4022,6 +4044,72 @@
 			(project ""
 				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
 					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 20.32 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "11d00e55-2c35-43a6-98ed-b0b61cb05036")
+		(property "Reference" "#PWR03"
+			(at 20.32 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 20.32 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 20.32 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 20.32 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 20.32 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c637502c-414f-459e-b267-aa01d1da0dc3")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -5159,6 +5247,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 17.78 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "807b5cb4-e094-4d70-a30b-eaebf8141e41")
+		(property "Reference" "#PWR01"
+			(at 17.78 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 17.78 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 17.78 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 17.78 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 17.78 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f16a2aa3-9cd4-4d3b-8cf4-d4fc657cb828")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 148.59 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5291,6 +5445,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 22.86 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8c28d7ca-3571-4bc7-8501-fd63a9b3b0b6")
+		(property "Reference" "#PWR013"
+			(at 22.86 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 22.86 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 22.86 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 22.86 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 22.86 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1d642a3c-d91b-4e75-a6f9-3c60a3eb7e96")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 195.58 115.57 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5351,6 +5571,72 @@
 			(project "power_splitter"
 				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
 					(reference "#ground0101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 25.4 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "918892d1-018c-48ef-8ef7-1b5199f5a415")
+		(property "Reference" "#PWR015"
+			(at 25.4 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 25.4 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 25.4 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 25.4 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 25.4 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0ac9b797-df1c-4042-ab25-1715fb35608b")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)

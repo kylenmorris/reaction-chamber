@@ -1514,83 +1514,43 @@
 			(embedded_fonts no)
 		)
 	)
-	(junction
-		(at 180.34 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0f1d25cc-f031-4b76-87b3-98c9391c39e1")
-	)
-	(junction
-		(at 180.34 55.88)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0f262949-7189-4dda-8443-8c4722991623")
-	)
-	(junction
-		(at 180.34 93.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "196d799a-ce25-4ef2-8d97-02fbff09708c")
-	)
-	(junction
-		(at 180.34 113.03)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4af72e3f-6a14-4515-8fe2-3ed4527cde92")
-	)
-	(junction
-		(at 180.34 132.08)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "895ddcce-550c-471f-ac57-9bdc0d1555aa")
-	)
-	(no_connect
-		(at 180.34 80.01)
-		(uuid "045f2023-696e-43f9-bcd0-bec30543d03e")
-	)
-	(no_connect
-		(at 180.34 99.06)
-		(uuid "06d78b5e-6cad-458c-8476-0eb8a7ca3473")
-	)
-	(no_connect
-		(at 180.34 137.16)
-		(uuid "34a10263-60a4-4c33-8f51-8cc7d3438286")
-	)
-	(no_connect
-		(at 180.34 60.96)
-		(uuid "48876f0d-d6b9-44fa-b773-82d9d7ea7059")
-	)
-	(no_connect
-		(at 180.34 118.11)
-		(uuid "52501a52-4e7c-4ca9-bebd-bc47c3ffdd96")
-	)
 	(no_connect
 		(at 142.24 68.58)
 		(uuid "f90b450f-6d93-4236-af17-b30a9efa2bc3")
 	)
 	(wire
 		(pts
-			(xy 62.23 132.08) (xy 180.34 132.08)
+			(xy 180.34 104.14) (xy 180.34 101.6)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "015dbed1-c86b-409b-a986-3e876eb1eebb")
+		(uuid "00bd0d28-0c14-458d-977b-236d1426a9d1")
 	)
 	(wire
 		(pts
-			(xy 180.34 93.98) (xy 152.4 93.98)
+			(xy 152.4 60.96) (xy 152.4 99.06)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0c71d24e-3bd9-401f-91dc-a36103ec35f7")
+		(uuid "1f368728-adfa-4cd5-a5cb-97ef96faa148")
 	)
 	(wire
 		(pts
-			(xy 180.34 53.34) (xy 180.34 55.88)
+			(xy 180.34 125.73) (xy 180.34 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26347918-2bf4-462f-96aa-08e2d93028a3")
+	)
+	(wire
+		(pts
+			(xy 180.34 50.8) (xy 180.34 53.34)
 		)
 		(stroke
 			(width 0)
@@ -1600,23 +1560,43 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 91.44) (xy 180.34 93.98)
+			(xy 180.34 142.24) (xy 62.23 142.24)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "28afa147-81a8-4839-b43c-f42baf96849c")
+		(uuid "2a38bc31-49a3-4d85-b899-02d16b597542")
 	)
 	(wire
 		(pts
-			(xy 180.34 72.39) (xy 180.34 74.93)
+			(xy 180.34 93.98) (xy 180.34 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2b3262aa-a119-40c6-a6d7-906f5680ca3e")
+		(uuid "3fdec089-866f-4678-8902-2b3e1ec7d869")
+	)
+	(wire
+		(pts
+			(xy 180.34 82.55) (xy 180.34 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "41153230-6378-4e68-9579-b575bec6ece9")
+	)
+	(wire
+		(pts
+			(xy 142.24 55.88) (xy 180.34 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42958eda-c612-4f4f-a1ca-980d2b8c4592")
 	)
 	(wire
 		(pts
@@ -1630,13 +1610,23 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 110.49) (xy 180.34 113.03)
+			(xy 180.34 115.57) (xy 180.34 118.11)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "82b54a12-d288-413c-b6f4-f2aebd7eb9f5")
+		(uuid "7fa89054-acb6-45ff-b127-b4295f20becd")
+	)
+	(wire
+		(pts
+			(xy 180.34 72.39) (xy 180.34 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89933927-2495-4cd9-a7aa-ef1da8428694")
 	)
 	(wire
 		(pts
@@ -1660,27 +1650,17 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 74.93) (xy 154.94 74.93)
+			(xy 180.34 60.96) (xy 180.34 58.42)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "90d75539-b7bf-4f69-a550-e08857b96471")
+		(uuid "9d7d9bda-2ab4-41e9-9af7-04c01e22ee1c")
 	)
 	(wire
 		(pts
-			(xy 152.4 93.98) (xy 152.4 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9d97367c-63cd-43c3-a75f-9e657c6d9abc")
-	)
-	(wire
-		(pts
-			(xy 154.94 74.93) (xy 154.94 58.42)
+			(xy 154.94 58.42) (xy 154.94 77.47)
 		)
 		(stroke
 			(width 0)
@@ -1690,13 +1670,13 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 55.88) (xy 180.34 55.88)
+			(xy 180.34 120.65) (xy 149.86 120.65)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a676fece-c060-4bed-9d73-6305fe78719d")
+		(uuid "a2f17847-d35b-4feb-926f-962a8110a00d")
 	)
 	(wire
 		(pts
@@ -1710,27 +1690,47 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 129.54) (xy 180.34 132.08)
+			(xy 180.34 99.06) (xy 152.4 99.06)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b243a3d6-0c99-476f-a949-4d7bc87c5f04")
+		(uuid "ab619456-542f-4b43-af66-208c19d940f7")
 	)
 	(wire
 		(pts
-			(xy 149.86 113.03) (xy 149.86 63.5)
+			(xy 180.34 137.16) (xy 180.34 139.7)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "db57a8f5-311f-40ed-adbc-9676c0e887dd")
+		(uuid "df8e681d-82c8-436c-9890-ecc9508e7259")
 	)
 	(wire
 		(pts
-			(xy 62.23 55.88) (xy 62.23 132.08)
+			(xy 180.34 147.32) (xy 180.34 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1e47ec3-6798-4fad-bb00-ddd24d4bc083")
+	)
+	(wire
+		(pts
+			(xy 149.86 63.5) (xy 149.86 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e28851ee-4202-44ae-a0c1-0625c9c5e9ef")
+	)
+	(wire
+		(pts
+			(xy 62.23 55.88) (xy 62.23 142.24)
 		)
 		(stroke
 			(width 0)
@@ -1740,17 +1740,17 @@
 	)
 	(wire
 		(pts
-			(xy 180.34 113.03) (xy 149.86 113.03)
+			(xy 154.94 77.47) (xy 180.34 77.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f8090e84-9331-430b-8597-267c743c312a")
+		(uuid "f3a598c3-2f45-4c59-a056-ecafa93eda23")
 	)
 	(global_label "CLK"
 		(shape input)
-		(at 36.83 58.42 0)
+		(at 36.83 55.88 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1760,7 +1760,7 @@
 		)
 		(uuid "05db013c-d750-4783-9784-383a2158f9ce")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 43.3833 58.42 0)
+			(at 43.3833 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1814,6 +1814,28 @@
 			)
 		)
 	)
+	(global_label "CSn"
+		(shape input)
+		(at 142.24 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a967295f-0164-473f-a47c-6877058c3116")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 148.8537 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SH"
 		(shape input)
 		(at 36.83 53.34 0)
@@ -1827,6 +1849,28 @@
 		(uuid "af231b57-4bd5-41b9-92ea-cbc1ab6395d8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 42.3552 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "CSn"
+		(shape input)
+		(at 36.83 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "be676bf6-5724-40f8-9da8-8c2964af722b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.4437 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1882,16 +1926,16 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 180.34 134.62 270)
+		(at 180.34 82.55 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "18b592ee-fe78-47a5-a61e-f4c3a1711af6")
-		(property "Reference" "#PWR010"
-			(at 173.99 134.62 0)
+		(uuid "2275341f-0e28-4e68-86f9-83bf8f6355d6")
+		(property "Reference" "#PWR04"
+			(at 173.99 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1900,7 +1944,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 176.53 134.6199 90)
+			(at 176.53 82.5499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1909,7 +1953,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 180.34 134.62 0)
+			(at 180.34 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1918,7 +1962,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 180.34 134.62 0)
+			(at 180.34 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1927,7 +1971,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 180.34 134.62 0)
+			(at 180.34 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1936,145 +1980,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "d5f808b8-5527-4784-9ed7-a01766bc7078")
+			(uuid "3159e2ef-c0de-48d8-9973-fb6f9269a5f1")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR010")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 167.64 129.54 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2113be45-ec2c-4e2c-8f19-c318420f9a37")
-		(property "Reference" "#PWR08"
-			(at 171.45 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 163.83 129.5399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 167.64 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 167.64 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 167.64 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "42486a05-4a94-498d-bc1a-5c8bff7ad20b")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 167.64 91.44 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "31ebdf60-b8be-4efd-b68b-6b92e84e2a1f")
-		(property "Reference" "#PWR05"
-			(at 171.45 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 163.83 91.4399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 167.64 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 167.64 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 167.64 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2c3e685a-0685-440f-bd74-5f2f11a4aa94")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR05")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -2149,16 +2060,16 @@
 	)
 	(symbol
 		(lib_id "10k-resistor:MFP-25BRD52-10K")
-		(at 167.64 72.39 0)
+		(at 167.64 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3c47876a-c21a-4bd4-8d36-55046766ad89")
-		(property "Reference" "R1"
-			(at 173.99 66.04 0)
+		(uuid "3551b3ff-b7c7-41f5-ac9e-6d77f5755213")
+		(property "Reference" "R5"
+			(at 173.99 130.81 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -2166,7 +2077,7 @@
 			)
 		)
 		(property "Value" "MFP-25BRD52-10K"
-			(at 173.99 68.58 0)
+			(at 173.99 133.35 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -2174,7 +2085,7 @@
 			)
 		)
 		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
-			(at 167.64 72.39 0)
+			(at 167.64 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2184,7 +2095,7 @@
 			)
 		)
 		(property "Datasheet" "MFP-25BRD52-10K"
-			(at 167.64 72.39 0)
+			(at 167.64 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2194,7 +2105,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 167.64 72.39 0)
+			(at 167.64 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2203,15 +2114,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "f473d860-3ec5-4ce8-bdc4-3706ed9d7c1d")
+			(uuid "16a5d46a-4a12-46af-99cb-624c3cbbb8fb")
 		)
 		(pin "2"
-			(uuid "7540d117-4d02-4186-ab92-06e94f8a328a")
+			(uuid "056112be-28ed-4347-8a64-4ce68f3438d3")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "R1")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -2219,7 +2130,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 180.34 58.42 270)
+		(at 180.34 60.96 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2228,7 +2139,7 @@
 		(fields_autoplaced yes)
 		(uuid "3dcfdb81-2cc9-45ed-b6d7-ca17f05f3253")
 		(property "Reference" "#PWR02"
-			(at 173.99 58.42 0)
+			(at 173.99 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2237,7 +2148,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 176.53 58.4199 90)
+			(at 176.53 60.9599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2246,7 +2157,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 180.34 58.42 0)
+			(at 180.34 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2255,7 +2166,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 180.34 58.42 0)
+			(at 180.34 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2264,7 +2175,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 180.34 58.42 0)
+			(at 180.34 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2352,76 +2263,6 @@
 		)
 	)
 	(symbol
-		(lib_id "10k-resistor:MFP-25BRD52-10K")
-		(at 167.64 129.54 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "448ad624-4d0c-4892-a1a3-7a77161c29bf")
-		(property "Reference" "R5"
-			(at 173.99 123.19 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Value" "MFP-25BRD52-10K"
-			(at 173.99 125.73 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
-			(at 167.64 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "MFP-25BRD52-10K"
-			(at 167.64 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 167.64 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "35602230-af3e-498b-8baf-5c5402bf23ad")
-		)
-		(pin "2"
-			(uuid "8fd3709f-5230-40ac-b5d4-b1f434f56b9a")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 71.12 68.58 0)
 		(unit 1)
@@ -2489,16 +2330,16 @@
 	)
 	(symbol
 		(lib_id "CME495_LIB:DM3CQF1003L01")
-		(at 185.42 78.74 0)
+		(at 185.42 100.33 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "4ac149f4-c6cd-4657-baa5-fb5478e2e224")
-		(property "Reference" "U2"
-			(at 189.23 76.8349 0)
+		(uuid "4f65b6d5-9217-4920-bc0f-ecc82da5150c")
+		(property "Reference" "U3"
+			(at 189.23 98.4249 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2507,7 +2348,7 @@
 			)
 		)
 		(property "Value" "DM3CQF1003L01"
-			(at 189.23 79.3749 0)
+			(at 189.23 100.9649 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2516,7 +2357,7 @@
 			)
 		)
 		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
-			(at 185.42 78.74 0)
+			(at 185.42 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2525,7 +2366,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 78.74 0)
+			(at 185.42 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2534,7 +2375,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 185.42 78.74 0)
+			(at 185.42 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2543,91 +2384,18 @@
 			)
 		)
 		(pin "2"
-			(uuid "6dfd5bf7-6944-4a42-a065-1afcee4a0131")
+			(uuid "45c7906c-52bd-4345-970a-8cbece031086")
 		)
 		(pin "3"
-			(uuid "edf6139e-e4ba-4fc6-947f-cd9f3dd5161e")
+			(uuid "78f99771-7b55-4cee-ac90-25395112ffc5")
 		)
 		(pin "1"
-			(uuid "58a78e8d-a7b0-461e-a569-785d359e2297")
+			(uuid "7ca995f9-3369-445a-b9ad-2a93a9cb7861")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "CME495_LIB:DM3CQF1003L01")
-		(at 185.42 135.89 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "52ed1529-3f17-42d3-858b-502c5259da6d")
-		(property "Reference" "U5"
-			(at 189.23 133.9849 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DM3CQF1003L01"
-			(at 189.23 136.5249 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
-			(at 185.42 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 185.42 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 185.42 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "02f879d5-92d6-4abd-981a-ff5d09a7352f")
-		)
-		(pin "3"
-			(uuid "9458f9e9-b0ca-4a23-850e-e43e33784902")
-		)
-		(pin "1"
-			(uuid "89978d1b-e74e-4c9d-94a6-1ce6d05e5d87")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "U5")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -2701,53 +2469,53 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 36.83 55.88 90)
+		(lib_id "10k-resistor:MFP-25BRD52-10K")
+		(at 167.64 93.98 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "6184a9a8-151d-4efd-976e-629284892b5c")
-		(property "Reference" "#PWR011"
-			(at 43.18 55.88 0)
+		(uuid "591e26a6-0d5e-4fbd-bfe3-24e493dfa570")
+		(property "Reference" "R2"
+			(at 173.99 87.63 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Value" "MFP-25BRD52-10K"
+			(at 173.99 90.17 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
+			(at 167.64 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
+					(italic yes)
 				)
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 40.64 55.8799 90)
+		(property "Datasheet" "MFP-25BRD52-10K"
+			(at 167.64 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 36.83 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
+					(italic yes)
 				)
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 36.83 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 36.83 55.88 0)
+		(property "Description" ""
+			(at 167.64 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2756,146 +2524,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "c5fb39c5-2668-489b-9302-a503d04586f9")
+			(uuid "45460d1f-7b50-485a-9f37-5e5d30753969")
 		)
-		(instances
-			(project ""
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR011")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 180.34 96.52 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "63f2b2f4-a463-4769-81fa-d6ed3a70713d")
-		(property "Reference" "#PWR06"
-			(at 173.99 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 176.53 96.5199 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 180.34 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 180.34 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 180.34 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "d39bc37d-d6e3-4751-91c7-782615c1a9ab")
+		(pin "2"
+			(uuid "929e5299-2298-4b0c-b58a-ecdc84ec3fb3")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 167.64 53.34 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "78c93a56-34e8-4dbd-a40d-b528b09bb244")
-		(property "Reference" "#PWR01"
-			(at 171.45 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 163.83 53.3399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 167.64 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 167.64 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 167.64 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6ab3ee24-2fc1-4c92-b6f8-295a7b354e66")
-		)
-		(instances
-			(project ""
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR01")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -2903,16 +2540,16 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 180.34 77.47 270)
+		(at 180.34 147.32 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "7c9faeef-5908-42c3-b448-99c75ea9d363")
-		(property "Reference" "#PWR04"
-			(at 173.99 77.47 0)
+		(uuid "68718cc6-0238-40fc-a6a8-fe8e0e6e241a")
+		(property "Reference" "#PWR010"
+			(at 173.99 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2921,7 +2558,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 176.53 77.4699 90)
+			(at 176.53 147.3199 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2930,7 +2567,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 180.34 77.47 0)
+			(at 180.34 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2939,7 +2576,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 180.34 77.47 0)
+			(at 180.34 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2948,7 +2585,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 180.34 77.47 0)
+			(at 180.34 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2957,12 +2594,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1614b3ae-a61a-4e2c-a771-1da0bd8cde95")
+			(uuid "dfb06dd8-402c-42ce-b39f-be15124bb85e")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR04")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -2977,7 +2614,7 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "86fa4468-c556-4c37-ac9e-3b79033f1919")
+		(uuid "690c2329-82cd-4d62-a3b4-170e7b01adec")
 		(property "Reference" "#PWR03"
 			(at 171.45 72.39 0)
 			(effects
@@ -3024,7 +2661,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "f773a069-b3d7-4c18-9e22-ffd54af80fee")
+			(uuid "cd18e69e-a7a5-447c-b989-18ca1a20271f")
 		)
 		(instances
 			(project "tube_detection_pcb"
@@ -3036,17 +2673,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 142.24 53.34 90)
+		(lib_id "power:+3V3")
+		(at 167.64 137.16 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "8a0c6dda-37ef-49c1-a036-c851890d53cf")
-		(property "Reference" "#PWR016"
-			(at 148.59 53.34 0)
+		(uuid "6b2c5b73-ba9f-4d95-8d7d-0446a26b8782")
+		(property "Reference" "#PWR08"
+			(at 171.45 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3054,17 +2691,17 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 146.05 53.3399 90)
+		(property "Value" "+3V3"
+			(at 163.83 137.1599 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 142.24 53.34 0)
+			(at 167.64 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3073,7 +2710,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 142.24 53.34 0)
+			(at 167.64 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3081,8 +2718,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 142.24 53.34 0)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 167.64 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3091,12 +2728,222 @@
 			)
 		)
 		(pin "1"
-			(uuid "4ccd1ce4-94fd-4d15-a34a-459752469691")
+			(uuid "2803b1c3-968f-452a-a301-3a41eb642f50")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 167.64 50.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "78c93a56-34e8-4dbd-a40d-b528b09bb244")
+		(property "Reference" "#PWR01"
+			(at 171.45 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 163.83 50.7999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 167.64 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 167.64 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 167.64 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6ab3ee24-2fc1-4c92-b6f8-295a7b354e66")
 		)
 		(instances
 			(project ""
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR016")
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "10k-resistor:MFP-25BRD52-10K")
+		(at 167.64 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "794c1609-c8b6-4be5-a23e-e395d00a6f08")
+		(property "Reference" "R4"
+			(at 173.99 109.22 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Value" "MFP-25BRD52-10K"
+			(at 173.99 111.76 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
+			(at 167.64 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "MFP-25BRD52-10K"
+			(at 167.64 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 167.64 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ee44dd0f-c7da-47ee-bc4f-4460387d5a86")
+		)
+		(pin "2"
+			(uuid "abe09a0b-c009-4c08-872d-e0d19a62b2ed")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "CME495_LIB:DM3CQF1003L01")
+		(at 185.42 143.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "840e6176-5f31-4082-86a3-5485d49aa1aa")
+		(property "Reference" "U5"
+			(at 189.23 141.6049 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DM3CQF1003L01"
+			(at 189.23 144.1449 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
+			(at 185.42 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 185.42 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b9e1c99e-9727-4219-a96d-e34708a55856")
+		)
+		(pin "3"
+			(uuid "259928a1-53a3-4f9a-b495-9edc82c95b62")
+		)
+		(pin "1"
+			(uuid "6979689a-df18-489c-8a2c-03538731e98e")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -3295,7 +3142,7 @@
 	)
 	(symbol
 		(lib_id "CME495_LIB:DM3CQF1003L01")
-		(at 185.42 59.69 0)
+		(at 185.42 57.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3304,7 +3151,7 @@
 		(fields_autoplaced yes)
 		(uuid "8bb1c7a2-ff1c-404e-8f0f-b2ee2bf52e5c")
 		(property "Reference" "U1"
-			(at 189.23 57.7849 0)
+			(at 189.23 55.2449 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3313,7 +3160,7 @@
 			)
 		)
 		(property "Value" "DM3CQF1003L01"
-			(at 189.23 60.3249 0)
+			(at 189.23 57.7849 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3322,7 +3169,7 @@
 			)
 		)
 		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
-			(at 185.42 59.69 0)
+			(at 185.42 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3331,7 +3178,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 59.69 0)
+			(at 185.42 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3340,7 +3187,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 185.42 59.69 0)
+			(at 185.42 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3367,157 +3214,17 @@
 		)
 	)
 	(symbol
-		(lib_id "10k-resistor:MFP-25BRD52-10K")
-		(at 167.64 110.49 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8f557dab-f085-4dd3-83bf-605a7c93faf5")
-		(property "Reference" "R4"
-			(at 173.99 104.14 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Value" "MFP-25BRD52-10K"
-			(at 173.99 106.68 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
-			(at 167.64 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "MFP-25BRD52-10K"
-			(at 167.64 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 167.64 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "680e3b71-01dc-4953-b63c-4f9160fd4b90")
-		)
-		(pin "2"
-			(uuid "2b47fa3e-8f18-470e-afb7-ab8e8ba6e2ce")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "R4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "10k-resistor:MFP-25BRD52-10K")
-		(at 167.64 91.44 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8f97b184-cb31-4315-a8a9-b4376d96ef05")
-		(property "Reference" "R2"
-			(at 173.99 85.09 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Value" "MFP-25BRD52-10K"
-			(at 173.99 87.63 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
-			(at 167.64 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "MFP-25BRD52-10K"
-			(at 167.64 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 167.64 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "573ff7c0-3606-4174-8250-93305fae4f94")
-		)
-		(pin "2"
-			(uuid "0803000b-746e-44b4-81de-636bf097fbf8")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "R2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3V3")
-		(at 167.64 110.49 90)
+		(at 167.64 115.57 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "93c80dbc-1888-4366-881f-7231a346fd47")
+		(uuid "99ba95ee-95ee-4310-ac5a-84bbf71fd608")
 		(property "Reference" "#PWR07"
-			(at 171.45 110.49 0)
+			(at 171.45 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3526,7 +3233,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 163.83 110.4899 90)
+			(at 163.83 115.5699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3535,7 +3242,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 167.64 110.49 0)
+			(at 167.64 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3544,7 +3251,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 167.64 110.49 0)
+			(at 167.64 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3553,7 +3260,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 167.64 110.49 0)
+			(at 167.64 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3562,7 +3269,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "afa2b305-78ac-46e3-9042-0c11badcaa4e")
+			(uuid "34027491-5573-4c02-9c55-65224abbd854")
 		)
 		(instances
 			(project "tube_detection_pcb"
@@ -3574,126 +3281,53 @@
 		)
 	)
 	(symbol
-		(lib_id "CME495_LIB:DM3CQF1003L01")
-		(at 185.42 116.84 0)
+		(lib_id "10k-resistor:MFP-25BRD52-10K")
+		(at 167.64 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "948b6f33-19c3-406a-9d39-839f788524aa")
-		(property "Reference" "U4"
-			(at 189.23 114.9349 0)
+		(uuid "a3fcdda1-e88d-4365-b16c-0b4edd2827d5")
+		(property "Reference" "R1"
+			(at 173.99 66.04 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.524 1.524)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "DM3CQF1003L01"
-			(at 189.23 117.4749 0)
+		(property "Value" "MFP-25BRD52-10K"
+			(at 173.99 68.58 0)
 			(effects
 				(font
-					(size 1.27 1.27)
+					(size 1.524 1.524)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
-			(at 185.42 116.84 0)
+		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
+			(at 167.64 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 185.42 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
+					(italic yes)
 				)
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 185.42 116.84 0)
+		(property "Datasheet" "MFP-25BRD52-10K"
+			(at 167.64 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "5f2578bb-3f2f-431d-820c-885648c474c2")
-		)
-		(pin "3"
-			(uuid "d82a1abf-fd0c-45d1-b951-1eee2e921749")
-		)
-		(pin "1"
-			(uuid "44436b28-6efb-4413-9fb0-25fd1f1e637d")
-		)
-		(instances
-			(project "tube_detection_pcb"
-				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "U4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "CME495_LIB:DM3CQF1003L01")
-		(at 185.42 97.79 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a06f5ff1-ac26-47c4-abbf-cf9e9faa02a8")
-		(property "Reference" "U3"
-			(at 189.23 95.8849 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "DM3CQF1003L01"
-			(at 189.23 98.4249 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
-			(at 185.42 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 185.42 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
+					(italic yes)
 				)
 				(hide yes)
 			)
 		)
 		(property "Description" ""
-			(at 185.42 97.79 0)
+			(at 167.64 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3701,19 +3335,16 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "b0835920-188c-4b78-9f89-29b28efc994e")
-		)
-		(pin "3"
-			(uuid "ffa42b3d-fd85-4622-b0a9-0cf266ef36a2")
-		)
 		(pin "1"
-			(uuid "c055a012-7ea3-4cfe-8026-c1f9b4c1d776")
+			(uuid "ea30e049-02d4-49a5-ae70-e7bb04dd68e0")
+		)
+		(pin "2"
+			(uuid "826ad13c-b32e-40cf-abc8-7560f4cd9637")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "U3")
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -3787,6 +3418,79 @@
 		)
 	)
 	(symbol
+		(lib_id "CME495_LIB:DM3CQF1003L01")
+		(at 185.42 121.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ba31e471-4865-4497-9f1c-a7806f7e34cc")
+		(property "Reference" "U4"
+			(at 189.23 120.0149 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DM3CQF1003L01"
+			(at 189.23 122.5549 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
+			(at 185.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 185.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "44980159-ec01-47c9-be5b-0a4686dcd387")
+		)
+		(pin "3"
+			(uuid "03fa1176-8657-40b2-9911-2ce5463018e5")
+		)
+		(pin "1"
+			(uuid "51007314-a549-4cbd-81e6-37d15244f1a0")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 71.12 60.96 270)
 		(unit 1)
@@ -3848,6 +3552,79 @@
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
 					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "CME495_LIB:DM3CQF1003L01")
+		(at 185.42 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c5726ffa-ae33-482f-9f4d-b71153da0160")
+		(property "Reference" "U2"
+			(at 189.23 76.8349 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "DM3CQF1003L01"
+			(at 189.23 79.3749 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "CME495_LIB:DM3CQF1003L01"
+			(at 185.42 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 185.42 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7d40ab9c-eab0-45f9-86f5-6ee4dff92513")
+		)
+		(pin "3"
+			(uuid "c652c2df-2d44-443c-a067-d755580c02d8")
+		)
+		(pin "1"
+			(uuid "904b61dd-e193-4c89-966c-aa4ed1c0835e")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -3989,7 +3766,7 @@
 	)
 	(symbol
 		(lib_id "10k-resistor:MFP-25BRD52-10K")
-		(at 167.64 53.34 0)
+		(at 167.64 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3998,7 +3775,7 @@
 		(fields_autoplaced yes)
 		(uuid "dea2eff6-1ab4-407b-8d76-63ea7bb0999a")
 		(property "Reference" "R3"
-			(at 173.99 46.99 0)
+			(at 173.99 44.45 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -4006,7 +3783,7 @@
 			)
 		)
 		(property "Value" "MFP-25BRD52-10K"
-			(at 173.99 49.53 0)
+			(at 173.99 46.99 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -4014,7 +3791,7 @@
 			)
 		)
 		(property "Footprint" "10k-resistor:YAG_MF25_YAG"
-			(at 167.64 53.34 0)
+			(at 167.64 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4024,7 +3801,7 @@
 			)
 		)
 		(property "Datasheet" "MFP-25BRD52-10K"
-			(at 167.64 53.34 0)
+			(at 167.64 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4034,7 +3811,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 167.64 53.34 0)
+			(at 167.64 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4052,6 +3829,73 @@
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
 					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 180.34 125.73 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e26694bf-bc96-45b0-acf6-0cd1de598507")
+		(property "Reference" "#PWR09"
+			(at 173.99 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 176.53 125.7299 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 180.34 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 180.34 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 180.34 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0cb78211-6bf5-456b-807b-00f6c01ae7a2")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -4170,17 +4014,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 180.34 115.57 270)
+		(lib_id "power:+3V3")
+		(at 167.64 93.98 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "f82ce0e7-36af-4526-947d-2bba4ed1d31e")
-		(property "Reference" "#PWR09"
-			(at 173.99 115.57 0)
+		(uuid "f6e38cf5-623d-4b94-896b-143d09de3fde")
+		(property "Reference" "#PWR05"
+			(at 171.45 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4188,17 +4032,17 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 176.53 115.5699 90)
+		(property "Value" "+3V3"
+			(at 163.83 93.9799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 180.34 115.57 0)
+			(at 167.64 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4207,7 +4051,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 180.34 115.57 0)
+			(at 167.64 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4215,8 +4059,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 180.34 115.57 0)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 167.64 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4225,12 +4069,79 @@
 			)
 		)
 		(pin "1"
-			(uuid "d540a73c-c65f-4c88-948d-9cc276baff30")
+			(uuid "4ad7795c-8616-4617-8b05-dd9729ef9d5a")
 		)
 		(instances
 			(project "tube_detection_pcb"
 				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
-					(reference "#PWR09")
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 180.34 104.14 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fdc9c256-a8e4-4f5e-8ecf-8c9d2e5ff79c")
+		(property "Reference" "#PWR06"
+			(at 173.99 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 176.53 104.1399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 180.34 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 180.34 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 180.34 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a1803717-39b4-4b17-86d0-6af1d4941cb2")
+		)
+		(instances
+			(project "tube_detection_pcb"
+				(path "/8963d266-a6bd-42d9-bfbb-c9f3c747bccc"
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)

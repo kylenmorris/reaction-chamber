@@ -50,7 +50,6 @@
             printf("Mount failed: %d\n", fr);
         }
 
-        // Open a file and write to it 
         FIL fil;
         fr = f_open(&fil, filename, FA_WRITE | FA_CREATE_ALWAYS);
         if (FR_OK != fr && FR_EXIST != fr) {
@@ -65,8 +64,6 @@
         if (FR_OK != fr) {
             printf("f_close error: %s (%d)\n", FRESULT_str(fr), fr);
         }
-
-        printf("Wrote to %s...", filename);
         
         // Unmount the SD card
         f_unmount("");
@@ -105,11 +102,7 @@
         // Unmount the SD card
         f_unmount("");
 
-        // return &raw_buffer;
     }
-
-    // char file_list[MAX_FILES][MAX_NAME_LEN];
-    int file_count = 0;
 
     void populate_file_list(const char* path) {
         FRESULT res;
@@ -117,7 +110,7 @@
         static FILINFO fno;
         FATFS fs;
 
-        file_count = 0;
+        int file_count = 0;
 
         res = f_mount(&fs, "", 1); 
         if (res != FR_OK) {
@@ -132,7 +125,6 @@
             f_unmount(""); // Clean up
             return;
         }
-        printf("Populating file list from path: %s\n", path);
 
         memset(results_menu_items, 0, sizeof(results_menu_items));
         
@@ -151,11 +143,6 @@
 
         f_closedir(&dir);
 
-        printf("Found %d files in %s\n", file_count, path);
-        printf("Files:\n");
-        for (int i = 0; i < file_count; i++) {
-            printf(" - %s\n", results_menu_items[i]);
-        }
     }
 
 #endif

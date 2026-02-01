@@ -141,12 +141,5 @@ typedef struct {
 extern SimParams gSimParams;
 extern uint16_t gSimTime;
 
-void reset_sim_params(void);
-
-char* get_system_state_string(SystemState state);
-char* get_tube_state_string(TubeState state);
-char* get_result_string(ReactionResult result);
-
-bool button_is_pressed(ButtonType button);
 
 #endif

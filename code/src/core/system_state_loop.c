@@ -1,8 +1,8 @@
 #include "constants.h"
 #include "data_structs.h"
+#include "data_helpers.h"
 #include "imodel_structs.h"
 
-#include "sd_drv.h"
 #include "test_manager.h"
 
 #include "button_ctrl.h"
@@ -14,11 +14,43 @@
 #include "sd_ctrl.h"
 #include <stdbool.h>
 
+// ####################################
+// HELPERS
+// ####################################
+
+static void move_to_idle() {
+    gIdleMenuIM.needs_redraw = true;
+    gSystemState = IDLE;
+}
+
+static void move_to_heating() {
+    gHeatingMenuIM.needs_redraw = true;
+    gSystemState = HEATING;
+}
+
+static void move_to_reacting() {
+    gTestRunningIM.needs_redraw = true;
+    gSystemState = REACTING;
+}
+
+static void move_to_results() {
+    gResultsIM.needs_redraw = true;
+    gSystemState = RESULTS;
+}
+
+static void move_to_history() {
+    gHistoryIM.needs_redraw = true;
+    gSystemState = HISTORY;
+}
+
+// ####################################
+// MAIN LOOPS
+// ####################################
+
 void run_system_state_loop_core1() {
     display_ctrl_step();
 }
 
-// Main system state loop and update
 void run_system_state_loop_core0() {
     
     temp_sens_ctrl_step();
@@ -27,77 +59,61 @@ void run_system_state_loop_core0() {
 
     switch (gSystemState) {
         case BOOT:
-            gIdleMenuIM.needs_redraw = true;
-            gSystemState = IDLE;
+            move_to_idle();
             break;
 
         case IDLE:
 
-            // no inputs means stay in idle, keeping this for redraw limiting for now
             if (!gButtonInput.wasPressed) {
                 break;
             }
 
             gIdleMenuIM.needs_redraw = true;
 
-            if (button_is_pressed(UP)) {
-                gButtonInput.wasPressed = false;  // Reset flag
+            if (handle_button_press(UP)) {
                 gIdleMenuIM.selected_index = 0;   // Update selection
             }
             
-            if (button_is_pressed(DOWN)) {
-                gButtonInput.wasPressed = false;  // Reset flag
+            if (handle_button_press(DOWN)) {
                 gIdleMenuIM.selected_index = 1;   // Update selection
             }
             
-            if (button_is_pressed(SELECT)) {
-                gButtonInput.wasPressed = false;  // Reset flag
+            if (handle_button_press(SELECT)) {
 
-                if (gIdleMenuIM.selected_index == 0) { // Go to heating                    
-                    gHeatingMenuIM.needs_redraw = true;
-                    gSystemState = HEATING;
+                if (gIdleMenuIM.selected_index == 0) {             
+                    move_to_heating();
                 }
-                else if (gIdleMenuIM.selected_index == 1) { // go to history
-                    gHistoryIM.needs_redraw = true;
-                    populate_file_list("");  // populate results menu items
-                    gSystemState = HISTORY;
+                else if (gIdleMenuIM.selected_index == 1) {
+                    load_all_sd_filenames_into_global();
+                    move_to_history();
                 }
             }
-
-            // back does nothing in idle
 
             break;
 
         case HEATING:
 
-            if (button_is_pressed(BACK)) {  // back to idle
-                gButtonInput.wasPressed = false;        // Reset flag
-                gIdleMenuIM.needs_redraw = true;
-                gSystemState = IDLE;
+            if (handle_button_press(BACK)) {
+                move_to_idle();
             }
-
-            if (gTempStatus.target_reached) {           // target temp reached, start test
+            
+            // target temp reached, start test
+            if (gTempStatus.target_reached) {   
                 test_manager_start();
-                gTestRunningIM.needs_redraw = true;
-                gSystemState = REACTING;
+                move_to_reacting();
             }
 
             break;
 
         case REACTING:
 
-            // Back to idle
-            if (button_is_pressed(BACK)) {
-                gButtonInput.wasPressed = false;  // Reset flag
-                gIdleMenuIM.needs_redraw = true;
-                gSystemState = IDLE;
+            if (handle_button_press(BACK)) {
+                move_to_idle();
             }
 
-            // Reaction complete
             if (gTestStatus.completed) {
                 test_manager_stop();
-                gResultsIM.needs_redraw = true;
-                gSystemState = RESULTS;
+                move_to_results();
             }
 
             tube_sens_ctrl_step();
@@ -107,52 +123,45 @@ void run_system_state_loop_core0() {
             break;
 
         case RESULTS:
-            
-            // Select or Back to go to idle
-            if (button_is_pressed(BACK) || button_is_pressed(SELECT)) {
-                save_test_results_to_file("latest_test.json");
-                gButtonInput.wasPressed = false;  // Reset flag
-                gIdleMenuIM.needs_redraw = true;
-                gSystemState = IDLE;
+
+            if (handle_button_press(SELECT)) {
+                save_test_result_from_global_to_filename("latest_test.json");
+                move_to_idle();
+            }
+
+            if (handle_button_press(BACK)) {
+                save_test_result_from_global_to_filename("latest_test.json");
+                move_to_history();
             }
 
             break;
 
         case HISTORY:
         
-            // no inputs means stay in idle, keeping this for redraw limiting for now
             if (!gButtonInput.wasPressed) {
                 break;
             }
 
             gHistoryIM.needs_redraw = true;
 
-            if (button_is_pressed(UP)) {
-                gButtonInput.wasPressed = false;  // Reset flag
-                gHistoryIM.selected_index = gHistoryIM.selected_index - 1;   // Update selection
+            if (handle_button_press(UP)) {
+                gHistoryIM.selected_index = gHistoryIM.selected_index - 1; 
             }
             
-            if (button_is_pressed(DOWN)) {
-                gButtonInput.wasPressed = false;  // Reset flag
-                gHistoryIM.selected_index = gHistoryIM.selected_index + 1;   // Update selection
+            if (handle_button_press(DOWN)) {
+                gHistoryIM.selected_index = gHistoryIM.selected_index + 1;
             }
             
-            if (button_is_pressed(SELECT)) {
-                gButtonInput.wasPressed = false;  // Reset flag
+            if (handle_button_press(SELECT)) {
 
                 int idx = gHistoryIM.selected_index;
-                
-                // load results into testresults
-                load_test_from_filename(results_menu_items[idx]);
+                load_test_result_from_filename_into_global(results_menu_items[idx]);
 
-                gSystemState = RESULTS;
-
+                move_to_results();
             }
 
-            if (button_is_pressed(BACK)) {      // back to idle
-                gButtonInput.wasPressed = false;        // Reset flag
-                gIdleMenuIM.needs_redraw = true;
-                gSystemState = IDLE;
+            if (handle_button_press(BACK)) {
+                move_to_idle();
             }
 
             

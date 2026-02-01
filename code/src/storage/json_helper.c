@@ -4,24 +4,10 @@
 #include <stdio.h>
 
 #include "data_structs.h"
+#include "data_helpers.h"
 #include "constants.h"
 #include <string.h>
 #include <stdlib.h>
-
-// Helper to map string results back to enums
-static ReactionResult string_to_result(const char* str) {
-    if (strcmp(str, "POSITIVE") == 0) return POSITIVE;
-    if (strcmp(str, "NEGATIVE") == 0) return NEGATIVE;
-    return INVALID_RESULT;
-}
-
-// Helper to map string states back to enums
-static TubeState string_to_state(const char* str) {
-    if (strcmp(str, "EMPTY") == 0) return EMPTY;
-    if (strcmp(str, "RUNNING") == 0) return RUNNING;
-    if (strcmp(str, "COMPLETED") == 0) return COMPLETED;
-    return ERROR;
-}
 
 void read_json_string(char *string) {
     if (!string) return;

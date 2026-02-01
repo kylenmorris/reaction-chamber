@@ -1,5 +1,6 @@
 #include "screens_interface.h"
 #include "data_structs.h"
+#include "data_helpers.h"
 #include "imodel_structs.h"
 #include <stdio.h>
 
@@ -143,8 +144,13 @@ void draw_results_history() {
     printf("           RESULTS HISTORY MENU         \n");
     printf("========================================\n\n");
 
-    // Placeholder for history display
-    printf("No history available.\n");
+    for (int i = 0; i < MAX_FILES; i++) {
+        if (i == gHistoryIM.selected_index) {
+            printf(" > %s\n", results_menu_items[i]);
+        } else {
+            printf("   %s\n", results_menu_items[i]);
+        }
+    }
 
     printf("\n----------------------------------------\n");
     printf("SELECT: Return to Idle Menu\n");

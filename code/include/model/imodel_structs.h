@@ -1,6 +1,7 @@
 #ifndef IMODEL_STRUCTS_H
 #define IMODEL_STRUCTS_H
 
+#include "constants.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -65,8 +66,11 @@ extern resultsIM gResultsIM;
 typedef struct {
     bool needs_redraw;
     uint32_t last_redraw;
+    int selected_index;
 } historyIM;
 
 extern historyIM gHistoryIM;
+
+extern char results_menu_items[MAX_FILES][MAX_NAME_LEN];
 
 #endif

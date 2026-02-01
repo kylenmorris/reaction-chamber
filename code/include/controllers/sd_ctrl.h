@@ -1,10 +1,12 @@
 #ifndef SD_CTRL_H
 #define SD_CTRL_H
 
-void save_test_results_to_file(char* filename);
+// These are verbose and I like it that way. SD logic is a bit messy
 
-void load_all_filenames(void);
+void save_test_result_from_global_to_filename(char* filename);
 
-void load_test_from_filename(char* filename);
+void load_all_sd_filenames_into_global(void);
+
+void load_test_result_from_filename_into_global(char* filename);
 
 #endif

@@ -5,6 +5,7 @@
 #include "drivers.h"
 #include <stdio.h>
 
+// Reads from gSystemState and gTempStatus to control the heater
 void heater_ctrl_step(void) {
 
     bool sys_state_invalid = !(gSystemState == HEATING || gSystemState == REACTING);
@@ -18,7 +19,7 @@ void heater_ctrl_step(void) {
     }
 
     // If the heater is on, let it rise to 0.3 above desired. If it's off,
-    // let it fall to 0.3 below. This prevents rapid switching of heater
+    // let it fall to 0.3 below. This prevents rapid switching of the heater
     if (gHeaterState.heaterOn && (gTempStatus.chamber_temp > (TEMP_DESIRED_C + 0.3))) {
         hw_heater_toggle(false);
         gHeaterState.heaterOn = false;

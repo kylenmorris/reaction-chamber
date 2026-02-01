@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <hardware/gpio.h>
 #include <hardware/spi.h>
+#include "ff.h"
 #include "glcd.h"
 
 #ifdef CYW43_WL_GPIO_LED_PIN
@@ -50,14 +51,13 @@ void board_setup(void) {
         gpio_set_function(SPI1_MISO_PIN, GPIO_FUNC_SPI);
         gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SPI);
 
-        spi_set_format(SPI_INSTANCE_SW, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
-
         // Buttons
         for (int i = 0; i < NUM_BUTTONS; i++) {
             init_gpio_as_button(BUTTON_PINS[i]);
         }
 
         // Heater
+        
 
         // Display
         gpio_init(SPI0_CSn_DISPLAY_PIN);
@@ -84,12 +84,13 @@ void board_setup(void) {
         // gpio_put(SPI1_CS0_PIN, HIGH); // Deselect
         // We don't init the pin as a spi pin so we can easily control multiple spi devices... according to chat
 
+        // Debug pin
         gpio_init(PROBE_PIN);
         gpio_set_dir(PROBE_PIN, GPIO_IN);
 
-
         // Libraries
         glcd_init();
+
 
     #else
 

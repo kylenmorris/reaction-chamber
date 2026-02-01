@@ -60,6 +60,9 @@
 #define NUM_BUTTONS 5
 #define REDRAW_INTERVAL_MS 500
 
+#define MAX_FILES 10
+#define MAX_NAME_LEN 21  // Adjust based on your screen width
+
 // ####################################
 // OPTICAL CONSTANTS
 // ####################################
@@ -67,7 +70,7 @@
 #define OPTICAL_REACTION_THRESHOLD 5000         // unsure of units
 
 // ####################################
-// PIN DEFINITIONS
+// BUTTON DEFINITIONS
 // ####################################
 
 #define BACK_BUTTON_GPIO_PIN 28 
@@ -83,6 +86,10 @@ static const int BUTTON_PINS[] = {
     BACK_BUTTON_GPIO_PIN,
     DEBUG_BUTTON_GPIO_PIN
 };
+
+// ####################################
+// SPI DEFINITIONS
+// ####################################
 
 #define SPI0_SCK_PIN 18
 #define SPI0_MOSI_PIN 19
@@ -101,8 +108,8 @@ static const int BUTTON_PINS[] = {
 // #define SPI1_CSn_ADC0_PIN 0
 // #define SPI1_CSn_ADC1_PIN 0
 
-#define DISPLAY_DC_A0_PIN 20   // A0 Data/Command pin - LOW=command, HIGH=data
-#define DISPLAY_RST_PIN  21      // Reset pin - LOW=reset, HIGH=normal operation
+#define DISPLAY_DC_A0_PIN 20    // A0 Data/Command pin - LOW=command, HIGH=data
+#define DISPLAY_RST_PIN  21     // Reset pin - LOW=reset, HIGH=normal operation
 
 // #define HEATER_PIN 0
 

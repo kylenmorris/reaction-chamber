@@ -47,7 +47,6 @@ typedef struct {
 
 extern SystemControl gSysControl;
 
-
 // Per tube info
 // Written only by test_manager.c
 typedef struct {
@@ -75,12 +74,6 @@ typedef struct {
 } TestStatus;
 
 extern TestStatus gTestStatus;
-
-typedef struct {
-    TubeReaction tubes[NUM_TUBES];
-} TestResult;
-
-extern TestResult gTestResult;
 
 // System states for main loop
 // Written only by system_state_loop.c

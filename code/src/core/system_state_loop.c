@@ -2,6 +2,7 @@
 #include "data_structs.h"
 #include "imodel_structs.h"
 
+#include "sd_drv.h"
 #include "test_manager.h"
 
 #include "button_ctrl.h"
@@ -14,7 +15,6 @@
 #include <stdbool.h>
 
 void run_system_state_loop_core1() {
-    button_ctrl_step(); 
     display_ctrl_step();
 }
 
@@ -23,6 +23,7 @@ void run_system_state_loop_core0() {
     
     temp_sens_ctrl_step();
     heater_ctrl_step();
+    button_ctrl_step(); 
 
     switch (gSystemState) {
         case BOOT:
@@ -58,6 +59,7 @@ void run_system_state_loop_core0() {
                 }
                 else if (gIdleMenuIM.selected_index == 1) { // go to history
                     gHistoryIM.needs_redraw = true;
+                    populate_file_list("");  // populate results menu items
                     gSystemState = HISTORY;
                 }
             }
@@ -108,6 +110,7 @@ void run_system_state_loop_core0() {
             
             // Select or Back to go to idle
             if (button_is_pressed(BACK) || button_is_pressed(SELECT)) {
+                save_test_results_to_file("latest_test.json");
                 gButtonInput.wasPressed = false;  // Reset flag
                 gIdleMenuIM.needs_redraw = true;
                 gSystemState = IDLE;
@@ -116,9 +119,44 @@ void run_system_state_loop_core0() {
             break;
 
         case HISTORY:
-            save_test_results_to_file("test.json");
-            load_test_from_filename("test.json");
-            gSystemState = IDLE;
+        
+            // no inputs means stay in idle, keeping this for redraw limiting for now
+            if (!gButtonInput.wasPressed) {
+                break;
+            }
+
+            gHistoryIM.needs_redraw = true;
+
+            if (button_is_pressed(UP)) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                gHistoryIM.selected_index = gHistoryIM.selected_index - 1;   // Update selection
+            }
+            
+            if (button_is_pressed(DOWN)) {
+                gButtonInput.wasPressed = false;  // Reset flag
+                gHistoryIM.selected_index = gHistoryIM.selected_index + 1;   // Update selection
+            }
+            
+            if (button_is_pressed(SELECT)) {
+                gButtonInput.wasPressed = false;  // Reset flag
+
+                int idx = gHistoryIM.selected_index;
+                
+                // load results into testresults
+                load_test_from_filename(results_menu_items[idx]);
+
+                gSystemState = RESULTS;
+
+            }
+
+            if (button_is_pressed(BACK)) {      // back to idle
+                gButtonInput.wasPressed = false;        // Reset flag
+                gIdleMenuIM.needs_redraw = true;
+                gSystemState = IDLE;
+            }
+
+            
+
     }
 
 }

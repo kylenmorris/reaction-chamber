@@ -5,9 +5,76 @@
 
 #include "data_structs.h"
 #include "constants.h"
+#include <string.h>
+#include <stdlib.h>
+
+// Helper to map string results back to enums
+static ReactionResult string_to_result(const char* str) {
+    if (strcmp(str, "POSITIVE") == 0) return POSITIVE;
+    if (strcmp(str, "NEGATIVE") == 0) return NEGATIVE;
+    return INVALID_RESULT;
+}
+
+// Helper to map string states back to enums
+static TubeState string_to_state(const char* str) {
+    if (strcmp(str, "EMPTY") == 0) return EMPTY;
+    if (strcmp(str, "RUNNING") == 0) return RUNNING;
+    if (strcmp(str, "COMPLETED") == 0) return COMPLETED;
+    return ERROR;
+}
 
 void read_json_string(char *string) {
+    if (!string) return;
 
+    cJSON *root = cJSON_Parse(string);
+    if (!root) {
+        printf("JSON Parse Error: %s\n", cJSON_GetErrorPtr());
+        return;
+    }
+
+    // 1. Parse Metadata
+    cJSON *meta = cJSON_GetObjectItemCaseSensitive(root, "test_metadata");
+    if (meta) {
+        gTestStatus.reaction_total_time = cJSON_GetObjectItem(meta, "total_duration_sec")->valuedouble;
+        gTestStatus.test_invalid = cJSON_IsTrue(cJSON_GetObjectItem(meta, "test_invalid"));
+        
+        cJSON *status = cJSON_GetObjectItem(meta, "final_gTestStatus");
+        if (status && status->valuestring) {
+            gTestStatus.completed = (strcmp(status->valuestring, "COMPLETED") == 0);
+        }
+    }
+
+    // 2. Parse Results Array
+    cJSON *results = cJSON_GetObjectItemCaseSensitive(root, "results");
+    cJSON *tube_node = NULL;
+    int i = 0;
+
+    cJSON_ArrayForEach(tube_node, results) {
+        if (i >= NUM_TUBES) break;
+
+        // Extract values using helper macros or standard checks
+        cJSON *id = cJSON_GetObjectItem(tube_node, "tube_id");
+        cJSON *state_str = cJSON_GetObjectItem(tube_node, "state");
+        cJSON *result_str = cJSON_GetObjectItem(tube_node, "result");
+        cJSON *ctrl_str = cJSON_GetObjectItem(tube_node, "is_control");
+        cJSON *ct = cJSON_GetObjectItem(tube_node, "ct_time_sec");
+        cJSON *pos_det = cJSON_GetObjectItem(tube_node, "was_positive_detected");
+
+        if (state_str) gTestStatus.tubes[i].state = string_to_state(state_str->valuestring);
+        if (result_str) gTestStatus.tubes[i].result = string_to_result(result_str->valuestring);
+        
+        if (ctrl_str) {
+            gTestStatus.tubes[i].is_positive_control = (strcmp(ctrl_str->valuestring, "POSITIVE_CONTROL") == 0);
+            gTestStatus.tubes[i].is_negative_control = (strcmp(ctrl_str->valuestring, "NEGATIVE_CONTROL") == 0);
+        }
+
+        if (ct) gTestStatus.tubes[i].ct_time = ct->valuedouble;
+        if (pos_det) gTestStatus.tubes[i].positive_detected = cJSON_IsTrue(pos_det);
+
+        i++;
+    }
+
+    cJSON_Delete(root);
 }
 
 char* serialize_test_results() {

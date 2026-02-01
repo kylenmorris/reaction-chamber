@@ -129,16 +129,24 @@ void draw_results_history(void) {
     /* Draw top border line */
     glcd_draw_line(0, 8, 128, 8, BLACK);
     
-    /* Title: "RESULTS HISTORY MENU" */
-    glcd_draw_string_xy(10, 0, "RESULTS HISTORY MENU");
-    
     /* Draw line below title */
     glcd_draw_line(0, 25, 128, 25, BLACK);
     
     /* Placeholder for history display */
     glcd_tiny_draw_string(0, 0, "RESULTS HISTORY");
-    glcd_tiny_draw_string(0, 3, "No history available.");
-    
+
+    for (int i = 0; i < 4; i++) {
+        int y = 2 + i;
+        
+        /* Draw selection indicator (arrow) */
+        if (i == gHistoryIM.selected_index) {
+            glcd_tiny_draw_string(5, y, ">");
+        }
+        
+        /* Draw menu item text */
+        glcd_tiny_draw_string(15, y, results_menu_items[i]);
+    }
+
     /* Draw bottom instruction bar */
     glcd_tiny_draw_string(0, 7, "SELECT: Return to Idle");
     

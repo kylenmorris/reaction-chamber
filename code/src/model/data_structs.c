@@ -42,7 +42,10 @@ TempStatus gTempStatus = {
 };
 
 SimParams gSimParams = {
-
+    .ambient_temp = 0.0f,
+    .heat_rate = 0.1f,
+    .cool_rate = 0.1f,
+    .force_temp_sensor_fault = false
 };
 
 uint16_t gSimTime = 10;

@@ -177,6 +177,7 @@ if (NOT BUILD_TESTS)
     )
     target_link_libraries(drivers_hw PUBLIC 
         glcd
+        sd_card
         pico_stdlib 
         hardware_spi
         pico_cyw43_arch_none

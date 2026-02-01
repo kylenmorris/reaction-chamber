@@ -54,6 +54,7 @@ endif()
 
 add_library(model
     src/model/data_structs.c
+    src/model/data_helpers.c
     src/model/imodel_structs.c
 )
 target_include_directories(model PUBLIC
@@ -177,6 +178,7 @@ if (NOT BUILD_TESTS)
     )
     target_link_libraries(drivers_hw PUBLIC 
         glcd
+        sd_card
         pico_stdlib 
         hardware_spi
         pico_cyw43_arch_none

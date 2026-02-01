@@ -29,31 +29,28 @@ void display_ctrl_step() {
 
     switch (gSystemState) {
         case IDLE:
-            if (gIdleMenuIM.needs_redraw) {
-                draw_idle_screen();
-                gIdleMenuIM.needs_redraw = false;
-            }
+            redraw_if_needed(now_ms, &gIdleMenuIM.needs_redraw, 
+                    &gIdleMenuIM.last_redraw, draw_idle_screen);
             break;
 
         case HEATING:
             redraw_if_needed(now_ms, &gHeatingMenuIM.needs_redraw, 
-                            &gHeatingMenuIM.last_redraw, draw_heating_screen);
+                    &gHeatingMenuIM.last_redraw, draw_heating_screen);
             break;
 
         case REACTING:
             redraw_if_needed(now_ms, &gTestRunningIM.needs_redraw, 
-                            &gTestRunningIM.last_redraw, draw_test_running_screen);
+                    &gTestRunningIM.last_redraw, draw_test_running_screen);
             break;
 
         case RESULTS:
-            if (gResultsIM.needs_redraw) {
-                draw_results_screen();
-                gResultsIM.needs_redraw = false;
-            }
+            redraw_if_needed(now_ms, &gResultsIM.needs_redraw, 
+                    &gResultsIM.last_redraw, draw_results_screen);
             break;
 
         case HISTORY:
-            draw_loading_screen();
+            redraw_if_needed(now_ms, &gHistoryIM.needs_redraw, 
+                    &gHistoryIM.last_redraw, draw_results_history);
             break;
             
         case BOOT:

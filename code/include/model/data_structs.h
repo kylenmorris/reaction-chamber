@@ -47,7 +47,6 @@ typedef struct {
 
 extern SystemControl gSysControl;
 
-
 // Per tube info
 // Written only by test_manager.c
 typedef struct {
@@ -75,12 +74,6 @@ typedef struct {
 } TestStatus;
 
 extern TestStatus gTestStatus;
-
-typedef struct {
-    TubeReaction tubes[NUM_TUBES];
-} TestResult;
-
-extern TestResult gTestResult;
 
 // System states for main loop
 // Written only by system_state_loop.c
@@ -148,12 +141,5 @@ typedef struct {
 extern SimParams gSimParams;
 extern uint16_t gSimTime;
 
-void reset_sim_params(void);
-
-char* get_system_state_string(SystemState state);
-char* get_tube_state_string(TubeState state);
-char* get_result_string(ReactionResult result);
-
-bool button_is_pressed(ButtonType button);
 
 #endif

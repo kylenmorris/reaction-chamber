@@ -27,9 +27,7 @@ float hw_read_temperature_sensor(int sensor_id);
 uint16_t hw_adc_read_raw(int adc_index, int channel);
 
 // Returns a bitmask where bit 0 is Tube 1, bit 1 is Tube 2, etc.
-uint8_t hw_tube_sens_read_all(void);
-
-
+uint16_t hw_tube_sens_read_all(void);
 
 
 #endif

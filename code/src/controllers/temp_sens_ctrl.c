@@ -5,6 +5,7 @@
 #include "constants.h"
 #include "data_structs.h"
 
+// Read temp status into gTempStatus
 void temp_sens_ctrl_step(void) {
     gTempStatus.chamber_temp = hw_read_temperature_sensor(1);
     

@@ -19,10 +19,13 @@ testRunningIM gTestRunningIM = {
 
 resultsIM gResultsIM = {
     .needs_redraw = true,
-    .last_redraw = 0
+    .last_redraw = 0,
 };
+
+char results_menu_items[MAX_FILES][MAX_NAME_LEN];
 
 historyIM gHistoryIM = {
     .needs_redraw = true,
-    .last_redraw = 0
+    .last_redraw = 0,
+    .selected_index = 0
 };

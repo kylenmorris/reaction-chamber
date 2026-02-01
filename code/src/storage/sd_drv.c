@@ -2,11 +2,21 @@
 
 #include <stdio.h>
 #include "constants.h"
+#include "imodel_structs.h"
 
 #ifndef USE_HW_SD
 
     void save_to_file(char* filename, char* content) {
+         FILE *fptr;
 
+        // Open a file in writing mode
+        fptr = fopen(filename, "w");
+
+        // Write some text to the file
+        fprintf(fptr, "%s", content);
+
+        // Close the file
+        fclose(fptr); 
     }
 
     char *load_file(char *filename) {
@@ -33,19 +43,15 @@
     #include "ff.h"
 
     void save_to_file(char* filename, char* content) {
-
-        // See FatFs - Generic FAT Filesystem Module, "Application Interface",
-        // http://elm-chan.org/fsw/ff/00index_e.html
-
+        
         FATFS fs;
-        FRESULT fr = f_mount(&fs, "", 1);
-        if (FR_OK != fr) {
-            panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+        FRESULT fr = f_mount(&fs, "", 1); 
+        if (fr != FR_OK) {
+            printf("Mount failed: %d\n", fr);
         }
 
-        // Open a file and write to it 
         FIL fil;
-        fr = f_open(&fil, filename, FA_OPEN_APPEND | FA_WRITE);
+        fr = f_open(&fil, filename, FA_WRITE | FA_CREATE_ALWAYS);
         if (FR_OK != fr && FR_EXIST != fr) {
             panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
         }
@@ -58,19 +64,17 @@
         if (FR_OK != fr) {
             printf("f_close error: %s (%d)\n", FRESULT_str(fr), fr);
         }
-
-        printf("Wrote to %s...", filename);
         
         // Unmount the SD card
         f_unmount("");
     }
 
     char *load_file(char *filename) {
-        
+
         FATFS fs;
-        FRESULT fr = f_mount(&fs, "0:", 1);
-        if (FR_OK != fr) {
-            panic("f_mount error: %s (%d)\n", FRESULT_str(fr), fr);
+        FRESULT fr = f_mount(&fs, "", 1); 
+        if (fr != FR_OK) {
+            printf("Mount failed: %d\n", fr);
         }
 
         // Open a file and read from it
@@ -98,7 +102,47 @@
         // Unmount the SD card
         f_unmount("");
 
-        // return &raw_buffer;
+    }
+
+    void populate_file_list(const char* path) {
+        FRESULT res;
+        DIR dir;
+        static FILINFO fno;
+        FATFS fs;
+
+        int file_count = 0;
+
+        res = f_mount(&fs, "", 1); 
+        if (res != FR_OK) {
+            printf("Mount failed: %d\n", res);
+            return;
+        }
+
+        // 2. Open the path passed into the function (e.g., "/")
+        res = f_opendir(&dir, path); 
+        if (res != FR_OK) {
+            printf("Failed to open directory: %s (Error: %d)\n", path, res);
+            f_unmount(""); // Clean up
+            return;
+        }
+
+        memset(results_menu_items, 0, sizeof(results_menu_items));
+        
+        while (file_count < MAX_FILES) {
+            res = f_readdir(&dir, &fno);
+            if (res != FR_OK || fno.fname[0] == 0) break;
+
+            // Skip hidden files and the .sysinfo.txt file
+            if (!(fno.fattrib & (AM_DIR | AM_HID)) && (fno.fname[0] != '.')) {
+                // Copy name to array and null-terminate safely
+                strncpy(results_menu_items[file_count], fno.fname, MAX_NAME_LEN - 1);
+                results_menu_items[file_count][MAX_NAME_LEN - 1] = '\0';
+                file_count++;
+            }
+        }
+
+        f_closedir(&dir);
+
     }
 
 #endif

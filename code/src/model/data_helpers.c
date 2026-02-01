@@ -1,0 +1,82 @@
+#include "data_helpers.h"
+#include "data_structs.h"
+#include <stdint.h>
+#include <string.h>
+
+void reset_sim_params() {
+    gSimParams.ambient_temp = 0.0f;
+    gSimParams.heat_rate = 0.5f;
+    gSimParams.cool_rate = 0.3f;
+    gSimParams.force_temp_sensor_fault = false;
+}
+
+// Helper to map string results back to enums
+ReactionResult string_to_result(const char* str) {
+    if (strcmp(str, "POSITIVE") == 0) return POSITIVE;
+    if (strcmp(str, "NEGATIVE") == 0) return NEGATIVE;
+    return INVALID_RESULT;
+}
+
+// Helper to map string states back to enums
+TubeState string_to_state(const char* str) {
+    if (strcmp(str, "EMPTY") == 0) return EMPTY;
+    if (strcmp(str, "RUNNING") == 0) return RUNNING;
+    if (strcmp(str, "COMPLETED") == 0) return COMPLETED;
+    return ERROR;
+}
+
+char* get_system_state_string(SystemState state) {
+    switch (state) {
+        case IDLE:    return "IDLE";
+        case HEATING: return "HEATING";
+        case REACTING: return "REACTING";
+        case RESULTS:  return "RESULTS";
+        case HISTORY:  return "HISTORY";
+        case BOOT:     return "BOOT";
+        default:       return "UNKNOWN_STATE";
+    }
+}
+
+char* get_tube_state_string(TubeState state) {
+    switch (state) {
+        case EMPTY:
+            return "EMPTY";
+        case RUNNING:
+            return "RUN";
+        case COMPLETED:
+            return "FINISH";
+        case ERROR:
+            return "ERROR";
+        default:
+            return "__ERROR__";
+    }
+}
+
+char* get_result_string(ReactionResult result) {
+    switch (result) {
+        // case UNKNOWN:
+        //     return "UNKN";
+        case POSITIVE:
+            return "POS";
+        case NEGATIVE:
+            return "NEG";
+        case INVALID_RESULT:
+            return "INVALD";
+        default:
+            return "ERR";
+    }
+}
+
+// Check if a specific button was pressed
+bool button_is_pressed(ButtonType button) {
+    return gButtonInput.wasPressed && gButtonInput.lastPressed == button;
+}
+
+bool handle_button_press(ButtonType button) {
+    if (button_is_pressed(button)) {
+        gButtonInput.wasPressed = false;  // Reset flag
+        return true;
+    }
+    return false;
+}
+

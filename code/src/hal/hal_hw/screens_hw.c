@@ -3,6 +3,7 @@
 #include "screens_interface.h"
 
 #include "data_structs.h"
+#include "data_helpers.h"
 #include "imodel_structs.h"
 #include <stdio.h>
 
@@ -14,7 +15,7 @@ void draw_idle_screen(void) {
 
     glcd_clear();
     
-    glcd_tiny_draw_string(0, 0, "IDLE MENU");
+    glcd_tiny_draw_string(0, 0, "MAIN MENU");
     
     const int item_y_start = 1;
     const int item_spacing = 1;
@@ -32,7 +33,7 @@ void draw_idle_screen(void) {
     }
         
     /* Draw bottom instruction bar */
-    glcd_tiny_draw_string(0, 7, "UP/DOWN: Nav SEL: Sel");
+    glcd_tiny_draw_string(0, 7, "SEL: Select");
     
     /* Update the display with changes */
     glcd_write();
@@ -64,7 +65,7 @@ void draw_heating_screen(void) {
     glcd_tiny_draw_string(5, 4, bar_str);
     
     /* Draw bottom instruction bar */
-    glcd_tiny_draw_string(0, 7, "BACK: Cancel Heating");
+    glcd_tiny_draw_string(0, 7, "BACK: Cancel");
     
     glcd_write();
 }
@@ -73,7 +74,7 @@ void draw_test_running_screen(void) {
 
     glcd_clear();
 
-    glcd_draw_string_xy(0, 0, "TEST RUNNING");
+    glcd_draw_string_xy(0, 0, "TEST ACTIVE");
         
     /* Show test progress */
     char progress_str[64];
@@ -102,7 +103,7 @@ void draw_results_screen(void) {
 
     glcd_clear();
 
-    glcd_tiny_draw_string(0, 0, "RESULTS MENU");
+    glcd_tiny_draw_string(0, 0, "TEST RESULT");
     
     for (int i = 0; i < NUM_TUBES / 2; i++) {
         char result_str[64];
@@ -123,24 +124,22 @@ void draw_results_screen(void) {
 
 
 void draw_results_history(void) {
-    /* Clear the screen buffer */
+
     glcd_clear();
-    
-    /* Draw top border line */
-    glcd_draw_line(0, 8, 128, 8, BLACK);
-    
-    /* Title: "RESULTS HISTORY MENU" */
-    glcd_draw_string_xy(10, 0, "RESULTS HISTORY MENU");
-    
-    /* Draw line below title */
-    glcd_draw_line(0, 25, 128, 25, BLACK);
-    
-    /* Placeholder for history display */
+
     glcd_tiny_draw_string(0, 0, "RESULTS HISTORY");
-    glcd_tiny_draw_string(0, 3, "No history available.");
-    
-    /* Draw bottom instruction bar */
-    glcd_tiny_draw_string(0, 7, "SELECT: Return to Idle");
+
+    for (int i = 0; i < 4; i++) {
+        int y = 2 + i;
+        
+        if (i == gHistoryIM.selected_index) {
+            glcd_tiny_draw_string(5, y, ">");
+        }
+        
+        glcd_tiny_draw_string(15, y, results_menu_items[i]);
+    }
+
+    glcd_tiny_draw_string(0, 7, "SEL: View  BACK: Main");
     
     glcd_write();
 }
@@ -152,8 +151,5 @@ void draw_loading_screen(void) {
 
     glcd_write();
 }
-
-
-
 
 #endif

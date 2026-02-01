@@ -33,8 +33,10 @@ void tube_sens_ctrl_init(void) {
 // Detects the insertion of tubes and might do other stuff later
 void tube_sens_ctrl_step(void) {
 
-    printf("Reading tubes...: ");
     uint16_t tubes_binary = hw_tube_sens_read_all();
-    printf("Tubes raw: %d\n", tubes_binary);
+
+    for (int i = 0; i < NUM_TUBES; i++) {
+        gSysControl.tube_present[i] = ((tubes_binary >> i) & 1);
+    }
 
 }

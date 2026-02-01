@@ -27,7 +27,6 @@ void core1_entry() {
     }
 }
 
-// Most logic is in system_state_loop.c
 int main() {
 
     // Set up pins, SPI, I2C, etc
@@ -40,7 +39,7 @@ int main() {
     multicore_launch_core1(core1_entry);
 
     // Show the boot screen
-    sleep_ms(1000);
+    sleep_ms(500);
 
     while (true) {      
         // Run everything else on core 0

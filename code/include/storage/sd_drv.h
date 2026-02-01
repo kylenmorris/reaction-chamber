@@ -5,4 +5,6 @@ void save_to_file(char* filename, char* content);
 
 char* load_file(char* filename);
 
+void populate_file_list(const char* path);
+
 #endif

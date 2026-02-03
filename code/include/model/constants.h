@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 #include "compilation_variables.h"
+#include <stdint.h>
 
 // ####################################
 // SYSTEM DEFINITIONS
@@ -86,6 +87,15 @@ static const int BUTTON_PINS[] = {
     BACK_BUTTON_GPIO_PIN,
     DEBUG_BUTTON_GPIO_PIN
 };
+
+// ####################################
+// I2C DEFINITIONS
+// ####################################
+
+#define I2C_SDA_PIN 14
+#define I2C_SCL_PIN 15
+#define I2C_BAUDRATE 100 * 1000  // 100 kHz
+#define TEMP_SENSOR_0_I2C_ADDRESS 0x18
 
 // ####################################
 // SPI DEFINITIONS

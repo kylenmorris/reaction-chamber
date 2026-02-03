@@ -10,6 +10,7 @@ uint32_t get_current_time(void);
 // Read raw button state; returns 1 if pressed
 int hw_button_get_raw(int button_index);
 
+// Initialize SPI, I2C, libraries, etc
 void board_setup(void);
 
 // Turn the heater on or off

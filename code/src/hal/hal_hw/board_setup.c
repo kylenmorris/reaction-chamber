@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <hardware/gpio.h>
 #include <hardware/spi.h>
+#include <hardware/i2c.h>
+
 #include "ff.h"
 #include "glcd.h"
 
@@ -71,7 +73,11 @@ void board_setup(void) {
 
         
         // Temperature sensors
-
+        i2c_init(i2c1, I2C_BAUDRATE);
+        gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
+        gpio_set_function(I2C_SCL_PIN, GPIO_FUNC_I2C);
+        gpio_pull_up(I2C_SDA_PIN);
+        gpio_pull_up(I2C_SCL_PIN);
 
         // Tube switches
         gpio_init(SPI1_CS_SHIFT_SWITCHES_SR_PIN);

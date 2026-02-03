@@ -4,6 +4,7 @@
 #include <stdarg.h>
 
 #include "../include/model/data_structs.h"
+#include "../include/model/data_helpers.h"
 #include "../include/core/system_state_loop.h"
 #include "include/heater_tests.h"
 #include "include/state_tests.h"

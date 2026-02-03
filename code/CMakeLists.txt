@@ -181,6 +181,7 @@ if (NOT BUILD_TESTS)
         sd_card
         pico_stdlib 
         hardware_spi
+        hardware_i2c
         pico_cyw43_arch_none
         model
         cjson

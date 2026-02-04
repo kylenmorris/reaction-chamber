@@ -9985,7 +9985,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1cce9f23-3b27-472e-83da-97f38dde448d")
-		(property "Reference" "Heater_Actuation"
+		(property "Reference" "Heater_Actuation1"
 			(at 382.27 46.9899 0)
 			(effects
 				(font
@@ -10080,7 +10080,7 @@
 		(instances
 			(project ""
 				(path "/9e1b86fa-37cc-48d2-968d-4a7578d4873f"
-					(reference "Heater_Actuation")
+					(reference "Heater_Actuation1")
 					(unit 1)
 				)
 			)

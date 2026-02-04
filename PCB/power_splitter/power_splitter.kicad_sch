@@ -3564,6 +3564,28 @@
 			)
 		)
 	)
+	(global_label "heater_actuation_signal"
+		(shape input)
+		(at 199.39 73.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a49100ad-988e-4fb8-b44f-a8c70a0faeaf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 173.8476 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "5V_Line"
 		(shape input)
 		(at 30.48 113.03 180)
@@ -3733,7 +3755,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 45.72 88.9 0)
 			(effects
 				(font
@@ -4005,7 +4027,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_NV_B02P-NV_1x02_P5.00mm_Vertical"
+		(property "Footprint" "B02P_new:CONN_B02P-VL_JST"
 			(at 113.03 44.45 0)
 			(effects
 				(font
@@ -4332,6 +4354,73 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 195.58 133.35 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "334f5305-b3e2-4312-9376-49eb2fafc168")
+		(property "Reference" "#ground02"
+			(at 189.23 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 191.77 133.3499 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 195.58 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 195.58 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3bde2bd6-7496-46e2-afdb-03f0ca6471c1")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#ground02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "B02P_VL_2026-01-28_20-34-11:B02P_VL_CONNECTOR")
 		(at 205.74 113.03 0)
 		(unit 1)
@@ -4359,7 +4448,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_NV_B02P-NV_1x02_P5.00mm_Vertical"
+		(property "Footprint" "B02P_new:CONN_B02P-VL_JST"
 			(at 205.74 113.03 0)
 			(effects
 				(font
@@ -4432,7 +4521,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 73.66 88.9 0)
 			(effects
 				(font
@@ -4787,7 +4876,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 153.67 86.36 0)
 			(effects
 				(font
@@ -4830,73 +4919,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 195.58 133.35 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "57b21cf3-ee35-4d65-b7b0-3b6ef6243831")
-		(property "Reference" "#PWR014"
-			(at 189.23 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 191.77 133.3499 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 195.58 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 195.58 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 195.58 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "38064578-3437-434b-b7d1-cb4724eb99c3")
-		)
-		(instances
-			(project "power_splitter"
-				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
-					(reference "#PWR014")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 102.87 134.62 0)
 		(unit 1)
@@ -4925,7 +4947,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 102.87 134.62 0)
 			(effects
 				(font
@@ -5132,7 +5154,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 107.95 77.47 0)
 			(effects
 				(font
@@ -5203,7 +5225,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 125.73 85.09 0)
 			(effects
 				(font
@@ -5643,6 +5665,78 @@
 		)
 	)
 	(symbol
+		(lib_id "B02P_VL_2026-01-28_20-34-11:B02P_VL_CONNECTOR")
+		(at 199.39 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "953525a0-4fab-4c9f-af37-d055695edb71")
+		(property "Reference" "J5"
+			(at 213.36 73.6599 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "B02P-VL"
+			(at 213.36 76.1999 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_NV_B02P-NV_1x02_P5.00mm_Vertical"
+			(at 199.39 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "B02P-VL"
+			(at 199.39 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 199.39 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "05becc9c-e434-4026-a680-a0b786a1467f")
+		)
+		(pin "1"
+			(uuid "750de88f-6ccf-4ad2-a8ae-05c9acea391d")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_Small")
 		(at 134.62 92.71 0)
 		(unit 1)
@@ -5740,7 +5834,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 130.81 135.89 0)
 			(effects
 				(font
@@ -5878,7 +5972,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 148.59 86.36 0)
 			(effects
 				(font
@@ -5949,7 +6043,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 50.8 52.07 0)
 			(effects
 				(font
@@ -6218,7 +6312,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 50.8 138.43 0)
 			(effects
 				(font
@@ -6288,7 +6382,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_NV_B02P-NV_1x02_P5.00mm_Vertical"
+		(property "Footprint" "B02P_new:CONN_B02P-VL_JST"
 			(at 205.74 130.81 0)
 			(effects
 				(font
@@ -6327,6 +6421,73 @@
 			(project "power_splitter"
 				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
 					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 199.39 76.2 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bce3599d-3bb9-410b-a8da-171771d6d3d4")
+		(property "Reference" "#ground01"
+			(at 193.04 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 195.58 76.1999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 199.39 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 199.39 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "eda8e731-3938-4688-a2fd-b6111baaf256")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#ground01")
 					(unit 1)
 				)
 			)
@@ -6424,7 +6585,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 85.09 127 0)
 			(effects
 				(font
@@ -6494,7 +6655,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 125.73 135.89 0)
 			(effects
 				(font
@@ -6861,6 +7022,72 @@
 			(project ""
 				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
 					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 33.02 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e2e1924b-a9ee-4e89-8018-4768dc171ff9")
+		(property "Reference" "#PWR014"
+			(at 33.02 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 33.02 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 33.02 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ed787d03-57ad-4a1d-a0b5-2de8bc6b7464")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)

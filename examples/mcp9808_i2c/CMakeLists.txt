@@ -23,7 +23,7 @@ if (EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
 # ====================================================================================
-set(PICO_BOARD pico2 CACHE STRING "Board type")
+set(PICO_BOARD pico CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -46,3 +46,7 @@ target_link_libraries(mcp9808_i2c pico_stdlib hardware_i2c)
 pico_add_extra_outputs(mcp9808_i2c)
 
 # add url via pico_set_program_url
+
+# Enable USB serial output (which means disabling UART output)
+pico_enable_stdio_usb(mcp9808_i2c 1)
+pico_enable_stdio_uart(mcp9808_i2c 0)

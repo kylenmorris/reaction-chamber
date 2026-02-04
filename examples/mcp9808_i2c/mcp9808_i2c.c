@@ -35,6 +35,12 @@ const uint8_t REG_TEMP_CRIT = 0x04;
 const uint8_t REG_TEMP_AMB = 0x05;
 const uint8_t REG_RESOLUTION = 0x08;
 
+const uint ALERT_PIN = 2;
+volatile bool alert_triggered = false;
+
+void gpio_callback(uint gpio, uint32_t events) {
+    alert_triggered = true;
+}
 
 void mcp9808_check_limits(uint8_t upper_byte) {
 
@@ -69,15 +75,16 @@ float mcp9808_convert_temp(uint8_t upper_byte, uint8_t lower_byte) {
 #ifdef i2c_default
 void mcp9808_set_limits() {
 
-    //Set an upper limit of 30°C for the temperature
+    // Set Upper Limit to 30.5°C (This acts as our trigger threshold)
+    // Calculation: 30.5 = 16 + 14.5. MSB=0x01 (16), LSB=0xE8 (14.5 * 16 = 232)
     uint8_t upper_temp_msb = 0x01;
-    uint8_t upper_temp_lsb = 0xE0;
+    uint8_t upper_temp_lsb = 0xE8;
 
-    //Set a lower limit of 20°C for the temperature
-    uint8_t lower_temp_msb = 0x01;
-    uint8_t lower_temp_lsb = 0x40;
+    // Set Lower Limit to 0°C to prevent interrupts on the low side
+    uint8_t lower_temp_msb = 0x00;
+    uint8_t lower_temp_lsb = 0x00;
 
-    //Set a critical limit of 40°C for the temperature
+    // Set Critical Limit to 40°C (Safe high limit, unused for interrupt)
     uint8_t crit_temp_msb = 0x02;
     uint8_t crit_temp_lsb = 0x80;
 
@@ -95,6 +102,14 @@ void mcp9808_set_limits() {
     buf[0] = REG_TEMP_CRIT;
     buf[1] = crit_temp_msb;
     buf[2] = crit_temp_lsb;;
+    i2c_write_blocking(i2c_default, ADDRESS, buf, 3, false);
+
+    // Config Register:
+    // MSB (buf[1]): 0x02 -> Sets Hysteresis to +1.5°C (Bits 10-9 = 01)
+    // LSB (buf[2]): 0x29 -> Int Clear (Bit 5), Alert Enable (Bit 3), Int Mode (Bit 0)
+    buf[0] = REG_CONFIG;
+    buf[1] = 0x02;
+    buf[2] = 0x29;
     i2c_write_blocking(i2c_default, ADDRESS, buf, 3, false);
 }
 #endif
@@ -118,15 +133,41 @@ int main() {
     // Make the I2C pins available to picotool
     bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
 
+    gpio_init(ALERT_PIN);
+    gpio_set_dir(ALERT_PIN, GPIO_IN);
+    gpio_pull_up(ALERT_PIN);
+    gpio_set_irq_enabled_with_callback(ALERT_PIN, GPIO_IRQ_EDGE_FALL, true, &gpio_callback);
+
     mcp9808_set_limits();
 
-    uint8_t buf[2];
+    uint8_t buf[3];
     uint16_t upper_byte;
     uint16_t lower_byte;
 
     float temperature;
 
     while (1) {
+        if (alert_triggered) {
+            // Read the temperature register to check the status flags
+            i2c_write_blocking(i2c_default, ADDRESS, &REG_TEMP_AMB, 1, true);
+            i2c_read_blocking(i2c_default, ADDRESS, buf, 2, false);
+
+            // Check Upper Limit Flag (Bit 6 of MSB). Only print if we are actually above the limit.
+            if ((buf[0] & 0x40) == 0x40) {
+                printf("Alert Pin Interrupt Fired! Temperature exceeded upper limit.\n");
+            } else {
+                printf("Alert Pin Interrupt Fired! Temperature has lowered to a safe amount.\n");
+            }
+
+            // Clear MCP9808 interrupt by writing 1 to Bit 5 of Config Register
+            // Must preserve Hysteresis in MSB (0x02) and Config in LSB (0x29)
+            buf[0] = REG_CONFIG;
+            buf[1] = 0x02;
+            buf[2] = 0x29;
+            i2c_write_blocking(i2c_default, ADDRESS, buf, 3, false);
+            alert_triggered = false;
+        }
+
         // Start reading ambient temperature register for 2 bytes
         i2c_write_blocking(i2c_default, ADDRESS, &REG_TEMP_AMB, 1, true);
         i2c_read_blocking(i2c_default, ADDRESS, buf, 2, false);

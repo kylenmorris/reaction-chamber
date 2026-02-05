@@ -34,7 +34,6 @@ typedef enum {
     INVALID_RESULT 
 } ReactionResult;
 
-
 // ####################################
 // STRUCTS
 // ####################################
@@ -140,6 +139,60 @@ typedef struct {
 
 extern SimParams gSimParams;
 extern uint16_t gSimTime;
+
+extern bool filenames_need_update;
+
+#define PROGRESS_BAR_WIDTH 16
+#define IDLE_MENU_ITEM_COUNT 2 // might be excessive to define this
+
+// ####################################
+// IMODEL STRUCTS
+// ####################################
+
+static char *idle_menu_items[] = {
+    "Start Test",
+    "View History"
+};
+
+typedef struct {
+    int selected_index;
+    uint32_t last_redraw;
+    bool needs_redraw;
+} idleMenuIM;
+
+extern idleMenuIM gIdleMenuIM;
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+    int spinner_frame;
+} heatingMenuIM;
+
+extern heatingMenuIM gHeatingMenuIM;
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+} testRunningIM;
+
+extern testRunningIM gTestRunningIM;
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+} resultsIM;
+
+extern resultsIM gResultsIM;
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+    int selected_index;
+} historyIM;
+
+extern historyIM gHistoryIM;
+
+extern char results_menu_items[MAX_FILES][MAX_NAME_LEN];
 
 
 #endif

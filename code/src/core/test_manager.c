@@ -8,36 +8,47 @@
 static uint32_t temp_low_start = 0;
 static uint32_t temp_extreme_start = 0;
 
-void test_manager_init(void) {
-    // Initialize test manager here
-}
-
-
 void test_manager_start(void) {
-    gTestStatus.reaction_active = true;
+
+    for (int i = 0; i < NUM_TUBES; i++) {
+        gTestStatus.tubes[i].state = EMPTY;
+        gTestStatus.tubes[i].result = UNKNOWN;
+        gTestStatus.tubes[i].start_time = 0;
+        gTestStatus.tubes[i].last_update = 0;
+        gTestStatus.tubes[i].is_positive_control = false;
+        gTestStatus.tubes[i].is_negative_control = false;
+        gTestStatus.tubes[i].positive_detected = false;
+        gTestStatus.tubes[i].ct_time = 0;
+    }
+    
+    temp_low_start = 0;
+    temp_extreme_start = 0;
 
     gTestStatus.reaction_start_time = get_current_time();
+    gTestStatus.reaction_active = true;
     gTestStatus.test_invalid = false;
     gTestStatus.completed = false;
 
-    temp_low_start = 0;
-    temp_extreme_start = 0;
 }
 
-void test_manager_determine_results(void) {
+static void determine_results(void) {
     
+    gTestStatus.test_invalid = false;
+
     for (int i = 0; i < NUM_TUBES; i++) {
 
-        // // positive and negative control checks
-        // if (gTestStatus.tubes[i].is_positive_control 
-        //     && !gTestStatus.tubes[i].positive_detected) {
-        //     gTestStatus.test_invalid = true;
-        // }
+        // positive and negative control checks
+        if (gTestStatus.tubes[i].is_positive_control 
+            && gTestStatus.tubes[i].state == COMPLETED
+            && gTestStatus.tubes[i].positive_detected) {
+            bool positive_control_passed = true;
+        }
 
-        // if (gTestStatus.tubes[i].is_negative_control 
-        //     && gTestStatus.tubes[i].positive_detected) {
-        //     gTestStatus.test_invalid = true;
-        // }
+        if (gTestStatus.tubes[i].is_negative_control
+            && gTestStatus.tubes[i].state == COMPLETED 
+            && !gTestStatus.tubes[i].positive_detected) {
+            bool negative_control_passed = true;
+        }
 
     }
 
@@ -55,7 +66,7 @@ void test_manager_determine_results(void) {
 }
 
 void test_manager_stop(void) {
-    test_manager_determine_results();
+    determine_results();
 }
 
 

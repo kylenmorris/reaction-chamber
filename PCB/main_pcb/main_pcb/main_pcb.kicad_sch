@@ -6098,6 +6098,28 @@
 			)
 		)
 	)
+	(global_label "DISP REGSEL"
+		(shape input)
+		(at 330.2 54.61 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "119dc9f1-228a-40d5-a74f-52b05072087e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 345.5827 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "BTN1"
 		(shape input)
 		(at 312.42 87.63 180)
@@ -6208,28 +6230,6 @@
 			)
 		)
 	)
-	(global_label "DISP_RST"
-		(shape input)
-		(at 330.2 54.61 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "212d3d43-8fc2-402e-ac0b-3d929620cb62")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 341.9542 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "PHOTO9_OUT"
 		(shape input)
 		(at 275.59 200.66 0)
@@ -6243,28 +6243,6 @@
 		(uuid "2240a006-333c-4ccc-9aca-3ee8fa6ea7a3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 290.61 200.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DISP REGSEL"
-		(shape input)
-		(at 330.2 52.07 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "2bfad974-f889-4af2-a665-b1eee319de11")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 345.5827 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6848,22 +6826,22 @@
 	)
 	(global_label "DISP_RST"
 		(shape input)
-		(at 312.42 115.57 180)
+		(at 330.2 52.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "664bddf7-0dd4-41f6-be8c-aef61cefb90d")
+		(uuid "5d5a474c-9bcf-481b-88d0-722262d068cf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 300.6658 115.57 0)
+			(at 341.9542 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -7651,6 +7629,28 @@
 		(uuid "9f48331b-2060-4b74-8009-0a7c0509b995")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 166.832 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "DISP REGSEL"
+		(shape input)
+		(at 312.42 115.57 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9fe93e80-6be0-49ad-818a-68951d7ab473")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 297.0373 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8584,6 +8584,28 @@
 			)
 		)
 	)
+	(global_label "DISP_RST"
+		(shape input)
+		(at 312.42 118.11 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ef55fe0f-28c2-4d8d-8aae-96bb89a7f299")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 300.6658 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SPI0_CSn"
 		(shape input)
 		(at 330.2 64.77 0)
@@ -8668,28 +8690,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DISP REGSEL"
-		(shape input)
-		(at 312.42 118.11 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f551f421-4fea-4389-832a-13a9bbac7c76")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 297.0373 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -9057,7 +9057,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 187.96 162.56 0)
 			(effects
 				(font
@@ -9261,7 +9261,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 160.02 132.08 0)
 			(effects
 				(font
@@ -9452,7 +9452,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 160.02 157.48 0)
 			(effects
 				(font
@@ -9985,7 +9985,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1cce9f23-3b27-472e-83da-97f38dde448d")
-		(property "Reference" "Heater_Actuation"
+		(property "Reference" "Heater_Actuation1"
 			(at 382.27 46.9899 0)
 			(effects
 				(font
@@ -10080,7 +10080,7 @@
 		(instances
 			(project ""
 				(path "/9e1b86fa-37cc-48d2-968d-4a7578d4873f"
-					(reference "Heater_Actuation")
+					(reference "Heater_Actuation1")
 					(unit 1)
 				)
 			)
@@ -10314,7 +10314,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 96.52 132.08 0)
 			(effects
 				(font
@@ -10439,7 +10439,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 187.96 213.36 0)
 			(effects
 				(font
@@ -10643,7 +10643,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 160.02 106.68 0)
 			(effects
 				(font
@@ -13041,7 +13041,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 96.52 157.48 0)
 			(effects
 				(font
@@ -13361,7 +13361,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 187.96 111.76 0)
 			(effects
 				(font
@@ -13498,7 +13498,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 160.02 208.28 0)
 			(effects
 				(font
@@ -15069,7 +15069,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 124.46 187.96 0)
 			(effects
 				(font
@@ -15243,7 +15243,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 124.46 162.56 0)
 			(effects
 				(font
@@ -15758,7 +15758,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 187.96 187.96 0)
 			(effects
 				(font
@@ -16279,7 +16279,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 96.52 208.28 0)
 			(effects
 				(font
@@ -16404,7 +16404,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 124.46 111.76 0)
 			(effects
 				(font
@@ -16671,7 +16671,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 187.96 137.16 0)
 			(effects
 				(font
@@ -18127,7 +18127,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 96.52 106.68 0)
 			(effects
 				(font
@@ -18916,7 +18916,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 124.46 137.16 0)
 			(effects
 				(font
@@ -18986,7 +18986,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 96.52 182.88 0)
 			(effects
 				(font
@@ -19510,7 +19510,7 @@
 				)
 			)
 		)
-		(property "Footprint" "APDS_9006_020:photodiode_v3"
+		(property "Footprint" "APDS_9006_020:photodiode_v4"
 			(at 160.02 182.88 0)
 			(effects
 				(font
@@ -19635,7 +19635,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C1206C101K1HACTU:CAPC340180_88N_KEM"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 124.46 213.36 0)
 			(effects
 				(font

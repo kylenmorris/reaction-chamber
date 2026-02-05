@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include "constants.h"
-#include "imodel_structs.h"
+#include "data_structs.h"
 
 #ifndef USE_HW_SD
 

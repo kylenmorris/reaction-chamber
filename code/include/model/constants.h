@@ -62,7 +62,7 @@
 #define REDRAW_INTERVAL_MS 500
 
 #define MAX_FILES 10
-#define MAX_NAME_LEN 21  // Adjust based on your screen width
+#define MAX_NAME_LEN 21 
 
 // ####################################
 // OPTICAL CONSTANTS

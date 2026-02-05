@@ -4,7 +4,6 @@
 
 #include "data_structs.h"
 #include "data_helpers.h"
-#include "imodel_structs.h"
 #include <stdio.h>
 
 #include "glcd.h"

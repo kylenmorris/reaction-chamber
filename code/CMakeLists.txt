@@ -55,7 +55,6 @@ endif()
 add_library(model
     src/model/data_structs.c
     src/model/data_helpers.c
-    src/model/imodel_structs.c
 )
 target_include_directories(model PUBLIC
     include/model

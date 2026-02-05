@@ -9,6 +9,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+// TODO check this as it's mostly from gemini
+
 void read_json_string(char *string) {
     if (!string) return;
 

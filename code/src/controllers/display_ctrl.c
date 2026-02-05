@@ -4,7 +4,6 @@
 #include "drivers.h"
 
 #include "data_structs.h"
-#include "imodel_structs.h"
 #include "constants.h"
 
 // This might need a rework

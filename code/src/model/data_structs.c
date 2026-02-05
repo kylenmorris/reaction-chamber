@@ -1,7 +1,9 @@
 #include "data_structs.h"
 #include <stdint.h>
 
-// See header for info
+// ####################################
+// STRUCTS
+// ####################################
 
 SystemState gSystemState = BOOT;
 
@@ -49,3 +51,39 @@ SimParams gSimParams = {
 };
 
 uint16_t gSimTime = 10;
+
+// ####################################
+// IMODEL STRUCTS
+// ####################################
+
+idleMenuIM gIdleMenuIM = {
+    .selected_index = 0,
+    .needs_redraw = true,
+    .last_redraw = 0
+};
+
+heatingMenuIM gHeatingMenuIM = {
+    .needs_redraw = true,
+    .last_redraw = 0
+};
+
+testRunningIM gTestRunningIM = {
+    .needs_redraw = true,
+    .last_redraw = 0
+};
+
+resultsIM gResultsIM = {
+    .needs_redraw = true,
+    .last_redraw = 0,
+};
+
+// Populated by sd_drv.c
+char results_menu_items[MAX_FILES][MAX_NAME_LEN];
+
+historyIM gHistoryIM = {
+    .needs_redraw = true,
+    .last_redraw = 0,
+    .selected_index = 0
+};
+
+bool filenames_need_update = true;

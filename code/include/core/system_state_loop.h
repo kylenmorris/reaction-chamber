@@ -7,4 +7,6 @@ void run_system_state_loop_core0(void);
 
 void run_system_state_loop_core1(void);
 
+void run_debug_loop(void);
+
 #endif

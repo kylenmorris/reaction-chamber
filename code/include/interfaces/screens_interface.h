@@ -9,4 +9,6 @@ void draw_test_running_screen(void);
 void draw_heating_screen(void);
 void draw_results_history(void);
 
+void draw_debug_screen(void);
+
 #endif

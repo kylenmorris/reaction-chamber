@@ -10,6 +10,12 @@
 
 #ifdef USE_HW_DISPLAY
 
+void draw_debug_screen(void) {
+    glcd_clear();
+    glcd_draw_string_xy(0, 0, "DEBUG SCREEN");
+    glcd_write();
+}
+
 void draw_idle_screen(void) {
 
     glcd_clear();

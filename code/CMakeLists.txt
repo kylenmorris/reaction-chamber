@@ -211,6 +211,7 @@ target_link_libraries(drivers_sw PUBLIC
 
 add_library(logic_core
     src/core/system_state_loop.c
+    src/core/debug_loop.c
     src/core/test_manager.c
 
     src/controllers/button_ctrl.c

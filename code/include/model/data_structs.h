@@ -188,7 +188,7 @@ typedef struct {
     bool needs_redraw;
     uint32_t last_redraw;
     int selected_index; // absolute index of selection in file list
-    int screen_scroll_index; // how many lines have we scrolled down
+    int scroll_index; // how many lines have we scrolled down
     int selected_index_relative; // 0-3
     int num_items;
 } historyIM;

@@ -12,7 +12,7 @@ SystemControl gSysControl = {
 };
 
 TestStatus gTestStatus = {
-    // .tubes = { {EMPTY, 0, 0, false, false, false, 0} },
+    .tubes = { },
     .reaction_start_time = 0,
     .reaction_total_time = 0,
     .reaction_active = false,
@@ -45,7 +45,7 @@ TempStatus gTempStatus = {
 
 SimParams gSimParams = {
     .ambient_temp = 0.0f,
-    .heat_rate = 0.1f,
+    .heat_rate = 0.3f,
     .cool_rate = 0.1f,
     .force_temp_sensor_fault = false
 };
@@ -57,9 +57,10 @@ uint16_t gSimTime = 10;
 // ####################################
 
 idleMenuIM gIdleMenuIM = {
-    .selected_index = 0,
     .needs_redraw = true,
-    .last_redraw = 0
+    .last_redraw = 0,
+    
+    .selected_index = 0
 };
 
 heatingMenuIM gHeatingMenuIM = {
@@ -83,8 +84,9 @@ char results_menu_items[MAX_FILES][MAX_NAME_LEN];
 historyIM gHistoryIM = {
     .needs_redraw = true,
     .last_redraw = 0,
+
     .selected_index = 0,
-    .screen_scroll_index = 0,
+    .scroll_index = 0,
     .selected_index_relative = 0,
     .num_items = 0
 };

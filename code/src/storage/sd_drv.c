@@ -48,12 +48,15 @@
         FRESULT fr = f_mount(&fs, "", 1); 
         if (fr != FR_OK) {
             printf("Mount failed: %d\n", fr);
+            return;
         }
 
         FIL fil;
         fr = f_open(&fil, filename, FA_WRITE | FA_CREATE_ALWAYS);
         if (FR_OK != fr && FR_EXIST != fr) {
-            panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+            printf("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+            f_unmount("");
+            return;
         }
         if (f_printf(&fil, content) < 0) {
             printf("f_printf to file failed!\n");
@@ -63,6 +66,8 @@
         fr = f_close(&fil);
         if (FR_OK != fr) {
             printf("f_close error: %s (%d)\n", FRESULT_str(fr), fr);
+            f_unmount("");
+            return;
         }
         
         // Unmount the SD card
@@ -75,13 +80,16 @@
         FRESULT fr = f_mount(&fs, "", 1); 
         if (fr != FR_OK) {
             printf("Mount failed: %d\n", fr);
+            return NULL;
         }
 
         // Open a file and read from it
         FIL fil;
         fr = f_open(&fil, filename, FA_READ);
         if (FR_OK != fr && FR_EXIST != fr) {
-            panic("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+            printf("f_open(%s) error: %s (%d)\n", filename, FRESULT_str(fr), fr);
+            f_unmount("");
+            return NULL;
         }
 
         UINT bytes_read;
@@ -97,11 +105,15 @@
         fr = f_close(&fil);
         if (FR_OK != fr) {
             printf("f_close error: %s (%d)\n", FRESULT_str(fr), fr);
+
+            f_unmount("");
+            return NULL;
         }
 
         // Unmount the SD card
         f_unmount("");
 
+        return strdup(raw_buffer); // Caller is responsible for freeing this memory
     }
 
     void populate_file_list(const char* path) {

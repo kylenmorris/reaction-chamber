@@ -13,6 +13,10 @@
 void draw_debug_screen(void) {
     glcd_clear();
     glcd_draw_string_xy(0, 0, "DEBUG SCREEN");
+    // draw all temp sensor data
+    char temp_str[64];
+    snprintf(temp_str, sizeof(temp_str), "Temp: %.2f C", gTempStatus.chamber_temp);
+    glcd_tiny_draw_string(0, 1, temp_str);
     glcd_write();
 }
 
@@ -134,10 +138,15 @@ void draw_results_history(void) {
 
     glcd_tiny_draw_string(0, 0, "RESULTS HISTORY");
 
-    for (int i = 0; i < 4; i++) {
-        int y = 2 + i;
+    int start = gHistoryIM.screen_scroll_index;
+    int end = start + 4;
+    int sel_idx = gHistoryIM.selected_index_relative;
+
+    for (int i = start; i < end; i++) {
+
+        int y = (i + 1) - start; // Y position on screen (1-4)
         
-        if (i == gHistoryIM.selected_index) {
+        if ((i - start) == sel_idx) {
             glcd_tiny_draw_string(5, y, ">");
         }
         

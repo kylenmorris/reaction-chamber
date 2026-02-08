@@ -143,6 +143,8 @@
 
         f_closedir(&dir);
 
+        gHistoryIM.num_items = file_count;
+
     }
 
 #endif

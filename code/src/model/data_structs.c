@@ -83,7 +83,10 @@ char results_menu_items[MAX_FILES][MAX_NAME_LEN];
 historyIM gHistoryIM = {
     .needs_redraw = true,
     .last_redraw = 0,
-    .selected_index = 0
+    .selected_index = 0,
+    .screen_scroll_index = 0,
+    .selected_index_relative = 0,
+    .num_items = 0
 };
 
 bool filenames_need_update = true;

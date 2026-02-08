@@ -143,7 +143,7 @@ void run_system_state_loop_core0() {
 
             gHistoryIM.needs_redraw = true;
 
-            // TODO burh
+            // TODO bruh
 
             if (handle_button_press(UP)) {
                 if (gHistoryIM.selected_index == 0) {
@@ -152,8 +152,8 @@ void run_system_state_loop_core0() {
 
                 gHistoryIM.selected_index = gHistoryIM.selected_index - 1; 
 
-                if (gHistoryIM.selected_index_relative == 0 && gHistoryIM.screen_scroll_index > 0) {
-                    gHistoryIM.screen_scroll_index = gHistoryIM.screen_scroll_index - 1;
+                if (gHistoryIM.selected_index_relative == 0 && gHistoryIM.scroll_index > 0) {
+                    gHistoryIM.scroll_index = gHistoryIM.scroll_index - 1;
                 }
                 else {
                     gHistoryIM.selected_index_relative = gHistoryIM.selected_index_relative - 1;
@@ -168,8 +168,8 @@ void run_system_state_loop_core0() {
                 gHistoryIM.selected_index = gHistoryIM.selected_index + 1; 
 
                 if (gHistoryIM.selected_index_relative == 3 && 
-                    gHistoryIM.screen_scroll_index < gHistoryIM.num_items - 4) {
-                    gHistoryIM.screen_scroll_index = gHistoryIM.screen_scroll_index + 1;
+                    gHistoryIM.scroll_index < gHistoryIM.num_items - 4) {
+                    gHistoryIM.scroll_index = gHistoryIM.scroll_index + 1;
                 }
                 else {
                     gHistoryIM.selected_index_relative = gHistoryIM.selected_index_relative + 1;

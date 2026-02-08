@@ -138,7 +138,7 @@ void draw_results_history(void) {
 
     glcd_tiny_draw_string(0, 0, "RESULTS HISTORY");
 
-    int start = gHistoryIM.screen_scroll_index;
+    int start = gHistoryIM.scroll_index;
     int end = start + 4;
     int sel_idx = gHistoryIM.selected_index_relative;
 

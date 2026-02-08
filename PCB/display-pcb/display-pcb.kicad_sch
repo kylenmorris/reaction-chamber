@@ -2365,7 +2365,7 @@
 	)
 	(global_label "A0"
 		(shape input)
-		(at 86.36 71.12 0)
+		(at 86.36 68.58 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2375,7 +2375,7 @@
 		)
 		(uuid "04b53609-0953-485a-8f89-2577c40d606b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 91.6433 71.12 0)
+			(at 91.6433 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2915,7 +2915,7 @@
 	)
 	(global_label "{slash}RESET"
 		(shape input)
-		(at 86.36 68.58 0)
+		(at 86.36 71.12 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2925,7 +2925,7 @@
 		)
 		(uuid "cd6cdf9f-1b1e-4417-9d4e-faf6fdfbcffe")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.4208 68.58 0)
+			(at 96.4208 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)

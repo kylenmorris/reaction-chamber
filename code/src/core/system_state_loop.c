@@ -143,6 +143,8 @@ void run_system_state_loop_core0() {
 
             gHistoryIM.needs_redraw = true;
 
+            // TODO burh
+
             if (handle_button_press(UP)) {
                 if (gHistoryIM.selected_index == 0) {
                     break;

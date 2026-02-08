@@ -11,7 +11,7 @@
 #define USE_HW_PICO
 #define USE_HW_BUTTONS
 //#define USE_HW_HEATER
-// #define USE_HW_TEMP_SENS
+#define USE_HW_TEMP_SENS
 //#define USE_HW_OPTICAL
 #define USE_HW_TUBE_SENS
 #define USE_HW_DISPLAY

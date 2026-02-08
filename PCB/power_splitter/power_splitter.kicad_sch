@@ -2874,7 +2874,7 @@
 	)
 	(wire
 		(pts
-			(xy 63.5 81.28) (xy 73.66 81.28)
+			(xy 63.5 81.28) (xy 66.04 81.28)
 		)
 		(stroke
 			(width 0)
@@ -2904,7 +2904,7 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 44.45) (xy 113.03 44.45)
+			(xy 67.31 44.45) (xy 77.47 44.45)
 		)
 		(stroke
 			(width 0)
@@ -2971,6 +2971,16 @@
 			(type default)
 		)
 		(uuid "5388fa2c-55a4-490f-8b5c-f0485802a0e7")
+	)
+	(wire
+		(pts
+			(xy 71.12 81.28) (xy 73.66 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59535409-1466-47d0-8bc3-da1d31c7ac4a")
 	)
 	(wire
 		(pts
@@ -3221,6 +3231,16 @@
 			(type default)
 		)
 		(uuid "978c44ed-5aee-4dbb-9f2d-25f710936294")
+	)
+	(wire
+		(pts
+			(xy 82.55 44.45) (xy 113.03 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "97e12ef5-813c-481b-a084-f8e195c56218")
 	)
 	(wire
 		(pts
@@ -5334,6 +5354,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_Small")
+		(at 80.01 44.45 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "870f1933-3eca-4c63-9767-7b25764f0bd3")
+		(property "Reference" "Thermal_Fuse_1"
+			(at 78.994 42.926 0)
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "R_Small"
+			(at 81.2799 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESISTOR:YAG_MF25_YAG"
+			(at 80.01 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 80.01 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 80.01 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e9015661-c9e1-428c-b1ca-b9bd9e2889d6")
+		)
+		(pin "2"
+			(uuid "4372a245-4f05-49e8-8048-1982e9db2e8a")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "Thermal_Fuse_1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 148.59 91.44 0)
 		(unit 1)
@@ -5731,6 +5821,76 @@
 			(project "power_splitter"
 				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
 					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small")
+		(at 68.58 81.28 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9a6174ba-7698-40a7-aeb8-351013d33f1b")
+		(property "Reference" "Thermal_Fuse_2"
+			(at 67.564 79.756 0)
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "R_Small"
+			(at 69.8499 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "RESISTOR:YAG_MF25_YAG"
+			(at 68.58 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 68.58 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 68.58 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6115b32f-983f-4b6b-afbd-02ddeef11ba1")
+		)
+		(pin "2"
+			(uuid "f452c632-1f3b-4ce3-97c3-2b08155ace51")
+		)
+		(instances
+			(project "power_splitter"
+				(path "/4cdb7044-92dd-4272-b0bd-7079be4f3079"
+					(reference "Thermal_Fuse_2")
 					(unit 1)
 				)
 			)

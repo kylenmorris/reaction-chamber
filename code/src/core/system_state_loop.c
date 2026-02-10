@@ -98,7 +98,8 @@ void run_system_state_loop_core0() {
             }
             
             // target temp reached, start test
-            if (gTempStatus.target_reached) {   
+            if (check_conditions_for_test_start()) {  
+                reset_test_data(); 
                 move_to_reacting();
             }
 
@@ -110,12 +111,13 @@ void run_system_state_loop_core0() {
                 move_to_idle();
             }
 
-            if (gTestStatus.completed) {
+            if (check_test_completed()) {
+                determine_results();
                 move_to_results();
             }
 
             tube_sens_ctrl_step();
-            test_manager_tick();
+            test_step();
             tube_optical_ctrl_step();
             
             break;

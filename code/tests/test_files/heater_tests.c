@@ -7,6 +7,7 @@
 // compile_commands.json file. I don't know how to fix that at the moment.
 #include "../../include/model/data_structs.h"
 #include "../../include/core/system_state_loop.h"
+#include "../../include/model/data_helpers.h"
 
 // Check behaviour during temperature sensor failure in all states
 
@@ -23,7 +24,7 @@ void temp_sensor_failure_test() {
         gSystemState = currentState;
         
         const char* stateName = get_system_state_string(currentState); 
-        printf("  Checking state: %s\n", stateName);
+        // printf("  Checking state: %s\n", stateName);
 
         for (int cycle = 0; cycle < TEST_CYCLES; cycle++) {
             run_system_state_loop_core0();
@@ -89,7 +90,7 @@ void heating_test_high() {
         gSystemState = currentState;
         
         const char* stateName = get_system_state_string(currentState); 
-        printf("  Checking state: %s\n", stateName);
+        // printf("  Checking state: %s\n", stateName);
 
         for (int cycle = 0; cycle < TEST_CYCLES; cycle++) {
             

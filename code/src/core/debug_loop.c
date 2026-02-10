@@ -15,7 +15,6 @@
 #include "sd_ctrl.h"
 #include <stdbool.h>
 #include <stdio.h>
-#include <sys/_intsup.h>
 #include "screens_interface.h"
 
 void run_debug_loop() {

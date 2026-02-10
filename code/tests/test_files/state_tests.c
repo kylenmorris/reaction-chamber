@@ -7,6 +7,7 @@
 // compile_commands.json file. I don't know how to fix that at the moment.
 #include "../../include/model/data_structs.h"
 #include "../../include/core/system_state_loop.h"
+#include "../../include/model/data_helpers.h"
 
 
 void state_all_to_idle_on_back(void) {

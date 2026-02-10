@@ -57,7 +57,7 @@ typedef struct {
     bool is_positive_control;
     bool is_negative_control;
     bool positive_detected;
-    uint32_t ct_time;
+    uint32_t detection_time;
 
 } TubeReaction;
 
@@ -87,6 +87,14 @@ typedef enum {
 
 extern SystemState gSystemState;
 
+typedef enum {
+    TEST_IDLE,
+    TEST_PREPARE,
+    TEST_RUNNING,
+    TEST_FINISHED
+} TestManagerState;
+
+extern TestManagerState gTestManagerState;
 
 // Button input structure
 // Written only by button_ctrl.c

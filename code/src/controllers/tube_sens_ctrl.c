@@ -25,7 +25,7 @@ void tube_sens_ctrl_init(void) {
     //     gTestStatus.tubes[i].is_positive_control = false;
     //     gTestStatus.tubes[i].is_negative_control = false;
     //     gTestStatus.tubes[i].positive_detected = false;
-    //     gTestStatus.tubes[i].ct_time = 0;
+    //     gTestStatus.tubes[i].detection_time = 0;
     // }
 
 }

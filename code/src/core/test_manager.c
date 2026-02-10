@@ -8,7 +8,7 @@
 static uint32_t temp_low_start = 0;
 static uint32_t temp_extreme_start = 0;
 
-void test_manager_start(void) {
+void reset_test_data(void) {
 
     for (int i = 0; i < NUM_TUBES; i++) {
         gTestStatus.tubes[i].state = EMPTY;
@@ -18,7 +18,7 @@ void test_manager_start(void) {
         gTestStatus.tubes[i].is_positive_control = false;
         gTestStatus.tubes[i].is_negative_control = false;
         gTestStatus.tubes[i].positive_detected = false;
-        gTestStatus.tubes[i].ct_time = 0;
+        gTestStatus.tubes[i].detection_time = 0;
     }
     
     temp_low_start = 0;
@@ -65,12 +65,35 @@ static void determine_results(void) {
 
 }
 
-void test_manager_stop(void) {
-    determine_results();
+void check_test_completed(void) {
+    // for (int i = 0; i < NUM_TUBES; i++) {
+    //     if (gTestStatus.tubes[i].state == RUNNING) {
+    //         return false;
+    //     }
+    // }
+    
+    // check for test completion
+    if (gTestStatus.reaction_total_time >= REACTION_DURATION_MS) {
+        gTestStatus.reaction_active = false;
+        gTestStatus.completed = true;
+    }
+
+    // return true;
 }
 
+bool check_conditions_for_test_start(void) {
 
-void test_manager_step(void) {
+    // Check for all tubes removed
+    for (int i = 0; i < NUM_TUBES; i++) {
+        if (gSysControl.tube_present[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void test_step(void) {
 
     uint32_t now_ms = get_current_time();
     
@@ -121,7 +144,7 @@ void test_manager_step(void) {
             !gTestStatus.tubes[i].positive_detected) {
             
             gTestStatus.tubes[i].positive_detected = true;
-            gTestStatus.tubes[i].ct_time = tube_reaction_time;
+            gTestStatus.tubes[i].detection_time = tube_reaction_time;
             gTestStatus.tubes[i].state = COMPLETED;
         }
 
@@ -135,11 +158,36 @@ void test_manager_step(void) {
 
         
     }
-
-    // check for test completion
-    if (gTestStatus.reaction_total_time >= REACTION_DURATION_MS) {
-        gTestStatus.reaction_active = false;
-        gTestStatus.completed = true;
-    }
-
 }
+
+void test_manager_tick(void) {
+    switch (gTestManagerState) {
+
+        case TEST_IDLE:
+
+            break;
+
+        case TEST_PREPARE:
+            bool ok = check_conditions_for_test_start();
+            if (ok) {
+                reset_test_data();
+                gTestManagerState = TEST_RUNNING;
+            }
+            break;
+
+        case TEST_RUNNING:
+            test_step();
+            check_test_completed();
+            
+            if (gTestStatus.completed) {
+                determine_results();
+                gTestManagerState = TEST_FINISHED;
+            }
+            
+            break;
+
+        case TEST_FINISHED:
+            break;
+    }
+}
+

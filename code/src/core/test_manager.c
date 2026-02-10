@@ -3,12 +3,16 @@
 #include "data_structs.h"
 #include "constants.h"
 #include "drivers.h"
+#include <stdbool.h>
+#include <stdio.h>
 
 // Timers for temperature violations
 static uint32_t temp_low_start = 0;
 static uint32_t temp_extreme_start = 0;
 
 void reset_test_data(void) {
+
+    printf("Resetting test data...\n");
 
     for (int i = 0; i < NUM_TUBES; i++) {
         gTestStatus.tubes[i].state = EMPTY;
@@ -29,10 +33,18 @@ void reset_test_data(void) {
     gTestStatus.test_invalid = false;
     gTestStatus.completed = false;
 
+    #ifndef USE_HW_TUBE_SENS
+        // Clear tube presence flags
+        for (int i = 0; i < NUM_TUBES; i++) {
+            gSysControl.tube_present[i] = false;
+        }
+    #endif
 }
 
-static void determine_results(void) {
-    
+void determine_results(void) {
+
+    printf("Determining test results...\n");
+
     gTestStatus.test_invalid = false;
 
     for (int i = 0; i < NUM_TUBES; i++) {
@@ -65,20 +77,15 @@ static void determine_results(void) {
 
 }
 
-void check_test_completed(void) {
-    // for (int i = 0; i < NUM_TUBES; i++) {
-    //     if (gTestStatus.tubes[i].state == RUNNING) {
-    //         return false;
-    //     }
-    // }
-    
+bool check_test_completed(void) {
+
     // check for test completion
     if (gTestStatus.reaction_total_time >= REACTION_DURATION_MS) {
         gTestStatus.reaction_active = false;
         gTestStatus.completed = true;
     }
 
-    // return true;
+    return gTestStatus.completed;
 }
 
 bool check_conditions_for_test_start(void) {
@@ -90,6 +97,10 @@ bool check_conditions_for_test_start(void) {
         }
     }
 
+    if (!gTempStatus.target_reached) {
+        return false;
+    }
+
     return true;
 }
 
@@ -98,6 +109,8 @@ void test_step(void) {
     uint32_t now_ms = get_current_time();
     
     gTestStatus.reaction_total_time = now_ms - gTestStatus.reaction_start_time;
+
+    printf("Test step: reaction time = %f ms\n", gTestStatus.reaction_total_time);
     
     if (!gTestStatus.reaction_active) {
         return; // No active test
@@ -159,35 +172,3 @@ void test_step(void) {
         
     }
 }
-
-void test_manager_tick(void) {
-    switch (gTestManagerState) {
-
-        case TEST_IDLE:
-
-            break;
-
-        case TEST_PREPARE:
-            bool ok = check_conditions_for_test_start();
-            if (ok) {
-                reset_test_data();
-                gTestManagerState = TEST_RUNNING;
-            }
-            break;
-
-        case TEST_RUNNING:
-            test_step();
-            check_test_completed();
-            
-            if (gTestStatus.completed) {
-                determine_results();
-                gTestManagerState = TEST_FINISHED;
-            }
-            
-            break;
-
-        case TEST_FINISHED:
-            break;
-    }
-}
-

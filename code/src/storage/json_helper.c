@@ -45,7 +45,7 @@ void read_json_string(char *string) {
         cJSON *state_str = cJSON_GetObjectItem(tube_node, "state");
         cJSON *result_str = cJSON_GetObjectItem(tube_node, "result");
         cJSON *ctrl_str = cJSON_GetObjectItem(tube_node, "is_control");
-        cJSON *ct = cJSON_GetObjectItem(tube_node, "ct_time_sec");
+        cJSON *ct = cJSON_GetObjectItem(tube_node, "detection_time_sec");
         cJSON *pos_det = cJSON_GetObjectItem(tube_node, "was_positive_detected");
 
         if (state_str) gTestStatus.tubes[i].state = string_to_state(state_str->valuestring);
@@ -56,7 +56,7 @@ void read_json_string(char *string) {
             gTestStatus.tubes[i].is_negative_control = (strcmp(ctrl_str->valuestring, "NEGATIVE_CONTROL") == 0);
         }
 
-        if (ct) gTestStatus.tubes[i].ct_time = ct->valuedouble;
+        if (ct) gTestStatus.tubes[i].detection_time = ct->valuedouble;
         if (pos_det) gTestStatus.tubes[i].positive_detected = cJSON_IsTrue(pos_det);
 
         i++;
@@ -90,7 +90,7 @@ char* serialize_test_results() {
         if (gTestStatus.tubes[i].is_negative_control) ctrl = "NEGATIVE_CONTROL";
         cJSON_AddStringToObject(tube_obj, "is_control", ctrl);
 
-        cJSON_AddNumberToObject(tube_obj, "ct_time_sec", gTestStatus.tubes[i].ct_time);
+        cJSON_AddNumberToObject(tube_obj, "detection_time_sec", gTestStatus.tubes[i].detection_time);
         cJSON_AddBoolToObject(tube_obj, "was_positive_detected", gTestStatus.tubes[i].positive_detected);
 
         cJSON_AddItemToArray(results_array, tube_obj);

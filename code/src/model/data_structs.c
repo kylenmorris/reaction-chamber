@@ -7,6 +7,8 @@
 
 SystemState gSystemState = BOOT;
 
+TestManagerState gTestManagerState = TEST_IDLE;
+
 SystemControl gSysControl = {
     .tube_present = { false }
 };

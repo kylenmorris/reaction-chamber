@@ -20,7 +20,44 @@
     }
 
     char *load_file(char *filename) {
+        FILE *fptr;
+        long file_size;
+        char *buffer;
 
+        // Open the file in reading mode
+        fptr = fopen(filename, "r");
+        if (fptr == NULL) {
+            printf("Error opening file: %s\n", filename);
+            return NULL;
+        }
+
+        // Move the file pointer to the end of the file to get its size
+        fseek(fptr, 0, SEEK_END);
+        file_size = ftell(fptr);
+        rewind(fptr); // Move the file pointer back to the beginning
+        // Allocate memory to hold the file contents
+        buffer = (char *)malloc(file_size + 1); // +1 for null termin
+        if (buffer == NULL) {
+            printf("Memory allocation failed\n");
+            fclose(fptr);
+            return NULL;
+        }
+        // Read the file contents into the buffer
+        fread(buffer, sizeof(char), file_size, fptr);
+        buffer[file_size] = '\0'; //
+        // Close the file
+        fclose(fptr);
+        return buffer; // Caller is responsible for freeing this memory
+    }
+
+    void populate_file_list(const char* path) {
+        // For simulation, we'll just populate with some dummy filenames
+        snprintf(results_menu_items[0], MAX_NAME_LEN, "test_result_1.json");
+        snprintf(results_menu_items[1], MAX_NAME_LEN, "test_result_2.json");
+        snprintf(results_menu_items[2], MAX_NAME_LEN, "test_result_3.json");
+        snprintf(results_menu_items[3], MAX_NAME_LEN, "test_result_4.json");
+
+        gHistoryIM.num_items = 4; // Update the count of items
     }
 
 #endif

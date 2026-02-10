@@ -1,3 +1,4 @@
+#include "system_state_loop.h"
 #include "constants.h"
 #include "data_structs.h"
 #include "data_helpers.h"
@@ -98,7 +99,6 @@ void run_system_state_loop_core0() {
             
             // target temp reached, start test
             if (gTempStatus.target_reached) {   
-                test_manager_start();
                 move_to_reacting();
             }
 
@@ -111,12 +111,11 @@ void run_system_state_loop_core0() {
             }
 
             if (gTestStatus.completed) {
-                test_manager_stop();
                 move_to_results();
             }
 
             tube_sens_ctrl_step();
-            test_manager_step();
+            test_manager_tick();
             tube_optical_ctrl_step();
             
             break;

@@ -14,7 +14,7 @@
 // #define USE_HW_TEMP_SENS
 //#define USE_HW_OPTICAL
 #define USE_HW_TUBE_SENS
-#define USE_HW_DISPLAY
+// #define USE_HW_DISPLAY
 #define USE_HW_SD
 
 #endif

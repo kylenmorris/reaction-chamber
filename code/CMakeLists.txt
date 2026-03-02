@@ -38,7 +38,7 @@ else()
         include(${picoVscode})
     endif()
 
-    set(PICO_BOARD pico2_w CACHE STRING "Board type")
+    set(PICO_BOARD pico2 CACHE STRING "Board type")
 
     include(pico_sdk_import.cmake)
 
@@ -211,7 +211,6 @@ target_link_libraries(drivers_sw PUBLIC
 
 add_library(logic_core
     src/core/system_state_loop.c
-    src/core/debug_loop.c
     src/core/test_manager.c
 
     src/controllers/button_ctrl.c

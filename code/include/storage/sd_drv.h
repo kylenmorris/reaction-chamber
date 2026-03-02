@@ -7,4 +7,6 @@ char* load_file(char* filename);
 
 void populate_file_list(const char* path);
 
+void delete_file(char* filename);
+
 #endif

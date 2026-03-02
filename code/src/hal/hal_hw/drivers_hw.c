@@ -72,30 +72,36 @@ float mcp9808_convert_temp(uint8_t upper_byte, uint8_t lower_byte) {
 
     return temperature;
 }
+float hw_read_temperature_sensor(int address) {
 
-float hw_read_temperature_sensor(int sensor_id) {
 
-    const uint8_t REG_TEMP_AMB = 0x05;
-
+    printf("Reading temperature sensor at address 0x%02X\n", address);
+    const uint8_t reg = 0x05;
     uint8_t buf[2];
-    uint16_t upper_byte;
-    uint16_t lower_byte;
-
-    float temperature;
-
-    i2c_write_blocking(i2c1, TEMP_SENSOR_0_I2C_ADDRESS, &REG_TEMP_AMB, 1, true);
-    i2c_read_blocking(i2c1, TEMP_SENSOR_0_I2C_ADDRESS, buf, 2, false);
-
-    upper_byte = buf[0];
-    lower_byte = buf[1];
-    printf("Raw: {%d} {%d}\n", upper_byte, lower_byte);
-    //clears flag bits in upper byte
-    temperature = mcp9808_convert_temp(upper_byte & 0xF, lower_byte & 0xF0);
     
-    printf("Ambient temperature: %.4f°C\n", temperature);
-    
-    return temperature;
+    int w = i2c_write_timeout_us(i2c0, address, &reg, 1, true, 50000);
+    if (w < 0) {
+        printf("I2C write failed\n");
+        return -999;
+    }
+
+    int r = i2c_read_timeout_us(i2c0, address, buf, 2, false, 50000);
+    if (r < 0) {
+        printf("I2C read failed\n");
+        return -999;
+    }
+    printf("Raw bytes: 0x%02X 0x%02X\n", buf[0], buf[1]);
+    uint16_t raw = ((uint16_t)buf[0] << 8) | buf[1];
+    raw &= 0x1FFF;
+
+    float temp = raw * 0.0625f;
+
+    if (raw & 0x1000)
+        temp -= 256.0f;
+
+    return temp;
 }
+
 #endif
 
 #ifdef USE_HW_OPTICAL
@@ -108,15 +114,35 @@ uint16_t hw_adc_read_raw(int adc_index, int channel) {
 static bool used_tubes[NUM_TUBES] = { false };
 
 #ifdef USE_HW_TUBE_SENS
-uint16_t hw_tube_sens_read_all(void) {
+uint16_t hw_tube_sens_read_all(int pin) {
     uint8_t data;
-    
-    gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 0);
-    sleep_us(100); // Could be as short as 100ns but I see no need for that
-    gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 1);
 
-    spi_read_blocking(SPI_INSTANCE_SW, 0x0, &data, 1);
+    // Disable clock (CLKINH = 1)
+    gpio_put(pin, 1);
 
-    return data;
+    // Take MOSI away from SPI as I screwed up the pcb
+    gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SIO);
+    gpio_set_dir(SPI1_MOSI_PIN, GPIO_OUT);
+
+    // Parallel load
+    gpio_put(SPI1_MOSI_PIN, 0);
+    sleep_us(1);
+    gpio_put(SPI1_MOSI_PIN, 1);
+    sleep_us(1);
+
+    // Give MOSI back to SPI
+    gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SPI);
+
+    // Enable clock
+    gpio_put(pin, 0);
+
+    // Clock 8 bits
+    spi_read_blocking(SPI_INSTANCE_SW, 0xFF, &data, 1);
+
+    // Disable clock again
+    gpio_put(pin, 1);
+
+    return ~data;   // because QH* is inverted
 }
+
 #endif

@@ -58,7 +58,7 @@
 // ####################################
 
 #define DEBOUNCE_TIME_CYCLES 5 
-#define NUM_BUTTONS 5
+#define NUM_BUTTONS 4
 #define REDRAW_INTERVAL_MS 500
 
 #define MAX_FILES 10
@@ -74,28 +74,32 @@
 // BUTTON DEFINITIONS
 // ####################################
 
-#define BACK_BUTTON_GPIO_PIN 28 
-#define DOWN_BUTTON_GPIO_PIN 27  
-#define UP_BUTTON_GPIO_PIN 26 
-#define SELECT_BUTTON_GPIO_PIN 22  
-#define DEBUG_BUTTON_GPIO_PIN 15
+#define BACK_BUTTON_GPIO_PIN 14     // btn 1
+#define DOWN_BUTTON_GPIO_PIN 15     // btn 0  
+#define UP_BUTTON_GPIO_PIN 12       // btn 3
+#define SELECT_BUTTON_GPIO_PIN 13   // btn 2
+// #define DEBUG_BUTTON_GPIO_PIN 
 
 static const int BUTTON_PINS[] = {
     UP_BUTTON_GPIO_PIN,
     DOWN_BUTTON_GPIO_PIN,
     SELECT_BUTTON_GPIO_PIN,
     BACK_BUTTON_GPIO_PIN,
-    DEBUG_BUTTON_GPIO_PIN
+    // DEBUG_BUTTON_GPIO_PIN
 };
 
 // ####################################
 // I2C DEFINITIONS
 // ####################################
 
-#define I2C_SDA_PIN 14
-#define I2C_SCL_PIN 15
+#define I2C_SDA_PIN 4
+#define I2C_SCL_PIN 5
 #define I2C_BAUDRATE 100 * 1000  // 100 kHz
+
 #define TEMP_SENSOR_0_I2C_ADDRESS 0x18
+#define TEMP_SENSOR_1_I2C_ADDRESS 0x1C
+#define TEMP_SENSOR_2_I2C_ADDRESS 0x1A
+#define TEMP_SENSOR_3_I2C_ADDRESS 0x1E
 
 // ####################################
 // SPI DEFINITIONS
@@ -103,23 +107,23 @@ static const int BUTTON_PINS[] = {
 
 #define SPI0_SCK_PIN 18
 #define SPI0_MOSI_PIN 19
-// #define SPI0_MISO_PIN 0
-#define SPI0_BAUDRATE 4 * 1000 * 1000        // 4 MHz which is a limit from glcd
+
+#define SPI0_CSn_DISPLAY_PIN 17
+#define DISPLAY_DC_A0_PIN 20    // A0 Data/Command pin - LOW=command, HIGH=data
+#define DISPLAY_RST_PIN 21      // Reset pin - LOW=reset, HIGH=normal operation
 
 #define SPI1_SCK_PIN 10
 #define SPI1_MOSI_PIN 11
-#define SPI1_MISO_PIN 12
-#define SPI1_BAUDRATE 125 * 1000 * 1000 / 4  // 31.25 MHz, just the default from no-os-fatfs 
+#define SPI1_MISO_PIN 8
+#define SPI1_CSn_SD_CARD_PIN 0
+// #define SPI1_BAUDRATE 125 * 1000 * 1000 / 16  // slowed down for testing, 7.8125 MHz 
 
-#define SPI0_CSn_DISPLAY_PIN 17 // display
+#define SPI1_CS_SHIFT_SWITCHES_SR_PIN_0 26
+#define SPI1_CS_SHIFT_SWITCHES_SR_PIN_1 27
+// #define SPI1_CSn_ADC0_PIN 9
+// #define SPI1_CSn_ADC1_PIN 7
 
-#define SPI1_CSn_SD_CARD_PIN 13
-#define SPI1_CS_SHIFT_SWITCHES_SR_PIN 9
-// #define SPI1_CSn_ADC0_PIN 0
-// #define SPI1_CSn_ADC1_PIN 0
-
-#define DISPLAY_DC_A0_PIN 20    // A0 Data/Command pin - LOW=command, HIGH=data
-#define DISPLAY_RST_PIN  21     // Reset pin - LOW=reset, HIGH=normal operation
+// #define HEATER_ON_PIN 22
 
 // #define HEATER_PIN 0
 
@@ -128,6 +132,9 @@ static const int BUTTON_PINS[] = {
 #define SPI_INSTANCE_SW spi1        // for reference only
 
 #define PROBE_PIN 1
+
+#define SPI0_BAUDRATE 4 * 1000 * 1000 / 4       // 4 MHz which is a limit from glcd
+#define SPI1_BAUDRATE 125 * 1000 * 1000 / 4     // 31.25 MHz, just the default from no-os-fatfs 
 
 
 #endif

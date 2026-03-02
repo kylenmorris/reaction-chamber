@@ -13,6 +13,7 @@
 #include "tube_sens_ctrl.h"
 #include "sd_ctrl.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 // ####################################
 // HELPERS
@@ -56,6 +57,15 @@ void run_system_state_loop_core0() {
     temp_sens_ctrl_step();
     heater_ctrl_step();
     button_ctrl_step(); 
+    // tube_sens_ctrl_step();
+
+    if (gSystemError.current_error != ERROR_NONE) {
+        if (handle_button_press(SELECT)) {
+            gSystemError.current_error = ERROR_NONE;
+            gSystemError.needs_display = false;
+            return;
+        }
+    }   
 
     switch (gSystemState) {
         case BOOT:

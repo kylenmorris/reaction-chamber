@@ -110,7 +110,7 @@ void test_step(void) {
     
     gTestStatus.reaction_total_time = now_ms - gTestStatus.reaction_start_time;
 
-    printf("Test step: reaction time = %f ms\n", gTestStatus.reaction_total_time);
+    // printf("Test step: reaction time = %f ms\n", gTestStatus.reaction_total_time);
     
     if (!gTestStatus.reaction_active) {
         return; // No active test
@@ -148,7 +148,7 @@ void test_step(void) {
         if (gSysControl.tube_present[i] && gTestStatus.tubes[i].state == EMPTY) {
             gTestStatus.tubes[i].state = RUNNING;
             gTestStatus.tubes[i].start_time = now_ms;
-            // gSysControl.tube_present[i] = false; // Reset flag
+            gSysControl.tube_present[i] = false; // Reset flag
         }
 
         // Check for tube positive result
@@ -165,7 +165,7 @@ void test_step(void) {
         if (gTestStatus.tubes[i].state == RUNNING &&
             tube_reaction_time >= REACTION_DURATION_MS) {
 
-            // gTestStatus.tubes[i].state = COMPLETED;
+            gTestStatus.tubes[i].state = COMPLETED;
 
         }
 

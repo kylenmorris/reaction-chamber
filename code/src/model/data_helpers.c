@@ -1,4 +1,5 @@
 #include "data_helpers.h"
+
 #include "data_structs.h"
 #include <stdint.h>
 #include <string.h>
@@ -8,6 +9,28 @@ void reset_sim_params() {
     gSimParams.heat_rate = 0.5f;
     gSimParams.cool_rate = 0.3f;
     gSimParams.force_temp_sensor_fault = false;
+}
+
+char* get_error_string(ErrorCode error) {
+    switch (error) {
+        case ERROR_SD_READ_FAILED:
+            return "SD card read failed";
+        case ERROR_SD_WRITE_FAILED:
+            return "SD card write failed";
+        case ERROR_TEST_INVALID:
+            return "Test invalid. Check tubes.";
+        case ERROR_TEMP_SENSOR_FAULT:
+            return "Temperature sensor fault.";
+        case ERROR_OPTICAL_SENSOR_FAULT:
+            return "Optical sensor fault.";
+        case ERROR_HEATER_FAULT:
+            return "Heater fault.";
+        case ERROR_NONE:
+            return "No error";
+        default:
+            return "Unknown error";
+        
+    }
 }
 
 // Helper to map string results back to enums

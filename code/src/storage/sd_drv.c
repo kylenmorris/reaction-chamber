@@ -60,6 +60,10 @@
         gHistoryIM.num_items = 4; // Update the count of items
     }
 
+    void delete_file(char* filename) {
+        printf("Simulated deletion of file: %s\n", filename);
+    }
+
 #endif
 
 /**
@@ -164,6 +168,7 @@
         res = f_mount(&fs, "", 1); 
         if (res != FR_OK) {
             printf("Mount failed: %d\n", res);
+            gSystemError.current_error = ERROR_SD_READ_FAILED;
             return;
         }
 
@@ -194,6 +199,26 @@
 
         gHistoryIM.num_items = file_count;
 
+    }
+
+    void delete_file(char* filename) {
+        FRESULT res;
+        FATFS fs;
+
+        res = f_mount(&fs, "", 1); 
+        if (res != FR_OK) {
+            printf("Mount failed: %d\n", res);
+            return;
+        }
+
+        res = f_unlink(filename);
+        if (res != FR_OK) {
+            printf("Failed to delete file: %s (Error: %d)\n", filename, res);
+        } else {
+            printf("File deleted successfully: %s\n", filename);
+        }
+
+        f_unmount("");
     }
 
 #endif

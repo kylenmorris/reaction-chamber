@@ -1,9 +1,17 @@
 #include "data_structs.h"
 #include <stdint.h>
 
+bool DEBUG_MODE = false;
+
 // ####################################
 // STRUCTS
 // ####################################
+
+SystemError gSystemError = {
+    .current_error = ERROR_NONE,
+    // .error_timestamp = 0,
+    // .needs_display = false
+};
 
 SystemState gSystemState = BOOT;
 
@@ -57,6 +65,11 @@ uint16_t gSimTime = 10;
 // ####################################
 // IMODEL STRUCTS
 // ####################################
+
+ErrorMenuIM gErrorMenuIM = {
+    .last_redraw = 0,
+    .needs_redraw = true
+};
 
 idleMenuIM gIdleMenuIM = {
     .needs_redraw = true,

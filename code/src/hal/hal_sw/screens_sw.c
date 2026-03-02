@@ -18,12 +18,22 @@ static void draw_progress_bar(float percent) {
         else
             printf(" ");
     }
-    printf("] %3f%%  ", percent);
+    printf("] %3.2f%%  ", percent);
 }
 
 // ####################################
 // TERMINAL SCREENS
 // ####################################
+
+void display_error_banner() {
+        printf("\033[2J");    // clear screen
+        printf("\033[H");     // move cursor to top-left
+        printf("================================\n");
+        printf("              ERROR               \n");
+        printf("================================\n\n");
+    
+        printf("%s\n", get_error_string(gSystemError.current_error));
+}
 
 void draw_loading_screen() {
     printf("\033[2J");    // clear screen
@@ -67,7 +77,7 @@ void draw_heating_screen() {
     printf("========================================\n\n");
 
     // Show temperature
-    printf("[%6.2f C / %6.2f C]\n",
+    printf("[%2.2f C / %2.2f C]\n",
            gTempStatus.chamber_temp, gTempStatus.target_temp);
 
     // Show progress bar

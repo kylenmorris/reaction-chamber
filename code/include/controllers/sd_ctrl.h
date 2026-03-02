@@ -9,4 +9,6 @@ void load_all_sd_filenames_into_global(void);
 
 void load_test_result_from_filename_into_global(char* filename);
 
+void delete_file_from_sd_card(char* filename);
+
 #endif

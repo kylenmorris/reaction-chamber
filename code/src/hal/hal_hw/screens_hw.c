@@ -1,29 +1,34 @@
+#include "screens_interface.h"
+
+#include "glcd.h"
 #include "glcd_controllers.h"
 #include "glcd_text.h"
-#include "screens_interface.h"
 
 #include "data_structs.h"
 #include "data_helpers.h"
 #include <stdio.h>
 
-#include "glcd.h"
 
 #ifdef USE_HW_DISPLAY
 
-void draw_debug_screen(void) {
+void display_error_banner() {
+    
     glcd_clear();
-    glcd_draw_string_xy(0, 0, "DEBUG SCREEN");
-    // draw all temp sensor data
-    char temp_str[64];
-    snprintf(temp_str, sizeof(temp_str), "Temp: %.2f C", gTempStatus.chamber_temp);
-    glcd_tiny_draw_string(0, 1, temp_str);
+
+    int x = 5;
+    int y = 3;
+    if (gSystemError.current_error != ERROR_NONE) {
+        glcd_tiny_draw_string(x, y, "ERROR: ");
+        glcd_tiny_draw_string(x, y + 1, get_error_string(gSystemError.current_error));
+    }
+
     glcd_write();
 }
 
 void draw_idle_screen(void) {
 
     glcd_clear();
-    
+
     glcd_tiny_draw_string(0, 0, "MAIN MENU");
     
     const int item_y_start = 1;
@@ -50,7 +55,7 @@ void draw_idle_screen(void) {
 
 void draw_heating_screen(void) {
     glcd_clear();
-    
+
     glcd_tiny_draw_string(0, 0, "HEATING MENU");
     
     /* Show temperature */
@@ -83,7 +88,7 @@ void draw_test_running_screen(void) {
 
     glcd_clear();
 
-    glcd_draw_string_xy(0, 0, "TEST ACTIVE");
+    glcd_tiny_draw_string(0, 0, "TEST ACTIVE");
         
     /* Show test progress */
     char progress_str[64];
@@ -139,7 +144,7 @@ void draw_results_history(void) {
     glcd_tiny_draw_string(0, 0, "RESULTS HISTORY");
 
     int start = gHistoryIM.scroll_index;
-    int end = start + 4;
+    int end = start + 5;
     int sel_idx = gHistoryIM.selected_index_relative;
 
     for (int i = start; i < end; i++) {
@@ -153,6 +158,10 @@ void draw_results_history(void) {
         glcd_tiny_draw_string(15, y, results_menu_items[i]);
     }
 
+    if (gHistoryIM.num_items > 5) {
+        glcd_tiny_draw_string(5, 6, "Scroll: UP/DOWN");
+    }
+
     glcd_tiny_draw_string(0, 7, "SEL: View  BACK: Main");
     
     glcd_write();
@@ -161,7 +170,7 @@ void draw_results_history(void) {
 void draw_loading_screen(void) {
     glcd_clear();
 
-    glcd_draw_string_xy(0, 0, "Device busy...");
+    glcd_tiny_draw_string(0, 0, "Device busy...");
 
     glcd_write();
 }

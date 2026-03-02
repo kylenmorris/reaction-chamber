@@ -73,16 +73,16 @@ void board_setup(void) {
 
         
         // Temperature sensors
-        i2c_init(i2c1, I2C_BAUDRATE);
+        i2c_init(i2c0, I2C_BAUDRATE);
         gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
         gpio_set_function(I2C_SCL_PIN, GPIO_FUNC_I2C);
         gpio_pull_up(I2C_SDA_PIN);
         gpio_pull_up(I2C_SCL_PIN);
 
         // Tube switches
-        gpio_init(SPI1_CS_SHIFT_SWITCHES_SR_PIN);
-        gpio_set_dir(SPI1_CS_SHIFT_SWITCHES_SR_PIN, GPIO_OUT);
-        gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN, 1);
+        gpio_init(SPI1_CS_SHIFT_SWITCHES_SR_PIN_0);
+        gpio_set_dir(SPI1_CS_SHIFT_SWITCHES_SR_PIN_0, GPIO_OUT);
+        gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN_0, 1);
 
         // SD card reader
         // gpio_init(SPI1_CS0_PIN);

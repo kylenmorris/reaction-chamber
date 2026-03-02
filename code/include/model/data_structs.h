@@ -5,6 +5,8 @@
 #include "constants.h"
 #include <stdint.h>
 
+extern bool DEBUG_MODE;
+
 // ####################################
 // ENUMS
 // ####################################
@@ -37,6 +39,24 @@ typedef enum {
 // ####################################
 // STRUCTS
 // ####################################
+
+typedef enum {
+    ERROR_NONE,
+    ERROR_SD_READ_FAILED,
+    ERROR_SD_WRITE_FAILED,
+    ERROR_TEMP_SENSOR_FAULT,
+    ERROR_TEST_INVALID,
+    ERROR_OPTICAL_SENSOR_FAULT,
+    ERROR_HEATER_FAULT
+} ErrorCode;
+
+typedef struct {
+    ErrorCode current_error;
+    uint32_t error_timestamp;
+    bool needs_display;  // Force redraw when error occurs
+} SystemError;
+
+extern SystemError gSystemError;
 
 // monitors which tubes are inserted
 // Written only by tube_sens_ctrl.c
@@ -156,6 +176,14 @@ extern bool filenames_need_update;
 // ####################################
 // IMODEL STRUCTS
 // ####################################
+
+typedef struct {
+    int selected_index;
+    uint32_t last_redraw;
+    bool needs_redraw;
+} ErrorMenuIM;
+
+extern ErrorMenuIM gErrorMenuIM;
 
 static char *idle_menu_items[] = {
     "Start Test",

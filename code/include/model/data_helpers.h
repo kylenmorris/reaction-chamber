@@ -5,6 +5,8 @@
 
 void reset_sim_params(void);
 
+char* get_error_string(ErrorCode error);
+
 ReactionResult string_to_result(const char* str);
 TubeState string_to_state(const char* str);
 

@@ -12,7 +12,7 @@ static uint32_t temp_extreme_start = 0;
 
 void reset_test_data(void) {
 
-    printf("Resetting test data...\n");
+    // printf("Resetting test data...\n");
 
     for (int i = 0; i < NUM_TUBES; i++) {
         gTestStatus.tubes[i].state = EMPTY;

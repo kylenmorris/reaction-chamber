@@ -7,4 +7,6 @@ char* create_json_string(void);
 
 void read_json_string(char *string);
 
+void read_metadata_json_string(char *string);
+
 #endif

@@ -43,19 +43,6 @@ static int debounceButton(int i, int reading) {
 // PUBLIC METHODS
 // ####################################
 
-void button_ctrl_init(void) {
-
-    // initialize button states
-    for (int i = 0; i < NUM_BUTTONS; i++) {
-        gButtonInput.buttonStates[i] = HIGH;
-        gButtonInput.lastButtonStates[i] = HIGH;
-        gButtonInput.steadyTime[i] = 0;
-    }
-
-    gButtonInput.wasPressed = false;
-    gButtonInput.lastPressed = -1;
-}
-
 // Checks for button presses and updates gButtonInput if a button was pressed
 void button_ctrl_step(void) {
 

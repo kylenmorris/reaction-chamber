@@ -1,9 +1,9 @@
 #ifndef HEATER_TESTS_H
 #define HEATER_TESTS_H
 
-void temp_sensor_failure_test(void);
-void heating_test_low(void);
-void heating_test_high(void);
+void test_heater_not_active_during_temp_sensor_failure(void);
+void test_heater_turns_on_when_heating(void);
+void test_heater_shutoff_on_overheat(void);
 
 void json_test(void);
 

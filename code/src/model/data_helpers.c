@@ -4,6 +4,12 @@
 #include <stdint.h>
 #include <string.h>
 
+void temp_sensor_reading_tracking(bool successful_read) {
+    if (successful_read) {
+        
+    }
+}
+
 void reset_sim_params() {
     gSimParams.ambient_temp = 0.0f;
     gSimParams.heat_rate = 0.5f;
@@ -35,8 +41,8 @@ char* get_error_string(ErrorCode error) {
 
 // Helper to map string results back to enums
 ReactionResult string_to_result(const char* str) {
-    if (strcmp(str, "POSITIVE") == 0) return POSITIVE;
-    if (strcmp(str, "NEGATIVE") == 0) return NEGATIVE;
+    if (strcmp(str, "POS") == 0) return POSITIVE;
+    if (strcmp(str, "NEG") == 0) return NEGATIVE;
     return INVALID_RESULT;
 }
 

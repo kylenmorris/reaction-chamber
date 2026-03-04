@@ -1,5 +1,3 @@
-#include "button_ctrl.h"
-#include "data_helpers.h"
 #include "drivers.h"
 
 // **Note** pico/stdlib.h IS needed despite clangd saying otherwise
@@ -12,12 +10,10 @@
 
 #include "constants.h"
 #include <stdbool.h>
-#include "data_structs.h"
 
-#include "sd_ctrl.h"
 #include "system_state_loop.h"
 
-// Needed in glcd
+// Needed for glcd
 void delay_ms(unsigned int ms) {
     sleep_ms(ms);
 }
@@ -26,7 +22,6 @@ void delay_ms(unsigned int ms) {
 void core1_entry() {
     while (true) {      
         run_system_state_loop_core1();
-        // printf("Core 1 loop done\n");
 
         sleep_ms(SYSTEM_DELAY_MS);
     }
@@ -69,9 +64,7 @@ int main() {
     // sleep_ms(200);
 
     while (true) {      
-        // Run everything else on core 0
         run_system_state_loop_core0();
-        // printf("Core 0 loop done\n");
 
         sleep_ms(SYSTEM_DELAY_MS);
     }

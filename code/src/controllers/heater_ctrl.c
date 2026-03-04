@@ -20,6 +20,7 @@ void heater_ctrl_step(void) {
 
     // If the heater is on, let it rise to 0.3 above desired. If it's off,
     // let it fall to 0.3 below. This prevents rapid switching of the heater
+    
     if (gHeaterState.heaterOn && (gTempStatus.chamber_temp > (TEMP_DESIRED_C + 0.3))) {
         hw_heater_toggle(false);
         gHeaterState.heaterOn = false;

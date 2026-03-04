@@ -50,6 +50,10 @@ int main()
 {
     stdio_init_all();
 
+    // Init built-in LED
+    gpio_init(PICO_DEFAULT_LED_PIN);
+    gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
+
     // SPI initialisation. This example will use SPI at 1MHz.
     spi_init(SPI_PORT, 1000*1000);
     gpio_set_function(PIN_MISO, GPIO_FUNC_SPI);
@@ -62,10 +66,13 @@ int main()
     gpio_put(PIN_CS, 1); // Set high (inactive) by default
     
     // Give the user a moment to connect via USB serial monitor
-    sleep_ms(2000);
+    sleep_ms(5000);
     printf("MCP3208 Initialization Complete.\n");
 
     while(true) {
+        // Turn LED on to show we are starting a read
+        gpio_put(PICO_DEFAULT_LED_PIN, 1);
+
         // Read Channel 0
         uint16_t adc_value = read_mcp3208(0);
         
@@ -73,9 +80,13 @@ int main()
         float voltage = (adc_value / 4095.0f) * 3.3f;
 
         // Print to the console
-        printf("Channel 0: %04d (%.2f V)\n", adc_value, voltage);
+        printf("Channel 0: %04d (%.6f V)\n", adc_value, voltage);
 
-        // Wait half a second before reading again
-        sleep_ms(1000);
+        // Turn LED off after delay
+        sleep_ms(500);
+        gpio_put(PICO_DEFAULT_LED_PIN, 0); 
+
+        // Wait before reading again
+        sleep_ms(500);
     }
 }

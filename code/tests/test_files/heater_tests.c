@@ -11,8 +11,8 @@
 
 // Check behaviour during temperature sensor failure in all states
 
-void temp_sensor_failure_test() {
-    printf("Running Test: Temperature Sensor Failure...\n");
+void test_heater_not_active_during_temp_sensor_failure() {
+    printf("Running Test: test_heater_not_active_during_temp_sensor_failure...");
 
     gSimParams.force_temp_sensor_fault = true;
 
@@ -37,16 +37,16 @@ void temp_sensor_failure_test() {
 
     gSimParams.force_temp_sensor_fault = false;
 
-    EXPECT_ONCE(gTempStatus.chamber_temp < 0, "Error: Simulation failed to inject sensor fault");
+    EXPECT_ONCE(gTempStatus.chamber_temp > 210.0f, "Error: Simulation failed to inject sensor fault");
 
     reset_sim_params();
-    printf("Test Temperature Sensor Failure: FINISHED\n");
+    printf("    FINISHED\n");
 }
 
 // Check the heater turns on when it should
 
-void heating_test_low() {
-    printf("Running Test: Cold Safety Check...\n");
+void test_heater_turns_on_when_heating() {
+    printf("Running Test: test_heater_turns_on_when_heating...");
 
     gTempStatus.chamber_temp = 0; 
 
@@ -66,13 +66,13 @@ void heating_test_low() {
     // EXPECT_ONCE(gTempStatus.chamber_temp > TEMP_HIGH_HIGH_C, "Test did not move temp above %dC", TEMP_HIGH_HIGH_C);        
 
     reset_sim_params();
-    printf("Test Cold: FINISHED\n");
+    printf("    FINISHED\n");
 }
 
 // Check heater turns off when it should
 
-void heating_test_high() {
-    printf("Running Test: Overheat Safety Check...\n");
+void test_heater_shutoff_on_overheat() {
+    printf("Running Test: test_heater_shutoff_on_overheat...");
 
     gSimParams.ambient_temp = 25.0f;
     gSimParams.heat_rate = 1.0f; // Increase 1 degree per tick
@@ -106,5 +106,5 @@ void heating_test_high() {
     EXPECT_ONCE(gTempStatus.chamber_temp > TEMP_HIGH_HIGH_C, "Test did not move temp above %dC", TEMP_HIGH_HIGH_C);        
 
     reset_sim_params();
-    printf("Test Overheat: FINISHED\n");
+    printf("    FINISHED\n");
 }

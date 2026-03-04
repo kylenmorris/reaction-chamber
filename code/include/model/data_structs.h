@@ -36,10 +36,6 @@ typedef enum {
     INVALID_RESULT 
 } ReactionResult;
 
-// ####################################
-// STRUCTS
-// ####################################
-
 typedef enum {
     ERROR_NONE,
     ERROR_SD_READ_FAILED,
@@ -49,6 +45,40 @@ typedef enum {
     ERROR_OPTICAL_SENSOR_FAULT,
     ERROR_HEATER_FAULT
 } ErrorCode;
+
+// System states for main loop
+// Written only by system_state_loop.c
+typedef enum {
+    IDLE,
+    HEATING,
+    REACTING,
+    RESULTS,
+    HISTORY,
+    BOOT
+} SystemState;
+
+extern SystemState gSystemState;
+
+typedef enum {
+    TEST_IDLE,
+    TEST_PREPARE,
+    TEST_RUNNING,
+    TEST_FINISHED
+} TestManagerState;
+
+extern TestManagerState gTestManagerState;
+
+// ####################################
+// STRUCTS
+// ####################################
+
+typedef struct {
+    int temp_sensor_success_count; // can be positive or negative
+    int optical_sensor_success_count; // can be positive or negative
+    int latest_filename_int; // for generating new filenames
+} SystemInfo;
+
+extern SystemInfo gSystemInfo;
 
 typedef struct {
     ErrorCode current_error;
@@ -94,28 +124,6 @@ typedef struct {
 
 extern TestStatus gTestStatus;
 
-// System states for main loop
-// Written only by system_state_loop.c
-typedef enum {
-    IDLE,
-    HEATING,
-    REACTING,
-    RESULTS,
-    HISTORY,
-    BOOT
-} SystemState;
-
-extern SystemState gSystemState;
-
-typedef enum {
-    TEST_IDLE,
-    TEST_PREPARE,
-    TEST_RUNNING,
-    TEST_FINISHED
-} TestManagerState;
-
-extern TestManagerState gTestManagerState;
-
 // Button input structure
 // Written only by button_ctrl.c
 typedef struct {
@@ -128,13 +136,11 @@ typedef struct {
 
 extern ButtonInput gButtonInput;
 
-
 typedef struct {
     bool heaterOn;
 } HeaterState;
 
 extern HeaterState gHeaterState;
-
 
 // Tube optical readings
 // Written only by tube_optical_ctrl.c
@@ -143,7 +149,6 @@ typedef struct {
 } OpticalInputs;
 
 extern OpticalInputs gOpticalInputs;
-
 
 // Temperature status
 // Written only by temp_sens_ctrl.c

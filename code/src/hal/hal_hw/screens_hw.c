@@ -37,19 +37,15 @@ void draw_idle_screen(void) {
     for (int i = 0; i < IDLE_MENU_ITEM_COUNT; i++) {
         int y = item_y_start + item_spacing * i;
         
-        /* Draw selection indicator (arrow) */
         if (i == gIdleMenuIM.selected_index) {
             glcd_tiny_draw_string(5, y, ">");
         }
         
-        /* Draw menu item text */
         glcd_tiny_draw_string(15, y, idle_menu_items[i]);
     }
         
-    /* Draw bottom instruction bar */
     glcd_tiny_draw_string(0, 7, "SEL: Select");
     
-    /* Update the display with changes */
     glcd_write();
 }
 
@@ -64,11 +60,10 @@ void draw_heating_screen(void) {
              gTempStatus.chamber_temp, gTempStatus.target_temp);
     glcd_tiny_draw_string(5, 2, temp_str);
     
-    /* Draw progress bar */
     int percent = (gTempStatus.chamber_temp * 100) / gTempStatus.target_temp;
     int filled = (percent * PROGRESS_BAR_WIDTH) / 100;
-    
     char bar_str[PROGRESS_BAR_WIDTH + 3];
+
     bar_str[0] = '[';
     for (int i = 0; i < PROGRESS_BAR_WIDTH; i++) {
         bar_str[i + 1] = (i < filled) ? '=' : ' ';
@@ -78,7 +73,6 @@ void draw_heating_screen(void) {
     
     glcd_tiny_draw_string(5, 4, bar_str);
     
-    /* Draw bottom instruction bar */
     glcd_tiny_draw_string(0, 7, "BACK: Cancel");
     
     glcd_write();

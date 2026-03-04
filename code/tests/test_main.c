@@ -23,11 +23,11 @@ int main(void) {
     gSystemState = BOOT;
     run_system_state_loop_core0();
 
-    heating_test_high();
-    heating_test_low();
-    temp_sensor_failure_test();
+    test_heater_shutoff_on_overheat();
+    test_heater_turns_on_when_heating();
+    test_heater_not_active_during_temp_sensor_failure();
 
-    state_to_reacting_on_temp();
+    test_state_to_reacting_on_temp();
 
     printf("--- Tests Complete ---\n");
 

@@ -11,4 +11,6 @@ void load_test_result_from_filename_into_global(char* filename);
 
 void delete_file_from_sd_card(char* filename);
 
+int get_latest_filename_int(void);
+
 #endif

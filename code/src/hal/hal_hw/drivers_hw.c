@@ -1,3 +1,4 @@
+#include "data_helpers.h"
 #include "drivers.h"
 #include "data_structs.h"
 #include "constants.h"
@@ -14,6 +15,7 @@
 #endif
 
 #ifdef USE_HW_PICO
+
 // Turn the led on or off
 void pico_set_led(bool led_on) {
     #if defined(PICO_DEFAULT_LED_PIN)
@@ -72,25 +74,29 @@ float mcp9808_convert_temp(uint8_t upper_byte, uint8_t lower_byte) {
 
     return temperature;
 }
+
 float hw_read_temperature_sensor(int address) {
 
-
-    printf("Reading temperature sensor at address 0x%02X\n", address);
+    // printf("Reading temperature sensor at address 0x%02X\n", address);
     const uint8_t reg = 0x05;
     uint8_t buf[2];
     
     int w = i2c_write_timeout_us(i2c0, address, &reg, 1, true, 50000);
-    if (w < 0) {
-        printf("I2C write failed\n");
+    int r = i2c_read_timeout_us(i2c0, address, buf, 2, false, 50000);
+
+    if ((r < 0) || (w < 0)) {
+        gSystemInfo.temp_sensor_success_count--;
+        if (gSystemInfo.temp_sensor_success_count < -5) {
+            gSystemError.current_error = ERROR_TEMP_SENSOR_FAULT;
+            gSystemInfo.temp_sensor_success_count = -6;
+        }
         return -999;
+    } else {
+        gSystemInfo.temp_sensor_success_count++;
     }
 
-    int r = i2c_read_timeout_us(i2c0, address, buf, 2, false, 50000);
-    if (r < 0) {
-        printf("I2C read failed\n");
-        return -999;
-    }
-    printf("Raw bytes: 0x%02X 0x%02X\n", buf[0], buf[1]);
+    // TODO: idk how this works, please test or update if needed
+
     uint16_t raw = ((uint16_t)buf[0] << 8) | buf[1];
     raw &= 0x1FFF;
 
@@ -98,6 +104,16 @@ float hw_read_temperature_sensor(int address) {
 
     if (raw & 0x1000)
         temp -= 256.0f;
+
+    if (temp < -40.0f || temp > 125.0f) {
+        // Out of range, likely a faulty reading
+        gSystemInfo.temp_sensor_success_count--;
+        if (gSystemInfo.temp_sensor_success_count < -5) {
+            gSystemError.current_error = ERROR_TEMP_SENSOR_FAULT;
+            gSystemInfo.temp_sensor_success_count = -6;
+        }
+        return -999;
+    }
 
     return temp;
 }
@@ -114,13 +130,13 @@ uint16_t hw_adc_read_raw(int adc_index, int channel) {
 static bool used_tubes[NUM_TUBES] = { false };
 
 #ifdef USE_HW_TUBE_SENS
-uint16_t hw_tube_sens_read_all(int pin) {
+uint8_t hw_tube_sens_read_all(int pin) {
     uint8_t data;
 
     // Disable clock (CLKINH = 1)
     gpio_put(pin, 1);
 
-    // Take MOSI away from SPI as I screwed up the pcb
+    // Take MOSI away from SPI as I screwed up the pcb, plz forgive me
     gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SIO);
     gpio_set_dir(SPI1_MOSI_PIN, GPIO_OUT);
 
@@ -142,7 +158,7 @@ uint16_t hw_tube_sens_read_all(int pin) {
     // Disable clock again
     gpio_put(pin, 1);
 
-    return ~data;   // because QH* is inverted
+    return ~data;   // because QH* is inverted output
 }
 
 #endif

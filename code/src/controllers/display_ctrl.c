@@ -9,7 +9,6 @@
 // This might need a rework
 static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw, 
                             uint32_t* last_redraw, void (*draw_fn)(void)) {
-    // draw_fn();
 
     if ((now_ms - *last_redraw) >= REDRAW_INTERVAL_MS || *needs_redraw) {
         draw_fn();
@@ -19,11 +18,11 @@ static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw,
     
 }
 
-
 // ####################################
 // PUBLIC METHODS
 // ####################################
 
+// Draws the currently relevant screen based on gSystemState and gSystemError 
 void display_ctrl_step() {
     
     uint32_t now_ms = get_current_time();

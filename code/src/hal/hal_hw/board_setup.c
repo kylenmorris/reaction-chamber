@@ -50,6 +50,7 @@ void board_setup(void) {
         spi_init(spi1, SPI1_BAUDRATE);       
         
         gpio_set_function(SPI1_SCK_PIN, GPIO_FUNC_SPI);
+        // gpio_pull_down(SPI1_MISO_PIN); // Or gpio_pull_up(SPI1_MISO_PIN);
         gpio_set_function(SPI1_MISO_PIN, GPIO_FUNC_SPI);
         gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SPI);
 
@@ -83,6 +84,10 @@ void board_setup(void) {
         gpio_init(SPI1_CS_SHIFT_SWITCHES_SR_PIN_0);
         gpio_set_dir(SPI1_CS_SHIFT_SWITCHES_SR_PIN_0, GPIO_OUT);
         gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN_0, 1);
+        
+        gpio_init(SPI1_CS_SHIFT_SWITCHES_SR_PIN_1);
+        gpio_set_dir(SPI1_CS_SHIFT_SWITCHES_SR_PIN_1, GPIO_OUT);
+        gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN_1, 1);
 
         // SD card reader
         // gpio_init(SPI1_CS0_PIN);

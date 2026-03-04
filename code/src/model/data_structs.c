@@ -7,10 +7,14 @@ bool DEBUG_MODE = false;
 // STRUCTS
 // ####################################
 
+SystemInfo gSystemInfo = {
+    .temp_sensor_success_count = 0,
+    .optical_sensor_success_count = 0,
+    .latest_filename_int = 0
+};
+
 SystemError gSystemError = {
     .current_error = ERROR_NONE,
-    // .error_timestamp = 0,
-    // .needs_display = false
 };
 
 SystemState gSystemState = BOOT;

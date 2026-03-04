@@ -57,7 +57,7 @@ void run_system_state_loop_core0() {
     temp_sens_ctrl_step();
     heater_ctrl_step();
     button_ctrl_step(); 
-    // tube_sens_ctrl_step();
+    tube_sens_ctrl_step();
 
     if (gSystemError.current_error != ERROR_NONE) {
         if (handle_button_press(SELECT)) {
@@ -123,6 +123,12 @@ void run_system_state_loop_core0() {
 
             if (check_test_completed()) {
                 determine_results();
+                int next_filename_int = get_latest_filename_int() + 1;
+                char filename[256];
+                snprintf(filename, sizeof(filename), "test_result_%d.json", next_filename_int);
+                save_test_result_from_global_to_filename(filename);
+                gSystemInfo.latest_filename_int = next_filename_int;
+                save_metadata_to_sd_card();
                 move_to_results();
             }
 
@@ -135,12 +141,10 @@ void run_system_state_loop_core0() {
         case RESULTS:
 
             if (handle_button_press(SELECT)) {
-                save_test_result_from_global_to_filename("latest_test.json");
                 move_to_idle();
             }
 
             if (handle_button_press(BACK)) {
-                save_test_result_from_global_to_filename("latest_test.json");
                 move_to_history();
             }
 

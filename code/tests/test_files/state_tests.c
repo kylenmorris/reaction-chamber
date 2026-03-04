@@ -10,16 +10,8 @@
 #include "../../include/model/data_helpers.h"
 
 
-void state_all_to_idle_on_back(void) {
-
-}
-
-void state_to_heating_on_select(void) {
-
-}
-
-void state_to_reacting_on_temp(void) {
-    printf("Running Test: Heating -> Reacting...\n");
+void test_state_to_reacting_on_temp(void) {
+    printf("Running Test: test_test_state_to_reacting_on_temp...");
 
     gTempStatus.chamber_temp = 40; 
     gSimParams.heat_rate = 1.0f;
@@ -33,7 +25,7 @@ void state_to_reacting_on_temp(void) {
     EXPECT_ONCE(gSystemState == REACTING, "System did not move to reacting.");        
 
     reset_sim_params();
-    printf("Test State: FINISHED\n");
+    printf("    FINISHED\n");
 }
 
 void state_to_results_on_finish(void) {

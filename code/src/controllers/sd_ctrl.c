@@ -5,6 +5,17 @@
 #include "sd_drv.h"
 #include <stdlib.h>
 
+int get_latest_filename_int() {
+    load_metadata_from_sd_card();
+    return gSystemInfo.latest_filename_int;
+}
+
+void save_metadata_to_sd_card() {
+    char *json_str = create_json_string();
+    save_to_file("metadata.json", json_str);
+    free(json_str);
+}
+
 void save_test_result_from_global_to_filename(char* filename) {
     char *test_results = serialize_test_results();
     save_to_file(filename, test_results);
@@ -16,13 +27,18 @@ void save_test_result_from_global_to_filename(char* filename) {
 
 void load_all_sd_filenames_into_global(void) {
 
-    // if (filenames_need_update == false) {
-    //     return;
-    // }
+    if (filenames_need_update == false) {
+        return;
+    }
     
-    populate_file_list("");
+    bool success = populate_file_list("");
 
-    filenames_need_update = false;
+    if (success) {
+        filenames_need_update = false;
+    } else {
+        filenames_need_update = true; // error and try again next time
+    }
+    
 }
 
 void load_test_result_from_filename_into_global(char* filename) {

@@ -11,6 +11,23 @@
 
 // TODO check this as it's mostly from gemini
 
+void read_metadata_json_string(char *string) {
+    if (!string) return;
+
+    cJSON *root = cJSON_Parse(string);
+    if (!root) {
+        printf("JSON Parse Error: %s\n", cJSON_GetErrorPtr());
+        return;
+    }
+
+    cJSON *latest_filename_int = cJSON_GetObjectItemCaseSensitive(root, "latest_filename_int");
+    if (latest_filename_int) {
+        gSystemInfo.latest_filename_int = latest_filename_int->valueint;
+    }
+
+    cJSON_Delete(root);
+}
+
 void read_json_string(char *string) {
     if (!string) return;
 

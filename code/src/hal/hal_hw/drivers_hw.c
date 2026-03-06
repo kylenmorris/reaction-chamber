@@ -43,8 +43,10 @@ int hw_button_get_raw(int button_gpio) {
 void hw_heater_toggle(bool enable) {
     if (enable) {
         gpio_put(HEATER_PIN, 1);
+        printf("Heater pin ON\n");
     } else {
         gpio_put(HEATER_PIN, 0);
+        printf("Heater pin OFF\n");
     }
 }
 #endif

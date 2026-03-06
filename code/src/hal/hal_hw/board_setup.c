@@ -60,7 +60,9 @@ void board_setup(void) {
         }
 
         // Heater
-        
+        gpio_init(HEATER_PIN);
+        gpio_set_dir(HEATER_PIN, GPIO_OUT);
+        gpio_put(HEATER_PIN, 0); // make sure heater is off to start
 
         // Display
         gpio_init(SPI0_CSn_DISPLAY_PIN);

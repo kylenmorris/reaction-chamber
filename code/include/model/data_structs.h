@@ -16,8 +16,7 @@ typedef enum {
     UP,
     DOWN,
     SELECT,
-    BACK,
-    DEBUG
+    BACK
 } ButtonType;
 
 // Physical tube state
@@ -54,7 +53,8 @@ typedef enum {
     REACTING,
     RESULTS,
     HISTORY,
-    BOOT
+    BOOT,
+    DEBUG
 } SystemState;
 
 extern SystemState gSystemState;
@@ -153,6 +153,7 @@ extern OpticalInputs gOpticalInputs;
 // Temperature status
 // Written only by temp_sens_ctrl.c
 typedef struct {
+    float temp_readings[NUM_TEMP_SENSORS];
     float chamber_temp; // °C
     bool temp_low;      // default false
     bool temp_extreme;  // default false
@@ -176,7 +177,7 @@ extern uint16_t gSimTime;
 extern bool filenames_need_update;
 
 #define PROGRESS_BAR_WIDTH 16
-#define IDLE_MENU_ITEM_COUNT 2 // might be excessive to define this
+#define IDLE_MENU_ITEM_COUNT 3 // might be excessive to define this
 
 // ####################################
 // IMODEL STRUCTS
@@ -192,8 +193,17 @@ extern ErrorMenuIM gErrorMenuIM;
 
 static char *idle_menu_items[] = {
     "Start Test",
-    "View History"
+    "View History",
+    "Debug Menu"
 };
+
+typedef struct {
+    bool needs_redraw;
+    uint32_t last_redraw;
+    int selected_index; // choose the screen
+} debugMenuIM;
+
+extern debugMenuIM gDebugMenuIM;
 
 typedef struct {
     int selected_index;

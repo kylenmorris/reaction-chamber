@@ -5,11 +5,13 @@
 
 #include "data_structs.h"
 #include "constants.h"
+#include <stdio.h>
 
 // This might need a rework
 static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw, 
                             uint32_t* last_redraw, void (*draw_fn)(void)) {
 
+// draw_fn();
     if ((now_ms - *last_redraw) >= REDRAW_INTERVAL_MS || *needs_redraw) {
         draw_fn();
         *last_redraw = now_ms;
@@ -26,8 +28,10 @@ static void redraw_if_needed(uint32_t now_ms, bool* needs_redraw,
 void display_ctrl_step() {
     
     uint32_t now_ms = get_current_time();
+    // printf("Displaying screen for state: %d\n", gSystemState);
 
     if (gSystemError.current_error != ERROR_NONE) {
+        // printf("Current error: %d\n", gSystemError.current_error);
         redraw_if_needed(now_ms, &gErrorMenuIM.needs_redraw, 
                 &gErrorMenuIM.last_redraw, display_error_banner);
         return;
@@ -62,5 +66,11 @@ void display_ctrl_step() {
         case BOOT:
             draw_loading_screen();
             break;
+
+        case DEBUG:
+            redraw_if_needed(now_ms, &gDebugMenuIM.needs_redraw, 
+                    &gDebugMenuIM.last_redraw, draw_debug_screen);
+            break;
+
         }
 }

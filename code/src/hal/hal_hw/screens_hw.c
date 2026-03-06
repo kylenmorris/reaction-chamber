@@ -1,3 +1,5 @@
+#include "constants.h"
+#include "glcd_text_tiny.h"
 #include "screens_interface.h"
 
 #include "glcd.h"
@@ -20,6 +22,62 @@ void display_error_banner() {
     if (gSystemError.current_error != ERROR_NONE) {
         glcd_tiny_draw_string(x, y, "ERROR: ");
         glcd_tiny_draw_string(x, y + 1, get_error_string(gSystemError.current_error));
+    }
+
+    glcd_write();
+}
+
+// Print with minimal formatting to fit on screen
+// All 4 temp sensors, 10 tube states, and 10 optical readings should fit on the screen
+void draw_debug_screen(void) {
+    glcd_clear();
+
+    
+    if (gDebugMenuIM.selected_index == 0) {
+        glcd_tiny_draw_string(0, 0, "Temp Sensors:");
+        for (int i = 0; i < NUM_TEMP_SENSORS; i++) {
+            char line[32];
+            snprintf(line, sizeof(line), "%d: %.2f C", i, gTempStatus.temp_readings[i]);
+            glcd_tiny_draw_string(0, i+1, line);
+        }
+
+        // draw heater state
+        char heater_line[32];
+        snprintf(heater_line, sizeof(heater_line), "Heater: %s", gHeaterState.heaterOn ? "ON" : "OFF");
+        glcd_tiny_draw_string(0, NUM_TEMP_SENSORS + 2, heater_line);
+    }
+
+    if (gDebugMenuIM.selected_index == 1) {
+        glcd_tiny_draw_string(0, 0, "Tube States:");
+
+        for (int i = 0; i < NUM_TUBES / 2; i++) {
+            char line[64];
+            snprintf(line, sizeof(line), 
+                    "%-1d:%-6s | %-2d:%-6s",
+                    i + 1,
+                    get_tube_state_string(gSysControl.tube_present[i]),
+                    i + NUM_TUBES / 2 + 1,
+                    get_tube_state_string(gSysControl.tube_present[i + NUM_TUBES / 2]));
+            
+            glcd_tiny_draw_string(0, 1 + i, line);
+        }
+    }
+
+    if (gDebugMenuIM.selected_index == 2) {
+        glcd_tiny_draw_string(0, 0, "Optical Inputs:");
+
+        for (int i = 0; i < NUM_TUBES / 2; i++) {
+            char line[64];
+            snprintf(line, sizeof(line), 
+                    "%-1d:%-6d | %-2d:%-6d",
+                    i + 1,
+                    gOpticalInputs.intensity[i],
+                    i + NUM_TUBES / 2 + 1,
+                    gOpticalInputs.intensity[i + NUM_TUBES / 2]);
+            
+            glcd_tiny_draw_string(0, 1 + i, line);
+        }
+
     }
 
     glcd_write();

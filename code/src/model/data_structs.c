@@ -75,6 +75,12 @@ ErrorMenuIM gErrorMenuIM = {
     .needs_redraw = true
 };
 
+debugMenuIM gDebugMenuIM = {
+    .needs_redraw = true,
+    .last_redraw = 0,
+    .selected_index = 0
+};
+
 idleMenuIM gIdleMenuIM = {
     .needs_redraw = true,
     .last_redraw = 0,

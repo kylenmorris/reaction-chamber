@@ -119,6 +119,8 @@
         f_unmount("");
     }
 
+    static char raw_buffer[2048];
+
     char *load_file(char *filename) {
 
         FATFS fs;
@@ -138,12 +140,12 @@
         }
 
         UINT bytes_read;
-        char raw_buffer[2048];
         
         fr = f_read(&fil, raw_buffer, sizeof(raw_buffer) - 1, &bytes_read);
         if (fr == FR_OK) {
             raw_buffer[bytes_read] = '\0'; // Null-terminate for printing
-            printf("Read %u bytes: %s\n", bytes_read, raw_buffer);
+            // printf("Read %u bytes: %s\n", bytes_read, raw_buffer);
+            printf("Read %u bytes from file %s successfully.\n", bytes_read, filename);
         }
 
         // Close the file
@@ -158,7 +160,7 @@
         // Unmount the SD card
         f_unmount("");
 
-        printf("File %s loaded successfully.\nData: %s", filename, raw_buffer);
+        printf("File %s loaded successfully.\n", filename);
 
         return strdup(raw_buffer); // Caller is responsible for freeing this memory
     }

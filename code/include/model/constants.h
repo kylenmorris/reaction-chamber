@@ -39,6 +39,8 @@
 
 #define NUM_TUBES 10
 
+#define NUM_TEMP_SENSORS 4
+
 #define TEMP_DESIRED_C 62.5
 #define TEMP_LOW_C 61
 #define TEMP_HIGH_HIGH_C 64
@@ -97,7 +99,7 @@ static const int BUTTON_PINS[] = {
 #define I2C_BAUDRATE 100 * 1000  // 100 kHz
 
 #define TEMP_SENSOR_0_I2C_ADDRESS 0x18
-#define TEMP_SENSOR_1_I2C_ADDRESS 0x1C
+#define TEMP_SENSOR_1_I2C_ADDRESS 0x19
 #define TEMP_SENSOR_2_I2C_ADDRESS 0x1A
 #define TEMP_SENSOR_3_I2C_ADDRESS 0x1E
 
@@ -123,9 +125,7 @@ static const int BUTTON_PINS[] = {
 // #define SPI1_CSn_ADC0_PIN 9
 // #define SPI1_CSn_ADC1_PIN 7
 
-// #define HEATER_ON_PIN 22
-
-// #define HEATER_PIN 0
+#define HEATER_PIN 22
 
 #define SPI_INSTANCE_DISPLAY spi0   // for reference only, see PICO2W.h
 #define SPI_INSTANCE_SD spi1        // for reference only, see hw_config.h

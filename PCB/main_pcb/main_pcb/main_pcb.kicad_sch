@@ -5627,10 +5627,6 @@
 		(uuid "5b928fed-3aa5-4ad2-81f9-ede284235aca")
 	)
 	(no_connect
-		(at 259.08 203.2)
-		(uuid "5c5e8009-4748-4398-9532-bc6efd0084b0")
-	)
-	(no_connect
 		(at 368.3 99.06)
 		(uuid "5d425433-0520-45b1-ab43-fe9bed294580")
 	)
@@ -5655,20 +5651,8 @@
 		(uuid "b80c014a-01a2-4082-ba4c-9f22ac2c725b")
 	)
 	(no_connect
-		(at 223.52 208.28)
-		(uuid "ca4ba9b4-6a4e-409c-8817-2050404a110a")
-	)
-	(no_connect
-		(at 259.08 200.66)
-		(uuid "d32761a8-6d1a-4cd6-9877-ee95b98b8e99")
-	)
-	(no_connect
 		(at 223.52 40.64)
 		(uuid "d7534e51-2107-4721-970f-8c89dbeb9e1c")
-	)
-	(no_connect
-		(at 223.52 203.2)
-		(uuid "e484d4cd-edfe-4946-8a91-6b3fba85e48e")
 	)
 	(no_connect
 		(at 223.52 72.39)
@@ -6952,6 +6936,28 @@
 			)
 		)
 	)
+	(global_label "OpOut8"
+		(shape input)
+		(at 223.52 203.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1a9d7a6b-2fe9-41b5-894d-37d49e0da4ff")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 213.6406 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TEMP_ALERT"
 		(shape input)
 		(at 368.3 147.32 180)
@@ -7458,6 +7464,28 @@
 			)
 		)
 	)
+	(global_label "out2"
+		(shape input)
+		(at 259.08 200.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4aee100c-aff9-4bea-b81d-6f98aa68010a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 266.2984 200.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TEMP_ALERT"
 		(shape input)
 		(at 368.3 96.52 180)
@@ -7630,6 +7658,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "out3"
+		(shape input)
+		(at 259.08 203.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "573e56a5-46b6-41c4-a016-d6ea0cf89094")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 266.2984 203.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -8466,6 +8516,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "OpOut9"
+		(shape input)
+		(at 223.52 208.28 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8fafcec0-cb13-465d-b096-e4b8dbcfac7e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 213.6406 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -9328,6 +9400,28 @@
 			)
 		)
 	)
+	(global_label "out3"
+		(shape input)
+		(at 223.52 210.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d1d1b2f3-003b-458e-91ef-c71650461017")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 216.3016 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "OpOut2"
 		(shape input)
 		(at 198.12 213.36 0)
@@ -9852,6 +9946,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "out2"
+		(shape input)
+		(at 223.52 205.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f8239024-f225-444e-8613-beb70d3bb3c3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 216.3016 205.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -18422,73 +18538,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 223.52 205.74 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "bba6603f-10ac-4745-b35c-e7c3f9cda81e")
-		(property "Reference" "#PWR030"
-			(at 217.17 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 219.71 205.7399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 223.52 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 223.52 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 223.52 205.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bafdcc01-4117-4d54-b1e1-36c71946362b")
-		)
-		(instances
-			(project "main_pcb"
-				(path "/9e1b86fa-37cc-48d2-968d-4a7578d4873f"
-					(reference "#PWR030")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3V")
 		(at 368.3 111.76 90)
 		(unit 1)
@@ -19600,73 +19649,6 @@
 			(project "main_pcb"
 				(path "/9e1b86fa-37cc-48d2-968d-4a7578d4873f"
 					(reference "#PWR077")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 223.52 210.82 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d8586b8e-560a-43fb-9b90-53b32d4b5be6")
-		(property "Reference" "#PWR031"
-			(at 217.17 210.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 219.71 210.8199 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 223.52 210.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 223.52 210.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 223.52 210.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "eecdf9a5-0730-4539-af48-77855892a07e")
-		)
-		(instances
-			(project "main_pcb"
-				(path "/9e1b86fa-37cc-48d2-968d-4a7578d4873f"
-					(reference "#PWR031")
 					(unit 1)
 				)
 			)

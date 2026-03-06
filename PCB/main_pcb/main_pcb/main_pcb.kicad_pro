@@ -490,7 +490,7 @@
       "plot": "/Users/matthewhahn/Documents/USASK/capstone/pathoscan/PCB/gerber_files/main_pcb/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "main_pcb.step",
       "svg": "",
       "vrml": ""
     },

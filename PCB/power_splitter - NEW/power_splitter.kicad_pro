@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 2.54
+          "drill": 0.0,
+          "height": 0.6,
+          "width": 1.325
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -451,7 +451,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "main_pcb.kicad_pro",
+    "filename": "power_splitter.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -487,10 +487,10 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "/Users/matthewhahn/Documents/USASK/capstone/pathoscan/PCB/gerber_files/main_pcb/",
+      "plot": "power_splitter_pcb",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "main_pcb.step",
+      "step": "",
       "svg": "",
       "vrml": ""
     },
@@ -611,7 +611,7 @@
   },
   "sheets": [
     [
-      "9e1b86fa-37cc-48d2-968d-4a7578d4873f",
+      "4cdb7044-92dd-4272-b0bd-7079be4f3079",
       "Root"
     ]
   ],

@@ -70,7 +70,7 @@
 // OPTICAL CONSTANTS
 // ####################################
 
-#define OPTICAL_REACTION_THRESHOLD 5000         // unsure of units
+#define OPTICAL_REACTION_THRESHOLD 1500         // unsure of units
 
 // ####################################
 // BUTTON DEFINITIONS
@@ -110,31 +110,31 @@ static const int BUTTON_PINS[] = {
 #define SPI0_SCK_PIN 18
 #define SPI0_MOSI_PIN 19
 
-#define SPI0_CSn_DISPLAY_PIN 17
 #define DISPLAY_DC_A0_PIN 20    // A0 Data/Command pin - LOW=command, HIGH=data
 #define DISPLAY_RST_PIN 21      // Reset pin - LOW=reset, HIGH=normal operation
 
 #define SPI1_SCK_PIN 10
 #define SPI1_MOSI_PIN 11
 #define SPI1_MISO_PIN 8
-#define SPI1_CSn_SD_CARD_PIN 0
-// #define SPI1_BAUDRATE 125 * 1000 * 1000 / 16  // slowed down for testing, 7.8125 MHz 
 
+#define SPI0_CSn_DISPLAY_PIN 17
+#define SPI1_CSn_SD_CARD_PIN 0
 #define SPI1_CS_SHIFT_SWITCHES_SR_PIN_0 26
 #define SPI1_CS_SHIFT_SWITCHES_SR_PIN_1 27
-// #define SPI1_CSn_ADC0_PIN 9
-// #define SPI1_CSn_ADC1_PIN 7
+#define SPI1_CSn_ADC0_PIN 9
+#define SPI1_CSn_ADC1_PIN 7
 
 #define HEATER_PIN 22
 
 #define SPI_INSTANCE_DISPLAY spi0   // for reference only, see PICO2W.h
 #define SPI_INSTANCE_SD spi1        // for reference only, see hw_config.h
 #define SPI_INSTANCE_SW spi1        // for reference only
+#define SPI_INSTANCE_ADC spi1        // for reference only
 
 #define PROBE_PIN 1
 
 #define SPI0_BAUDRATE 4 * 1000 * 1000 / 4       // 4 MHz which is a limit from glcd
-#define SPI1_BAUDRATE 125 * 1000 * 1000 / 4     // 31.25 MHz, just the default from no-os-fatfs 
-
+// #define SPI1_BAUDRATE 125 * 1000 * 1000 / 4     // 31.25 MHz, just the default from no-os-fatfs 
+#define SPI1_BAUDRATE 1000 * 1000
 
 #endif

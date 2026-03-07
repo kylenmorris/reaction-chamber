@@ -145,7 +145,7 @@ extern HeaterState gHeaterState;
 // Tube optical readings
 // Written only by tube_optical_ctrl.c
 typedef struct {
-    int intensity[NUM_TUBES];
+    float intensity[NUM_TUBES];
 } OpticalInputs;
 
 extern OpticalInputs gOpticalInputs;

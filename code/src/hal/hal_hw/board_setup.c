@@ -50,7 +50,6 @@ void board_setup(void) {
         spi_init(spi1, SPI1_BAUDRATE);       
         
         gpio_set_function(SPI1_SCK_PIN, GPIO_FUNC_SPI);
-        // gpio_pull_down(SPI1_MISO_PIN); // Or gpio_pull_up(SPI1_MISO_PIN);
         gpio_set_function(SPI1_MISO_PIN, GPIO_FUNC_SPI);
         gpio_set_function(SPI1_MOSI_PIN, GPIO_FUNC_SPI);
 
@@ -71,10 +70,15 @@ void board_setup(void) {
 
         gpio_set_function(SPI0_CSn_DISPLAY_PIN, GPIO_FUNC_SPI); 
 
-
         // Photodiodes
+        gpio_init(SPI1_CSn_ADC0_PIN);
+        gpio_set_dir(SPI1_CSn_ADC0_PIN, GPIO_OUT);
+        gpio_put(SPI1_CSn_ADC0_PIN, 1);
 
-        
+        gpio_init(SPI1_CSn_ADC1_PIN);
+        gpio_set_dir(SPI1_CSn_ADC1_PIN, GPIO_OUT);
+        gpio_put(SPI1_CSn_ADC1_PIN, 1);
+
         // Temperature sensors
         i2c_init(i2c0, I2C_BAUDRATE);
         gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
@@ -91,11 +95,15 @@ void board_setup(void) {
         gpio_set_dir(SPI1_CS_SHIFT_SWITCHES_SR_PIN_1, GPIO_OUT);
         gpio_put(SPI1_CS_SHIFT_SWITCHES_SR_PIN_1, 1);
 
+        gpio_init(1);
+        gpio_set_dir(1, GPIO_OUT);
+        gpio_put(1, 1);
+
         // SD card reader
         // gpio_init(SPI1_CS0_PIN);
         // gpio_set_dir(SPI1_CS0_PIN, GPIO_OUT);
         // gpio_put(SPI1_CS0_PIN, HIGH); // Deselect
-        // We don't init the pin as a spi pin so we can easily control multiple spi devices... according to chat
+        // i think glcd does this
 
         // Debug pin
         gpio_init(PROBE_PIN);

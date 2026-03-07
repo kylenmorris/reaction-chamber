@@ -25,6 +25,38 @@ static void draw_progress_bar(float percent) {
 // TERMINAL SCREENS
 // ####################################
 
+void draw_debug_screen() {
+    printf("\033[2J");    // clear screen
+    printf("\033[H");     // move cursor to top-left
+
+    printf("================================\n");
+    printf("            DEBUG INFO           \n");
+    printf("================================\n\n");
+
+    if (gDebugMenuIM.selected_index == 0) {
+        printf("Temp Sensors:\n");
+        for (int i = 0; i < NUM_TEMP_SENSORS; i++) {
+            printf("%d: %.2f C\n", i, gTempStatus.temp_readings[i]);
+        }
+        printf("Heater: %s\n", gHeaterState.heaterOn ? "ON" : "OFF");
+    }
+
+    if (gDebugMenuIM.selected_index == 1) {
+        printf("Tube States:\n");
+        for (int i = 0; i < NUM_TUBES / 2; i++) {
+            printf("%-2d: %-10s | %-2d: %-10s\n",
+                   i + 1,
+                   get_tube_state_string(gSysControl.tube_present[i]),
+                   i + NUM_TUBES / 2 + 1,
+                   get_tube_state_string(gSysControl.tube_present[i + NUM_TUBES / 2]));
+        }
+    }
+
+    printf("\n--------------------------------\n");
+    printf("UP/DOWN: Switch Debug Screen\n");
+    printf("================================\n");
+}
+
 void display_error_banner() {
         printf("\033[2J");    // clear screen
         printf("\033[H");     // move cursor to top-left

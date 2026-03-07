@@ -79,7 +79,7 @@ void run_system_state_loop_core0() {
     switch (gSystemState) {
         case DEBUG: 
             if (handle_button_press(SELECT)) {
-                gDebugMenuIM.selected_index = (gDebugMenuIM.selected_index + 1) % 3; // cycle through debug screens
+                gDebugMenuIM.selected_index = (gDebugMenuIM.selected_index + 1) % 4; // cycle through debug screens
                 gDebugMenuIM.needs_redraw = true;
             }
             if (handle_button_press(BACK)) {

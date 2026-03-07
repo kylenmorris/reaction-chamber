@@ -69,15 +69,52 @@ void draw_debug_screen(void) {
         for (int i = 0; i < NUM_TUBES / 2; i++) {
             char line[64];
             snprintf(line, sizeof(line), 
-                    "%-1d:%-6d | %-2d:%-6d",
+                    "%-1d:%-4.0f %c | %-2d:%-4.0f %c",
                     i + 1,
                     gOpticalInputs.intensity[i],
+                    (gOpticalInputs.intensity[i] > OPTICAL_REACTION_THRESHOLD) ? '*' : ' ',
                     i + NUM_TUBES / 2 + 1,
-                    gOpticalInputs.intensity[i + NUM_TUBES / 2]);
+                    gOpticalInputs.intensity[i + NUM_TUBES / 2],
+                    (gOpticalInputs.intensity[i + NUM_TUBES / 2] > OPTICAL_REACTION_THRESHOLD) ? '*' : ' '
+                );
             
             glcd_tiny_draw_string(0, 1 + i, line);
         }
 
+    }
+
+    if (gDebugMenuIM.selected_index == 3) {
+        glcd_tiny_draw_string(0, 0, "Tubes and Detections:");
+
+        for (int i = 0; i < NUM_TUBES / 2; i++) {
+            char line[64];
+
+            if (gSysControl.tube_present[i] == false) {
+                snprintf(line, sizeof(line), 
+                    // "%-1d: ABSENT | %-2d: ABSENT",
+                    "%-1d: ABSENT",
+                    i + 1
+                    );
+            } 
+            else {
+                // snprintf(line, sizeof(line), 
+                //         "%-1d:%-4.0f %c | %-2d:%-4.0f %c",
+                //         i + 1,
+                //         gOpticalInputs.intensity[i],
+                //         (gOpticalInputs.intensity[i] > OPTICAL_REACTION_THRESHOLD) ? '*' : ' ',
+                //         i + NUM_TUBES / 2 + 1,
+                //         gOpticalInputs.intensity[i + NUM_TUBES / 2],
+                //         (gOpticalInputs.intensity[i + NUM_TUBES / 2] > OPTICAL_REACTION_THRESHOLD) ? '*' : ' '
+                //     );
+                snprintf(line, sizeof(line), 
+                        "%-1d: %-10s [%-4.0f] ",
+                        i + 1,
+                        (gOpticalInputs.intensity[i] > OPTICAL_REACTION_THRESHOLD) ? "DETECTED" : "NO DETECT",
+                        gOpticalInputs.intensity[i]
+                    );
+            }
+            glcd_tiny_draw_string(0, 1 + i, line);
+        }        
     }
 
     glcd_write();

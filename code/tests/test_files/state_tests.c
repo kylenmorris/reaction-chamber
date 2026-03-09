@@ -11,7 +11,7 @@
 
 
 void test_state_to_reacting_on_temp(void) {
-    printf("Running Test: test_test_state_to_reacting_on_temp...");
+    printf("Running Test: test_test_state_to_reacting_on_temp...\n");
 
     gTempStatus.chamber_temp = 40; 
     gSimParams.heat_rate = 1.0f;

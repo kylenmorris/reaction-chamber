@@ -38,10 +38,10 @@ int main() {
     sleep_ms(SYSTEM_DELAY_MS * 5);
 
     // Hold up and down to enter debug
-    if (!hw_button_get_raw(BUTTON_PINS[UP])
-        && !hw_button_get_raw(BUTTON_PINS[UP])) {
-            DEBUG_MODE = true; // enable some menu items
-    }
+    // if (!hw_button_get_raw(BUTTON_PINS[UP])
+    //     && !hw_button_get_raw(BUTTON_PINS[UP])) {
+    //         DEBUG_MODE = true; // enable some menu items
+    // }
 
     // Run the display on core 1
     multicore_launch_core1(core1_entry);

@@ -51,7 +51,7 @@
 #define TEST_CYCLES 20
 
 // #define REACTION_DURATION_MS 30 * 60 * 1000     // 30 minutes
-#define REACTION_DURATION_MS 10 * 1000          // 10 seconds
+#define REACTION_DURATION_MS 30 * 1000          // 30 seconds
 #define TEMP_LOW_DURATION_MS 5 * 60 * 1000      // 5 minutes
 #define TEMP_EXTREME_DURATION_MS 10 * 1000      // 10 seconds
 
@@ -70,7 +70,7 @@
 // OPTICAL CONSTANTS
 // ####################################
 
-#define OPTICAL_REACTION_THRESHOLD 1500         // unsure of units
+#define OPTICAL_REACTION_THRESHOLD 1000
 
 // ####################################
 // BUTTON DEFINITIONS
@@ -80,14 +80,12 @@
 #define DOWN_BUTTON_GPIO_PIN 15     // btn 0  
 #define UP_BUTTON_GPIO_PIN 12       // btn 3
 #define SELECT_BUTTON_GPIO_PIN 13   // btn 2
-// #define DEBUG_BUTTON_GPIO_PIN 
 
 static const int BUTTON_PINS[] = {
     UP_BUTTON_GPIO_PIN,
     DOWN_BUTTON_GPIO_PIN,
     SELECT_BUTTON_GPIO_PIN,
     BACK_BUTTON_GPIO_PIN,
-    // DEBUG_BUTTON_GPIO_PIN
 };
 
 // ####################################

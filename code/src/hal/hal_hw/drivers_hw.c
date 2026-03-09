@@ -43,10 +43,10 @@ int hw_button_get_raw(int button_gpio) {
 void hw_heater_toggle(bool enable) {
     if (enable) {
         gpio_put(HEATER_PIN, 1);
-        printf("Heater pin ON\n");
+        // printf("Heater pin ON\n");
     } else {
         gpio_put(HEATER_PIN, 0);
-        printf("Heater pin OFF\n");
+        // printf("Heater pin OFF\n");
     }
 }
 #endif
@@ -154,7 +154,7 @@ uint16_t read_mcp3208(uint8_t channel, int adc_csn_pin) {
     // The lower 4 bits of the second RX byte contain the upper 4 bits of the result.
     // The third RX byte contains the lower 8 bits of the result.
     uint16_t result = ((rx_buf[1] & 0x0F) << 8) | rx_buf[2];
-    printf("RAW BYTES: %02X %02X %02X from channel %d pin %d\n", rx_buf[0], rx_buf[1], rx_buf[2], channel, adc_csn_pin);
+    // printf("RAW BYTES: %02X %02X %02X from channel %d pin %d\n", rx_buf[0], rx_buf[1], rx_buf[2], channel, adc_csn_pin);
 
     return result;
 }

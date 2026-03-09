@@ -36,7 +36,7 @@ void hw_heater_toggle(bool enable) {
 #ifndef USE_HW_TEMP_SENS
 float hw_read_temperature_sensor(int sensor_id) {
 
-    if (gSimParams.force_temp_sensor_fault) return 211.0f;
+    if (gSimParams.force_temp_sensor_fault) return -999.0f;
 
     // if heater is on, temp goes up
     if (gHeaterState.heaterOn == true) {

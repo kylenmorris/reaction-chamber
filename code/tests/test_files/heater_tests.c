@@ -12,7 +12,7 @@
 // Check behaviour during temperature sensor failure in all states
 
 void test_heater_not_active_during_temp_sensor_failure() {
-    printf("Running Test: test_heater_not_active_during_temp_sensor_failure...");
+    printf("Running Test: test_heater_not_active_during_temp_sensor_failure...\n");
 
     gSimParams.force_temp_sensor_fault = true;
 
@@ -20,10 +20,9 @@ void test_heater_not_active_during_temp_sensor_failure() {
     int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
 
     for (int i = 0; i < num_cases; i++) {
-        SystemState currentState = test_cases[i];
-        gSystemState = currentState;
+        gSystemState = test_cases[i];
         
-        const char* stateName = get_system_state_string(currentState); 
+        const char* stateName = get_system_state_string(test_cases[i]); 
         // printf("  Checking state: %s\n", stateName);
 
         for (int cycle = 0; cycle < TEST_CYCLES; cycle++) {
@@ -37,7 +36,7 @@ void test_heater_not_active_during_temp_sensor_failure() {
 
     gSimParams.force_temp_sensor_fault = false;
 
-    EXPECT_ONCE(gTempStatus.chamber_temp > 210.0f, "Error: Simulation failed to inject sensor fault");
+    EXPECT_ONCE((gTempStatus.chamber_temp > 210.0f) || (gTempStatus.chamber_temp < -99.0f), "Error: Simulation failed to inject sensor fault");
 
     reset_sim_params();
     printf("    FINISHED\n");
@@ -46,7 +45,7 @@ void test_heater_not_active_during_temp_sensor_failure() {
 // Check the heater turns on when it should
 
 void test_heater_turns_on_when_heating() {
-    printf("Running Test: test_heater_turns_on_when_heating...");
+    printf("Running Test: test_heater_turns_on_when_heating...\n");
 
     gTempStatus.chamber_temp = 0; 
 
@@ -72,7 +71,7 @@ void test_heater_turns_on_when_heating() {
 // Check heater turns off when it should
 
 void test_heater_shutoff_on_overheat() {
-    printf("Running Test: test_heater_shutoff_on_overheat...");
+    printf("Running Test: test_heater_shutoff_on_overheat...\n");
 
     gSimParams.ambient_temp = 25.0f;
     gSimParams.heat_rate = 1.0f; // Increase 1 degree per tick

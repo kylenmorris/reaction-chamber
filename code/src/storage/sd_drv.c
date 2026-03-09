@@ -113,7 +113,7 @@
             return;
         }
 
-        printf("File data written to %s successfully.\nData: %s", filename, content);
+        printf("File data written to %s successfully.\n", filename);
         
         // Unmount the SD card
         f_unmount("");

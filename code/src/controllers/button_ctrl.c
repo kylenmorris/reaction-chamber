@@ -4,6 +4,7 @@
 
 #include "constants.h"
 #include "data_structs.h"
+#include <stdio.h>
 
 // debounces a button input, returns 1 if a true press detected
 static int debounceButton(int i, int reading) {
@@ -56,6 +57,7 @@ void button_ctrl_step(void) {
         if (truePress) {
             gButtonInput.lastPressed = i;
             gButtonInput.wasPressed = true;
+            printf("Button %d pressed\n", i);
         }
     }
     

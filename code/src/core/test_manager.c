@@ -27,7 +27,8 @@ void reset_test_data(void) {
     
     temp_low_start = 0;
     temp_extreme_start = 0;
-
+    
+    gTestStatus.reaction_total_time = 0;
     gTestStatus.reaction_start_time = get_current_time();
     gTestStatus.reaction_active = true;
     gTestStatus.test_invalid = false;
@@ -109,8 +110,7 @@ void test_step(void) {
     uint32_t now_ms = get_current_time();
     
     gTestStatus.reaction_total_time = now_ms - gTestStatus.reaction_start_time;
-
-    // printf("Test step: reaction time = %f ms\n", gTestStatus.reaction_total_time);
+    // printf("Test step: reaction total time = %d ms\n", gTestStatus.reaction_total_time);
     
     if (!gTestStatus.reaction_active) {
         return; // No active test
@@ -151,10 +151,15 @@ void test_step(void) {
             gSysControl.tube_present[i] = false; // Reset flag
         }
 
+        if (!gSysControl.tube_present[i]) {
+            continue; 
+        }
+
         // Check for tube positive result
         if (gTestStatus.tubes[i].state == RUNNING && 
             gOpticalInputs.intensity[i] >= OPTICAL_REACTION_THRESHOLD &&
             !gTestStatus.tubes[i].positive_detected) {
+            printf("Tube %d positive at time %d ms\n", i, tube_reaction_time);
             
             gTestStatus.tubes[i].positive_detected = true;
             gTestStatus.tubes[i].detection_time = tube_reaction_time;
@@ -164,7 +169,7 @@ void test_step(void) {
         // Check for tube completions
         if (gTestStatus.tubes[i].state == RUNNING &&
             tube_reaction_time >= REACTION_DURATION_MS) {
-
+            printf("Tube %d completed at time %d ms\n", i, tube_reaction_time);
             gTestStatus.tubes[i].state = COMPLETED;
 
         }

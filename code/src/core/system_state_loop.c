@@ -60,22 +60,22 @@ void run_system_state_loop_core1() {
 
 void run_system_state_loop_core0() {
     
+    button_ctrl_step(); 
     temp_sens_ctrl_step();
     heater_ctrl_step();
-    button_ctrl_step(); 
     tube_sens_ctrl_step();
     tube_optical_ctrl_step();
 
     // printf("State: %d\n", gSystemState);
 
-    if (gSystemError.current_error != ERROR_NONE) {
-        if (handle_button_press(SELECT)) {
-            gSystemError.current_error = ERROR_NONE;
-            gSystemError.needs_display = false;
-            return;
-        }
-    }   
-
+    // if (gSystemError.current_error != ERROR_NONE) {
+    //     if (handle_button_press(SELECT)) {
+    //         gSystemError.current_error = ERROR_NONE;
+    //         gSystemError.needs_display = false;
+    //         return;
+    //     }
+    // }   
+                                               
     switch (gSystemState) {
         case DEBUG: 
             if (handle_button_press(SELECT)) {
@@ -133,6 +133,10 @@ void run_system_state_loop_core0() {
 
         case HEATING:
 
+            if (handle_button_press(UP)) {
+                DEBUG_MODE = true;
+            }
+
             if (handle_button_press(BACK)) {
                 move_to_idle();
             }
@@ -140,6 +144,7 @@ void run_system_state_loop_core0() {
             // target temp reached, start test
             if (check_conditions_for_test_start()) {  
                 reset_test_data(); 
+                DEBUG_MODE = false;
                 move_to_reacting();
             }
 

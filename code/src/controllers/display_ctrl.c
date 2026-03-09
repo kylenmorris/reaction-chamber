@@ -32,9 +32,9 @@ void display_ctrl_step() {
 
     if (gSystemError.current_error != ERROR_NONE) {
         // printf("Current error: %d\n", gSystemError.current_error);
-        redraw_if_needed(now_ms, &gErrorMenuIM.needs_redraw, 
-                &gErrorMenuIM.last_redraw, display_error_banner);
-        return;
+        // redraw_if_needed(now_ms, &gErrorMenuIM.needs_redraw, 
+        //         &gErrorMenuIM.last_redraw, display_error_banner);
+        // return;
     }
 
     switch (gSystemState) {

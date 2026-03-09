@@ -8,10 +8,6 @@
 // Reads from gSystemState and gTempStatus to control the heater
 void heater_ctrl_step(void) {
 
-    if (gSystemState == DEBUG) {
-        return; // in debug mode, the heater is controlled manually with buttons
-    }
-    
     bool sys_state_invalid = !(gSystemState == HEATING || gSystemState == REACTING || gSystemState == DEBUG);
     bool temp_sensors_invald = (gTempStatus.chamber_temp < LOWEST_POSSIBLE_TEMP) 
                                 || (gTempStatus.chamber_temp > HIGHEST_POSSIBLE_TEMP);
@@ -22,7 +18,10 @@ void heater_ctrl_step(void) {
         return;        
     }
 
-
+    if (gSystemState == DEBUG) {
+        return; // in debug mode, the heater is controlled manually with buttons
+    }
+    
     // If the heater is on, let it rise to 0.3 above desired. If it's off,
     // let it fall to 0.3 below. This prevents rapid switching of the heater
     

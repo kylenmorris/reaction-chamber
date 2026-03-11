@@ -8,13 +8,13 @@
 
 #ifndef USE_HW_PICO
 
-
 // Turn the led on or off
 void pico_set_led(bool led_on) {
     printf("LED %s\n", led_on ? "ON" : "OFF");
 }
 
 uint32_t get_current_time(void) {
+    gSimTime += 10;
     return gSimTime;
 }
 
@@ -28,7 +28,6 @@ int hw_button_get_raw(int button_gpio) {
 
 #ifndef USE_HW_HEATER
 void hw_heater_toggle(bool enable) {
-    // printf("Heater %s\n", enable ? "ON" : "OFF");
     gHeaterState.heaterOn = enable;
 }
 #endif
@@ -65,14 +64,15 @@ uint16_t hw_adc_read_raw(int adc_index, int channel) {
 
 #endif
 
+#ifndef USE_HW_TUBE_SENS
+
 // Track which tubes have been inserted via debug button
 static bool used_tubes[NUM_TUBES] = { false };
 
-#ifndef USE_HW_TUBE_SENS
 uint8_t hw_tube_sens_read_all(void) {
 
     // Handle debug button press to insert new random tube
-    if (button_is_pressed(DEBUG)) {
+    if (handle_button_press(DEBUG)) {
 
         // printf("Debug button pressed, inserting tube\n");
         // Find an unused tube

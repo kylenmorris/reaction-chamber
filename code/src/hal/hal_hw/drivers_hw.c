@@ -1,5 +1,6 @@
-#include "data_helpers.h"
 #include "drivers.h"
+
+#include "data_helpers.h"
 #include "data_structs.h"
 #include "constants.h"
 #include <hardware/i2c.h>
@@ -97,15 +98,15 @@ float hw_read_temperature_sensor(int address) {
         gSystemInfo.temp_sensor_success_count++;
     }
 
-    // TODO: idk how this works, please test or update if needed
+    float temp = mcp9808_convert_temp(buf[0], buf[1]);
 
-    uint16_t raw = ((uint16_t)buf[0] << 8) | buf[1];
-    raw &= 0x1FFF;
+    // uint16_t raw = ((uint16_t)buf[0] << 8) | buf[1];
+    // raw &= 0x1FFF;
 
-    float temp = raw * 0.0625f;
+    // float temp = raw * 0.0625f;
 
-    if (raw & 0x1000)
-        temp -= 256.0f;
+    // if (raw & 0x1000)
+    //     temp -= 256.0f;
 
     if (temp < -40.0f || temp > 125.0f) {
         // Out of range, likely a faulty reading
@@ -159,30 +160,21 @@ uint16_t read_mcp3208(uint8_t channel, int adc_csn_pin) {
     return result;
 }
 
-
 uint16_t hw_adc_read_raw(int adc_csn_pin, int channel) {
 
-    while(true) {
-        // Read Channel 
-        uint16_t adc_value = read_mcp3208(channel, adc_csn_pin);
-        
-        // Calculate voltage (Assuming VREF = 3.3V on the MCP3208)
-        // float voltage = (adc_value / 4095.0f) * 3.3f;
-        // Print to the console
-        // printf("Channel %d: %04d (%.6f V)\n", channel, adc_value, voltage);
-        if (adc_value == 4095)
-            adc_value = 0;
+    uint16_t adc_value = read_mcp3208(channel, adc_csn_pin);
+    
+    if (adc_value == 4095)
+        adc_value = 0; // error reading
 
-        return adc_value;
-    }
+    return adc_value;
+
 }
 
 #endif
 
-// Track which tubes have been inserted via debug button
-static bool used_tubes[NUM_TUBES] = { false };
-
 #ifdef USE_HW_TUBE_SENS
+
 uint8_t hw_tube_sens_read_all(int pin) {
     uint8_t data;
 

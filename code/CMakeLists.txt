@@ -38,7 +38,7 @@ else()
         include(${picoVscode})
     endif()
 
-    set(PICO_BOARD pico2 CACHE STRING "Board type")
+    set(PICO_BOARD picow CACHE STRING "Board type")
 
     include(pico_sdk_import.cmake)
 

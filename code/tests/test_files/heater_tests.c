@@ -68,6 +68,37 @@ void test_heater_turns_on_when_heating() {
     printf("    FINISHED\n");
 }
 
+// check if heater is only on in valid states
+void test_heater_only_on_in_valid_states() {
+    printf("Running Test: test_heater_only_on_in_valid_states...\n");
+
+    gTempStatus.chamber_temp = 0; 
+
+    SystemState test_cases[] = {IDLE, BOOT, RESULTS, HISTORY, HEATING, REACTING};
+    int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);
+
+    for (int i = 0; i < num_cases; i++) {
+        gSystemState = test_cases[i];
+        
+        const char* stateName = get_system_state_string(test_cases[i]); 
+        // printf("  Checking state: %s\n", stateName);
+
+        for (int cycle = 0; cycle < TEST_CYCLES; cycle++) {
+            run_system_state_loop_core0();
+
+            if (test_cases[i] == HEATING) {
+                EXPECT(gHeaterState.heaterOn == true, "Heater should be enabled in HEATING state");
+            } else {
+                EXPECT(gHeaterState.heaterOn == false, "Heater should be disabled in state %s", stateName);
+            }
+        }
+    }
+
+    reset_sim_params();
+    printf("    FINISHED\n");
+}
+
+
 // Check heater turns off when it should
 
 void test_heater_shutoff_on_overheat() {

@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "constants.h"
 
 // Gets time in ms since boot
 uint32_t get_current_time(void);

@@ -21,6 +21,7 @@ https://github.com/carlk3/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/tree/main#customizing
 */
 
 #include "hw_config.h"
+#include "SPI/my_spi.h"
 #include "constants.h"
 
 /* Configuration of hardware SPI object */

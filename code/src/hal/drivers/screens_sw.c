@@ -78,7 +78,6 @@ void draw_loading_screen() {
 }
 
 void draw_idle_screen() {
-    // Clear terminal (works on most terminals)
     printf("\033[2J");    // clear screen
     printf("\033[H");     // move cursor to top-left
 

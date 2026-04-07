@@ -68,30 +68,45 @@ void run_system_state_loop_core0() {
 
     // printf("State: %d\n", gSystemState);
 
-    // if (gSystemError.current_error != ERROR_NONE) {
-    //     if (handle_button_press(SELECT)) {
-    //         gSystemError.current_error = ERROR_NONE;
-    //         gSystemError.needs_display = false;
-    //         return;
-    //     }
-    // }   
+    if (gSystemError.current_error != ERROR_NONE) {
+        if (handle_button_press(SELECT)) {
+            gSystemError.current_error = ERROR_NONE;
+            gSystemError.needs_display = false;
+            return;
+        }
+    }   
                                                
     switch (gSystemState) {
         case DEBUG: 
             if (handle_button_press(SELECT)) {
-                gDebugMenuIM.selected_index = (gDebugMenuIM.selected_index + 1) % 4; // cycle through debug screens
+                gDebugMenuIM.selected_index = (gDebugMenuIM.selected_index + 1) % 5; // cycle through debug screens
                 gDebugMenuIM.needs_redraw = true;
+                printf("Debug SELECT pressed, new index: %d\n", gDebugMenuIM.selected_index);
             }
             if (handle_button_press(BACK)) {
                 move_to_idle();
             }
-            if (handle_button_press(UP) && (gDebugMenuIM.selected_index == 0)) {
-                hw_heater_toggle(true);
-                gHeaterState.heaterOn = true;
+
+            if (handle_button_press(UP)) {
+                if (gDebugMenuIM.selected_index == 0) {
+                    hw_heater_toggle(true);
+                    printf("Heater ON\n");
+                }
+                if (gDebugMenuIM.selected_index == 4) {
+                    hw_leds_toggle(true);
+                    printf("LEDs ON\n");
+                }
             }
-            if (handle_button_press(DOWN) && (gDebugMenuIM.selected_index == 0)) {
-                hw_heater_toggle(false);
-                gHeaterState.heaterOn = false;
+
+            if (handle_button_press(DOWN)) {
+                if (gDebugMenuIM.selected_index == 0) {
+                    hw_heater_toggle(false);
+                    printf("Heater OFF\n");
+                }
+                if (gDebugMenuIM.selected_index == 4) {
+                    hw_leds_toggle(false);
+                    printf("LEDs OFF\n");
+                }
             }
             break;
 
@@ -154,6 +169,14 @@ void run_system_state_loop_core0() {
 
             if (handle_button_press(BACK)) {
                 move_to_idle();
+            }
+
+            if (handle_button_press(UP)) {
+                hw_leds_toggle(!gSystemInfo.led_state);
+            }
+
+            if (handle_button_press(DOWN)) {
+                set_all_inserted_tubes_detected();
             }
 
             if (check_test_completed()) {

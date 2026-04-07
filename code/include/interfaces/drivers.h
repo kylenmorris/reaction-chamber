@@ -30,5 +30,7 @@ uint16_t hw_adc_read_raw(int adc_index, int channel);
 // Returns a bitmask where bit 0 is Tube 1, bit 1 is Tube 2, etc.
 uint8_t hw_tube_sens_read_all(int pin);
 
+// enable the leds internal
+void hw_leds_toggle(bool enable);
 
 #endif

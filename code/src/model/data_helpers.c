@@ -2,6 +2,7 @@
 
 #include "data_structs.h"
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 void reset_sim_params() {
@@ -17,8 +18,12 @@ char* get_error_string(ErrorCode error) {
             return "SD card read failed";
         case ERROR_SD_WRITE_FAILED:
             return "SD card write failed";
-        case ERROR_TEST_INVALID:
-            return "Test invalid. Check tubes.";
+        case ERROR_TEST_INVALID_POS_CTRL:
+            return "Test invalid. Positive control failure.";
+        case ERROR_TEST_INVALID_NEG_CTRL:
+            return "Test invalid. Negative control failure.";
+        case ERROR_TEST_INVALID_TEMP:
+            return "Test invalid. Temperature failure.";
         case ERROR_TEMP_SENSOR_FAULT:
             return "Temperature sensor fault.";
         case ERROR_OPTICAL_SENSOR_FAULT:
@@ -43,9 +48,24 @@ ReactionResult string_to_result(const char* str) {
 // Helper to map string states back to enums
 TubeState string_to_state(const char* str) {
     if (strcmp(str, "EMPTY") == 0) return EMPTY;
-    if (strcmp(str, "RUNNING") == 0) return RUNNING;
-    if (strcmp(str, "COMPLETED") == 0) return COMPLETED;
+    if (strcmp(str, "REACT") == 0) return RUNNING;
+    if (strcmp(str, "DONE") == 0) return COMPLETED;
     return ERROR;
+}
+
+char* get_tube_state_string(TubeState state) {
+    switch (state) {
+        case EMPTY:
+            return "EMPTY";
+        case RUNNING:
+            return "REACT";
+        case COMPLETED:
+            return "DONE";
+        case ERROR:
+            return "ERROR";
+        default:
+            return "__ERROR__";
+    }
 }
 
 char* get_system_state_string(SystemState state) {
@@ -57,21 +77,6 @@ char* get_system_state_string(SystemState state) {
         case HISTORY:  return "HISTORY";
         case BOOT:     return "BOOT";
         default:       return "UNKNOWN_STATE";
-    }
-}
-
-char* get_tube_state_string(TubeState state) {
-    switch (state) {
-        case EMPTY:
-            return "EMPTY";
-        case RUNNING:
-            return "RUNNING";
-        case COMPLETED:
-            return "COMPLETED";
-        case ERROR:
-            return "ERROR";
-        default:
-            return "__ERROR__";
     }
 }
 
@@ -93,6 +98,7 @@ bool handle_button_press(ButtonType button) {
 
     if (pressed) {
         gButtonInput.wasPressed = false;
+        printf("button handled: %d\n", button);
         return true;
     } else {
         return false;

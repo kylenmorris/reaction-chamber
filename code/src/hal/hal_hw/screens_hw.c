@@ -43,7 +43,12 @@ void draw_debug_screen(void) {
 
         // draw heater state
         char heater_line[32];
-        snprintf(heater_line, sizeof(heater_line), "Heater: %s", gHeaterState.heaterOn ? "ON" : "OFF");
+        if (gHeaterState.heaterOn) {
+            snprintf(heater_line, sizeof(heater_line), "Heater: ON");
+        } else {
+            snprintf(heater_line, sizeof(heater_line), "Heater: OFF");
+        }
+        // snprintf(heater_line, sizeof(heater_line), "Heater: %s", gHeaterState.heaterOn ? "ON" : "OFF");
         glcd_tiny_draw_string(0, NUM_TEMP_SENSORS + 2, heater_line);
     }
 
@@ -97,15 +102,6 @@ void draw_debug_screen(void) {
                     );
             } 
             else {
-                // snprintf(line, sizeof(line), 
-                //         "%-1d:%-4.0f %c | %-2d:%-4.0f %c",
-                //         i + 1,
-                //         gOpticalInputs.intensity[i],
-                //         (gOpticalInputs.intensity[i] > OPTICAL_REACTION_THRESHOLD) ? '*' : ' ',
-                //         i + NUM_TUBES / 2 + 1,
-                //         gOpticalInputs.intensity[i + NUM_TUBES / 2],
-                //         (gOpticalInputs.intensity[i + NUM_TUBES / 2] > OPTICAL_REACTION_THRESHOLD) ? '*' : ' '
-                //     );
                 snprintf(line, sizeof(line), 
                         "%-1d: %-10s [%-4.0f] ",
                         i + 1,
@@ -115,6 +111,15 @@ void draw_debug_screen(void) {
             }
             glcd_tiny_draw_string(0, 1 + i, line);
         }        
+    }
+
+    if (gDebugMenuIM.selected_index == 4) {
+        glcd_tiny_draw_string(0, 0, "LED Status:");
+        if (gSystemInfo.led_state) {
+            glcd_tiny_draw_string(0, 1, "LED is ON");
+        } else {
+            glcd_tiny_draw_string(0, 1, "LED is OFF");
+        }
     }
 
     glcd_write();
@@ -177,7 +182,9 @@ void draw_test_running_screen(void) {
 
     glcd_clear();
 
-    glcd_tiny_draw_string(0, 0, "TEST ACTIVE");
+    char test_str[32];
+    snprintf(test_str, sizeof(test_str), "TEST ACTIVE, LEDS %s", gSystemInfo.led_state ? "ON" : "OFF");
+    glcd_tiny_draw_string(0, 0, test_str);
         
     /* Show test progress */
     char progress_str[64];

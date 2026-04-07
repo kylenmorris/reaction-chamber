@@ -40,7 +40,9 @@ typedef enum {
     ERROR_SD_READ_FAILED,
     ERROR_SD_WRITE_FAILED,
     ERROR_TEMP_SENSOR_FAULT,
-    ERROR_TEST_INVALID,
+    ERROR_TEST_INVALID_POS_CTRL,
+    ERROR_TEST_INVALID_NEG_CTRL,
+    ERROR_TEST_INVALID_TEMP,
     ERROR_OPTICAL_SENSOR_FAULT,
     ERROR_HEATER_FAULT
 } ErrorCode;
@@ -76,6 +78,7 @@ typedef struct {
     int temp_sensor_success_count; // can be positive or negative
     int optical_sensor_success_count; // can be positive or negative
     int latest_filename_int; // for generating new filenames
+    bool led_state; // for led control idk where to put this gotta be done for tomorrow tho
 } SystemInfo;
 
 extern SystemInfo gSystemInfo;

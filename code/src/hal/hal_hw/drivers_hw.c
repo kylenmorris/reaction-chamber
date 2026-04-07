@@ -6,6 +6,7 @@
 #include <hardware/i2c.h>
 #include <hardware/spi.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #include <hardware/gpio.h>
@@ -32,6 +33,17 @@ uint32_t get_current_time(void) {
     return to_ms_since_boot(get_absolute_time());
 }
 
+void hw_leds_toggle(bool enable) {
+    if (enable) {
+        gpio_put(LED_PIN, 1);
+        printf("Led pin set");
+        gSystemInfo.led_state = true;
+    } else {
+        gpio_put(LED_PIN, 0);
+        gSystemInfo.led_state = false;
+    }
+}
+
 #endif
 
 #ifdef USE_HW_BUTTONS
@@ -44,9 +56,11 @@ int hw_button_get_raw(int button_gpio) {
 void hw_heater_toggle(bool enable) {
     if (enable) {
         gpio_put(HEATER_PIN, 1);
+        gHeaterState.heaterOn = true;
         // printf("Heater pin ON\n");
     } else {
         gpio_put(HEATER_PIN, 0);
+        gHeaterState.heaterOn = false;
         // printf("Heater pin OFF\n");
     }
 }
@@ -112,7 +126,7 @@ float hw_read_temperature_sensor(int address) {
         // Out of range, likely a faulty reading
         gSystemInfo.temp_sensor_success_count--;
         if (gSystemInfo.temp_sensor_success_count < -5) {
-            gSystemError.current_error = ERROR_TEMP_SENSOR_FAULT;
+            // gSystemError.current_error = ERROR_TEMP_SENSOR_FAULT;
             gSystemInfo.temp_sensor_success_count = -6;
         }
         return -999;

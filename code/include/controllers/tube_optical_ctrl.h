@@ -3,4 +3,6 @@
 
 void tube_optical_ctrl_step(void);
 
+void set_all_inserted_tubes_detected(void);
+
 #endif

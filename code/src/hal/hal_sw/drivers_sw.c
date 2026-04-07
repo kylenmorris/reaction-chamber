@@ -18,6 +18,18 @@ uint32_t get_current_time(void) {
     return gSimTime;
 }
 
+void hw_leds_toggle(bool enable) {
+    if (enable) {
+        // gpio_put(LED_PIN, 1);
+        printf("Led pin set");
+        gSystemInfo.led_state = true;
+    } else {
+        // gpio_put(LED_PIN, 0);
+        gSystemInfo.led_state = false;
+    }
+}
+
+
 #endif
 
 #ifndef USE_HW_BUTTONS

@@ -34,6 +34,9 @@ void reset_test_data(void) {
     gTestStatus.test_invalid = false;
     gTestStatus.completed = false;
 
+    gTestStatus.tubes[0].is_positive_control = true;
+    gTestStatus.tubes[1].is_negative_control = true;
+
     #ifndef USE_HW_TUBE_SENS
         // Clear tube presence flags
         for (int i = 0; i < NUM_TUBES; i++) {
@@ -47,6 +50,8 @@ void determine_results(void) {
     printf("Determining test results...\n");
 
     gTestStatus.test_invalid = false;
+    bool positive_control_passed = false;
+    bool negative_control_passed = false;
 
     for (int i = 0; i < NUM_TUBES; i++) {
 
@@ -54,15 +59,25 @@ void determine_results(void) {
         if (gTestStatus.tubes[i].is_positive_control 
             && gTestStatus.tubes[i].state == COMPLETED
             && gTestStatus.tubes[i].positive_detected) {
-            bool positive_control_passed = true;
+            positive_control_passed = true;
         }
 
         if (gTestStatus.tubes[i].is_negative_control
             && gTestStatus.tubes[i].state == COMPLETED 
             && !gTestStatus.tubes[i].positive_detected) {
-            bool negative_control_passed = true;
+            negative_control_passed = true;
         }
 
+    }
+    
+    if (!positive_control_passed) {
+        gTestStatus.test_invalid = true;
+        gSystemError.current_error = ERROR_TEST_INVALID_POS_CTRL;
+    }
+
+    if (!negative_control_passed) {
+        gTestStatus.test_invalid = true;
+        gSystemError.current_error = ERROR_TEST_INVALID_NEG_CTRL;
     }
 
     for (int i = 0; i < NUM_TUBES; i++) {
@@ -123,6 +138,7 @@ void test_step(void) {
         }
         if ((now_ms - temp_low_start) >= TEMP_LOW_DURATION_MS) {
             gTestStatus.test_invalid = true;
+            gSystemError.current_error = ERROR_TEST_INVALID_TEMP;
         }
     } else {
         temp_low_start = 0;
@@ -135,6 +151,7 @@ void test_step(void) {
         }
         if ((now_ms - temp_extreme_start) >= TEMP_EXTREME_DURATION_MS) {
             gTestStatus.test_invalid = true;
+            gSystemError.current_error = ERROR_TEST_INVALID_TEMP;
         }
     } else {
         temp_extreme_start = 0;
@@ -168,7 +185,7 @@ void test_step(void) {
 
         // Check for tube completions
         if (gTestStatus.tubes[i].state == RUNNING &&
-            tube_reaction_time >= REACTION_DURATION_MS) {
+            tube_reaction_time >= TUBE_REACTION_DURATION_MS) {
             printf("Tube %d completed at time %d ms\n", i, tube_reaction_time);
             gTestStatus.tubes[i].state = COMPLETED;
 

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\kylen\\\\gth842\\\\capstone\\\\new\\\\code\" -Recurse -Force)",
+      "Bash(Select-Object -Property FullName, PSIsContainer)",
+      "Bash(ConvertTo-Json -Depth 100)",
+      "Bash(Get-Content \"c:\\\\Users\\\\kylen\\\\gth842\\\\capstone\\\\new\\\\code\\\\build\\\\CMakeCache.txt\")",
+      "Bash(Select-String \"TOOLCHAIN|ARM_NONE|BUILD_TESTS|PICO_SDK_PATH|CMAKE_C_COMPILER\")"
+    ]
+  }
+}

@@ -69,7 +69,6 @@ void test_heater_turns_on_when_heating() {
 }
 
 // Check heater turns off when it should
-
 void test_heater_shutoff_on_overheat() {
     printf("Running Test: test_heater_shutoff_on_overheat...\n");
 
@@ -79,7 +78,6 @@ void test_heater_shutoff_on_overheat() {
     gSimParams.cool_rate = 0.1f;
 
     gSystemState = HEATING;
-
 
     SystemState test_cases[] = {IDLE, BOOT, RESULTS, HISTORY, HEATING, REACTING};
     int num_cases = sizeof(test_cases) / sizeof(test_cases[0]);

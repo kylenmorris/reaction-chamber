@@ -67,3 +67,4 @@ fp-info-cache
 code/.cache/
 code/build
 code/build_tests
+code/.claude/settings.local.json
